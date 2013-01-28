@@ -8,3 +8,4 @@ wikipendium/lib/
 wikipendium/include/
 *.db
 .gitignore
+.*.sw*

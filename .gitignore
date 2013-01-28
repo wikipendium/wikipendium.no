@@ -2,3 +2,9 @@
 *.pot
 *.pyc
 local_settings.py
+.*
+wikipendium/bin/
+wikipendium/lib/
+wikipendium/include/
+*.db
+.gitignore

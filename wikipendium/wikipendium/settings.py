@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'registration',
+    'south',
 
     'wiki',
 )

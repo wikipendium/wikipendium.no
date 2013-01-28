@@ -11,6 +11,8 @@ urlpatterns = patterns('',
 
      url(r'^$', 'wiki.views.home', name='home'),
 
+     url(r'^(?P<slug>[A-Za-z0-9]+)$', 'wiki.views.article', name='article'),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

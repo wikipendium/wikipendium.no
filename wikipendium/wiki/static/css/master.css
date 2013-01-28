@@ -109,7 +109,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 .small {
-  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: Georgia, serif;
   font-size: 12px;
   font-weight: normal;
   line-height: 18px;
@@ -755,7 +755,7 @@ html {
 
 body {
   color: #444444;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: Georgia, serif;
   font-size: 14px;
   font-size-adjust: none;
   line-height: 21px;
@@ -774,7 +774,7 @@ hgroup {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   color: #222222;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: Georgia, serif;
   font-weight: 600;
   line-height: 1;
   text-rendering: optimizelegibility;
@@ -892,7 +892,7 @@ input,
 textarea {
   color: #444444;
   font-size: 14px;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: Georgia, serif;
   font-weight: normal;
 }
 
@@ -1225,7 +1225,7 @@ input::-moz-focus-inner {
   border-style: solid;
   cursor: pointer;
   color: #444444;
-  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: Georgia, serif;
   font-weight: 600;
   line-height: 1;
   text-align: center;

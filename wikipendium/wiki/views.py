@@ -8,4 +8,4 @@ def article(request, slug):
     article = Article.objects.get(slug=slug)
     print article.slug
     print slug
-    return render(request, 'article.html', {slug: article.slug})
+    return render(request, 'article.html', {"slug": article.slug})

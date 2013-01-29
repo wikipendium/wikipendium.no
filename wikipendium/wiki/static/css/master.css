@@ -19,6 +19,10 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
+html, body {
+    height: 100%;
+}
+
 html {
   line-height: 1;
 }
@@ -109,7 +113,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 .small {
-  font-family: Georgia, serif;
+  /*font-family: Georgia, serif;*/
   font-size: 12px;
   font-weight: normal;
   line-height: 18px;
@@ -565,12 +569,15 @@ img.native-width {
   border-bottom: 1px solid rgba(0, 0, 0, 0.13);
 }
 
-.sticky-footer #footer-pusher {
-  height: auto;
+#footer-pusher {
   min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -40px; /* the bottom margin is the negative value of the footer's height */
 }
-.sticky-footer #page-footer {
-  position: relative;
+#page-footer,
+#push {
+  height: 40px;
 }
 
 @media screen and (max-width: 980px) {
@@ -755,10 +762,11 @@ html {
 
 body {
   color: #444444;
-  font-family: Georgia, serif;
+  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
   font-size: 14px;
   font-size-adjust: none;
   line-height: 21px;
+  padding-top: 20px;
 }
 
 p,
@@ -774,7 +782,7 @@ hgroup {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   color: #222222;
-  font-family: Georgia, serif;
+  /*font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;*/
   font-weight: 600;
   line-height: 1;
   text-rendering: optimizelegibility;
@@ -892,7 +900,7 @@ input,
 textarea {
   color: #444444;
   font-size: 14px;
-  font-family: Georgia, serif;
+  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
   font-weight: normal;
 }
 
@@ -2047,4 +2055,11 @@ button.close {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
+}
+
+/******************
+ * HEADER
+******************/
+
+#header {
 }

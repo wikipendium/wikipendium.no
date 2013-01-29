@@ -1,25 +1,43 @@
 <!DOCTYPE html>
+<html class="no-js">
 
-<html>
-    <head>
-        <title>Wikipendium</title>
-        <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js></script>
-        <link rel=stylesheet href={{STATIC_URL}}css/master.css />
-    </head>
-    <body class=responsive>
-    <div class=container>
-        <header class=row>
-            <h1 class=span6>Wikipendium</h1>
-            <nav class=span6>Insert nav here</nav>
-        </header>
+<head>
+    <title>Wikipendium</title>
+    <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js></script>
+    <link rel=stylesheet href={{STATIC_URL}}css/master.css />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body class="responsive">
+    <div id="footer-pusher">
+        <div class=container>
+            <header id="header" class=row>
+                <h1 class=span6>Wikipendium</h1>
+                <nav class=span6>Insert nav here</nav>
+            </header>
 
 
-        <div id=content>
-        {% block content %}
-        {% endblock %}
+            <div id=content>
+            {% block content %}
+            {% endblock %}
+            </div>
+
         </div>
-
-        <footer>Wikipendium! :D</footer>
+        <div id="push"></div>
     </div>
-    </body>
+    <footer id="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="span4">
+                    &copy; 2013 - Wikipendium! :D
+                </div>
+                <div class="span4"></div>
+                <div class="span4"></div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
 </html>

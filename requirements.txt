@@ -1,3 +1,5 @@
 django==1.4
 django-registration
 south
+django-autocomplete-light
+markdown2

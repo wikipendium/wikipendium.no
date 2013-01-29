@@ -4,15 +4,14 @@
     <head>
         <title>Wikipendium</title>
         <link rel=stylesheet href={{STATIC_URL}}css/master.css />
-        <link rel=stylesheet href={{STATIC_URL}}css/style.css />
     </head>
-    <body>
-
-        <header>
-        <h1>Wikipendium</h1>
+    <body class=responsive>
+    <div class=container>
+        <header class=row>
+            <h1 class=span6>Wikipendium</h1>
+            <nav class=span6>Insert nav here</nav>
         </header>
 
-        <nav>Insert nav here</nav>
 
         <div id=content>
         {% block content %}
@@ -20,6 +19,6 @@
         </div>
 
         <footer>Wikipendium! :D</footer>
-
+    </div>
     </body>
 </html>

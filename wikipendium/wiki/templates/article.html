@@ -2,7 +2,9 @@
 
 {% block content %}
 <h1>{{ slug }}: {{ title }}</h1>
-<p>
-{{ content }}
-</p>
+<div id=article>
+{% autoescape off %}
+    {{ content }}
+{% endautoescape %}
+</div>
 {% endblock %}

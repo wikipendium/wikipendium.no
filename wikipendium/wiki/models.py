@@ -11,3 +11,5 @@ class ArticleContent(models.Model):
     title = models.CharField(max_length=1024)
     lang = models.CharField(max_length=2)
     updated = models.DateTimeField(auto_now=True, auto_now_add=True)
+
+

@@ -9,10 +9,8 @@ urlpatterns = patterns('',
 
      url(r'^$', 'wiki.views.home', name='home'),
 
-     url(r'^(?P<slug>[A-Za-z0-9]+)$', 'wiki.views.article', name='article'),
      url(r'^(?P<slug>[A-Za-z0-9]+)/edit/$', 'wiki.views.edit', name='editarticle'),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+     url(r'^article_trie/$', 'wiki.views.article_trie', name='article_trie'),
+     url(r'^(?P<slug>[A-Za-z0-9]+).*$', 'wiki.views.article', name='article'),
 
 )

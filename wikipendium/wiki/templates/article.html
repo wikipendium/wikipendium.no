@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ slug }}: {{ title }}</h1>
+<div id="article-header" class="row">
+    <h1 class=span6>{{ slug }}: {{ title }}</h1>
+    <div class=span6>
+        <a href={{ slug }}/edit/>Edit</a>
+    </div>
+</div>
 <div id=article>
 {% autoescape off %}
     {{ content }}

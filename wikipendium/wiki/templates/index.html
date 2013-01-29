@@ -1,5 +1,63 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <p>This is the content from the index template, yo!</p>
+
+
+
+<script src={{STATIC_URL}}js/autocompletrie.js></script>
+
+<input id=searchbox type=text placeholder="find an article..." />
+
+<script>
+    (function(){
+        var trie = {{ trie|safe }};
+        $('#searchbox').autocompletrie(trie);
+    })();
+</script>
+
+
+<style>
+.active{
+    background:#3B5998;
+    background:#6D84B4;
+}
+
+#searchbox{
+    width:100%;
+    border:0;
+    outline: none;
+    margin:0 auto;
+    display:block;
+    padding: 4px 5px 4px 1px;
+    border: 1px solid #BDC7D8;
+    font-family: Georgia, serif;
+    font-size:20px;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+
+#suggestions{
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+    width:100%;
+    border: 1px solid #BDC7D8;
+    overflow:hidden;
+    list-style-type:none;
+    padding:0;
+    font-family: Georgia, serif;
+    font-size:20px;
+    margin:0 auto;
+    display:block;
+    background:white;
+}
+#suggestions li{
+    width:100%;
+    padding: 4px 5px 4px 1px;
+    
+}
+</style>
+
+
 {% endblock %}

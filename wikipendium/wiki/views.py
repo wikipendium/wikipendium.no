@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils import simplejson
 from wiki.models import Article, ArticleContent
-from wiki.trie import *
+from markdown2 import markdown
 
 def home(request):
 
@@ -18,10 +18,10 @@ def home(request):
 def article(request, slug):
     article = Article.objects.get(slug=slug)
     articleContent = ArticleContent.objects.order_by('-updated')[0:1].get()
-    print articleContent.content
+    content = markdown(articleContent.content)
     return render(request, 'article.html', {
         "slug": article.slug,
-        "content": articleContent.content,
+        "content": content,
         "title": articleContent.title
         })
 

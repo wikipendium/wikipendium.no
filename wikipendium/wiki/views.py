@@ -22,7 +22,7 @@ def article_trie(request, slug):
 
 def article(request, slug):
     article = Article.objects.get(slug=slug)
-    articleContent = ArticleContent.objects.order_by('-updated')[0:1].get()
+    articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
     content = markdown(articleContent.content)
     return render(request, 'article.html', {
         "slug": article.slug,
@@ -32,7 +32,7 @@ def article(request, slug):
 
 def edit(request, slug):
     article = Article.objects.get(slug=slug)
-    articleContent = ArticleContent.objects.order_by('-updated')[0:1].get()
+    articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
     if request.method == 'POST': # If the form has been submitted...
         form = ArticleForm(request.POST) # A form bound to the POST data
         new_article = form.save(commit=False)

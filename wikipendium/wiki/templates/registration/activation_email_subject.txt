@@ -1,5 +1,1 @@
-{% extends "base.html" %}
-
-{% block content %}
-this is activation_email_subject.txt
-{% endblock %}
+Activate your wikipendium.no account - you have {{ expiration_days }} days!

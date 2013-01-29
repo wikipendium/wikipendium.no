@@ -131,6 +131,12 @@ INSTALLED_APPS = (
 
 
 ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_HOST = ''
+EMAIL_PORT = 0
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 
 # A sample logging configuration. The only tangible logging

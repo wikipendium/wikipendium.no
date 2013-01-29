@@ -16,6 +16,10 @@ def home(request):
 
     return render(request, 'index.html', {"trie":simplejson.dumps(trie)})
 
+def article_trie(request, slug):
+    bop = "yo"
+    # is this a hack or what?
+
 def article(request, slug):
     article = Article.objects.get(slug=slug)
     articleContent = ArticleContent.objects.order_by('-updated')[0:1].get()

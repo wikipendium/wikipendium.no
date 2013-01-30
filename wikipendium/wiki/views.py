@@ -45,6 +45,6 @@ def edit(request, slug):
     else:
         form = ArticleForm(instance=articleContent)
     return render(request, 'edit.html', {
-        "slug": article.slug,
+        "articleContent": articleContent,
         "form": form
         })

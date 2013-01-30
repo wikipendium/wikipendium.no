@@ -183,6 +183,12 @@ img.native-width {
   .hide-on-tablet {
     display: none !important;
   }
+  .span6 {
+    width: 66.66667% !important;
+  }
+  .span3 {
+    width: 33.33333% !important;
+  }
 }
 @media screen and (min-width: 768px) {
   .show-on-tablet-desktop {

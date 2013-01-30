@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href={{ articleContent.get_url }}>« Back</a>
 <form method="post" action="">
     {% csrf_token %}
     {{ form }}

@@ -52,7 +52,13 @@
         <div class=container>
             <header id="header" class=row>
                 <h1 class=span6><a href=/>Wikipendium</a></h1>
-                <nav class=span6>Insert nav here</nav>
+                <nav class=span6>
+                {% if user.is_authenticated %}
+                <a class=button href=/accounts/><i class="icon icon-prepend green-bg"></i>{{user.username}}</a>
+                {% else %}
+                    <a class=button href=/accounts/login/><i class="icon icon-prepend"></i>Log in</a>
+                {% endif %}
+                </nav>
             </header>
 
 

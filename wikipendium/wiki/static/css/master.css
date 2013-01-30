@@ -2081,7 +2081,19 @@ body.frontpage:before {
 #header {
 }
 
+#header nav a{
+    float:right;
+}
 
+
+
+/******************
+ * EPICEDITOR
+******************/
+
+.epiceditor-container{
+    border:1px solid #ccc;
+}
 
 /******************
  * SEARCHBOX
@@ -2127,4 +2139,8 @@ body.frontpage:before {
     padding: 4px 5px 4px 5px;
     height:60px;
     line-height:60px;
+}
+
+.green-bg{
+    background: rgba(0, 204, 255, 0.5);
 }

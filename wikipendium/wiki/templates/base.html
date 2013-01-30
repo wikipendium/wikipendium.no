@@ -5,8 +5,29 @@
     <title>Wikipendium</title>
     <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js></script>
     <link rel=stylesheet href={{STATIC_URL}}css/master.css />
+    <script src={{STATIC_URL}}epiceditor/js/epiceditor.js></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <script>
+        $(function(){
+            $('textarea').each(function(){
+                var container = $('<div class=epiceditor-container></div>');
+                $this = $(this);
+                container.insertBefore($this);
+                container.append($this);
+                container.attr('id','epiceditor_'+(Math.random()*99*99*99|0));
+                new EpicEditor({
+                    container: container.attr('id'),
+                    basePath: '{{STATIC_URL}}epiceditor',
+                    theme: {
+                        base: '/themes/base/epiceditor.css',
+                        preview: '/themes/preview/preview-dark.css',
+                        editor: '/themes/editor/epic-dark.css'
+                    }
+                }).load();
+            });
+        });
+    </script>
 </head>
 
 <body class="responsive">

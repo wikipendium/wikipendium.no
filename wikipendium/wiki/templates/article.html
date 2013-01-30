@@ -3,19 +3,24 @@
 {% block title %}{{ slug }}: {{ title }} -{% endblock %}
 
 {% block content %}
-<div id="article-header" class="row">
-    <h1 class=span9>{{ articleContent.get_full_title }}</h1>
-    <div class=span3>
-        <a href={{ articleContent.get_edit_url }}>Edit</a>
+<div class=row>
+    <div class=span3></div>
+    {% autoescape off %}
+    <div id=article class=span6>
+        <h1>{{ articleContent.get_full_title }}</h1>
+        {{ content }}
     </div>
-</div>
-{% autoescape off %}
-<div id="toc">
-    <h3>Table of Contents</h3>
-    {{ toc }}
-</div>
-<div id=article>
-    {{ content }}
-{% endautoescape %}
+    <div class=span3>
+        <div class="floater">
+            <a class=edit-link href={{ articleContent.get_edit_url }}>Edit</a>
+            <a class=share-link href=#>Share</a>
+            <a class=history-link href=#>History</a>
+            <div id="toc">
+                <h3>Table of Contents</h3>
+                {{ toc }}
+            </div>
+        </div>
+    </div>
+    {% endautoescape %}
 </div>
 {% endblock %}

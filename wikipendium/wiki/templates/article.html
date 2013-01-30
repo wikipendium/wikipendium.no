@@ -3,19 +3,26 @@
 {% block title %}{{ slug }}: {{ title }} -{% endblock %}
 
 {% block content %}
-<div id="article-header" class="row serif">
-    <h1 class=span9>{{ articleContent.get_full_title }}</h1>
-    <div class=span3>
-        <a href={{ articleContent.get_edit_url }}>Edit</a>
+<div class="row serif">
+    <div class=span3></div>
+    {% autoescape off %}
+    <div id=article class=span6>
+        <h1>{{ articleContent.get_full_title }}</h1>
+        {{ content }}
     </div>
-</div>
-{% autoescape off %}
-<div id="toc" class=serif>
-    <h3>Table of Contents</h3>
-    {{ toc }}
-</div>
-<div id=article class=serif>
-    {{ content }}
-{% endautoescape %}
+    <div class=span3>
+        <div class="floater">
+            <div class=button-group style=width:100%>
+                <a class="button edit-link" style=width:33% href={{ articleContent.get_edit_url }}>Edit</a>
+                <a class="button share-link" style=width:34% href=#>Share</a>
+                <a class="button history-link" style=width:33% href=#>History</a>
+            </div>
+            <div id="toc">
+                <h3>Table of Contents</h3>
+                {{ toc }}
+            </div>
+        </div>
+    </div>
+    {% endautoescape %}
 </div>
 {% endblock %}

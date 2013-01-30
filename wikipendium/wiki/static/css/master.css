@@ -2105,10 +2105,7 @@ footer {
 ******************/
 
 #toc {
-    float: right;
-    width: 200px;
     border: 1px solid #aaa;
-    margin: 0 0 .5em .5em;
     padding: .5em;
 }
 #toc h3 {

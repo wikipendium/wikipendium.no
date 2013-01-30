@@ -28,7 +28,7 @@ def article(request, slug):
     content = markdown(articleContent.content, extras=["toc"])
     return render(request, 'article.html', {
         "content": content,
-        "toc": content.toc_html.replace("ul","ol"),
+        "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
         "articleContent": articleContent
         })
 

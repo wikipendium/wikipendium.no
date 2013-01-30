@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}{{ slug }}: {{ title }} -{% endblock %}
+{% block title %}{{ articleContent.get_full_title }} -{% endblock %}
 
 {% block content %}
 <div class="row serif">
-    <div class=span3></div>
+    <div class="span3 hide-on-tablet"></div>
     {% autoescape off %}
     <div id=article class=span6>
         <h1>{{ articleContent.get_full_title }}</h1>

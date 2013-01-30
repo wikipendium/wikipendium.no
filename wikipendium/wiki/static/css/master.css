@@ -2066,11 +2066,12 @@ body:before {
     content: "W";
     position: absolute;
     font-size: 500px;
-    top: 50%;
+    top: 0;
     left: 30%;
     margin-left: -250px;
     z-index: -1;
     color: rgba(0,0,0,.1);
+    line-height: 90%;
 }
 
 /******************

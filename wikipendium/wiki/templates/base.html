@@ -5,6 +5,7 @@
     <title>{% block title %}{% endblock %} Wikipendium</title>
     <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js></script>
     <link rel=stylesheet href={{STATIC_URL}}css/master.css />
+    <script src={{STATIC_URL}}js/bootstrap.min.js></script>
     <script src={{STATIC_URL}}epiceditor/js/epiceditor.js></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
@@ -54,7 +55,14 @@
                 <h1 class=span6><a href=/>Wikipendium</a></h1>
                 <nav class=span6>
                 {% if user.is_authenticated %}
-                <a class=button href=/accounts/><i class="icon icon-prepend green-bg"></i>{{user.username}}</a>
+    
+<div class="has-dropdown button-dropdown">
+    <a href=# class=button data-toggle=dropdown><i class="icon icon-prepend green-bg"></i>{{user.username}}<span class=caret></span></a>
+    <ul class="dropdown right">
+        <li><a href=/accounts/password/change/>Change password</a></li>
+        <li><a href=/accounts/logout/>Log out</a></li>
+    </ul>
+</div>
                 {% else %}
                     <a class=button href=/accounts/login/><i class="icon icon-prepend"></i>Log in</a>
                 {% endif %}

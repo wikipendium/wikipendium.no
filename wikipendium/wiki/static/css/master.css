@@ -2081,8 +2081,8 @@ body.frontpage:before {
 #header {
 }
 
-#header nav a{
-    float:right;
+#header nav{
+text-align:right;
 }
 
 

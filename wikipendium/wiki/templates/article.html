@@ -4,9 +4,9 @@
 
 {% block content %}
 <div id="article-header" class="row">
-    <h1 class=span9>{{ slug }}: {{ title }}</h1>
+    <h1 class=span9>{{ articleContent.get_full_title }}</h1>
     <div class=span3>
-        <a href={{ slug }}/edit/>Edit</a>
+        <a href={{ articleContent.get_edit_url }}>Edit</a>
     </div>
 </div>
 {% autoescape off %}

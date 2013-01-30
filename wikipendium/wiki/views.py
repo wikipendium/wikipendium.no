@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
 from wiki.models import Article, ArticleContent
 from wiki.forms import ArticleForm
@@ -15,27 +15,21 @@ def home(request):
         article = Article.objects.get(articlecontent=ac)
         if article.pk not in articleset:
             articleset.add(article.pk)
-            print article
             trie.append({
-                "label": article.slug+': '+ac.title,
-                "url": article.slug+':'+ac.title.replace(" ","_")
+                "label": ac.get_full_title(),
+                "url": ac.get_url()
                 })
 
     return render(request, 'index.html', {"trie":simplejson.dumps(trie)})
-
-def article_trie(request, slug):
-    bop = "yo"
-    # is this a hack or what?
 
 def article(request, slug):
     article = Article.objects.get(slug=slug)
     articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
     content = markdown(articleContent.content, extras=["toc"])
     return render(request, 'article.html', {
-        "slug": article.slug,
         "content": content,
-        "title": articleContent.title,
         "toc": content.toc_html.replace("ul","ol")
+        "articleContent": articleContent
         })
 
 def edit(request, slug):
@@ -47,10 +41,7 @@ def edit(request, slug):
         new_article.article = article
         new_article.lang = articleContent.lang
         new_article.save()
-        #if form.is_valid(): # All validation rules pass
-        # Process the data in form.cleaned_data
-        # ...
-        #form.save()
+        return HttpResponseRedirect(new_article.get_url())
     else:
         form = ArticleForm(instance=articleContent)
     return render(request, 'edit.html', {

@@ -2081,8 +2081,8 @@ body.frontpage:before {
 #header {
 }
 
-#header nav a{
-    float:right;
+#header nav{
+text-align:right;
 }
 
 
@@ -2123,8 +2123,12 @@ body.frontpage:before {
 ******************/
 
 .active{
+    /*
     background:#3B5998;
     background:#6D84B4;
+    */
+    background:rgba(109,132,184,0.8);
+    color:white;
 }
 
 #searchbox{
@@ -2154,7 +2158,7 @@ body.frontpage:before {
     font-size:30px;
     margin:0 auto;
     display:block;
-    background:white;
+    background:rgba(255,255,255,0.9);
 }
 
 #suggestions li{

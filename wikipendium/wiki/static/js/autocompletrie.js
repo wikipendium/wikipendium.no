@@ -27,7 +27,7 @@
             sb.on("keydown",function(e){
                 if(e.keyCode == 13){ //enter
                     e.preventDefault();
-                    window.location = '/'+$(ul.children()[index]).attr('data-url');
+                    window.location = $(ul.children()[index]).attr('data-url');
                 }
                 if(e.keyCode == 38){ //up
                     e.preventDefault();
@@ -48,7 +48,6 @@
                 index = 0;
                 ul.empty();
                 var words = search(trie,oldword);
-                console.log(words);
                 ullength = words.length;
                 for(var i=0;i<words.length;i++){
                     var li = document.createElement("li");

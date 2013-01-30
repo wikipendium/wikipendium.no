@@ -30,7 +30,8 @@ def article_trie(request, slug):
 def article(request, slug):
     article = Article.objects.get(slug=slug)
     articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
-    content = markdown(articleContent.content)
+    content = markdown(articleContent.content, extras=["toc"])
+    print content.toc_html
     return render(request, 'article.html', {
         "slug": article.slug,
         "content": content,

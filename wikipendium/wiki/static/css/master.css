@@ -2086,6 +2086,24 @@ body.frontpage:before {
 }
 
 
+/******************
+ * ARTICLE
+******************/
+
+#toc {
+    float: right;
+    width: 150px;
+    border: 1px solid #aaa;
+    margin: 0 0 .5em .5em;
+    padding: .5em;
+}
+#toc ul {
+    list-style-type: none;
+    margin: 0;
+}
+#toc li ul {
+    margin-left: .5em;
+}
 
 /******************
  * EPICEDITOR

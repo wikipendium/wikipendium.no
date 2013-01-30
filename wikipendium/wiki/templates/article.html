@@ -9,8 +9,12 @@
         <a href={{ slug }}/edit/>Edit</a>
     </div>
 </div>
-<div id=article>
 {% autoescape off %}
+<div id="toc">
+    <h3>Table of Contents</h3>
+    {{ content.toc_html }}
+</div>
+<div id=article>
     {{ content }}
 {% endautoescape %}
 </div>

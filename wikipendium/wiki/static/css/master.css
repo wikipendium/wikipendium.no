@@ -2094,6 +2094,8 @@ body.frontpage:before {
 
 #header nav{
     text-align:right;
+    width:100%;
+    margin-bottom:60px;
 }
 
 /******************
@@ -2129,6 +2131,7 @@ body.frontpage:before {
 
 #toc {
     padding: .5em;
+    margin: 40px 0 20px;
 }
 #toc h3 {
     margin: .5em 0;

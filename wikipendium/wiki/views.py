@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
+from django.contrib.auth.decorators import login_required
 from wiki.models import Article, ArticleContent
 from wiki.forms import ArticleForm
 from markdown2 import markdown
@@ -22,6 +23,7 @@ def home(request):
 
     return render(request, 'index.html', {"trie":simplejson.dumps(trie)})
 
+@login_required
 def article(request, slug):
     article = Article.objects.get(slug=slug)
     articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
@@ -32,6 +34,7 @@ def article(request, slug):
         "articleContent": articleContent
         })
 
+@login_required
 def edit(request, slug):
     article = Article.objects.get(slug=slug)
     articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()

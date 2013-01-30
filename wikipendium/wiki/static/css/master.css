@@ -2111,6 +2111,7 @@ body.frontpage:before {
 
 .epiceditor-container{
     border:1px solid #ccc;
+    min-height: 400px;
 }
 
 /******************

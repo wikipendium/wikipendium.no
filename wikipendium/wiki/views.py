@@ -25,10 +25,11 @@ def home(request):
 def article(request, slug):
     article = Article.objects.get(slug=slug)
     articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
-    content = markdown(articleContent.content)
+    content = markdown(articleContent.content, extras=["toc"])
     return render(request, 'article.html', {
-        "articleContent": articleContent,
-        "content": content
+        "content": content,
+        "toc": content.toc_html.replace("ul","ol")
+        "articleContent": articleContent
         })
 
 def edit(request, slug):

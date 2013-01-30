@@ -4,13 +4,17 @@
 
 {% block content %}
 <div id="article-header" class="row">
-    <h1 class=span6>{{ articleContent.get_full_title }}</h1>
-    <div class=span6>
+    <h1 class=span9>{{ articleContent.get_full_title }}</h1>
+    <div class=span3>
         <a href={{ articleContent.get_edit_url }}>Edit</a>
     </div>
 </div>
-<div id=article>
 {% autoescape off %}
+<div id="toc">
+    <h3>Table of Contents</h3>
+    {{ toc }}
+</div>
+<div id=article>
     {{ content }}
 {% endautoescape %}
 </div>

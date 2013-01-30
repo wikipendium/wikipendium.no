@@ -16,7 +16,10 @@ def home(request):
         if article.pk not in articleset:
             articleset.add(article.pk)
             print article
-            trie.append(article.slug+': '+ac.title)
+            trie.append({
+                "label": article.slug+': '+ac.title,
+                "url": article.slug+':'+ac.title.replace(" ","_")
+                })
 
     return render(request, 'index.html', {"trie":simplejson.dumps(trie)})
 

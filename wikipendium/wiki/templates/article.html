@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}{{ slug }}: {{ title }} -{% endblock %}
+
 {% block content %}
 <div id="article-header" class="row">
     <h1 class=span6>{{ articleContent.get_full_title }}</h1>

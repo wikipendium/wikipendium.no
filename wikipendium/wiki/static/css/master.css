@@ -2062,7 +2062,7 @@ button.close {
  * BODEY
 ****************/
 
-body:before {
+body.frontpage:before {
     content: "W";
     position: absolute;
     font-size: 500px;

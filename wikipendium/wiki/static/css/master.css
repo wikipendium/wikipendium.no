@@ -2064,6 +2064,10 @@ button.close {
 #header {
 }
 
+#header nav a{
+    float:right;
+}
+
 
 
 /******************
@@ -2110,4 +2114,8 @@ button.close {
     padding: 4px 5px 4px 5px;
     height:60px;
     line-height:60px;
+}
+
+.green-bg{
+    background: rgba(0, 204, 255, 0.5);
 }

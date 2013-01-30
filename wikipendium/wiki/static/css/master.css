@@ -2130,6 +2130,16 @@ footer {
 }
 
 /******************
+ * LOGIN
+******************/
+
+.login-form, .register-form{
+    width:320px;
+    margin:0 auto;
+}
+
+
+/******************
  * SEARCHBOX
 ******************/
 

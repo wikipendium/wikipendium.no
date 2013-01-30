@@ -6,22 +6,36 @@
 
 <h1>Log in</h1>
 
-{% if form.errors %}
-<p class="error">Please correct the errors below:</p>
-{% endif %}
+<form class=login-form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
 
-<form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
-<dl>
-<dt><label for="id_username">Username:</label>{% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span>{% endif %}</dt>
-<dd>{{ form.username }}</dd>
-<dt><label for="id_password">Password:</label>{% if form.password.errors %} <span class="error">{{ form.password.errors|join:", " }}</span>{% endif %}</dt>
-<dd>{{ form.password }}</dd>
-<dt><input class=button type="submit" value="Log in" /></dt>
-</dl>
+    <div class="field-group {%if form.username.errors %}error{% endif %}">
+        <label class=field-label>Username:</label>
+        <div class=fields>
+            {{ form.username }}
+
+            {% if form.username.errors %}
+            <div class=error-message>
+                {{form.username.errors|join:", "}}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="field-group {%if form.password.errors %}error{%endif%}">
+        <label class=field-label>Password:</label>
+        <div class=fields>
+            {{ form.password }}
+
+            {% if form.password.errors %}
+            <div class=error-message>
+                {{form.password.errors|join:", "}}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+<input class="button float-right" type="submit" value="Log in" />
 </form>
+
 {% endblock %}
 
-{% block content-related %}
-<p>If you don't have an account, you can <a href="/accounts/register/">sign
-up</a> for one.
-{% endblock %}

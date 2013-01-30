@@ -2070,6 +2070,9 @@ button.close {
  * BODEY BODY
 ****************/
 
+body{
+}
+
 body.frontpage:before {
     content: "W";
     position: absolute;
@@ -2111,8 +2114,20 @@ body.frontpage:before {
  * ARTICLE
 ******************/
 
+#article{
+    width: auto;
+    max-width: 520px;
+    margin:0 auto;
+    text-align:justify;
+    font-size:16px;
+    line-height: 24px;
+}
+
+#article .title{
+    margin-bottom:20px;
+}
+
 #toc {
-    border: 1px solid #aaa;
     padding: .5em;
 }
 #toc h3 {

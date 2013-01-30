@@ -2092,18 +2092,22 @@ body.frontpage:before {
 
 #toc {
     float: right;
-    width: 150px;
+    width: 200px;
     border: 1px solid #aaa;
     margin: 0 0 .5em .5em;
     padding: .5em;
 }
-#toc ul {
-    list-style-type: none;
-    margin: 0;
+#toc h3 {
+    margin: .5em 0;
 }
-#toc li ul {
-    margin-left: .5em;
+#toc > ol {
+    list-style-type: decimal;
+    margin-left: 1.5em;
 }
+#toc ol ol {list-style-type: upper-roman;}
+#toc ol ol ol {list-style-type: lower-roman;}
+#toc ol ol ol ol {list-style-type: lower-latin;}
+#toc ol ol ol ol ol {list-style-type: lower-greek;}
 
 /******************
  * EPICEDITOR

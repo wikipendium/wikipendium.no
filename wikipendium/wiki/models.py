@@ -4,6 +4,8 @@ from django.db import models
 
 class Article(models.Model):
     slug = models.SlugField(max_length=256)
+    def __unicode__(self):
+        return self.slug
 
 class ArticleContent(models.Model):
     article = models.ForeignKey('Article')
@@ -11,5 +13,7 @@ class ArticleContent(models.Model):
     title = models.CharField(max_length=1024)
     lang = models.CharField(max_length=2)
     updated = models.DateTimeField(auto_now=True, auto_now_add=True)
+    def __unicode__(self):
+        return self.title
 
 

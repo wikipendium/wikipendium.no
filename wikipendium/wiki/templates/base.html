@@ -13,18 +13,22 @@
             $('textarea').each(function(){
                 var container = $('<div class=epiceditor-container></div>');
                 $this = $(this);
-                container.insertBefore($this);
-                container.append($this);
+                $(this.form).on('submit',function(){
+                    $this.text(editor.exportFile());
+                });
                 container.attr('id','epiceditor_'+(Math.random()*99*99*99|0));
-                new EpicEditor({
+                $this.after(container);
+                $this.hide();
+                var editor = new EpicEditor({
                     container: container.attr('id'),
                     basePath: '{{STATIC_URL}}epiceditor',
                     theme: {
                         base: '/themes/base/epiceditor.css',
-                        preview: '/themes/preview/preview-dark.css',
-                        editor: '/themes/editor/epic-dark.css'
+                        preview: '/themes/preview/github.css',
+                        editor: '/themes/editor/epic-light.css'
                     }
                 }).load();
+                editor.importFile('',$this.text());
             });
         });
     </script>

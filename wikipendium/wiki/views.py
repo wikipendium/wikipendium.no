@@ -12,7 +12,10 @@ def home(request):
     trie = []
     for ac in articleContents:
         article = Article.objects.get(articlecontent=ac)
-        trie.append(article.slug+': '+ac.title)
+        trie.append({
+            "label": article.slug+': '+ac.title,
+            "url": article.slug+':'+ac.title.replace(" ","_")
+            })
 
     return render(request, 'index.html', {"trie":simplejson.dumps(trie)})
 

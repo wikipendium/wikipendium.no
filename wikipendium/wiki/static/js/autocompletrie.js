@@ -10,7 +10,7 @@
                 word = word.toLowerCase();
                 var ret = [];
                 for(var i=0;i<trie.length;i++){
-                    if(trie[i].toLowerCase().indexOf(word) !== -1){
+                    if(trie[i].label.toLowerCase().indexOf(word) !== -1){
                         ret.push(trie[i]);        
                     }
                 }
@@ -27,7 +27,7 @@
             sb.on("keydown",function(e){
                 if(e.keyCode == 13){ //enter
                     e.preventDefault();
-                    window.location = '/'+$(ul.children()[index]).text().replace(/ /g,'_');
+                    window.location = '/'+$(ul.children()[index]).attr('data-url');
                 }
                 if(e.keyCode == 38){ //up
                     e.preventDefault();
@@ -52,7 +52,8 @@
                 ullength = words.length;
                 for(var i=0;i<words.length;i++){
                     var li = document.createElement("li");
-                    li.textContent = words[i];
+                    li.textContent = words[i].label;
+                    li.setAttribute('data-url', words[i].url);
                     ul.append(li); 
                 }
                 $(ul.children()[index]).addClass("active");

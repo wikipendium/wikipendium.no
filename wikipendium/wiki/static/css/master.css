@@ -2088,6 +2088,14 @@ body:before {
 
 
 /******************
+ * EPICEDITOR
+******************/
+
+.epiceditor-container{
+    border:1px solid #ccc;
+}
+
+/******************
  * SEARCHBOX
 ******************/
 

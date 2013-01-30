@@ -6,6 +6,7 @@ from wiki.models import Article, ArticleContent
 from wiki.forms import ArticleForm
 from markdown2 import markdown
 
+@login_required
 def home(request):
 
     articleContents = ArticleContent.objects.all().order_by('-updated')

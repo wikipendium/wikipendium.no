@@ -763,7 +763,8 @@ html {
 
 body {
   color: #444444;
-  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+  /*font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;*/
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
   font-size: 14px;
   font-size-adjust: none;
   line-height: 21px;
@@ -901,7 +902,7 @@ input,
 textarea {
   color: #444444;
   font-size: 14px;
-  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+  /* font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;*/
   font-weight: normal;
 }
 
@@ -1234,7 +1235,8 @@ input::-moz-focus-inner {
   border-style: solid;
   cursor: pointer;
   color: #444444;
-  font-family: Georgia, serif;
+  /*font-family: Georgia, serif;*/
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
   font-weight: 600;
   line-height: 1;
   text-align: center;
@@ -2091,6 +2093,11 @@ body.frontpage:before {
 
 footer {
     text-align:right;
+}
+
+
+.serif{
+  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
 
 /******************

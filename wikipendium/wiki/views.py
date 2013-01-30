@@ -7,15 +7,19 @@ from markdown2 import markdown
 
 def home(request):
 
-    articleContents = ArticleContent.objects.all()
+    articleContents = ArticleContent.objects.all().order_by('-updated')
 
     trie = []
+    articleset = set([])
     for ac in articleContents:
         article = Article.objects.get(articlecontent=ac)
-        trie.append({
-            "label": article.slug+': '+ac.title,
-            "url": article.slug+':'+ac.title.replace(" ","_")
-            })
+        if article.pk not in articleset:
+            articleset.add(article.pk)
+            print article
+            trie.append({
+                "label": article.slug+': '+ac.title,
+                "url": article.slug+':'+ac.title.replace(" ","_")
+                })
 
     return render(request, 'index.html', {"trie":simplejson.dumps(trie)})
 

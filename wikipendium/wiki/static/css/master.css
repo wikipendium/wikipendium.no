@@ -27,6 +27,7 @@ html {
   line-height: 1;
 }
 
+
 ol, ul {
   list-style: none;
 }
@@ -2055,6 +2056,21 @@ button.close {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
+}
+
+/****************
+ * BODEY
+****************/
+
+body:before {
+    content: "W";
+    position: absolute;
+    font-size: 500px;
+    top: 50%;
+    left: 30%;
+    margin-left: -250px;
+    z-index: -1;
+    color: rgba(0,0,0,.1);
 }
 
 /******************

@@ -55,6 +55,8 @@
             <header id="header" class=row>
                 <h1 class=span6><a href=/></a></h1>
                 <nav class=span6>
+                {% block nav %}
+                {% endblock %}
                 {% if user.is_authenticated %}
     
 <div class="has-dropdown button-dropdown">

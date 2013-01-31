@@ -53,7 +53,9 @@
     <div id="footer-pusher">
         <div class=container>
             <header id="header" class=row>
-                <h1 class=span6><a href=/></a></h1>
+                <h1 class="span6 serif"><a href=/>
+                    {% block logo %}Wikipendium{% endblock %}
+                </a></h1>
                 <nav class=span6>
                 {% block nav %}
                 {% endblock %}

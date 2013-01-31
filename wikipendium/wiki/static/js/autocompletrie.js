@@ -27,7 +27,9 @@
             sb.on("keydown",function(e){
                 if(e.keyCode == 13){ //enter
                     e.preventDefault();
-                    window.location = $(ul.children()[index]).attr('data-url');
+                    if(sb.val() != ""){
+                        window.location = $(ul.children()[index]).attr('data-url');
+                    }
                 }
                 if(e.keyCode == 38){ //up
                     e.preventDefault();
@@ -57,6 +59,7 @@
                 }
                 $(ul.children()[index]).addClass("active");
             }
+
             setInterval(refresh,100);
 
         });

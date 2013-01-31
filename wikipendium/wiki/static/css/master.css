@@ -1437,10 +1437,10 @@ input::-moz-focus-inner {
   left: auto;
   right: 0;
   -webkit-border-radius: 4px 0 4px 4px;
-  -moz-border-radius: 4px 0 4px 4px;
-  -ms-border-radius: 4px 0 4px 4px;
-  -o-border-radius: 4px 0 4px 4px;
-  border-radius: 4px 0 4px 4px;
+     -moz-border-radius: 4px 0 4px 4px;
+      -ms-border-radius: 4px 0 4px 4px;
+       -o-border-radius: 4px 0 4px 4px;
+          border-radius: 4px 0 4px 4px;
 }
 .has-dropdown.button-dropdown .dropdown > li > a {
   padding-left: 12px;

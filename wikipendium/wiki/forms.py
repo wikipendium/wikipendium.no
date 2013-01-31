@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from wiki.models import Article, ArticleContent
+from wikipendium.wiki.models import Article, ArticleContent
 
 class ArticleForm(ModelForm):
     class Meta:

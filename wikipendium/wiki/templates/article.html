@@ -5,7 +5,13 @@
 {% block nav %}
 <div class=button-group style=inline-block>
     <a class="button edit-link" href={{ articleContent.get_edit_url }}>Edit</a>
-    <a class="button share-link" href=#>Share</a>
+    <div class="has-dropdown button-dropdown">
+        <a class="button share-link" href=# data-toggle=dropdown>Share<span class=caret></span></a>
+        <ul class="dropdown">
+            <li><a href="http://www.facebook.com/sharer.php?u={{ request.path }}&t={{ articleContent.get_full_title }}">Facebook</a></li>
+            <li><a href=#>Twitter</a></li>
+        </ul>
+    </div>
     <a class="button history-link" href=#>History</a>
 </div>
 {% endblock %}

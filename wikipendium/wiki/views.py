@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
-from wiki.models import Article, ArticleContent
-from wiki.forms import ArticleForm
+from wikipendium.wiki.models import Article, ArticleContent
+from wikipendium.wiki.forms import ArticleForm
 from markdown2 import markdown
 
 @login_required
@@ -33,12 +34,18 @@ def article(request, slug):
         "content": content,
         "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
         "articleContent": articleContent
-        })
+        }, context_instance=RequestContext(request))
 
 @login_required
 def edit(request, slug):
-    article = Article.objects.get(slug=slug)
-    articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
+    article = None
+    articleContent = ArticleContent()
+    try:
+        article = Article.objects.get(slug=slug)
+        articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
+    except:
+        article = Article(slug=slug) 
+        article.save()
     if request.method == 'POST': # If the form has been submitted...
         form = ArticleForm(request.POST) # A form bound to the POST data
         new_article = form.save(commit=False)

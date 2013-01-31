@@ -18,7 +18,7 @@ class ArticleContent(models.Model):
         return self.article.slug+': '+self.title
 
     def get_url(self):
-        return '/'+self.get_full_title().replace(' ','_')
+        return '/'+self.article.slug + ":" + self.title.replace(' ','_')
 
     def get_edit_url(self):
         return self.get_url() + '/edit/'

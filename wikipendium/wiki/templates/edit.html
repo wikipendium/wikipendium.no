@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href={{ articleContent.get_url }}>« Back</a>
+{% if articleContent.get_url %}
+    <a href={{ articleContent.get_url }}>« Back</a>
+{% endif %}
 <form method="post" action="">
     {% csrf_token %}
     {{ form }}

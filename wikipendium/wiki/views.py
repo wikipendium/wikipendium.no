@@ -28,7 +28,7 @@ def home(request):
 def article(request, slug):
     article = Article.objects.get(slug=slug)
     articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
-    content = markdown(articleContent.content, extras=["toc"], safe_mode=True)
+    content = markdown(articleContent.content, extras=["toc", "wiki-tables"], safe_mode=True)
     return render(request, 'article.html', {
         "content": content,
         "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),

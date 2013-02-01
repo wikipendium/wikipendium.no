@@ -23,5 +23,8 @@ class ArticleContent(models.Model):
     def get_edit_url(self):
         return self.get_url() + '/edit/'
     
+    def get_history_url(self):
+        return self.get_url() + '/history/'
+
     def __unicode__(self):
         return self.title

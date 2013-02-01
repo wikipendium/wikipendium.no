@@ -63,3 +63,12 @@ def edit(request, slug):
         "articleContent": articleContent,
         "form": form
         })
+
+@login_required
+def history(request, slug):
+    article = Article.objects.get(slug=slug)
+    articleContents = ArticleContent.objects.filter(article=article).order_by('-updated')
+
+    return render(request, "history.html", {
+        "articleContents": articleContents
+        })

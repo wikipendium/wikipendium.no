@@ -9,5 +9,6 @@ urlpatterns = patterns('',
      url(r'^$', 'wikipendium.wiki.views.home', name='home'),
      url(r'^(?P<slug>[A-Za-z0-9]+)[^/]*$', 'wikipendium.wiki.views.article', name='article'),
      url(r'^(?P<slug>[A-Za-z0-9]+)[^/]*/edit/$', 'wikipendium.wiki.views.edit', name='editarticle'),
+     url(r'^(?P<slug>[A-Za-z0-9]+)[^/]*/history/$', 'wikipendium.wiki.views.history', name='articlehistory'),
 
 )

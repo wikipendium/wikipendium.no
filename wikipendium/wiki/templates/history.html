@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<dl>
+{% for articleContent in articleContents %}
+    <dt> {{ articleContent.get_full_title }} </dt>
+    <dd> {{ articleContent.content }}</dd>
+{% endfor %}
+</dl>
+{% endblock %}

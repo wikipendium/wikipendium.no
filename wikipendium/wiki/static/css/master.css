@@ -886,7 +886,7 @@ table .figure {
   text-align: right;
 }
 
-code {
+code, pre {
   font-family: "Consolas", "Courier", monospace;
 }
 
@@ -2213,4 +2213,18 @@ body.frontpage:before {
 
 .green-bg{
     background: rgba(0, 204, 255, 0.5);
+}
+
+/********************
+ * HELP-CONTAINER
+********************/
+
+.help-container {
+    margin: 1em 0;
+}
+.help-container h3 {
+    margin: .5em 0;
+}
+.help-container ul {
+    padding-left: 1em;
 }

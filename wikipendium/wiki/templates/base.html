@@ -40,6 +40,11 @@
                 // Allow form to submit without being bugged about unsaved changes
                 editor_has_been_updated = false;
             });
+            $('#create-button').click(function(){
+                var redirect_url = $('#create-article-slug').val() + "/edit/";
+                window.location.href = redirect_url;
+                return false;
+            });
         });
         window.addEventListener('beforeunload', function(){
             if (editor_has_been_updated) {

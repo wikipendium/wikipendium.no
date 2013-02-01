@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
@@ -33,8 +32,9 @@ def article(request, slug):
     return render(request, 'article.html', {
         "content": content,
         "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
-        "articleContent": articleContent
-        }, context_instance=RequestContext(request))
+        "articleContent": articleContent,
+        "share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
+        })
 
 @login_required
 def edit(request, slug):
@@ -42,10 +42,13 @@ def edit(request, slug):
     articleContent = ArticleContent()
     try:
         article = Article.objects.get(slug=slug)
-        articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
     except:
         article = Article(slug=slug) 
         article.save()
+    try:
+        articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
+    except:
+        pass
     if request.method == 'POST': # If the form has been submitted...
         form = ArticleForm(request.POST) # A form bound to the POST data
         new_article = form.save(commit=False)
@@ -57,5 +60,6 @@ def edit(request, slug):
         form = ArticleForm(instance=articleContent)
     return render(request, 'edit.html', {
         "articleContent": articleContent,
+        "share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
         "form": form
         })

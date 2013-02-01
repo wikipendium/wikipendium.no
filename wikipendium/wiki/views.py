@@ -51,15 +51,15 @@ def edit(request, slug):
         pass
     if request.method == 'POST': # If the form has been submitted...
         form = ArticleForm(request.POST) # A form bound to the POST data
-        new_article = form.save(commit=False)
-        new_article.article = article
-        new_article.lang = articleContent.lang
-        new_article.save()
-        return HttpResponseRedirect(new_article.get_url())
+        if form.is_valid():
+            new_article = form.save(commit=False)
+            new_article.article = article
+            new_article.lang = articleContent.lang
+            new_article.save()
+            return HttpResponseRedirect(new_article.get_url())
     else:
         form = ArticleForm(instance=articleContent)
     return render(request, 'edit.html', {
         "articleContent": articleContent,
-        "share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
         "form": form
         })

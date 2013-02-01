@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Article(models.Model):
-    slug = models.SlugField(max_length=256)
+    slug = models.SlugField(max_length=256, unique=True)
     def __unicode__(self):
         return self.slug
 

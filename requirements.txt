@@ -2,3 +2,4 @@ django==1.4
 django-registration
 south
 markdown2
+fabric

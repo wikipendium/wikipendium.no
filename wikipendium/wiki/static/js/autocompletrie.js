@@ -28,7 +28,8 @@
                 if(e.keyCode == 13){ //enter
                     e.preventDefault();
                     if(sb.val() != ""){
-                        window.location = $(ul.children()[index]).attr('data-url');
+                        var url = $(ul.children()[index]).attr('data-url') || sb.val();
+                        window.location = url;
                     }
                 }
                 if(e.keyCode == 38){ //up

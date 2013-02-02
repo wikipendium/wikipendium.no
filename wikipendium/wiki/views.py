@@ -26,8 +26,12 @@ def home(request):
 
 @login_required
 def article(request, slug):
-    article = Article.objects.get(slug=slug)
-    articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
+    try:
+        article = Article.objects.get(slug=slug)
+        articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
+    except:
+        return HttpResponseRedirect(slug+'/edit')
+
     content = markdown(articleContent.content, extras=["toc"], safe_mode=True)
     return render(request, 'article.html', {
         "content": content,
@@ -37,17 +41,29 @@ def article(request, slug):
         })
 
 @login_required
+def new(request):
+    slug = ''
+    if request.POST:
+        slug = request.POST.get('slug')
+    return edit(request, slug)
+
+@login_required
 def edit(request, slug):
     article = None
     articleContent = ArticleContent()
     try:
-        article = Article.objects.get(slug=slug)
+        if slug:
+            article = Article.objects.get(slug=slug)
     except:
-        article = Article(slug=slug) 
-        article.save()
+        if slug:
+            article = Article(slug=slug) 
+            article.save()
     try:
         articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
     except:
+        articleContent = ArticleContent()
+        if article:
+            articleContent.article = article
         pass
     if request.method == 'POST': # If the form has been submitted...
         form = ArticleForm(request.POST) # A form bound to the POST data
@@ -62,7 +78,7 @@ def edit(request, slug):
     return render(request, 'edit.html', {
         "articleContent": articleContent,
         "form": form
-        })
+    })
 
 @login_required
 def history(request, slug):

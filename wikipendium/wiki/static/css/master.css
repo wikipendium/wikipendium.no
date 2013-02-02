@@ -2147,6 +2147,16 @@ body.frontpage:before {
 #toc ol ol ol ol {list-style-type: lower-latin;}
 #toc ol ol ol ol ol {list-style-type: lower-greek;}
 
+form #id_slug {
+    width:11%;
+    float:left;
+}
+
+form #id_title{
+    width:89%;
+}
+
+
 /******************
  * EPICEDITOR
 ******************/
@@ -2228,4 +2238,14 @@ body.frontpage:before {
 }
 .help-container ul {
     padding-left: 1em;
+}
+
+
+
+/**
+ *
+ */
+
+input[readonly=True]{
+    background:lightgrey;
 }

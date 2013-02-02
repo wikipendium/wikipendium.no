@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<dl>
-{% for articleContent in articleContents %}
-    <dt> {{ articleContent.get_full_title }} </dt>
-    <dd> {{ articleContent.content }}</dd>
-{% endfor %}
-</dl>
+<ul>
+    {% for ac in articleContents %}
+    <li><a href="{{ac.pk}}/">{{ ac.get_full_title }}</a></li>
+    {% endfor %}
+</ul>
 {% endblock %}

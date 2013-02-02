@@ -2242,6 +2242,20 @@ form #id_title{
 
 
 
+
+/********************
+ * HISTORY
+********************/
+del{
+    background: pink;
+    display: inline-block;
+}
+ins{
+    background: lightgreen;
+    display: inline-block;
+}
+
+
 /**
  *
  */

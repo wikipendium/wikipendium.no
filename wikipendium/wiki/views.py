@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import ArticleForm
 from markdown2 import markdown
+import diff
 
 @login_required
 def home(request):
@@ -84,7 +85,30 @@ def edit(request, slug):
 def history(request, slug):
     article = Article.objects.get(slug=slug)
     articleContents = ArticleContent.objects.filter(article=article).order_by('-updated')
-
+    for ac in articleContents:
+        ac.markdowned = markdown(ac.content, safe_mode=True)
     return render(request, "history.html", {
         "articleContents": articleContents
         })
+
+def history_single(request, slug, id):
+    article = Article.objects.get(slug=slug)
+
+    articleContents = ArticleContent.objects.filter(article=article).order_by('-updated')
+
+    aclist = filter(lambda ac: ac[1].pk == int(id), enumerate(articleContents))
+
+    if not aclist:
+        return HttpResponseRedirect('/'+article.get_history_url())
+    i,ac = aclist[0]
+
+    ac.diff = diff.textDiff(
+        markdown(articleContents[i+1].content, safe_mode=True) if len(articleContents) > i+1 else '',
+        markdown(ac.content, safe_mode=True)
+    )
+
+    return render(request, 'history_single.html', {
+        "ac":ac
+    })
+
+

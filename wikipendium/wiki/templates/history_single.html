@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class=info>
+    SOME SLICK INFOBOX HERE: This is an old version of the article. Changes made in this revision were made by [user].
+</div>
+
+<div id=article class=serif>
+    <h1 class=title>{{ ac.get_full_title }}</h1>
+    <div class=content>{{ ac.diff|safe }}</div>
+</div>
+{% endblock %}

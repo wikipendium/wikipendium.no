@@ -45,7 +45,7 @@ def new(request):
     slug = ''
     if request.POST:
         slug = request.POST.get('slug')
-    return edit(request, slug)
+    return edit(request, slug.upper())
 
 @login_required
 def edit(request, slug):

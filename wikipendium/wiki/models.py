@@ -7,6 +7,10 @@ class Article(models.Model):
     def __unicode__(self):
         return self.slug
 
+    def save(self):
+        self.slug = self.slug.upper()
+        super(Article,self).save()
+
 class ArticleContent(models.Model):
     article = models.ForeignKey('Article')
     content = models.TextField() 

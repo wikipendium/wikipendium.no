@@ -15,7 +15,10 @@
         $(function(){
 
             $('.button').on('touchstart',function(e){
-                $(this).click();
+                e.preventDefault();
+                e.stopPropagation();
+                this.click();
+                return false;
             });
 
             $('textarea').each(function(){

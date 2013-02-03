@@ -14,6 +14,14 @@
 
 <input id=searchbox type=text placeholder="find a compendium..." />
 
+<div class="popular-articles serif">
+    <h2>Popular compendiums</h2>
+    <ul>
+        {% for ac in popularACs %}
+            <li><a href={{ac.get_url}}>{{ac.get_full_title}}</a></li>
+        {% endfor %}
+    </ul>
+</div>
 <script>
     (function(){
         var trie = {{ trie|safe }};

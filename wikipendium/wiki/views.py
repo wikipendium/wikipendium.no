@@ -7,12 +7,21 @@ from wikipendium.wiki.forms import ArticleForm
 from markdown2 import markdown
 from django.contrib.auth.models import User
 import diff, urllib, hashlib
+from collections import Counter
 
 
 @login_required
 def home(request):
 
     articleContents = ArticleContent.objects.all().order_by('-updated')
+
+    counter = Counter()
+    for ac in articleContents:
+        counter[ac.article] += 1
+
+    print [(a,b) for a,b in counter.items()]
+
+    popularACs = [article.get_newest_content() for article,count in counter.most_common(6)]
 
     trie = []
     articleset = set([])
@@ -25,7 +34,10 @@ def home(request):
                 "url": ac.get_url()
                 })
 
-    return render(request, 'index.html', {"trie":simplejson.dumps(trie)})
+    return render(request, 'index.html', {
+        "trie":simplejson.dumps(trie),
+        'popularACs': popularACs     
+    })
 
 @login_required
 def article(request, slug):

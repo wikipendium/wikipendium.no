@@ -1,4 +1,5 @@
 (function($) {
+
     $.fn.autocompletrie = function(trie) {
         return this.each(function() {
 
@@ -23,6 +24,7 @@
             var ullength = 0;
             var oldword = "";
             var index = 0;
+
 
             sb.on("keydown",function(e){
                 if(e.keyCode == 13){ //enter
@@ -56,8 +58,18 @@
                     var li = document.createElement("li");
                     li.textContent = words[i].label;
                     li.setAttribute('data-url', words[i].url);
+                    li.setAttribute('data-idx', i);
                     ul.append(li); 
                 }
+                ul.children().on('mouseover', function(e){
+                    index = $(this).attr('data-idx');
+                    ul.children().removeClass('active');
+                    $(ul.children()[index]).addClass("active");
+                }).on('click touchstart',function(e){
+                    index = $(this).attr('data-idx');
+                    var url = $(ul.children()[index]).attr('data-url') || sb.val();
+                    window.location = url;
+                });
                 $(ul.children()[index]).addClass("active");
             }
 

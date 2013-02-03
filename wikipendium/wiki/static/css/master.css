@@ -2134,6 +2134,9 @@ body.frontpage:before {
     line-height: 24px;
 }
 
+h1{margin:60px 0;}
+h2{margin-top:40px;}
+
 #article .title{
     margin-bottom:20px;
     text-align: left;
@@ -2162,6 +2165,18 @@ form #id_slug {
 
 form #id_title{
     width:89%;
+}
+
+code {
+    font-size:14px; 
+    line-height: 18px;
+    background:#fafafa;
+    padding:10px;
+    display:block;
+    border-radius:10px;
+    border:1px solid #eaeaea;
+    box-shadow: -1px -1px 0px rgba(0,0,0,0.2);
+    margin-bottom:20px;
 }
 
 

@@ -14,7 +14,7 @@
         var editor_has_been_updated = false;
         $(function(){
 
-            $('.button').on('touchstart',function(e){
+            $('.header-logo-link, .button').on('touchstart',function(e){
                 e.preventDefault();
                 e.stopPropagation();
                 this.click();
@@ -72,7 +72,7 @@
     <div id="footer-pusher">
         <div class=container>
             <header id="header" class=row>
-                <h1 class="span6 serif"><a href=/>
+                <h1 class="span6 serif"><a class=header-logo-link href=/>
                     {% block logo %}Wikipendium{% endblock %}
                 </a></h1>
                 <nav class=span6>

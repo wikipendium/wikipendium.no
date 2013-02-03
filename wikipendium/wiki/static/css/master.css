@@ -2114,7 +2114,7 @@ body.frontpage:before {
  * ARTICLE
 ******************/
 
-#article{
+#article, #epiceditor-preview{
     width: auto;
     max-width: 520px;
     margin:0 auto;

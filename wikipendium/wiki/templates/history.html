@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<ul>
+<ul class=article-history-list>
     {% for ac in articleContents %}
-    <li><a href="{{ac.pk}}/">{{ ac.get_full_title }}</a></li>
+    <li>
+        <a href="{{ac.pk}}/">{{ ac.get_full_title }}</a>
+        <span class="date">{{ ac.updated }}</span>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}

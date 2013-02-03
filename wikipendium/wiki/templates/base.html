@@ -75,6 +75,7 @@
 <div class="has-dropdown button-dropdown">
     <a href=# class=button data-toggle=dropdown><i class="icon icon-prepend green-bg"></i>{{user.username}}<span class=caret></span></a>
     <ul class="dropdown right">
+        <li><a href=/users/{{request.user.username}}/>Profile</a></li>
         <li><a href=/accounts/password/change/>Change password</a></li>
         <li><a href=/accounts/logout/>Log out</a></li>
     </ul>

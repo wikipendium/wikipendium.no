@@ -69,6 +69,10 @@
                     index = $(this).attr('data-idx');
                     ul.children().removeClass('active');
                     $(ul.children()[index]).addClass("active");
+                }).on('touchmove',function(e){
+                    index = $(this).attr('data-idx');
+                    ul.children().removeClass('active');
+                    $(ul.children()[index]).addClass("active");
                 }).on('click touchend',function(e){
                     index = $(this).attr('data-idx');
                     ul.children().removeClass('active');

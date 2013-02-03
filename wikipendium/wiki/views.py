@@ -52,11 +52,14 @@ def article(request, slug, lang="en"):
     except:
         return HttpResponseRedirect("/" + slug+ "/" + lang + '/edit')
 
+    contributors = articleContent.get_contributors()
+    
     content = markdown(articleContent.content, extras=["toc", "wiki-tables"], safe_mode=True)
     return render(request, 'article.html', {
         "content": content,
         "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
         "articleContent": articleContent,
+        'contributors': contributors,
         #"share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
         })
 

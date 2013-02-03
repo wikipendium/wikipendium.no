@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ user }} -{% endblock %}
+
+{% block content %}
+<div id=article class=serif>
+    <div class=clearfix>
+        <img src="{{ gravatar }}" width=150 height=150 class=profile-photo />
+        <h1 class=title>{{ user }}</h1>
+    </div>
+    <h3>Contributions:</h3>
+    <ul class=article-history-list>
+        {% for ac in contributions %}
+        <li class="clearfix">
+            <a href="{{ac.pk}}/">{{ ac.get_full_title }}</a>
+            <span class="date">{{ ac.updated }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

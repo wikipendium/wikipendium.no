@@ -65,8 +65,14 @@
                     index = $(this).attr('data-idx');
                     ul.children().removeClass('active');
                     $(ul.children()[index]).addClass("active");
-                }).on('click touchstart',function(e){
+                }).on('touchstart',function(e){
                     index = $(this).attr('data-idx');
+                    ul.children().removeClass('active');
+                    $(ul.children()[index]).addClass("active");
+                }).on('click touchend',function(e){
+                    index = $(this).attr('data-idx');
+                    ul.children().removeClass('active');
+                    $(ul.children()[index]).addClass("active");
                     var url = $(ul.children()[index]).attr('data-url') || sb.val();
                     window.location = url;
                 });

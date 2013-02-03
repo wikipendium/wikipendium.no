@@ -15,7 +15,8 @@ class Site(object):
     def deploy(self):
         self.git_pull()
         self.update_packages()
-        self.run('venv/bin/python manage.py collectstatic')
+        self.run('venv/bin/python manage.py syncdb --migrate')
+        self.run('venv/bin/python manage.py collectstatic --noinput')
         self.restart()
 
     def git_pull(self):
@@ -50,7 +51,7 @@ DEV = Site(
 
 PROD = Site(
     dir='/home/prods/wikipendium.no/',
-    user_id='wikipendium'
+    user_id='web'
 )
 
 env.hosts = ['wikipendium.no']
@@ -61,7 +62,7 @@ def clone_prod_data():
     Download production data (database and uploaded files) and insert locally
     """
 
-    env.user = 'wikipendium'
+    env.user = prompt("Username on prod server:", default=getpass.getuser())
     dump_file = str(time.time()) + ".json"
 
     # Ignore errors on these next steps, so that we are sure we clean up no matter what
@@ -85,7 +86,7 @@ def deploy():
     """
     Deploy the curent master branch of UNO to prod (or dev, first)
     """
-    env.user = 'wikipendium'
+    env.user = prompt("Username on prod server:", default=getpass.getuser())
 
     # Check if we first want to test on dev
     """

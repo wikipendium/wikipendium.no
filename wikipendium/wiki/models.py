@@ -18,10 +18,10 @@ class Article(models.Model):
             raise ValidationError('Course code cannot contain slashes')
     
     def get_newest_content(self, lang='en'):
-        return ArticleContent.objects.filter(article=self).order_by('-updated')[:1].get()
+        return ArticleContent.objects.filter(article=self, lang=lang).order_by('-updated')[:1].get()
 
-    def get_sorted_contents(self):
-        return ArticleContent.objects.filter(article=self).order_by('-updated')
+    def get_sorted_contents(self, lang='en'):
+        return ArticleContent.objects.filter(article=self, lang=lang).order_by('-updated')
 
 
 class ArticleContent(models.Model):

@@ -21,7 +21,10 @@ def home(request):
 
     print [(a,b) for a,b in counter.items()]
 
-    popularACs = [article.get_newest_content() for article,count in counter.most_common(6)]
+    popularACs = []
+    try:
+        popularACs = [article.get_newest_content() for article,count in counter.most_common(6)]
+    except:pass
 
     trie = []
     articleset = set([])

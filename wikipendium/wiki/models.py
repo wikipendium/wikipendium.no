@@ -59,14 +59,14 @@ class ArticleContent(models.Model):
     def get_url(self):
         lang = ""
         if self.lang != "en":
-            lang = "/" + self.lang + "/"
+            lang = '/' + self.lang + '/'
         return '/'+self.article.slug + ":" + self.title.replace(' ','_') + lang
 
     def get_edit_url(self):
-        return self.get_url() + "/" + self.lang + '/edit/'
+        return (self.get_url() + '/edit/').replace('//','/')
     
     def get_history_url(self):
-        return self.get_url() + "/" + self.lang + '/history/'
+        return (self.get_url() + '/history/').replace('//','/')
 
     def get_history_single_url(self):
         return self.get_url() + '/history/'+str(self.pk)+'/'

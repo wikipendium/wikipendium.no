@@ -25,6 +25,14 @@ class Article(models.Model):
     def get_sorted_contents(self, lang='en'):
         return ArticleContent.objects.filter(article=self, lang=lang).order_by('-updated')
 
+    def get_available_languages(self, current=None):
+        codes = ArticleContent.objects.filter(article=self).exclude(lang=current.lang).distinct().values_list('lang', flat=True)
+        if codes:
+            return dict(zip(codes, map(self.get_url, codes) ))
+
+    def get_url(self, lang="en"):
+        return self.get_newest_content(lang).get_url()
+
 
 class ArticleContent(models.Model):
     article = models.ForeignKey('Article')
@@ -42,7 +50,10 @@ class ArticleContent(models.Model):
         return self.article.slug+': '+self.title
 
     def get_url(self):
-        return '/'+self.article.slug + ":" + self.title.replace(' ','_')
+        lang = ""
+        if self.lang != "en":
+            lang = "/" + self.lang + "/"
+        return '/'+self.article.slug + ":" + self.title.replace(' ','_') + lang
 
     def get_edit_url(self):
         return self.get_url() + "/" + self.lang + '/edit/'

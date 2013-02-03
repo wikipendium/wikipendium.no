@@ -53,10 +53,14 @@ def article(request, slug, lang="en"):
         return HttpResponseRedirect("/" + slug+ "/" + lang + '/edit')
 
     content = markdown(articleContent.content, extras=["toc", "wiki-tables"], safe_mode=True)
+    available_languages = article.get_available_languages(articleContent)
+    print available_languages
+
     return render(request, 'article.html', {
         "content": content,
         "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
         "articleContent": articleContent,
+        "availableLanguages": available_languages, 
         #"share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
         })
 

@@ -3,6 +3,7 @@
 {% block title %}{{ articleContent.get_full_title }} -{% endblock %}
 
 {% block nav %}
+<a class=button href=/new/>Create article</a>
 <div class=button-group style=inline-block>
     <a class="button edit-link" href={{ articleContent.get_edit_url }}>Edit</a>
     <div class="has-dropdown button-dropdown">

@@ -3,3 +3,4 @@ django-registration
 south
 markdown2
 fabric
+simplejson

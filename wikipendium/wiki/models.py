@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+import urllib2, urllib
+import simplejson as json
 
 # Create your models here.
 
@@ -43,13 +45,29 @@ class ArticleContent(models.Model):
         return '/'+self.article.slug + ":" + self.title.replace(' ','_')
 
     def get_edit_url(self):
-        return self.get_url() + '/edit/'
+        return self.get_url() + "/" + self.lang + '/edit/'
     
     def get_history_url(self):
-        return self.get_url() + '/history/'
+        return self.get_url() + "/" + self.lang + '/history/'
 
     def get_history_single_url(self):
         return self.get_url() + '/history/'+str(self.pk)+'/'
+
+    def get_language(self):
+        data = {
+            'q': self.content.encode('utf-8'),
+            'key': '21f18e409617475159ef7d5a7084d40c'
+            }
+        language_json = urllib2.urlopen('http://ws.detectlanguage.com/0.2/detect', urllib.urlencode(data))
+        language_info = json.loads(language_json.read())
+        print language_info
+        language_code = language_info["data"]["detections"][0]["language"]
+        return language_code
+
+    def save(self, lang=None):
+        if not self.pk and not lang:
+            self.lang = self.get_language()
+        super(ArticleContent,self).save()
 
     def __unicode__(self):
         return self.title

@@ -7,6 +7,7 @@ from wikipendium.wiki.forms import ArticleForm
 from markdown2 import markdown
 from django.contrib.auth.models import User
 import diff, urllib, hashlib
+#from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 
 
 @login_required
@@ -22,25 +23,27 @@ def home(request):
             articleset.add(article.pk)
             trie.append({
                 "label": ac.get_full_title(),
-                "url": ac.get_url()
+                "url": ac.get_url(),
+                "lang": ac.lang
                 })
 
     return render(request, 'index.html', {"trie":simplejson.dumps(trie)})
 
 @login_required
-def article(request, slug):
+def article(request, slug, lang="en"):
+    print lang
     try:
         article = Article.objects.get(slug=slug)
-        articleContent = article.get_newest_content()
+        articleContent = article.get_newest_content(lang)
     except:
-        return HttpResponseRedirect(slug+'/edit')
+        return HttpResponseRedirect("/" + slug+ "/" + lang + '/edit')
 
     content = markdown(articleContent.content, extras=["toc", "wiki-tables"], safe_mode=True)
     return render(request, 'article.html', {
         "content": content,
         "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
         "articleContent": articleContent,
-        "share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
+        #"share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
         })
 
 @login_required
@@ -52,7 +55,7 @@ def new(request):
 
 
 @login_required
-def edit(request, slug):
+def edit(request, slug, lang=None):
     article = None
     articleContent = None
     try:
@@ -61,9 +64,9 @@ def edit(request, slug):
         article = Article(slug=slug)
 
     try:
-        articleContent = article.get_newest_content()
+        articleContent = article.get_newest_content(lang)
     except:
-        articleContent = ArticleContent(article=article)
+        articleContent = ArticleContent(article=article, lang=lang)
         pass
 
     if request.method == 'POST':
@@ -75,7 +78,7 @@ def edit(request, slug):
             new_articleContent.article = article
             new_articleContent.edited_by = request.user
             new_articleContent.lang = articleContent.lang
-            new_articleContent.save()
+            new_articleContent.save(lang)
             return HttpResponseRedirect(new_articleContent.get_url())
     else:
         form = ArticleForm(instance=articleContent)
@@ -85,9 +88,9 @@ def edit(request, slug):
     })
 
 @login_required
-def history(request, slug):
+def history(request, slug, lang="en"):
     article = Article.objects.get(slug=slug)
-    articleContents = article.get_sorted_contents()
+    articleContents = article.get_sorted_contents(lang=lang)
     for ac in articleContents:
         ac.markdowned = markdown(ac.content, safe_mode=True)
     return render(request, "history.html", {
@@ -121,7 +124,7 @@ def history_single(request, slug, id):
 
 def user(request, username):
     user = User.objects.get(username=username)
-    contributions = ArticleContent.objects.filter(edited_by=user).order_by('article', '-updated')
+    contributions = ArticleContent.objects.filter(edited_by=user).order_by('-updated')
 
     email = user.email
     default = "http://www.example.com/default.jpg"

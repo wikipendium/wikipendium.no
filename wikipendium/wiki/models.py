@@ -48,5 +48,8 @@ class ArticleContent(models.Model):
     def get_history_url(self):
         return self.get_url() + '/history/'
 
+    def get_history_single_url(self):
+        return self.get_url() + '/history/'+str(self.pk)+'/'
+
     def __unicode__(self):
         return self.title

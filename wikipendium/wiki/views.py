@@ -103,13 +103,18 @@ def history_single(request, slug, id):
         return HttpResponseRedirect('/'+article.get_history_url())
     i,ac = aclist[0]
 
+    prev_ac = articleContents[i+1] if len(articleContents) > i+1 else None
+    next_ac = articleContents[i-1] if i-1 >= 0 else None
+
     ac.diff = diff.textDiff(
-        markdown(articleContents[i+1].content, safe_mode=True) if len(articleContents) > i+1 else '',
+        markdown(prev_ac.content, safe_mode=True) if prev_ac else '',
         markdown(ac.content, safe_mode=True)
     )
 
     return render(request, 'history_single.html', {
-        "ac":ac
+        'ac':ac,
+        'next_ac': next_ac,
+        'prev_ac':prev_ac
     })
 
 

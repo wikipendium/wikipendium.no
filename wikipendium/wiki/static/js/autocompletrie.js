@@ -70,15 +70,19 @@
                     ul.children().removeClass('active');
                     $(ul.children()[index]).addClass("active");
                 }).on('touchmove',function(e){
+                    e.preventDefault();
                     index = $(this).attr('data-idx');
                     ul.children().removeClass('active');
                     $(ul.children()[index]).addClass("active");
+                    return false;
                 }).on('click touchend',function(e){
+                    e.preventDefault();
                     index = $(this).attr('data-idx');
                     ul.children().removeClass('active');
                     $(ul.children()[index]).addClass("active");
                     var url = $(ul.children()[index]).attr('data-url') || sb.val();
                     window.location = url;
+                    return false;
                 });
                 $(ul.children()[index]).addClass("active");
             }

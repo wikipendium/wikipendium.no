@@ -6,6 +6,15 @@
     SOME SLICK INFOBOX HERE: This is an old version of the article. Changes made in this revision were made by {{ ac.edited_by }}.
 </div>
 
+<div style=overflow:hidden>
+{% if prev_ac %}
+<a class="button" href={{prev_ac.get_history_single_url}}>Previous version</a>
+{% endif %}
+{% if next_ac %}
+<a class="button float-right" href={{next_ac.get_history_single_url}}>Next version</a>
+{% endif %}
+</div>
+
 <div id=article class=serif>
     <h1 class=title>{{ ac.get_full_title }}</h1>
     <div class=content>{{ ac.diff|safe }}</div>

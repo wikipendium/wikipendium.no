@@ -48,32 +48,31 @@ def new(request):
         slug = request.POST.get('slug')
     return edit(request, slug.upper())
 
+
 @login_required
 def edit(request, slug):
     article = None
-    articleContent = ArticleContent()
+    articleContent = None
     try:
-        if slug:
-            article = Article.objects.get(slug=slug)
+        article = Article.objects.get(slug=slug)
     except:
-        if slug:
-            article = Article(slug=slug) 
-            article.save()
+        article = Article(slug=slug)
+
     try:
-        articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
+        articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[:1].get()
     except:
-        articleContent = ArticleContent()
-        if article:
-            articleContent.article = article
+        articleContent = ArticleContent(article=article)
         pass
-    if request.method == 'POST': # If the form has been submitted...
-        form = ArticleForm(request.POST) # A form bound to the POST data
+
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
         if form.is_valid():
-            new_article = form.save(commit=False)
-            new_article.article = article
-            new_article.lang = articleContent.lang
-            new_article.save()
-            return HttpResponseRedirect(new_article.get_url())
+            if not article.pk:
+                article.save()
+            articleContent = form.save(commit=False)
+            articleContent.article = article
+            articleContent.save()
+            return HttpResponseRedirect(articleContent.get_url())
     else:
         form = ArticleForm(instance=articleContent)
     return render(request, 'edit.html', {

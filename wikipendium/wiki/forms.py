@@ -15,9 +15,10 @@ class ArticleForm(ModelForm):
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
         try:
-            if self.instance.article and self.instance.article.pk:
+            if self.instance.article:
                 self.fields['slug'].widget.attrs['value'] = self.instance.article.slug
-                self.fields['slug'].widget.attrs['readonly'] = True
+                if self.instance.article.pk:
+                    self.fields['slug'].widget.attrs['readonly'] = True
         except:
             pass
 

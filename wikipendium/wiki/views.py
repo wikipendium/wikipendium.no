@@ -45,13 +45,14 @@ def home(request):
 
 @login_required
 def article(request, slug, lang="en"):
-    print lang
     try:
         article = Article.objects.get(slug=slug)
         articleContent = article.get_newest_content(lang)
     except:
         return HttpResponseRedirect("/" + slug+ "/" + lang + '/edit')
 
+    contributors = articleContent.get_contributors()
+    
     content = markdown(articleContent.content, extras=["toc", "wiki-tables"], safe_mode=True)
     available_languages = article.get_available_languages(articleContent)
     print available_languages
@@ -61,7 +62,8 @@ def article(request, slug, lang="en"):
         "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
         "articleContent": articleContent,
         "availableLanguages": available_languages, 
-        #"share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
+        'contributors': contributors,
+        "share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
         })
 
 @login_required

@@ -3,6 +3,7 @@
 {% block title %}{{ articleContent.get_full_title }} -{% endblock %}
 
 {% block nav %}
+<a class=button href=/new/>Create article</a>
 <div class=button-group style=inline-block>
     {% for lang_code, lang_url in availableLanguages.items %}
         <a class=button href={{ lang_url }}>{{ lang_code }}</a>
@@ -30,5 +31,16 @@
 </div>
     {{ content }}
 {% endautoescape %}
+</div>
+
+<div class=contributors>
+    <h2>Written by</h2>
+    {% for user in contributors %}
+        <div>
+            <a href=/users/{{user.username}}>
+                {{ user.get_full_name }}
+            </a>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

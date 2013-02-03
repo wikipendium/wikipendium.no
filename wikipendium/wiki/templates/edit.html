@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block nav %}
+<a class=button href=/new/>Create article</a>
+{% endblock %}
+
 {% block content %}
 {% if articleContent.get_url %}
 <a href={% if articleContent.pk %}{{ articleContent.get_url }}{%else%}/{%endif%} >« Back</a>

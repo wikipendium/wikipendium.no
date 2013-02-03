@@ -19,7 +19,10 @@ class Article(models.Model):
     def clean(self):
         if '/' in self.slug:
             raise ValidationError('Course code cannot contain slashes')
-    
+
+    def get_contributors(self,lang):
+        return set([ac.edited_by for ac in ArticleContent.objects.filter(article=self, lang=lang)])
+
     def get_newest_content(self, lang='en'):
         return ArticleContent.objects.filter(article=self, lang=lang).order_by('-updated')[:1].get()
 
@@ -47,6 +50,9 @@ class ArticleContent(models.Model):
         if '/' in self.title:
             raise ValidationError('Title cannot contain slashes')
     
+    def get_contributors(self):
+        return set([ac.edited_by for ac in ArticleContent.objects.filter(article=self.article, lang=self.lang, updated__lt=self.updated)]) | set([self.edited_by])
+
     def get_full_title(self):
         return self.article.slug+': '+self.title
 

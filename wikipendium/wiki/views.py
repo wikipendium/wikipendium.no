@@ -45,7 +45,6 @@ def home(request):
 
 @login_required
 def article(request, slug, lang="en"):
-    print lang
     try:
         article = Article.objects.get(slug=slug)
         articleContent = article.get_newest_content(lang)
@@ -60,7 +59,7 @@ def article(request, slug, lang="en"):
         "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
         "articleContent": articleContent,
         'contributors': contributors,
-        #"share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
+        "share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
         })
 
 @login_required

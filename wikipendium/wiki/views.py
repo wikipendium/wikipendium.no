@@ -7,13 +7,24 @@ from wikipendium.wiki.forms import ArticleForm
 from markdown2 import markdown
 from django.contrib.auth.models import User
 import diff, urllib, hashlib
-#from wikipendium.wiki.langcodes import LANGUAGE_NAMES
+from collections import Counter
 
 
 @login_required
 def home(request):
 
     articleContents = ArticleContent.objects.all().order_by('-updated')
+
+    counter = Counter()
+    for ac in articleContents:
+        counter[ac.article] += 1
+
+    print [(a,b) for a,b in counter.items()]
+
+    popularACs = []
+    try:
+        popularACs = [article.get_newest_content() for article,count in counter.most_common(6)]
+    except:pass
 
     trie = []
     articleset = set([])
@@ -27,7 +38,10 @@ def home(request):
                 "lang": ac.lang
                 })
 
-    return render(request, 'index.html', {"trie":simplejson.dumps(trie)})
+    return render(request, 'index.html', {
+        "trie":simplejson.dumps(trie),
+        'popularACs': popularACs     
+    })
 
 @login_required
 def article(request, slug, lang="en"):

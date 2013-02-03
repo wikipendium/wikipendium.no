@@ -13,6 +13,14 @@
     <script>
         var editor_has_been_updated = false;
         $(function(){
+
+            $('.header-logo-link, .button').on('touchstart',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                this.click();
+                return false;
+            });
+
             $('textarea').each(function(){
                 var container = $('<div class=epiceditor-container></div>');
                 $this = $(this);
@@ -64,7 +72,7 @@
     <div id="footer-pusher">
         <div class=container>
             <header id="header" class=row>
-                <h1 class="span6 serif"><a href=/>
+                <h1 class="span6 serif"><a class=header-logo-link href=/>
                     {% block logo %}Wikipendium{% endblock %}
                 </a></h1>
                 <nav class=span6>
@@ -75,6 +83,7 @@
 <div class="has-dropdown button-dropdown">
     <a href=# class=button data-toggle=dropdown><i class="icon icon-prepend green-bg"></i>{{user.username}}<span class=caret></span></a>
     <ul class="dropdown right">
+        <li><a href=/users/{{request.user.username}}/>Profile</a></li>
         <li><a href=/accounts/password/change/>Change password</a></li>
         <li><a href=/accounts/logout/>Log out</a></li>
     </ul>

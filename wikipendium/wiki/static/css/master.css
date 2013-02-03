@@ -2238,7 +2238,21 @@ form #id_title{
 }
 
 
+/********************
+ * POPULAR-ARTICLES
+********************/
 
+.popular-articles{
+    margin-top:100px;
+}
+
+.popular-articles ul li{
+    list-style-type:none; 
+    float:left;
+    display:block;
+    width:33%;
+    font-size: 20px;
+}
 
 /********************
  * HISTORY

@@ -2336,3 +2336,11 @@ ins{
 input[readonly=True]{
     background:lightgrey;
 }
+
+/**********************
+ * HEADER
+*********************/
+
+#header h1 {
+    margin: 0;
+}

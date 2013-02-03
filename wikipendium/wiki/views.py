@@ -95,7 +95,7 @@ def history(request, slug):
 def history_single(request, slug, id):
     article = Article.objects.get(slug=slug)
 
-    articleContents = article.get_sorted_articles()
+    articleContents = article.get_sorted_contents()
 
     aclist = filter(lambda ac: ac[1].pk == int(id), enumerate(articleContents))
 

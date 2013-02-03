@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import urllib2, urllib
 import simplejson as json
+from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 
 # Create your models here.
 
@@ -28,7 +29,7 @@ class Article(models.Model):
     def get_available_languages(self, current=None):
         codes = ArticleContent.objects.filter(article=self).exclude(lang=current.lang).distinct().values_list('lang', flat=True)
         if codes:
-            return dict(zip(codes, map(self.get_url, codes) ))
+            return dict(zip(map(lambda key: LANGUAGE_NAMES[key], codes), map(self.get_url, codes) ))
 
     def get_url(self, lang="en"):
         return self.get_newest_content(lang).get_url()

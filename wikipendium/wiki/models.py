@@ -16,12 +16,12 @@ class Article(models.Model):
     def clean(self):
         if '/' in self.slug:
             raise ValidationError('Course code cannot contain slashes')
+    
+    def get_newest_content(self, lang='en'):
+        return ArticleContent.objects.filter(article=self).order_by('-updated')[:1].get()
 
-    def get_newest_content(lang='en'):
-        try:
-            return ArticleContent.objects.filter(article=article, lang=lang).order_by('-updated')[:1].get()
-        except:
-            return None
+    def get_sorted_contents(self):
+        return ArticleContent.objects.filter(article=self).order_by('-updated')
 
 
 class ArticleContent(models.Model):

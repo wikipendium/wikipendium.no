@@ -29,7 +29,7 @@ def home(request):
 def article(request, slug):
     try:
         article = Article.objects.get(slug=slug)
-        articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[0:1].get()
+        articleContent = article.get_newest_content()
     except:
         return HttpResponseRedirect(slug+'/edit')
 
@@ -59,7 +59,7 @@ def edit(request, slug):
         article = Article(slug=slug)
 
     try:
-        articleContent = ArticleContent.objects.filter(article=article).order_by('-updated')[:1].get()
+        articleContent = article.get_newest_content()
     except:
         articleContent = ArticleContent(article=article)
         pass
@@ -85,7 +85,7 @@ def edit(request, slug):
 @login_required
 def history(request, slug):
     article = Article.objects.get(slug=slug)
-    articleContents = ArticleContent.objects.filter(article=article).order_by('-updated')
+    articleContents = article.get_sorted_contents()
     for ac in articleContents:
         ac.markdowned = markdown(ac.content, safe_mode=True)
     return render(request, "history.html", {
@@ -95,7 +95,7 @@ def history(request, slug):
 def history_single(request, slug, id):
     article = Article.objects.get(slug=slug)
 
-    articleContents = ArticleContent.objects.filter(article=article).order_by('-updated')
+    articleContents = article.get_sorted_articles()
 
     aclist = filter(lambda ac: ac[1].pk == int(id), enumerate(articleContents))
 

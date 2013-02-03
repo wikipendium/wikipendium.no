@@ -13,6 +13,11 @@
     <script>
         var editor_has_been_updated = false;
         $(function(){
+
+            $('.button').on('touchstart',function(e){
+                $(this).click();
+            });
+
             $('textarea').each(function(){
                 var container = $('<div class=epiceditor-container></div>');
                 $this = $(this);

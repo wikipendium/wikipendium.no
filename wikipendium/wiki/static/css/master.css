@@ -142,7 +142,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 img {
   display: block;
-  width: 100%;
   max-width: 100%;
 }
 img.native-width {
@@ -2273,6 +2272,14 @@ ins{
     float: left;
 }
 
+/********************
+ * USER
+********************/
+
+.profile-photo {
+    float: left;
+    margin: 0 .5em .5em 0;
+}
 
 /**
  *

@@ -5,7 +5,9 @@ from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import ArticleForm
 from markdown2 import markdown
-import diff
+from django.contrib.auth.models import User
+import diff, urllib, hashlib
+
 
 @login_required
 def home(request):
@@ -117,4 +119,19 @@ def history_single(request, slug, id):
         'prev_ac':prev_ac
     })
 
+def user(request, username):
+    user = User.objects.get(username=username)
+    contributions = ArticleContent.objects.filter(edited_by=user).order_by('article', '-updated')
 
+    email = user.email
+    default = "http://www.example.com/default.jpg"
+    size = 150
+
+    # construct the url
+    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+    gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+    return render(request, "user.html", {
+        "user": user,
+        "contributions": contributions,
+        "gravatar": gravatar_url
+        })

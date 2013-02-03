@@ -6,7 +6,7 @@
     <li class="clearfix">
         <a href="{{ac.pk}}/">{{ ac.get_full_title }}</a>
         <span class="date">{{ ac.updated }}</span>
-        <span class="user">{{ ac.edited_by }} </span>
+        <a class="user" href=/users/{{ user.username }}/>{{ ac.edited_by }} </a>
     </li>
     {% endfor %}
 </ul>

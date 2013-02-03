@@ -2259,6 +2259,7 @@ ins{
 .article-history-list li {
     padding: .5em;
     border: 1px solid #ccc;
+    margin-bottom: .5em;
 }
 .article-history-list .date {
     border-left: 1px solid #ccc;

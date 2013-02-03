@@ -71,6 +71,7 @@ def edit(request, slug):
         if form.is_valid():
             new_article = form.save(commit=False)
             new_article.article = article
+            new_article.edited_by = request.user
             new_article.lang = articleContent.lang
             new_article.save()
             return HttpResponseRedirect(new_article.get_url())

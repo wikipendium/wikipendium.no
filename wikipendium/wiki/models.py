@@ -28,7 +28,7 @@ class ArticleContent(models.Model):
     article = models.ForeignKey('Article')
     content = models.TextField() 
     title = models.CharField(max_length=1024)
-    lang = models.CharField(max_length=2)
+    lang = models.CharField(max_length=2, default='en')
     updated = models.DateTimeField(auto_now=True, auto_now_add=True)
     edited_by = models.ForeignKey(User, blank=True, null=True)
 

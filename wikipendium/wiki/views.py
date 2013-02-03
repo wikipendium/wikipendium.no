@@ -33,7 +33,7 @@ def article(request, slug):
     except:
         return HttpResponseRedirect(slug+'/edit')
 
-    content = markdown(articleContent.content, extras=["toc"], safe_mode=True)
+    content = markdown(articleContent.content, extras=["toc", "wiki-tables"], safe_mode=True)
     return render(request, 'article.html', {
         "content": content,
         "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),

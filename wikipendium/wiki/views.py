@@ -63,7 +63,7 @@ def article(request, slug, lang="en"):
         "articleContent": articleContent,
         "availableLanguages": available_languages, 
         'contributors': contributors,
-        "share_url": request.META['HTTP_REFERER'] + request.get_full_path()[1:], 
+        "share_url": "http://" + request.META['HTTP_HOST'] + request.get_full_path(),
         })
 
 @login_required

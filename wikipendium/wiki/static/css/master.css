@@ -2261,10 +2261,12 @@ ins{
     border: 1px solid #ccc;
     margin-bottom: .5em;
 }
-.article-history-list .date {
+.article-history-list .date,
+.article-history-list .user {
     border-left: 1px solid #ccc;
     padding-left: .5em;
     margin-left: .5em;
+    float: left;
 }
 .article-history-list a {
     padding-left: .5em;

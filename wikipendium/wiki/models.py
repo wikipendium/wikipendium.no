@@ -17,6 +17,12 @@ class Article(models.Model):
         if '/' in self.slug:
             raise ValidationError('Course code cannot contain slashes')
 
+    def get_newest_content(lang='en'):
+        try:
+            return ArticleContent.objects.filter(article=article, lang=lang).order_by('-updated')[:1].get()
+        except:
+            return None
+
 
 class ArticleContent(models.Model):
     article = models.ForeignKey('Article')

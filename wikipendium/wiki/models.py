@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -17,6 +18,7 @@ class ArticleContent(models.Model):
     title = models.CharField(max_length=1024)
     lang = models.CharField(max_length=2)
     updated = models.DateTimeField(auto_now=True, auto_now_add=True)
+    edited_by = models.ForeignKey(User, blank=True, null=True)
     
     def get_full_title(self):
         return self.article.slug+': '+self.title

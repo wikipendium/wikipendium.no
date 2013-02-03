@@ -69,10 +69,12 @@ def edit(request, slug):
         if form.is_valid():
             if not article.pk:
                 article.save()
-            articleContent = form.save(commit=False)
-            articleContent.article = article
-            articleContent.save()
-            return HttpResponseRedirect(articleContent.get_url())
+            new_articleContent = form.save(commit=False)
+            new_articleContent.article = article
+            new_articleContent.edited_by = request.user
+            new_articleContent.lang = articleContent.lang
+            new_articleContent.save()
+            return HttpResponseRedirect(new_articleContent.get_url())
     else:
         form = ArticleForm(instance=articleContent)
     return render(request, 'edit.html', {

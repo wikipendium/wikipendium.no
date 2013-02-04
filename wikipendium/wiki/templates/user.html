@@ -12,7 +12,7 @@
     <ul class=article-history-list>
         {% for ac in contributions %}
         <li class="clearfix">
-            <a href="{{ac.pk}}/">{{ ac.get_full_title }}</a>
+            <a href="{{ac.get_history_single_url}}">{{ ac.get_full_title }}</a>
             <span class="date">{{ ac.updated }}</span>
         </li>
         {% endfor %}

@@ -116,15 +116,15 @@ def history(request, slug, lang="en"):
         "articleContents": articleContents
         })
 
-def history_single(request, slug, id):
+def history_single(request, slug, lang, id):
     article = Article.objects.get(slug=slug)
 
-    articleContents = article.get_sorted_contents()
+    articleContents = article.get_sorted_contents(lang)
 
     aclist = filter(lambda ac: ac[1].pk == int(id), enumerate(articleContents))
 
     if not aclist:
-        return HttpResponseRedirect('/'+article.get_history_url())
+        return HttpResponseRedirect(articleContents[0].get_history_url())
     i,ac = aclist[0]
 
     prev_ac = articleContents[i+1] if len(articleContents) > i+1 else None

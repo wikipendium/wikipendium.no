@@ -69,7 +69,7 @@ class ArticleContent(models.Model):
         return (self.get_url() + '/history/').replace('//','/')
 
     def get_history_single_url(self):
-        return self.get_url() + '/history/'+str(self.pk)+'/'
+        return self.get_history_url() + str(self.pk)+'/'
 
     def get_language(self):
         data = {

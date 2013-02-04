@@ -71,11 +71,11 @@ def new(request):
     slug = ''
     if request.POST:
         slug = request.POST.get('slug')
-    return edit(request, slug.upper())
+    return edit(request, slug.upper(), None)
 
 
 @login_required
-def edit(request, slug, lang=None):
+def edit(request, slug, lang='en'):
     article = None
     articleContent = None
     try:

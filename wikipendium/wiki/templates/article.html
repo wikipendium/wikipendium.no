@@ -38,7 +38,7 @@
     {% for user in contributors %}
         <div>
             <a href=/users/{{user.username}}>
-                {{ user.get_full_name }}
+                {{ user.get_full_name|default:user.username }}
             </a>
         </div>
     {% endfor %}

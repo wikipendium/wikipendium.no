@@ -55,7 +55,6 @@ def article(request, slug, lang="en"):
     
     content = markdown(articleContent.content, extras=["toc", "wiki-tables"], safe_mode=True)
     available_languages = article.get_available_languages(articleContent)
-    print available_languages
 
     return render(request, 'article.html', {
         "content": content,

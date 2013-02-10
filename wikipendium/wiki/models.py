@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import urllib2, urllib
+from markdown2 import markdown
 import simplejson as json
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 
@@ -81,6 +82,9 @@ class ArticleContent(models.Model):
         print language_info
         language_code = language_info["data"]["detections"][0]["language"]
         return language_code
+
+    def get_html_content(self):
+        return markdown(self.content, extras=["toc", "wiki-tables"], safe_mode=True)
 
     def save(self, lang=None):
         if not self.pk and not lang:

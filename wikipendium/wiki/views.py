@@ -4,7 +4,6 @@ from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import ArticleForm
-from markdown2 import markdown
 from django.contrib.auth.models import User
 import diff, urllib, hashlib
 from collections import Counter
@@ -53,7 +52,7 @@ def article(request, slug, lang="en"):
 
     contributors = articleContent.get_contributors()
     
-    content = markdown(articleContent.content, extras=["toc", "wiki-tables"], safe_mode=True)
+    content = articleContent.get_html_content()
     available_languages = article.get_available_languages(articleContent)
 
     return render(request, 'article.html', {
@@ -111,7 +110,7 @@ def history(request, slug, lang="en"):
     article = Article.objects.get(slug=slug)
     articleContents = article.get_sorted_contents(lang=lang)
     for ac in articleContents:
-        ac.markdowned = markdown(ac.content, safe_mode=True)
+        ac.markdowned = ac.get_html_content()
     return render(request, "history.html", {
         "articleContents": articleContents
         })
@@ -131,8 +130,8 @@ def history_single(request, slug, lang, id):
     next_ac = articleContents[i-1] if i-1 >= 0 else None
 
     ac.diff = diff.textDiff(
-        markdown(prev_ac.content, safe_mode=True) if prev_ac else '',
-        markdown(ac.content, safe_mode=True)
+        prev_ac.get_html_content() if prev_ac else '',
+        ac.get_html_content()
     )
 
     return render(request, 'history_single.html', {

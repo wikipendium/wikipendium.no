@@ -2185,6 +2185,7 @@ code {
     border:1px solid #eaeaea;
     box-shadow: -1px -1px 0px rgba(0,0,0,0.2);
     margin-bottom:20px;
+    overflow:auto;
 }
 
 
@@ -2318,6 +2319,14 @@ ins{
 .article-history-list a {
     padding-left: .5em;
     float: left;
+}
+
+.info{
+    background: rgba(255,165,0,0.5);
+    border: 1px solid rgb(255,165,0);
+    padding: 20px;
+    border-radius:10px;
+    margin: 0 0 30px 0;
 }
 
 /********************

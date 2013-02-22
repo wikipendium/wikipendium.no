@@ -2285,8 +2285,10 @@ code {
     list-style-type:none; 
     float:left;
     display:block;
-    width:33%;
-    font-size: 20px;
+    width:30%;
+    font-size: 16px;
+    line-height: 34px;
+    margin: 0 1% 40px 0;
 }
 
 /********************

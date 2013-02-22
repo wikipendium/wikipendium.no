@@ -28,13 +28,6 @@
 
             prettyPrint();
 
-            $('.header-logo-link, .button').on('touchstart',function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                this.click();
-                return false;
-            });
-
             $('textarea').each(function(){
                 var container = $('<div class=epiceditor-container></div>');
                 $this = $(this);

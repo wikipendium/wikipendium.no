@@ -6,6 +6,7 @@ local_settings.py
 wikipendium/bin/
 wikipendium/lib/
 wikipendium/include/
+wikipendium/settings/local.py
 *.db
 .gitignore
 .*.sw*

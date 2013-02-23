@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.views.generic.simple import redirect_to
 
 admin.autodiscover()
 
@@ -9,6 +10,7 @@ urlpatterns = patterns('',
      url(r'^$', 'wikipendium.wiki.views.home', name='home'),
      url(r'^new/$', 'wikipendium.wiki.views.new', name='newarticle'),
 
+     url(r'^(?P<x>[A-Za-z0-9]+[^/]*)/$', redirect_to, {'url': '/%(x)s'}),
      url(r'^(?P<slug>[A-Za-z0-9]+)[^/]*$', 'wikipendium.wiki.views.article'),
      url(r'^(?P<slug>[A-Za-z0-9]+)[^/]*/edit/$', 'wikipendium.wiki.views.edit'),
      url(r'^(?P<slug>[A-Za-z0-9]+)[^/]*/history/$', 'wikipendium.wiki.views.history'),

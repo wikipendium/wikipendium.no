@@ -10,7 +10,32 @@
 {% endif %}
 <form method="post" action="">
     {% csrf_token %}
-    {{ form }}
+    <div class="field-group {%if form.slug.errors %}error{% endif %}">
+        <div class="fields slug-field">
+            {{ form.slug }}
+            {% if form.slug.errors %}
+            <div class=error-message>
+                {{form.slug.errors|join:", "}}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="field-group {%if form.title.errors %}error{% endif %}">
+        <div class="fields title-field">
+            {{ form.title }}
+            {% if form.title.errors %}
+            <div class=error-message>
+                {{form.title.errors|join:", "}}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br /><br />
+    <div class="field-group content-field">
+        <div class="fields">
+            {{ form.content }}
+        </div>
+    </div>
     <input type=submit class="button button-large float-right" value=Save! />
 </form>
 <div class="help-container">

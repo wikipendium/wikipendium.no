@@ -44,11 +44,15 @@ def home(request):
 
 @login_required
 def article(request, slug, lang="en"):
+
     try:
-        article = Article.objects.get(slug=slug)
+        article = Article.objects.get(slug=slug.upper())
         articleContent = article.get_newest_content(lang)
     except:
-        return HttpResponseRedirect("/" + slug+ "/" + lang + '/edit')
+        return HttpResponseRedirect("/" + slug.upper() + "/" + lang + '/edit')
+
+    if request.path != article.get_url():
+        return HttpResponseRedirect(article.get_url())
 
     contributors = articleContent.get_contributors()
     

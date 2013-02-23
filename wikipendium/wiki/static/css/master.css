@@ -2166,13 +2166,18 @@ h1,h2,h3,h4,h5,h6{
 #toc ol ol ol ol {list-style-type: lower-latin;}
 #toc ol ol ol ol ol {list-style-type: lower-greek;}
 
-form #id_slug {
+form .fields.slug-field {
     width:11%;
     float:left;
 }
 
-form #id_title{
+form .fields.title-field {
     width:89%;
+    float: left;
+}
+
+form .field-group.content-field {
+    clear: both;
 }
 
 code {

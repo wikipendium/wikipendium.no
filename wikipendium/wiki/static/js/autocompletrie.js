@@ -30,7 +30,7 @@
                 if(e.keyCode == 13){ //enter
                     e.preventDefault();
                     if(sb.val() != ""){
-                        var url = $(ul.children()[index]).attr('data-url') || sb.val();
+                        var url = $(ul.children()[index]).attr('data-url') || escape(sb.val());
                         window.location = url;
                     }
                 }

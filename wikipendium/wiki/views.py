@@ -51,8 +51,8 @@ def article(request, slug, lang="en"):
     except:
         return HttpResponseRedirect("/" + slug.upper() + "/" + lang + '/edit')
 
-    if request.path != article.get_url():
-        return HttpResponseRedirect(article.get_url())
+    if request.path != article.get_url(lang):
+        return HttpResponseRedirect(article.get_url(lang))
 
     contributors = articleContent.get_contributors()
     

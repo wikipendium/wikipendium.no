@@ -46,6 +46,8 @@ class ArticleContent(models.Model):
     lang = models.CharField(max_length=2, default='en')
     updated = models.DateTimeField(auto_now=True, auto_now_add=True)
     edited_by = models.ForeignKey(User, blank=True, null=True)
+    parent = models.ForeignKey('ArticleContent', related_name='parent_ac', null=True, blank=True)
+    child = models.ForeignKey('ArticleContent', related_name='child_ac',null=True, blank=True)
 
     def clean(self):
         if '/' in self.title:
@@ -92,4 +94,4 @@ class ArticleContent(models.Model):
         super(ArticleContent,self).save()
 
     def __unicode__(self):
-        return self.title
+        return '['+str(self.pk)+'] '+self.title

@@ -7,6 +7,7 @@ from wikipendium.wiki.forms import ArticleForm
 from django.contrib.auth.models import User
 import diff, urllib, hashlib
 from collections import Counter
+from wikipendium.wiki.merge3 import merge
 
 
 @login_required
@@ -17,8 +18,6 @@ def home(request):
     counter = Counter()
     for ac in articleContents:
         counter[ac.article] += 1
-
-    print [(a,b) for a,b in counter.items()]
 
     popularACs = []
     try:
@@ -95,8 +94,6 @@ def edit(request, slug, lang='en'):
         if form.is_valid():
             if not article.pk:
                 article.save()
-            parentId = form.cleaned_data['pk']
-            if parentId != articleContent.pk:
 
             new_articleContent = form.save(commit=False)
             new_articleContent.article = article
@@ -105,7 +102,7 @@ def edit(request, slug, lang='en'):
             new_articleContent.parent = articleContent
             new_articleContent.save(lang)
             articleContent.child = new_articleContent
-            articleContent.child.save()
+            articleContent.save(change_updated_time=False)
             return HttpResponseRedirect(new_articleContent.get_url())
     else:
         form = ArticleForm(instance=articleContent)

@@ -8,6 +8,8 @@
 {% if articleContent.get_url %}
 <a href={% if articleContent.pk %}{{ articleContent.get_url }}{%else%}/{%endif%} >« Back</a>
 {% endif %}
+
+{{ form.errors }} 
 <form method="post" action="">
     {{ form.pk }}
     {% csrf_token %}

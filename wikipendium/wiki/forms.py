@@ -6,6 +6,7 @@ class ArticleForm(ModelForm):
     slug = forms.CharField(label='')
     title = forms.CharField(label='')
     content = forms.CharField(label='',widget=forms.Textarea())
+    pk = forms.IntegerField(label='', widget=forms.HiddenInput())
 
     class Meta:
         model = ArticleContent
@@ -14,15 +15,16 @@ class ArticleForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
+
         try:
             if self.instance.article:
                 self.fields['slug'].widget.attrs['value'] = self.instance.article.slug
                 if self.instance.article.pk:
                     self.fields['slug'].widget.attrs['readonly'] = True
+                if self.instance.pk:
+                    self.fields['pk'].widget.attrs['value'] = self.instance.pk
         except:
             pass
 
         self.fields['title'].widget.attrs['placeholder'] = 'Course title'
-        self.fields.keyOrder = ['slug','title','content']
-
-
+        self.fields.keyOrder = ['pk','slug','title','content']

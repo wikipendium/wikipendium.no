@@ -89,13 +89,15 @@ def edit(request, slug, lang='en'):
         articleContent = article.get_newest_content(lang)
     except:
         articleContent = ArticleContent(article=article, lang=lang)
-        pass
 
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
             if not article.pk:
                 article.save()
+            parentId = form.cleaned_data['pk']
+            if parentId != articleContent.pk:
+
             new_articleContent = form.save(commit=False)
             new_articleContent.article = article
             new_articleContent.edited_by = request.user

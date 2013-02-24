@@ -34,7 +34,7 @@ def home(request):
                 "label": ac.get_full_title(),
                 "url": ac.get_url(),
                 "lang": ac.lang
-                })
+            })
 
     return render(request, 'index.html', {
         "trie":simplejson.dumps(trie),

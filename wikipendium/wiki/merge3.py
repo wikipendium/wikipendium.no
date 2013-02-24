@@ -32,20 +32,14 @@ def merge(a, ancestor, b):
     try:
         merged = subprocess.check_output(['diff3', '-m', apath, ancestorpath, bpath])
     except subprocess.CalledProcessError as e:
+        subprocess.check_call(['rm',apath])
+        subprocess.check_call(['rm',bpath])
+        subprocess.check_call(['rm',ancestorpath])
         raise  MergeError(e.output)
 
-    subprocess.call(['rm',apath])
-    subprocess.call(['rm',bpath])
-    subprocess.call(['rm',ancestorpath])
-
-    print "merging..."
-    print "======="
-    print a
-    print "======="
-    print b
-    print "======="
-    print merged
-    print "======="
+    subprocess.check_call(['rm',apath])
+    subprocess.check_call(['rm',bpath])
+    subprocess.check_call(['rm',ancestorpath])
 
     return merged
 

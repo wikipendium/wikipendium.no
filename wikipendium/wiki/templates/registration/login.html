@@ -4,7 +4,10 @@
 
 {% block content %}
 
-<h1>Log in</h1>
+<div class="login-header">
+    <h1>Log in</h1>
+    <a class="button button-small" href="/accounts/register/">Sign up</a>
+</div>
 
 <form class=login-form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
 

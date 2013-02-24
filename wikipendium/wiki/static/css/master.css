@@ -2369,3 +2369,18 @@ input[readonly=True]{
 #header h1 {
     margin: 0;
 }
+
+/********************
+ * LOGIN
+*******************/
+
+.login-header h1, .login-header a {
+    display: inline-block;
+}
+.login-header h1 {
+    vertical-align: middle;
+}
+.login-header a {
+    vertical-align: text-top;
+    margin: 0 3em;
+}

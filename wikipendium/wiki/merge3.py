@@ -16,17 +16,17 @@ def merge(a, ancestor, b):
 
     afile = open(apath, 'w+')
     for line in a:
-        afile.write(line)
+        afile.write(line.encode('utf-8'))
     afile.close()
 
     bfile = open(bpath, 'w+')
     for line in b:
-        bfile.write(line)
+        bfile.write(line.encode('utf-8'))
     bfile.close()
 
     ancestorfile = open(ancestorpath, 'w+')
     for line in ancestor:
-        ancestorfile.write(line)
+        ancestorfile.write(line.encode('utf-8'))
     ancestorfile.close()
 
     try:
@@ -41,11 +41,11 @@ def merge(a, ancestor, b):
     subprocess.check_call(['rm',bpath])
     subprocess.check_call(['rm',ancestorpath])
 
-    return merged
+    return merged.decode('utf-8')
 
 
 def generate_path(string):
     path = 'tmp/diff/'
-    path += str(hashlib.md5(string).hexdigest())
+    path += str(hashlib.md5(string.encode('utf-8')).hexdigest())
     path += str(random.random()*10000000)
     return path

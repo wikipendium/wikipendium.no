@@ -119,6 +119,7 @@ def history(request, slug, lang="en"):
         "articleContents": articleContents
         })
 
+@login_required
 def history_single(request, slug, lang, id):
     article = Article.objects.get(slug=slug)
 
@@ -144,6 +145,7 @@ def history_single(request, slug, lang, id):
         'prev_ac':prev_ac
     })
 
+@login_required
 def user(request, username):
     user = User.objects.get(username=username)
     contributions = ArticleContent.objects.filter(edited_by=user).order_by('-updated')

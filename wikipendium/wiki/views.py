@@ -7,6 +7,7 @@ from wikipendium.wiki.forms import ArticleForm
 from django.contrib.auth.models import User
 import diff, urllib, hashlib
 from collections import Counter
+from wikipendium.wiki.merge3 import merge
 
 
 @login_required
@@ -17,8 +18,6 @@ def home(request):
     counter = Counter()
     for ac in articleContents:
         counter[ac.article] += 1
-
-    print [(a,b) for a,b in counter.items()]
 
     popularACs = []
     try:
@@ -35,7 +34,7 @@ def home(request):
                 "label": ac.get_full_title(),
                 "url": ac.get_url(),
                 "lang": ac.lang
-                })
+            })
 
     return render(request, 'index.html', {
         "trie":simplejson.dumps(trie),
@@ -89,18 +88,21 @@ def edit(request, slug, lang='en'):
         articleContent = article.get_newest_content(lang)
     except:
         articleContent = ArticleContent(article=article, lang=lang)
-        pass
 
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
             if not article.pk:
                 article.save()
+
             new_articleContent = form.save(commit=False)
             new_articleContent.article = article
             new_articleContent.edited_by = request.user
             new_articleContent.lang = articleContent.lang
+            new_articleContent.parent = articleContent
             new_articleContent.save(lang)
+            articleContent.child = new_articleContent
+            articleContent.save(change_updated_time=False)
             return HttpResponseRedirect(new_articleContent.get_url())
     else:
         form = ArticleForm(instance=articleContent)
@@ -123,26 +125,17 @@ def history(request, slug, lang="en"):
 def history_single(request, slug, lang, id):
     article = Article.objects.get(slug=slug)
 
-    articleContents = article.get_sorted_contents(lang)
-
-    aclist = filter(lambda ac: ac[1].pk == int(id), enumerate(articleContents))
-
-    if not aclist:
-        return HttpResponseRedirect(articleContents[0].get_history_url())
-    i,ac = aclist[0]
-
-    prev_ac = articleContents[i+1] if len(articleContents) > i+1 else None
-    next_ac = articleContents[i-1] if i-1 >= 0 else None
+    ac = ArticleContent.objects.get(id=id)
 
     ac.diff = diff.textDiff(
-        prev_ac.get_html_content() if prev_ac else '',
+        ac.parent.get_html_content() if ac.parent else '',
         ac.get_html_content()
     )
 
     return render(request, 'history_single.html', {
         'ac':ac,
-        'next_ac': next_ac,
-        'prev_ac':prev_ac
+        'next_ac': ac.child,
+        'prev_ac': ac.parent
     })
 
 @login_required

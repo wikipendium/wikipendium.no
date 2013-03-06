@@ -64,7 +64,7 @@ class ArticleContent(models.Model):
         lang = ""
         if self.lang != "en":
             lang = '/' + self.lang + '/'
-        return '/'+self.article.slug + ":" + self.title.replace(' ','_') + lang
+        return '/'+self.article.slug + "_" + self.title.replace(' ','_') + lang
 
     def get_edit_url(self):
         return (self.get_url() + '/edit/').replace('//','/')

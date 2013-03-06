@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+import datetime
 import urllib2, urllib
 from markdown2 import markdown
 import simplejson as json
@@ -88,10 +89,12 @@ class ArticleContent(models.Model):
     def get_html_content(self):
         return markdown(self.content, extras=["toc", "wiki-tables"], safe_mode=True)
 
-    def save(self, lang=None):
+    def save(self, lang=None, change_updated_time=True):
         if not self.pk and not lang:
             self.lang = self.get_language()
+        if change_updated_time:
+            self.updated = datetime.datetime.now()
         super(ArticleContent,self).save()
 
     def __unicode__(self):
-        return self.title
+        return '['+str(self.pk)+'] '+self.title

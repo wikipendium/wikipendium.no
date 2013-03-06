@@ -762,7 +762,6 @@ html {
 
 body {
   color: #444444;
-  /*font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;*/
   font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
   font-size: 14px;
   font-size-adjust: none;
@@ -783,7 +782,6 @@ hgroup {
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   color: #222222;
-  /*font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;*/
   font-weight: 600;
   line-height: 1;
   text-rendering: optimizelegibility;
@@ -899,7 +897,6 @@ input,
 textarea {
   color: #444444;
   font-size: 14px;
-  /* font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;*/
   font-weight: normal;
 }
 
@@ -2118,7 +2115,7 @@ footer {
 
 .serif,
 body.frontpage:before {
-  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+  font-family: Palatino, "Palatino LT STD", "Book Antiqua", Georgia, serif;
 }
 
 /******************

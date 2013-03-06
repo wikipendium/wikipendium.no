@@ -44,8 +44,10 @@ class ArticleContent(models.Model):
     content = models.TextField() 
     title = models.CharField(max_length=1024)
     lang = models.CharField(max_length=2, default='en')
-    updated = models.DateTimeField(auto_now=True, auto_now_add=True)
-    edited_by = models.ForeignKey(User, blank=True, null=True)
+    updated = models.DateTimeField()
+    edited_by = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+    parent = models.ForeignKey('ArticleContent', related_name='parent_ac', null=True, blank=True, on_delete=models.SET_NULL)
+    child = models.ForeignKey('ArticleContent', related_name='child_ac',null=True, blank=True, on_delete=models.SET_NULL)
 
     def clean(self):
         if '/' in self.title:

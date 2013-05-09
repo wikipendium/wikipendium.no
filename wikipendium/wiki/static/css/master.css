@@ -2126,7 +2126,7 @@ body.frontpage:before {
     width: auto;
     max-width: 520px;
     margin:0 auto;
-    text-align:justify;
+    text-align:left;
     font-size:16px;
     line-height: 24px;
 }

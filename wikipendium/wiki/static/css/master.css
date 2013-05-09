@@ -2296,12 +2296,12 @@ code {
 
 .popular-articles ul li{
     list-style-type:none; 
-    float:left;
-    display:block;
+    display:inline-block;
     width:32%;
     font-size: 16px;
     line-height: 34px;
     margin: 0 1% 40px 0;
+    vertical-align: top;
 }
 
 /********************

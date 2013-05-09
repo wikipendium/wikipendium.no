@@ -790,17 +790,13 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   color: #222222;
 }
 
-h1, h2 {
-  margin: 0 0 21px;
-}
-
 h1 {
-  font-size: 36px;
+  font-size: 32px;
   letter-spacing: -1px;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 h3 {
@@ -2131,12 +2127,12 @@ body.frontpage:before {
     line-height: 24px;
 }
 
-h1{margin:60px 0;}
-h2{margin-top:40px;}
-h3{margin:40px 0 30px 0;}
-h4{margin:40px 0 30px 0;}
-h5{margin:40px 0 30px 0;}
-h6{margin:40px 0 30px 0;}
+h1{margin:50px 0 20px;}
+h2{margin:30px 0 8px;}
+h3{margin:22px 0 8px;}
+h4{margin:22px 0 8px;}
+h5{margin:22px 0 8px;}
+h6{margin:22px 0 8px;}
 
 h1,h2,h3,h4,h5,h6{
     font-weight:bold;

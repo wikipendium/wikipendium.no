@@ -76,30 +76,33 @@
 
 <body class="responsive {% block body_class %}{% endblock %}">
     <div id="footer-pusher">
-        <div class=container>
-            <header id="header" class=row>
-                <h1 class="float-left serif"><a class=header-logo-link href=/>
-                    {% block logo %}Wikipendium{% endblock %}
-                </a></h1>
-                <nav class="float-right">
-                {% block nav %}
-                {% endblock %}
-                {% if user.is_authenticated %}
-    
-<div class="has-dropdown button-dropdown">
-    <a href=# class=button data-toggle=dropdown><i class="icon icon-prepend green-bg"></i>{{user.username}}<span class=caret></span></a>
-    <ul class="dropdown right">
-        <li><a href=/users/{{request.user.username}}/>Profile</a></li>
-        <li><a href=/accounts/password/change/>Change password</a></li>
-        <li><a href=/accounts/logout/>Log out</a></li>
-    </ul>
-</div>
-                {% else %}
-                    <a class=button href=/accounts/login/><i class="icon icon-prepend"></i>Not logged in</a>
-                {% endif %}
-                </nav>
-            </header>
-
+        <div class="header-wrapper">
+            <div class=container>
+                <header id="header" class=row>
+                    <h1 class="float-left serif"><a class=header-logo-link href=/>
+                        {% block logo %}Wikipendium{% endblock %}
+                    </a></h1>
+                    <nav class="float-right">
+                    {% block nav %}
+                    {% endblock %}
+                    {% if user.is_authenticated %}
+        
+    <div class="has-dropdown button-dropdown">
+        <a href=# class=button data-toggle=dropdown><i class="icon icon-prepend green-bg"></i>{{user.username}}<span class=caret></span></a>
+        <ul class="dropdown right">
+            <li><a href=/users/{{request.user.username}}/>Profile</a></li>
+            <li><a href=/accounts/password/change/>Change password</a></li>
+            <li><a href=/accounts/logout/>Log out</a></li>
+        </ul>
+    </div>
+                    {% else %}
+                        <a class=button href=/accounts/login/><i class="icon icon-prepend"></i>Not logged in</a>
+                    {% endif %}
+                    </nav>
+                </header>
+            </div>
+        </div>
+        <div class="container">
 
             <div id=content>
             {% block content %}

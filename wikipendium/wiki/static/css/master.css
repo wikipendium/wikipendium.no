@@ -790,17 +790,13 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   color: #222222;
 }
 
-h1, h2 {
-  margin: 0 0 21px;
-}
-
 h1 {
-  font-size: 36px;
+  font-size: 32px;
   letter-spacing: -1px;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 22px;
 }
 
 h3 {
@@ -825,8 +821,8 @@ p a {
 }
 
 ul, ol {
-  padding: 0;
-  margin-left: 14px;
+  padding-left: 30px;
+  margin: 0;
 }
 
 ul ul,
@@ -2088,6 +2084,18 @@ body.frontpage:before {
  * HEADER
 ******************/
 
+body.article .header-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 9px 0;
+    background: rgba(255, 255, 255, .8);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
+       -moz-box-shadow: 0 0 5px rgba(0,0,0,.5);
+            box-shadow: 0 0 5px rgba(0,0,0,.5);
+}
+
 #header {
 }
 
@@ -2101,7 +2109,6 @@ body.frontpage:before {
 
 #header nav{
     text-align:right;
-    margin-bottom:60px;
 }
 
 /******************
@@ -2122,21 +2129,25 @@ body.frontpage:before {
  * ARTICLE
 ******************/
 
+#content {
+    padding-top: 20px;
+}
+
 #article, #epiceditor-preview{
     width: auto;
     max-width: 520px;
     margin:0 auto;
-    text-align:justify;
+    text-align:left;
     font-size:16px;
     line-height: 24px;
 }
 
-h1{margin:60px 0;}
-h2{margin-top:40px;}
-h3{margin:40px 0 30px 0;}
-h4{margin:40px 0 30px 0;}
-h5{margin:40px 0 30px 0;}
-h6{margin:40px 0 30px 0;}
+h1{margin:50px 0 20px;}
+h2{margin:30px 0 8px;}
+h3{margin:22px 0 8px;}
+h4{margin:22px 0 8px;}
+h5{margin:22px 0 8px;}
+h6{margin:22px 0 8px;}
 
 h1,h2,h3,h4,h5,h6{
     font-weight:bold;
@@ -2285,12 +2296,12 @@ code {
 
 .popular-articles ul li{
     list-style-type:none; 
-    float:left;
-    display:block;
+    display:inline-block;
     width:32%;
     font-size: 16px;
     line-height: 34px;
     margin: 0 1% 40px 0;
+    vertical-align: top;
 }
 
 /********************

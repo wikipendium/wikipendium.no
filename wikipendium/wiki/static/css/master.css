@@ -2084,6 +2084,18 @@ body.frontpage:before {
  * HEADER
 ******************/
 
+body.article .header-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 9px 0;
+    background: rgba(255, 255, 255, .8);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
+       -moz-box-shadow: 0 0 5px rgba(0,0,0,.5);
+            box-shadow: 0 0 5px rgba(0,0,0,.5);
+}
+
 #header {
 }
 
@@ -2097,7 +2109,6 @@ body.frontpage:before {
 
 #header nav{
     text-align:right;
-    margin-bottom:60px;
 }
 
 /******************
@@ -2117,6 +2128,10 @@ body.frontpage:before {
 /******************
  * ARTICLE
 ******************/
+
+#content {
+    padding-top: 20px;
+}
 
 #article, #epiceditor-preview{
     width: auto;

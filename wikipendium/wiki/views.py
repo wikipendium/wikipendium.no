@@ -26,8 +26,12 @@ def home(request):
 
     trie = []
     articleset = set([])
-    for ac in articleContents:
-        article = Article.objects.get(articlecontent=ac)
+    for article in Article.objects.all():
+        ac = article.get_newest_content(lang='en')
+        if ac == None:
+            ac = article.get_newest_content(lang='nb')
+            if ac == None:
+                continue
         if article.pk not in articleset:
             articleset.add(article.pk)
             trie.append({

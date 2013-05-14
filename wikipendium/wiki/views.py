@@ -13,7 +13,7 @@ from wikipendium.wiki.merge3 import merge
 @login_required
 def home(request):
 
-    articleContents = ArticleContent.objects.all().order_by('-updated')
+    articleContents = ArticleContent.objects.all().filter(lang='en').order_by('-updated')
 
     counter = Counter()
     for ac in articleContents:

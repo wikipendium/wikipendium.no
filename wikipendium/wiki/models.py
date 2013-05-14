@@ -26,7 +26,10 @@ class Article(models.Model):
         return set([ac.edited_by for ac in ArticleContent.objects.filter(article=self, lang=lang)])
 
     def get_newest_content(self, lang='en'):
-        return ArticleContent.objects.filter(article=self, lang=lang).order_by('-updated')[:1].get()
+        try:
+            return ArticleContent.objects.filter(article=self, lang=lang).order_by('-updated')[:1].get()
+        except:
+            return None
 
     def get_sorted_contents(self, lang='en'):
         return ArticleContent.objects.filter(article=self, lang=lang).order_by('-updated')

@@ -14,6 +14,7 @@ class ArticleForm(ModelForm):
         fields = ('title', 'content')
 
     def __init__(self, *args, **kwargs):
+        self.lang = kwargs.pop('lang', None)
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
         self.fields['pk'].widget.attrs['value'] = 0
@@ -45,7 +46,7 @@ class ArticleForm(ModelForm):
         article = None
         articleContent = None
         slug = self.cleaned_data['slug']
-        lang = 'en'
+        lang = self.lang
         try:
             article = Article.objects.get(slug=slug)
         except:

@@ -94,7 +94,7 @@ def edit(request, slug, lang='en'):
         articleContent = None
 
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, lang=lang)
         if form.is_valid():
             if not article.pk:
                 article.save()

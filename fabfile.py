@@ -84,7 +84,6 @@ def clone_prod_data():
 @task
 def deploy():
     """
-    Deploy the curent master branch of UNO to prod (or dev, first)
     """
     env.user = prompt("Username on prod server:", default=getpass.getuser())
 

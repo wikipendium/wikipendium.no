@@ -10,7 +10,6 @@ from collections import Counter
 from wikipendium.wiki.merge3 import merge
 
 
-@login_required
 def home(request):
 
     articleContents = ArticleContent.objects.all().filter(lang='en').order_by('-updated')
@@ -45,7 +44,6 @@ def home(request):
         'popularACs': popularACs     
     })
 
-@login_required
 def article(request, slug, lang="en"):
 
     try:
@@ -117,7 +115,6 @@ def edit(request, slug, lang='en'):
         "form": form
     })
 
-@login_required
 def history(request, slug, lang="en"):
     article = Article.objects.get(slug=slug)
     articleContents = article.get_sorted_contents(lang=lang)
@@ -127,7 +124,6 @@ def history(request, slug, lang="en"):
         "articleContents": articleContents
         })
 
-@login_required
 def history_single(request, slug, lang, id):
     article = Article.objects.get(slug=slug)
 
@@ -144,7 +140,6 @@ def history_single(request, slug, lang, id):
         'prev_ac': ac.parent
     })
 
-@login_required
 def user(request, username):
     user = User.objects.get(username=username)
     contributions = ArticleContent.objects.filter(edited_by=user).order_by('-updated')

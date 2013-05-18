@@ -6,7 +6,6 @@
 
 <div class="login-header">
     <h1>Log in</h1>
-    <a class="button button-small" href="/accounts/register/">Sign up</a>
 </div>
 
 <form class=login-form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
@@ -37,6 +36,9 @@
         </div>
     </div>
 
+    <span class="float-left">Not registered?
+        <a href="/accounts/register/">Sign up</a>
+    </span>
 <input class="button float-right" type="submit" value="Log in" />
 </form>
 

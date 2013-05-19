@@ -96,7 +96,6 @@ class ArticleContent(models.Model):
 
     def save(self, lang=None, change_updated_time=True):
         if not self.pk and not lang:
-            print "trying to extract language"
             self.lang = self.get_language()
         if change_updated_time:
             self.updated = datetime.datetime.now()

@@ -40,7 +40,10 @@ class Article(models.Model):
             return dict(zip(map(lambda key: LANGUAGE_NAMES[key], codes), map(self.get_url, codes) ))
 
     def get_url(self, lang="en"):
-        return self.get_newest_content(lang).get_url()
+        newest_content = self.get_newest_content(lang)
+        if newest_content != None:
+            return newest_content.get_url()
+        return "/" + self.slug + "/" + lang + "/edit/"
 
 
 class ArticleContent(models.Model):

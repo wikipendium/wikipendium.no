@@ -86,10 +86,9 @@ def edit(request, slug, lang='en'):
     except:
         article = Article(slug=slug)
 
-    try:
-        articleContent = article.get_newest_content(lang)
-    except:
-        articleContent = None
+    articleContent = article.get_newest_content(lang)
+    if articleContent == None:
+        articleContent = ArticleContent(article=article, lang=lang)
 
     if request.method == 'POST':
         form = ArticleForm(request.POST, lang=lang)
@@ -100,13 +99,14 @@ def edit(request, slug, lang='en'):
             new_articleContent = form.save(commit=False)
             new_articleContent.article = article
             new_articleContent.edited_by = request.user
-            if articleContent != None:
+            new_articleContent.lang = lang
+            if articleContent.pk != None:
                 new_articleContent.lang = articleContent.lang
                 new_articleContent.parent = articleContent
-            new_articleContent.save(lang)
-            if articleContent != None:
+            new_articleContent.save(lang=lang)
+            if articleContent.pk != None:
                 articleContent.child = new_articleContent
-                articleContent.save(change_updated_time=False)
+                articleContent.save(lang=lang, change_updated_time=False)
             return HttpResponseRedirect(new_articleContent.get_url())
     else:
         form = ArticleForm(instance=articleContent)

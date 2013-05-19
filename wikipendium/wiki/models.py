@@ -88,7 +88,6 @@ class ArticleContent(models.Model):
             }
         language_json = urllib2.urlopen('http://ws.detectlanguage.com/0.2/detect', urllib.urlencode(data))
         language_info = json.loads(language_json.read())
-        print language_info
         language_code = language_info["data"]["detections"][0]["language"]
         return language_code
 
@@ -97,6 +96,7 @@ class ArticleContent(models.Model):
 
     def save(self, lang=None, change_updated_time=True):
         if not self.pk and not lang:
+            print "trying to extract language"
             self.lang = self.get_language()
         if change_updated_time:
             self.updated = datetime.datetime.now()

@@ -4,7 +4,7 @@
 <head>
     <title>{% block title %}{% endblock %} Wikipendium</title>
     <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js></script>
-    <script src={{STATIC_URL}}js/latexmathml.js></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel=stylesheet href={{STATIC_URL}}css/master.css />
     <script src={{STATIC_URL}}js/bootstrap.min.js></script>
     <script src={{STATIC_URL}}epiceditor/js/epiceditor.js></script>
@@ -18,6 +18,16 @@
     <link rel="apple-touch-icon" href="{{STATIC_URL}}apple-touch/icon-72x72.png" sizes="72x72" />
     <link rel="apple-touch-icon" href="{{STATIC_URL}}apple-touch/icon-114x114.png" sizes="114x114" />
     <link rel="shortcut icon" href="{{STATIC_URL}}images/favicon.png" />
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['$$','$$'],  ['\\(','\\)']],
+    displayMath: [['$$$','$$$'], ['\\[','\\]']]
+  }
+});
+</script>
+
     <script>
         
         $(function(){

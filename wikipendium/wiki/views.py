@@ -9,6 +9,26 @@ import diff, urllib, hashlib
 from collections import Counter
 from wikipendium.wiki.merge3 import merge
 
+def all_articles(request):
+
+    articles = Article.objects.all()
+
+    complete_list = []
+
+    for a in articles:
+        article = a.get_newest_content(lang='en')
+        if article:
+            complete_list.append(article)
+        else:
+            article = a.get_newest_content(lang='nb')
+            if article:
+                complete_list.append(article)
+
+    complete_list = sorted(complete_list, key=lambda ArticleContent: ArticleContent.article.slug)
+
+    return render(request, 'all.html', {
+        'complete_list':complete_list
+        })
 
 def home(request):
 

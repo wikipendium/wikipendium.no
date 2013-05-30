@@ -13,6 +13,7 @@ urlpatterns = patterns('',
      url(r'^accounts/', include('registration.backends.simple.urls')),
      url(r'^$', 'wikipendium.wiki.views.home', name='home'),
      url(r'^new/$', 'wikipendium.wiki.views.new', name='newarticle'),
+     url(r'^all/$', 'wikipendium.wiki.views.all_articles', name='allarticles'),
 
      url(r'^(?P<x>' + slug_regex + '[^/]*)/$', redirect_to, {'url': '/%(x)s'}),
      url(r'^(?P<slug>' + slug_regex + ')[^/]*$', 'wikipendium.wiki.views.article'),

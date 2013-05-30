@@ -2305,6 +2305,32 @@ code {
 }
 
 /********************
+ * ALL ARTICLES
+********************/
+.article-all-list {
+    list-style-type:none;
+    margin:0;
+}
+
+.article-all-list li {
+    padding: .5em;
+    border: 1px solid #ccc;
+    margin-bottom: .7em;
+}
+
+.article-all-list a {
+    padding-left: .5em;
+    float: left;
+}
+
+.article-all-list .date {
+    clear:both;
+    padding-left:.5em;
+    margin:0;
+}
+
+
+/********************
  * HISTORY
 ********************/
 del{

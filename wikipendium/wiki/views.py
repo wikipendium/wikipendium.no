@@ -172,7 +172,7 @@ def user(request, username):
     contributions = ArticleContent.objects.filter(edited_by=user).order_by('-updated')
 
     email = user.email
-    default = "http://www.example.com/default.jpg"
+    default = "mm"
     size = 150
 
     # construct the url

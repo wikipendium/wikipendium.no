@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block body_class %}article{% endblock %}
+
+{% block nav %}
+<a class=button href="{{ back_url }}">Article</a>
+{% endblock %}
+
 {% block content %}
 <ul class=article-history-list>
     {% for ac in articleContents %}

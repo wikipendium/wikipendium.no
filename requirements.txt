@@ -4,3 +4,4 @@ south
 markdown2
 fabric
 simplejson
+pytz

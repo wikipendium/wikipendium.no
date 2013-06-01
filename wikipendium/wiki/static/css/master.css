@@ -2094,6 +2094,7 @@ body.article .header-wrapper {
     -webkit-box-shadow: 0 0 5px rgba(0,0,0,.5);
        -moz-box-shadow: 0 0 5px rgba(0,0,0,.5);
             box-shadow: 0 0 5px rgba(0,0,0,.5);
+    z-index:9000;
 }
 
 #header {

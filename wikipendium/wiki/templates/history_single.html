@@ -12,7 +12,7 @@
 {% block content %}
 
 <div class=info>
-    This is an old version of the article, written {{ac.updated}} Changes made in this revision were made by <a href="/users/{{ ac.edited_by }}">{{ ac.edited_by }}</a>.
+    This is an old version of the article, written {{ac.updated}} Changes made in this revision were made by <a href="{{ ac.edited_by.get_absolute_url }}">{{ ac.edited_by }}</a>.
 </div>
 
 <div style=overflow:hidden>

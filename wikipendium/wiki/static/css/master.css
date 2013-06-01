@@ -2344,6 +2344,7 @@ ins{
 .article-history-list {
     list-style-type: none;
     margin: 0;
+    margin-top:50px;
 }
 .article-history-list li {
     padding: .5em;
@@ -2368,6 +2369,7 @@ ins{
     padding: 20px;
     border-radius:10px;
     margin: 0 0 30px 0;
+    margin-top:50px;
 }
 
 /********************

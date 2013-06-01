@@ -140,8 +140,12 @@ def history(request, slug, lang="en"):
     articleContents = article.get_sorted_contents(lang=lang)
     for ac in articleContents:
         ac.markdowned = ac.get_html_content()
+
+    originalArticle = article.get_newest_content(lang=lang)
+
     return render(request, "history.html", {
-        "articleContents": articleContents
+        "articleContents": articleContents,
+        "back_url": originalArticle.get_url
         })
 
 def history_single(request, slug, lang, id):
@@ -154,10 +158,13 @@ def history_single(request, slug, lang, id):
         ac.get_html_content()
     )
 
+    originalArticle = article.get_newest_content(lang=lang)
+
     return render(request, 'history_single.html', {
         'ac':ac,
         'next_ac': ac.child,
-        'prev_ac': ac.parent
+        'prev_ac': ac.parent,
+        'back_url': originalArticle.get_url
     })
 
 def user(request, username):

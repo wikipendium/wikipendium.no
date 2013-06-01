@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 
+{% block body_class %}article{% endblock %}
+
+{% block nav %}
+<div class=button-group style=inline-block>
+    <a class=button href="{{ ac.get_history_url }}">History</a>
+    <a class=button href="{{ back_url }}">Article</a>
+</div>
+{% endblock %}
+
 {% block content %}
 
 <div class=info>
-    This is an old version of the article, written {{ac.updated}} Changes made in this revision were made by <a href="{{ac.edited_by.get_url}}">{{ ac.edited_by }}</a>.
+    This is an old version of the article, written {{ac.updated}} Changes made in this revision were made by <a href="{{ ac.edited_by.get_absolute_url }}">{{ ac.edited_by }}</a>.
 </div>
 
 <div style=overflow:hidden>

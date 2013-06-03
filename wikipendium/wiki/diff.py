@@ -26,7 +26,7 @@ def textDiff(a, b):
 		elif e[0] == "insert":
 			out.append('<ins class="diff">'+''.join(b[e[3]:e[4]]) + "</ins>")
 		elif e[0] == "equal":
-			out.append(''.join(b[e[3]:e[4]]))
+			out.append('<span class="diff equal hidden">' + ''.join(b[e[3]:e[4]]) + '</span>')
 		else: 
 			raise "Um, something's broken. I didn't expect a '" + `e[0]` + "'."
 	return ''.join(out)

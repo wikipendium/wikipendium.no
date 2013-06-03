@@ -138,8 +138,6 @@ def edit(request, slug, lang='en'):
 def history(request, slug, lang="en"):
     article = Article.objects.get(slug=slug)
     articleContents = article.get_sorted_contents(lang=lang)
-    for ac in articleContents:
-        ac.markdowned = ac.get_html_content()
 
     originalArticle = article.get_newest_content(lang=lang)
 
@@ -154,8 +152,8 @@ def history_single(request, slug, lang, id):
     ac = ArticleContent.objects.get(id=id)
 
     ac.diff = diff.textDiff(
-        ac.parent.get_html_content() if ac.parent else '',
-        ac.get_html_content()
+        ac.parent.get_html_content()['html'] if ac.parent else '',
+        ac.get_html_content()['html']
     )
 
     originalArticle = article.get_newest_content(lang=lang)

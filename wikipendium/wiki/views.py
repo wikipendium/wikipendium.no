@@ -81,6 +81,7 @@ def article(request, slug, lang="en"):
     available_languages = article.get_available_languages(articleContent)
 
     return render(request, 'article.html', {
+        "mathjax": True,
         "content": content['html'],
         "toc": (content['toc'] or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
         "articleContent": articleContent,
@@ -152,8 +153,8 @@ def history_single(request, slug, lang, id):
     ac = ArticleContent.objects.get(id=id)
 
     ac.diff = diff.textDiff(
-        ac.parent.get_html_content()['html'] if ac.parent else '',
-        ac.get_html_content()['html']
+        ac.parent.content if ac.parent else '',
+        ac.content
     )
 
     originalArticle = article.get_newest_content(lang=lang)

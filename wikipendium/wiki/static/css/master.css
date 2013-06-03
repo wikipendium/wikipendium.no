@@ -2341,6 +2341,7 @@ del{
 ins{
     background: lightgreen;
     display: inline-block;
+    text-decoration: none;
 }
 .article-history-list {
     list-style-type: none;
@@ -2371,6 +2372,31 @@ ins{
     border-radius:10px;
     margin: 0 0 30px 0;
     margin-top:50px;
+}
+
+.article-source{
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+.diff.equal{
+    cursor:pointer;
+}
+
+.diff.equal:hover{
+    opacity: 1 !important;
+}
+
+.diff.equal.hidden{
+    height: 1.3em;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    display:inline-block;
+    opacity: 0.5;
+}
+
+.diff.equal.hidden:before{
+    content: "... ";
 }
 
 /********************

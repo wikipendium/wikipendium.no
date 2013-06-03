@@ -5,3 +5,4 @@ markdown2
 fabric
 simplejson
 pytz
+markdown2Mathjax

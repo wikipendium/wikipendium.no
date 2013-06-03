@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 import datetime
 import urllib2, urllib
 from markdown2 import markdown
+from markdown2Mathjax import sanitizeInput, reconstructMath
 import simplejson as json
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 
@@ -92,7 +93,13 @@ class ArticleContent(models.Model):
         return language_code
 
     def get_html_content(self):
-        return markdown(self.content, extras=["toc", "wiki-tables"], safe_mode=True)
+        tmp = sanitizeInput(self.content)
+        markdowned_text = markdown(tmp[0], extras=["toc", "wiki-tables"], safe_mode=True)
+        article = {
+            'html': reconstructMath(markdowned_text, tmp[1]),
+            'toc': markdowned_text.toc_html
+            }
+        return article
 
     def save(self, lang=None, change_updated_time=True):
         if not self.pk and not lang:

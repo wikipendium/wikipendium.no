@@ -81,8 +81,8 @@ def article(request, slug, lang="en"):
     available_languages = article.get_available_languages(articleContent)
 
     return render(request, 'article.html', {
-        "content": content,
-        "toc": (content.toc_html or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
+        "content": content['html'],
+        "toc": (content['toc'] or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
         "articleContent": articleContent,
         "availableLanguages": available_languages, 
         'contributors': contributors,

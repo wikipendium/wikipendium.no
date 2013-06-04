@@ -17,10 +17,10 @@
 
 <div style=overflow:hidden>
 {% if prev_ac %}
-<a class="button" href={{prev_ac.get_history_single_url}}>Previous version</a>
+<a class="button" id="prev-button" href={{prev_ac.get_history_single_url}}>Previous version</a>
 {% endif %}
 {% if next_ac %}
-<a class="button float-right" href={{next_ac.get_history_single_url}}>Next version</a>
+<a class="button float-right" id="next-button" href={{next_ac.get_history_single_url}}>Next version</a>
 {% endif %}
 </div>
 
@@ -34,7 +34,16 @@
         $('.diff.equal').click(function(){
             $(this).toggleClass('hidden'); 
         });
+
+        $(document).keydown(function(e){
+            var selector = {37:'#prev-button', 39:'#next-button'}[e.which];
+            var href = $(selector).attr('href');
+            if(href){
+                window.location = href;
+            }
+        });
     });
+
 </script>
 
 {% endblock %}

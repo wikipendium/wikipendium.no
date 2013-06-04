@@ -34,7 +34,16 @@
         $('.diff.equal').click(function(){
             $(this).toggleClass('hidden'); 
         });
+
+        $(document).keydown(function(e){
+            var selector = {37:'#prev-button', 39:'#next-button'}[e.which];
+            var href = $(selector).attr('href');
+            if(href){
+                window.location = href;
+            }
+        });
     });
+
 </script>
 
 {% endblock %}

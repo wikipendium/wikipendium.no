@@ -102,7 +102,7 @@ MathJax.Hub.Config({
                     {% if user.is_authenticated %}
         
     <div class="has-dropdown button-dropdown">
-        <a href=# class=button data-toggle=dropdown><i class="icon icon-prepend green-bg"></i>{{user.username}}<span class=caret></span></a>
+        <a href=# class=button data-toggle=dropdown><i class="icon icon-prepend green-bg"></i>{{request.user.username}}<span class=caret></span></a>
         <ul class="dropdown right">
             <li><a href=/users/{{request.user.username}}/>Profile</a></li>
             <li><a href=/accounts/password/change/>Change password</a></li>

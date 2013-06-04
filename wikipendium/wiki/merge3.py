@@ -2,11 +2,14 @@ import subprocess
 import random
 import hashlib
 
+
 class MergeError(Exception):
     def __init__(self, diff):
         self.diff = diff
+
     def __unicode__(self):
-        return unicode(diff)
+        return unicode(self.diff)
+
 
 def merge(a, ancestor, b):
 
@@ -30,16 +33,18 @@ def merge(a, ancestor, b):
     ancestorfile.close()
 
     try:
-        merged = subprocess.check_output(['diff3', '-m', apath, ancestorpath, bpath])
+        merged = subprocess.check_output(
+            ['diff3', '-m', apath, ancestorpath, bpath]
+        )
     except subprocess.CalledProcessError as e:
-        subprocess.check_call(['rm',apath])
-        subprocess.check_call(['rm',bpath])
-        subprocess.check_call(['rm',ancestorpath])
-        raise  MergeError(e.output)
+        subprocess.check_call(['rm', apath])
+        subprocess.check_call(['rm', bpath])
+        subprocess.check_call(['rm', ancestorpath])
+        raise MergeError(e.output)
 
-    subprocess.check_call(['rm',apath])
-    subprocess.check_call(['rm',bpath])
-    subprocess.check_call(['rm',ancestorpath])
+    subprocess.check_call(['rm', apath])
+    subprocess.check_call(['rm', bpath])
+    subprocess.check_call(['rm', ancestorpath])
 
     return merged.decode('utf-8')
 

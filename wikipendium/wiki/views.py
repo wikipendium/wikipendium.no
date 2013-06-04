@@ -1,13 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import ArticleForm
 from django.contrib.auth.models import User
-import diff, urllib, hashlib
+import diff
+import urllib
+import hashlib
 from collections import Counter
-from wikipendium.wiki.merge3 import merge
+
 
 def all_articles(request):
 
@@ -24,15 +26,19 @@ def all_articles(request):
             if article:
                 complete_list.append(article)
 
-    complete_list = sorted(complete_list, key=lambda ArticleContent: ArticleContent.article.slug)
+    complete_list = sorted(
+        complete_list,
+        key=lambda ArticleContent: ArticleContent.article.slug)
 
     return render(request, 'all.html', {
-        'complete_list':complete_list
-        })
+        'complete_list': complete_list
+    })
+
 
 def home(request):
 
-    articleContents = ArticleContent.objects.all().filter(lang='en').order_by('-updated')
+    articleContents = ArticleContent.objects.all().filter(
+        lang='en').order_by('-updated')
 
     counter = Counter()
     for ac in articleContents:
@@ -40,16 +46,18 @@ def home(request):
 
     popularACs = []
     try:
-        popularACs = [article.get_newest_content() for article,count in counter.most_common(6)]
-    except:pass
+        popularACs = [article.get_newest_content() for
+                      article, count in counter.most_common(6)]
+    except:
+        pass
 
     trie = []
     articleset = set([])
     for article in Article.objects.all():
         ac = article.get_newest_content(lang='en')
-        if ac == None:
+        if ac is None:
             ac = article.get_newest_content(lang='nb')
-            if ac == None:
+            if ac is None:
                 continue
         if article.pk not in articleset:
             articleset.add(article.pk)
@@ -60,9 +68,10 @@ def home(request):
             })
 
     return render(request, 'index.html', {
-        "trie":simplejson.dumps(trie),
-        'popularACs': popularACs     
+        "trie": simplejson.dumps(trie),
+        'popularACs': popularACs
     })
+
 
 def article(request, slug, lang="en"):
 
@@ -76,19 +85,22 @@ def article(request, slug, lang="en"):
         return HttpResponseRedirect(article.get_url(lang))
 
     contributors = articleContent.get_contributors()
-    
+
     content = articleContent.get_html_content()
     available_languages = article.get_available_languages(articleContent)
 
     return render(request, 'article.html', {
         "mathjax": True,
         "content": content['html'],
-        "toc": (content['toc'] or "").replace('<ul>','<ol>').replace('</ul>','</ol>'),
+        "toc": (content['toc'] or "").replace(
+            '<ul>', '<ol>').replace('</ul>', '</ol>'),
         "articleContent": articleContent,
-        "availableLanguages": available_languages, 
+        "availableLanguages": available_languages,
         'contributors': contributors,
-        "share_url": "http://" + request.META['HTTP_HOST'] + request.get_full_path(),
-        })
+        "share_url": "http://" + request.META['HTTP_HOST'] +
+        request.get_full_path(),
+    })
+
 
 @login_required
 def new(request):
@@ -108,7 +120,7 @@ def edit(request, slug, lang='en'):
         article = Article(slug=slug)
 
     articleContent = article.get_newest_content(lang)
-    if articleContent == None:
+    if articleContent is None:
         articleContent = ArticleContent(article=article, lang=lang)
 
     if request.method == 'POST':
@@ -121,11 +133,11 @@ def edit(request, slug, lang='en'):
             new_articleContent.article = article
             new_articleContent.edited_by = request.user
             new_articleContent.lang = lang
-            if articleContent.pk != None:
+            if articleContent.pk is not None:
                 new_articleContent.lang = articleContent.lang
                 new_articleContent.parent = articleContent
             new_articleContent.save(lang=lang)
-            if articleContent.pk != None:
+            if articleContent.pk is not None:
                 articleContent.child = new_articleContent
                 articleContent.save(lang=lang, change_updated_time=False)
             return HttpResponseRedirect(new_articleContent.get_url())
@@ -136,6 +148,7 @@ def edit(request, slug, lang='en'):
         "form": form
     })
 
+
 def history(request, slug, lang="en"):
     article = Article.objects.get(slug=slug)
     articleContents = article.get_sorted_contents(lang=lang)
@@ -145,7 +158,8 @@ def history(request, slug, lang="en"):
     return render(request, "history.html", {
         "articleContents": articleContents,
         "back_url": originalArticle.get_url
-        })
+    })
+
 
 def history_single(request, slug, lang, id):
     article = Article.objects.get(slug=slug)
@@ -160,25 +174,28 @@ def history_single(request, slug, lang, id):
     originalArticle = article.get_newest_content(lang=lang)
 
     return render(request, 'history_single.html', {
-        'ac':ac,
+        'ac': ac,
         'next_ac': ac.child,
         'prev_ac': ac.parent,
         'back_url': originalArticle.get_url
     })
 
+
 def user(request, username):
     user = User.objects.get(username=username)
-    contributions = ArticleContent.objects.filter(edited_by=user).order_by('-updated')
+    contributions = ArticleContent.objects.filter(
+        edited_by=user).order_by('-updated')
 
     email = user.email
     default = "mm"
     size = 150
 
     # construct the url
-    gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
-    gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+    gravatar_url = "http://www.gravatar.com/avatar/" + \
+        hashlib.md5(email.lower()).hexdigest() + "?"
+    gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
     return render(request, "user.html", {
         "user": user,
         "contributions": contributions,
         "gravatar": gravatar_url
-        })
+    })

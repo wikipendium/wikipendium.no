@@ -15,5 +15,5 @@ DATABASES = {
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '3fbnn%u5_j1)p%k^4y%=v!qi2m!=z#kz8m_vn#^*+j5u!4hmvv'
 
-GOOGLE_ANALYTICS_KEY = 'UA-41042622-1'
-GOOGLE_ANALYTICS_NAME = 'wikipendium.no'
+GOOGLE_ANALYTICS_KEY = ''
+GOOGLE_ANALYTICS_NAME = ''

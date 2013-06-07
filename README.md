@@ -30,3 +30,8 @@ source venv/bin/virtualenv
 cp wikipendium/settings/local.py.example wikipendium/settings/local.py
 make
 ```
+
+## Coding style
+
+Wikipendium uses Flake8.
+Getting a plugin for your editor is highly recommended.

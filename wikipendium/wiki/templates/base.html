@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html>
 
 <head>
+    <meta charset="utf-8">
     <title>{% block title %}{% endblock %} Wikipendium</title>
-    <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js></script>
+    <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js></script>
     {% if mathjax %}
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     {% endif %}
     <link rel=stylesheet href={{STATIC_URL}}css/master.css />
+    <link rel=stylesheet href={{STATIC_URL}}codemirror/codemirror.css />
+    <link rel=stylesheet href={{STATIC_URL}}codemirror/xq-light.css />
     <script src={{STATIC_URL}}js/bootstrap.min.js></script>
-    <script src={{STATIC_URL}}epiceditor/js/epiceditor.js></script>
+    <script src={{STATIC_URL}}codemirror/codemirror.min.js></script>
     <link href="{{STATIC_URL}}google-code-prettify/prettify.css"  rel="stylesheet" />
     <script src="{{STATIC_URL}}google-code-prettify/prettify.js"></script>
-    <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -38,31 +41,18 @@ MathJax.Hub.Config({
 
             var editor_has_been_updated = false;
 
-            prettyPrint();
+            //prettyPrint();
 
-            $('textarea').each(function(){
-                var container = $('<div class=epiceditor-container></div>');
-                $this = $(this);
-                $(this.form).on('submit',function(){
-                    $this.text(editor.exportFile());
-                });
-                container.attr('id','epiceditor_'+(Math.random()*99*99*99|0));
-                $this.after(container);
-                $this.hide();
-                var editor = new EpicEditor({
-                    container: container.attr('id'),
-                    basePath: '{{STATIC_URL}}epiceditor',
-                    theme: {
-                        base: '/themes/base/epiceditor.css',
-                        preview: '',//'/themes/preview/github.css',
-                        editor: '/themes/editor/epic-light.css'
-                    }
-                }).load();
-                editor.importFile('',$this.text());
-                editor.on('update', function () {
-                    editor_has_been_updated = true;
-                });
+
+            var textarea = document.getElementById("id_content");
+            var codeMirror = CodeMirror.fromTextArea(textarea, {
+                mode: "markdown",
+                theme: "xq-light"
+            }).on("change", function(){
+                editor_has_been_updated = true;
+                console.log("update");
             });
+
             $('form').submit(function(){
                 // Allow form to submit without being bugged about unsaved changes
                 editor_has_been_updated = false;
@@ -73,16 +63,17 @@ MathJax.Hub.Config({
                 return false;
             }
             $('#create-button').click( create_article );
-            $('#create-article-slug').bind('keypress', function(e) {
+            $('#create-article-slug').on('keypress', function(e) {
                 if(e.keyCode==13){
                     create_article();
                 }
             });
-        });
-        window.addEventListener('beforeunload', function(){
-            if (editor_has_been_updated) {
-                return "You have unsaved changes!";
-            }
+
+            window.addEventListener('beforeunload', function(){
+                if (editor_has_been_updated) {
+                    return "You have unsaved changes!";
+                }
+            });
         });
         (function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone");
     </script>

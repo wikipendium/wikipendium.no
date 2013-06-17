@@ -9,12 +9,11 @@
 <a href={% if articleContent.pk %}{{ articleContent.get_url }}{%else%}/{%endif%} >« Back</a>
 {% endif %}
 
-{{ form.errors }} 
 <form method="post" action="">
     {{ form.pk }}
     {% csrf_token %}
-    <div class="field-group {%if form.slug.errors %}error{% endif %}">
-        <div class="fields slug-field">
+    <div class="field-group clearfix">
+        <div class="fields slug-field {%if form.slug.errors %}error{% endif %}">
             {{ form.slug }}
             {% if form.slug.errors %}
             <div class=error-message>
@@ -22,9 +21,15 @@
             </div>
             {% endif %}
         </div>
-    </div>
-    <div class="field-group {%if form.title.errors %}error{% endif %}">
-        <div class="fields title-field">
+        <div class="fields lang-field {%if form.lang.errors %}error{% endif %}">
+            {{ form.lang }}
+            {% if form.lang.errors %}
+            <div class=error-message>
+                {{form.lang.errors|join:", "}}
+            </div>
+            {% endif %}
+        </div>
+        <div class="fields title-field {%if form.title.errors %}error{% endif %}">
             {{ form.title }}
             {% if form.title.errors %}
             <div class=error-message>
@@ -33,10 +38,14 @@
             {% endif %}
         </div>
     </div>
-    <br /><br />
     <div class="field-group content-field">
-        <div class="fields">
+        <div class="fields {%if form.content.errors %}error{% endif %}">
             {{ form.content }}
+            {% if form.content.errors %}
+            <div class=error-message>
+                {{form.content.errors|join:", "}}
+            </div>
+            {% endif %}
         </div>
     </div>
     <input type=submit class="button button-large float-right" value=Save! />

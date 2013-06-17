@@ -111,6 +111,11 @@ def new(request):
 
 
 @login_required
+def add_language(request, slug):
+    return edit(request, slug, None)
+
+
+@login_required
 def edit(request, slug, lang='en'):
     article = None
     articleContent = None
@@ -132,7 +137,8 @@ def edit(request, slug, lang='en'):
             new_articleContent = form.save(commit=False)
             new_articleContent.article = article
             new_articleContent.edited_by = request.user
-            new_articleContent.lang = lang
+            if lang is not None:
+                new_articleContent.lang = lang
             if articleContent.pk is not None:
                 new_articleContent.lang = articleContent.lang
                 new_articleContent.parent = articleContent

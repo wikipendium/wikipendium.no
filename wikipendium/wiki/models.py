@@ -92,6 +92,9 @@ class ArticleContent(models.Model):
     def get_edit_url(self):
         return (self.get_url() + '/edit/').replace('//', '/')
 
+    def get_add_language_url(self):
+        return "/" + self.article.slug + "/add_language/"
+
     def get_history_url(self):
         return (self.get_url() + '/history/').replace('//', '/')
 
@@ -123,8 +126,6 @@ class ArticleContent(models.Model):
         return article
 
     def save(self, lang=None, change_updated_time=True):
-        if not self.pk and not lang:
-            self.lang = self.get_language()
         if change_updated_time:
             self.updated = datetime.datetime.now()
         super(ArticleContent, self).save()

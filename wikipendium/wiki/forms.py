@@ -2,20 +2,22 @@ from django.forms import ModelForm, ValidationError
 import django.forms as forms
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.merge3 import MergeError, merge
+from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 
 
 class ArticleForm(ModelForm):
     slug = forms.CharField(label='')
+    lang = forms.ChoiceField(label='', choices=LANGUAGE_NAMES.items())
     title = forms.CharField(label='')
     content = forms.CharField(label='', widget=forms.Textarea())
     pk = forms.IntegerField(label='', widget=forms.HiddenInput())
 
     class Meta:
         model = ArticleContent
-        fields = ('title', 'content')
+        fields = ('lang', 'title', 'content')
 
     def __init__(self, *args, **kwargs):
-        self.lang = kwargs.pop('lang', None)
+        kwargs.pop('lang', None)
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
         self.fields['pk'].widget.attrs['value'] = 0
@@ -26,13 +28,15 @@ class ArticleForm(ModelForm):
                 self.fields['slug'].widget.attrs['value'] = slug
                 if self.instance.article.pk:
                     self.fields['slug'].widget.attrs['readonly'] = True
+                    self.fields['lang'].widget = forms.TextInput()
+                    self.fields['lang'].widget.attrs['readonly'] = True
                 if self.instance.pk:
                     self.fields['pk'].widget.attrs['value'] = self.instance.pk
         except:
             pass
 
         self.fields['title'].widget.attrs['placeholder'] = 'Course title'
-        self.fields.keyOrder = ['pk', 'slug', 'title', 'content']
+        self.fields.keyOrder = ['pk', 'slug', 'lang', 'title', 'content']
 
     def clean(self):
         super(ArticleForm, self)
@@ -44,7 +48,7 @@ class ArticleForm(ModelForm):
         article = None
         articleContent = None
         slug = self.cleaned_data['slug']
-        lang = self.lang
+        lang = self.cleaned_data['lang']
         try:
             article = Article.objects.get(slug=slug)
         except:

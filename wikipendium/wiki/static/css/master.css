@@ -2217,6 +2217,11 @@ code {
     border-radius: 2px;
 }
 
+.cm-delimit {
+    font-style: italic;
+    color: #7EA656;
+}
+
 /******************
  * LOGIN
 ******************/

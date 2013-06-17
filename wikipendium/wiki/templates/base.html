@@ -43,14 +43,24 @@ MathJax.Hub.Config({
 
             //prettyPrint();
 
+            CodeMirror.defineMode("markdown-latex", function(config) {
+                return CodeMirror.multiplexingMode(
+                    CodeMirror.getMode(config, "markdown"),
+                    {open: "$$", close: "$$",
+                    mode: CodeMirror.getMode(config, "text/plain"),
+                    delimStyle: "delimit"},
+                    {open: "$", close: "$",
+                    mode: CodeMirror.getMode(config, "text/plain"),
+                    delimStyle: "delimit"}
+                );
+            });
 
             var textarea = document.getElementById("id_content");
             var codeMirror = CodeMirror.fromTextArea(textarea, {
-                mode: "markdown",
+                mode: "markdown-latex",
                 theme: "xq-light"
             }).on("change", function(){
                 editor_has_been_updated = true;
-                console.log("update");
             });
 
             $('form').submit(function(){
@@ -75,6 +85,8 @@ MathJax.Hub.Config({
                 }
             });
         });
+
+        // Stay in web-app on iOS
         (function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener("click",function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;"href"in d&&(d.href.indexOf("http")||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,"standalone");
     </script>
 </head>

@@ -2207,16 +2207,30 @@ code {
 form .fields.slug-field {
     width:11%;
     float:left;
+    margin-right: .5%;
 }
 
 form .fields.lang-field {
     width:11%;
     float:left;
+    margin-right: .5%;
+}
+form .fields.lang-field .chzn-single {
+    height: 30px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
 }
 
 form .fields.title-field {
-    width:78%;
+    width:77%;
     float: left;
+}
+form .fields.title-field input {
+    font-size: 1.4em;
+    font-weight: bold;
 }
 
 form .field-group.content-field {

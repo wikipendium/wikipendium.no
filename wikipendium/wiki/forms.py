@@ -7,7 +7,8 @@ from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 
 class ArticleForm(ModelForm):
     slug = forms.CharField(label='')
-    lang = forms.ChoiceField(label='', choices=LANGUAGE_NAMES.items())
+    choices = [('', '')] + LANGUAGE_NAMES.items()
+    lang = forms.ChoiceField(label='', choices=choices)
     title = forms.CharField(label='')
     content = forms.CharField(label='', widget=forms.Textarea())
     pk = forms.IntegerField(label='', widget=forms.HiddenInput())
@@ -28,10 +29,16 @@ class ArticleForm(ModelForm):
                 self.fields['slug'].widget.attrs['value'] = slug
                 if self.instance.article.pk:
                     self.fields['slug'].widget.attrs['readonly'] = True
-                    self.fields['lang'].widget = forms.TextInput()
-                    self.fields['lang'].widget.attrs['readonly'] = True
                 if self.instance.pk:
                     self.fields['pk'].widget.attrs['value'] = self.instance.pk
+                    self.fields['lang'].widget = forms.TextInput(attrs={
+                        'readonly': True
+                    })
+                else:
+                    self.fields['lang'].widget.attrs = {
+                        'class': "select_chosen",
+                        'data-placeholder': "Language"
+                    }
         except:
             pass
 

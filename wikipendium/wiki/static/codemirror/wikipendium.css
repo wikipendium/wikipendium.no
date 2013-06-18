@@ -18,16 +18,8 @@
 .cm-s-wikipendium span.cm-attribute {color: #7F007F;}
 .cm-s-wikipendium span.cm-link {color: #069;}
 
-.cm-delimit {
-    font-style: italic;
-    color: #7EA656;
-}
-.cm-delimit-block {
-    font-style: italic;
-    color: #7EA656;
-    font-weight: bold;
-}
-.cm-markdown-latex {
+.cm-mathjax-inline,
+.cm-mathjax-block {
     color: #4C581A;
 }
 

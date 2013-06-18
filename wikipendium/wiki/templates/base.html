@@ -41,26 +41,34 @@ MathJax.Hub.Config({
 
             var editor_has_been_updated = false;
 
-            //prettyPrint();
+            prettyPrint();
 
-            CodeMirror.defineMode("markdown-latex", function(config) {
-                return CodeMirror.multiplexingMode(
-                    CodeMirror.getMode(config, "markdown"),
-                    {open: "$$", close: "$$",
-                    mode: CodeMirror.getMode(config, "text/plain"),
-                    delimStyle: "delimit-block",
-                    innerStyle: "markdown-latex"},
-                    {open: "$", close: "$",
-                    mode: CodeMirror.getMode(config, "text/plain"),
-                    delimStyle: "delimit",
-                    innerStyle: "markdown-latex"}
-                );
+            CodeMirror.defineMode("markdown-math", function(config, parserConfig) {
+                var markdownMath = {
+                    token: function(stream, state) {
+                        var ch;
+                        if (stream.match("$$")) {
+                            while ((ch = stream.next()) != null)
+                            if (ch == "$" && stream.next() == "$") break;
+                            stream.eat("$");
+                            return "mathjax-block";
+                        }
+                        if (stream.match("$")) {
+                            while ((ch = stream.next()) != null)
+                            if (ch == "$" && stream.current().substr(-2) != "\\$") break;
+                            return "mathjax-inline";
+                        }
+                        while (stream.next() != null && !stream.match("$", false)) {}
+                        return null;
+                    }
+                };
+                return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "markdown"), markdownMath);
             });
 
             var textarea;
             if (textarea = document.getElementById("id_content")) {
                 var codeMirror = CodeMirror.fromTextArea(textarea, {
-                    mode: "markdown-latex",
+                    mode: "markdown-math",
                     theme: "wikipendium",
                     lineWrapping: true
                 }).on("change", function(){

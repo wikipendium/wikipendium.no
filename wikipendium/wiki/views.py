@@ -149,7 +149,9 @@ def edit(request, slug, lang='en'):
             return HttpResponseRedirect(new_articleContent.get_url())
     else:
         form = ArticleForm(instance=articleContent)
+        available_languages = article.get_available_languages(articleContent)
     return render(request, 'edit.html', {
+        "availableLanguages": available_languages,
         "articleContent": articleContent,
         "form": form
     })

@@ -46,7 +46,7 @@ class Article(models.Model):
         ).distinct().values_list('lang', flat=True)
         if codes:
             return dict(zip(map(lambda key: LANGUAGE_NAMES[key], codes),
-                            map(self.get_url, codes)))
+                            map(self.get_newest_content, codes)))
 
     def get_url(self, lang="en"):
         newest_content = self.get_newest_content(lang)

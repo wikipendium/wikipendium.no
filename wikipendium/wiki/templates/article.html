@@ -11,9 +11,9 @@
         <div class="has-dropdown button-dropdown text-left">
             <a class="button" href=# data-toggle=dropdown>Languages<span class=caret></span></a>
             <ul class="dropdown left">
-                {% for lang_code, lang_url in availableLanguages.items %}
+                {% for lang_name, article in availableLanguages.items %}
                     <li>
-                        <a href={{ lang_url }}>{{ lang_code }}</a>
+                        <a href={{ article.get_url }}>{{ lang_name }}</a>
                     </li>
                 {% endfor %}
             </ul>

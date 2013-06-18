@@ -1,0 +1,35 @@
+.cm-s-wikipendium span.cm-keyword {line-height: 1em; font-weight: bold; color: #5A5CAD; }
+.cm-s-wikipendium span.cm-atom {color: #6C8CD5;}
+.cm-s-wikipendium span.cm-number {color: #164;}
+.cm-s-wikipendium span.cm-def {text-decoration:underline;}
+.cm-s-wikipendium span.cm-variable {color: black; }
+.cm-s-wikipendium span.cm-variable-2 {color:black;}
+.cm-s-wikipendium span.cm-variable-3 {color: black; }
+.cm-s-wikipendium span.cm-property {}
+.cm-s-wikipendium span.cm-operator {}
+.cm-s-wikipendium span.cm-comment {color: #0080FF; font-style: italic;}
+.cm-s-wikipendium span.cm-string {color: red;}
+.cm-s-wikipendium span.cm-meta {color: yellow;}
+.cm-s-wikipendium span.cm-error {color: #f00;}
+.cm-s-wikipendium span.cm-qualifier {color: grey}
+.cm-s-wikipendium span.cm-builtin {color: #7EA656;}
+.cm-s-wikipendium span.cm-bracket {color: #cc7;}
+.cm-s-wikipendium span.cm-tag {color: #3F7F7F;}
+.cm-s-wikipendium span.cm-attribute {color: #7F007F;}
+.cm-s-wikipendium span.cm-link {color: #069;}
+
+.cm-delimit {
+    font-style: italic;
+    color: #7EA656;
+}
+.cm-delimit-block {
+    font-style: italic;
+    color: #7EA656;
+    font-weight: bold;
+}
+.cm-markdown-latex {
+    color: #4C581A;
+}
+
+.cm-s-wikipendium .CodeMirror-activeline-background {background: #e8f2ff !important;}
+.cm-s-wikipendium .CodeMirror-matchingbracket {border:1px solid grey;color:black !important;background:yellow;}

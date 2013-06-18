@@ -10,7 +10,7 @@
     {% endif %}
     <link rel=stylesheet href={{STATIC_URL}}css/master.css />
     <link rel=stylesheet href={{STATIC_URL}}codemirror/codemirror.css />
-    <link rel=stylesheet href={{STATIC_URL}}codemirror/xq-light.css />
+    <link rel=stylesheet href={{STATIC_URL}}codemirror/wikipendium.css />
     <script src={{STATIC_URL}}js/bootstrap.min.js></script>
     <script src={{STATIC_URL}}codemirror/codemirror.min.js></script>
     <link href="{{STATIC_URL}}google-code-prettify/prettify.css"  rel="stylesheet" />
@@ -48,10 +48,12 @@ MathJax.Hub.Config({
                     CodeMirror.getMode(config, "markdown"),
                     {open: "$$", close: "$$",
                     mode: CodeMirror.getMode(config, "text/plain"),
-                    delimStyle: "delimit"},
+                    delimStyle: "delimit-block",
+                    innerStyle: "markdown-latex"},
                     {open: "$", close: "$",
                     mode: CodeMirror.getMode(config, "text/plain"),
-                    delimStyle: "delimit"}
+                    delimStyle: "delimit",
+                    innerStyle: "markdown-latex"}
                 );
             });
 
@@ -59,7 +61,8 @@ MathJax.Hub.Config({
             if (textarea = document.getElementById("id_content")) {
                 var codeMirror = CodeMirror.fromTextArea(textarea, {
                     mode: "markdown-latex",
-                    theme: "xq-light"
+                    theme: "wikipendium",
+                    lineWrapping: true
                 }).on("change", function(){
                     editor_has_been_updated = true;
                 });

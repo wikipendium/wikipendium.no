@@ -2,23 +2,25 @@
 
 {% block nav %}
 <a class=button href=/new/>Create article</a>
-<div class=button-group style=inline-block>
-    {% if availableLanguages.items %}
-        <div class="has-dropdown button-dropdown text-left">
-            <a class="button" href=# data-toggle=dropdown>Languages<span class=caret></span></a>
-            <ul class="dropdown left">
-                {% for lang_name, article in availableLanguages.items %}
-                    <li>
-                        <a href={{ article.get_edit_url }}>{{ lang_name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% else %}
-        <a class=button>Languages</a>
-    {% endif %}
-    <a class="button add-language-button" href={{ articleContent.get_add_language_url }}>+</a>
-</div>
+{% if articleContent.pk %}
+    <div class=button-group style=inline-block>
+        {% if availableLanguages.items %}
+            <div class="has-dropdown button-dropdown text-left">
+                <a class="button" href=# data-toggle=dropdown>Languages<span class=caret></span></a>
+                <ul class="dropdown left">
+                    {% for lang_name, article in availableLanguages.items %}
+                        <li>
+                            <a href={{ article.get_edit_url }}>{{ lang_name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <a class=button>Languages</a>
+        {% endif %}
+        <a class="button add-language-button" href={{ articleContent.get_add_language_url }}>+</a>
+    </div>
+{% endif %}
 {% endblock %}
 
 {% block content %}

@@ -2134,7 +2134,7 @@ body.frontpage:before {
     padding-top: 20px;
 }
 
-#article, #epiceditor-preview{
+#article {
     width: auto;
     max-width: 520px;
     margin:0 auto;
@@ -2204,13 +2204,19 @@ code {
 
 
 /******************
- * EPICEDITOR
+ * CODEMIRROR
 ******************/
 
-.epiceditor-container{
+.CodeMirror {
     border:1px solid #ccc;
     min-height: 400px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
 }
+
 
 /******************
  * LOGIN

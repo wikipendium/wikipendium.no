@@ -2,7 +2,7 @@
 
 {% block nav %}
 <a class=button href=/new/>Create article</a>
-{% if articleContent.pk %}
+{% if form.instance.article.pk %}
     <div class=button-group style=inline-block>
         {% if availableLanguages.items %}
             <div class="has-dropdown button-dropdown text-left">

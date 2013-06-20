@@ -18,7 +18,6 @@ class ArticleForm(ModelForm):
         fields = ('lang', 'title', 'content')
 
     def __init__(self, *args, **kwargs):
-        kwargs.pop('lang', None)
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
         self.fields['pk'].widget.attrs['value'] = 0

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load extras %}
 
 {% block title %}{{ articleContent.get_full_title }} -{% endblock %}
 
@@ -6,23 +7,7 @@
 
 {% block nav %}
 <a class=button href=/new/>Create article</a>
-<div class=button-group style=inline-block>
-    {% if availableLanguages.items %}
-        <div class="has-dropdown button-dropdown text-left">
-            <a class="button" href=# data-toggle=dropdown>Languages<span class=caret></span></a>
-            <ul class="dropdown left">
-                {% for lang_name, article in availableLanguages.items %}
-                    <li>
-                        <a href={{ article.get_url }}>{{ lang_name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% else %}
-        <a class=button>Languages</a>
-    {% endif %}
-    <a class="button add-language-button" href={{ articleContent.get_add_language_url }}>+</a>
-</div>
+{% language_chooser language_list articleContent %}
 <div class=button-group style=inline-block>
     <a class="button edit-link" href={{ articleContent.get_edit_url }}>Edit</a>
     <div class="has-dropdown button-dropdown">

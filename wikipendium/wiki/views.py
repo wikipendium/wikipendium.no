@@ -88,6 +88,8 @@ def article(request, slug, lang="en"):
 
     content = articleContent.get_html_content()
     available_languages = article.get_available_languages(articleContent)
+    language_list = map(lambda x: (x[0], x[1].get_url),
+                        available_languages or [])
 
     return render(request, 'article.html', {
         "mathjax": True,
@@ -95,7 +97,7 @@ def article(request, slug, lang="en"):
         "toc": (content['toc'] or "").replace(
             '<ul>', '<ol>').replace('</ul>', '</ol>'),
         "articleContent": articleContent,
-        "availableLanguages": available_languages,
+        "language_list": language_list,
         'contributors': contributors,
         "share_url": "http://" + request.META['HTTP_HOST'] +
         request.get_full_path(),
@@ -129,7 +131,7 @@ def edit(request, slug, lang='en'):
         articleContent = ArticleContent(article=article, lang=lang)
 
     if request.method == 'POST':
-        form = ArticleForm(request.POST, lang=lang)
+        form = ArticleForm(request.POST)
         if form.is_valid():
             if not article.pk:
                 article.save()
@@ -150,11 +152,14 @@ def edit(request, slug, lang='en'):
     else:
         form = ArticleForm(instance=articleContent)
         available_languages = article.get_available_languages(articleContent)
-    return render(request, 'edit.html', {
-        "availableLanguages": available_languages,
-        "articleContent": articleContent,
-        "form": form
-    })
+        language_list = map(lambda x: (x[0], x[1].get_edit_url),
+                            available_languages or [])
+
+        return render(request, 'edit.html', {
+            "language_list": language_list,
+            "articleContent": articleContent,
+            "form": form
+        })
 
 
 def history(request, slug, lang="en"):

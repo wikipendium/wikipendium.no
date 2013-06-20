@@ -1,0 +1,17 @@
+{% if language_list %}
+    <div class=button-group style=inline-block>
+        <div class="has-dropdown button-dropdown text-left">
+            <a class="button" href=# data-toggle=dropdown>Languages<span class=caret></span></a>
+            <ul class="dropdown left">
+                {% for lang_name, article_url in language_list %}
+                    <li>
+                        <a href={{ article_url }}>{{ lang_name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a class="button add-language-button" href={{ articleContent.get_add_language_url }}>+</a>
+    </div>
+{% else %}
+    <a class="button add-language-button" href={{ articleContent.get_add_language_url }}>Add Language</a>
+{% endif %}

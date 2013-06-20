@@ -45,8 +45,8 @@ class Article(models.Model):
             lang=current.lang
         ).distinct().values_list('lang', flat=True)
         if codes:
-            return dict(zip(map(lambda key: LANGUAGE_NAMES[key], codes),
-                            map(self.get_newest_content, codes)))
+            return zip(map(lambda key: LANGUAGE_NAMES[key], codes),
+                       map(self.get_newest_content, codes))
 
     def get_url(self, lang="en"):
         newest_content = self.get_newest_content(lang)
@@ -125,7 +125,7 @@ class ArticleContent(models.Model):
         }
         return article
 
-    def save(self, lang=None, change_updated_time=True):
+    def save(self, change_updated_time=True):
         if change_updated_time:
             self.updated = datetime.datetime.now()
         super(ArticleContent, self).save()

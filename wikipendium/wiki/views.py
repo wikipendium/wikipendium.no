@@ -144,7 +144,7 @@ def edit(request, slug, lang='en'):
             if articleContent.pk is not None:
                 new_articleContent.lang = articleContent.lang
                 new_articleContent.parent = articleContent
-            new_articleContent.save(lang=lang)
+            new_articleContent.save()
             if articleContent.pk is not None:
                 articleContent.child = new_articleContent
                 articleContent.save(lang=lang, change_updated_time=False)

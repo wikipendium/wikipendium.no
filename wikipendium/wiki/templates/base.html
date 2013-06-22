@@ -3,7 +3,12 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
     <title>{% block title %}{% endblock %} Wikipendium</title>
+
     <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js></script>
     {% if mathjax %}
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -13,12 +18,11 @@
     <link rel=stylesheet href={{STATIC_URL}}codemirror/wikipendium.css />
     <script src={{STATIC_URL}}js/bootstrap.min.js></script>
     <script src={{STATIC_URL}}codemirror/codemirror.min.js></script>
-    <link href="{{STATIC_URL}}google-code-prettify/prettify.css"  rel="stylesheet" />
+    <link href="{{STATIC_URL}}google-code-prettify/prettify.css" rel="stylesheet" />
     <script src="{{STATIC_URL}}google-code-prettify/prettify.js"></script>
+    <link rel=stylesheet href={{STATIC_URL}}chosen/chosen.min.css />
+    <script src="{{STATIC_URL}}chosen/chosen.jquery.min.js"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="{{STATIC_URL}}apple-touch/icon-57x57.png" />
     <link rel="apple-touch-icon" href="{{STATIC_URL}}apple-touch/icon-72x72.png" sizes="72x72" />
     <link rel="apple-touch-icon" href="{{STATIC_URL}}apple-touch/icon-114x114.png" sizes="114x114" />
@@ -80,6 +84,12 @@ MathJax.Hub.Config({
                     editor_has_been_updated = false;
                 });
             }
+
+            $(".select_chosen").chosen({
+                width:'100%',
+                no_results_text: "Language already in use, or doesn't exist."
+            });
+
             function create_article() {
                 var redirect_url = $('#create-article-slug').val() + "/edit/";
                 window.location.href = redirect_url;

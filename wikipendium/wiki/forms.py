@@ -2,20 +2,23 @@ from django.forms import ModelForm, ValidationError
 import django.forms as forms
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.merge3 import MergeError, merge
+from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 
 
 class ArticleForm(ModelForm):
     slug = forms.CharField(label='')
+    language_list = sorted(LANGUAGE_NAMES.items(), key=lambda x: x[1])
+    choices = [('', '')] + language_list
+    lang = forms.ChoiceField(label='', choices=choices)
     title = forms.CharField(label='')
     content = forms.CharField(label='', widget=forms.Textarea())
     pk = forms.IntegerField(label='', widget=forms.HiddenInput())
 
     class Meta:
         model = ArticleContent
-        fields = ('title', 'content')
+        fields = ('lang', 'title', 'content')
 
     def __init__(self, *args, **kwargs):
-        self.lang = kwargs.pop('lang', None)
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
         self.fields['pk'].widget.attrs['value'] = 0
@@ -26,13 +29,29 @@ class ArticleForm(ModelForm):
                 self.fields['slug'].widget.attrs['value'] = slug
                 if self.instance.article.pk:
                     self.fields['slug'].widget.attrs['readonly'] = True
+                    existing_langs = (
+                        self.instance.article.get_available_language_codes()
+                    )
+                    filtered_choices = [x
+                                        for x
+                                        in self.fields['lang'].choices
+                                        if x[0] not in existing_langs]
+                    self.fields['lang'].choices = filtered_choices
                 if self.instance.pk:
                     self.fields['pk'].widget.attrs['value'] = self.instance.pk
+                    self.fields['lang'].widget = forms.TextInput(attrs={
+                        'readonly': True
+                    })
+                else:
+                    self.fields['lang'].widget.attrs = {
+                        'class': "select_chosen",
+                        'data-placeholder': "Language"
+                    }
         except:
             pass
 
         self.fields['title'].widget.attrs['placeholder'] = 'Course title'
-        self.fields.keyOrder = ['pk', 'slug', 'title', 'content']
+        self.fields.keyOrder = ['pk', 'slug', 'lang', 'title', 'content']
 
     def clean(self):
         super(ArticleForm, self)
@@ -44,7 +63,7 @@ class ArticleForm(ModelForm):
         article = None
         articleContent = None
         slug = self.cleaned_data['slug']
-        lang = self.lang
+        lang = self.cleaned_data['lang']
         try:
             article = Article.objects.get(slug=slug)
         except:

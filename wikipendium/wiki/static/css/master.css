@@ -2180,16 +2180,22 @@ h1,h2,h3,h4,h5,h6{
 
 
 code {
+    background:#fafafa;
+    border:1px solid #eaeaea;
+}
+code:not(.inline) {
     font-size:14px; 
     line-height: 18px;
-    background:#fafafa;
     padding:10px;
     display:block;
     border-radius:10px;
-    border:1px solid #eaeaea;
     box-shadow: -1px -1px 0px rgba(0,0,0,0.2);
     margin-bottom:20px;
     overflow:auto;
+}
+code.inline {
+    display: inline;
+    padding: 5px;
 }
 
 
@@ -2256,7 +2262,7 @@ form .field-group.content-field {
  * SEARCHBOX
 ******************/
 
-.active{
+#suggestions .active{
     background:rgba(109,132,184,0.8);
     color:white;
 }
@@ -2519,4 +2525,20 @@ input[readonly=True]{
 
 .tex2jax_ignore {
     font-family: "Consolas", "Courier", monospace;
+}
+
+/*******************
+ * TABS
+*******************/
+
+.tab-container .tab {
+    display: none;
+    position: absolute;
+}
+.tab-container .tab.active {
+    display: block;
+}
+
+#help-tabs-container {
+    min-height: 300px;
 }

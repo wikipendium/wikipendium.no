@@ -39,11 +39,16 @@ class Article(models.Model):
         filtered = ArticleContent.objects.filter(article=self, lang=lang)
         return filtered.order_by('-updated')
 
-    def get_available_languages(self, current=None):
-        filtered = ArticleContent.objects.filter(article=self)
-        codes = filtered.exclude(
-            lang=current.lang
+    def get_available_language_codes(self):
+        codes = ArticleContent.objects.filter(
+            article=self
         ).distinct().values_list('lang', flat=True)
+        return list(codes)
+
+    def get_available_languages(self, current=None):
+        codes = self.get_available_language_codes()
+        if current.lang is not None:
+            codes.remove(current.lang)
         if codes:
             return zip(map(lambda key: LANGUAGE_NAMES[key], codes),
                        map(self.get_newest_content, codes))

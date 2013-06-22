@@ -147,7 +147,7 @@ def edit(request, slug, lang='en'):
             new_articleContent.save()
             if articleContent.pk is not None:
                 articleContent.child = new_articleContent
-                articleContent.save(lang=lang, change_updated_time=False)
+                articleContent.save(change_updated_time=False)
             return HttpResponseRedirect(new_articleContent.get_url())
     else:
         form = ArticleForm(instance=articleContent)

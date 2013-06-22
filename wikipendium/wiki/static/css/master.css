@@ -1170,7 +1170,7 @@ input::-moz-focus-inner {
   -o-border-radius: 2px;
   border-radius: 2px;
   display: inline-block;
-  position: relative;
+  position: absolute;
   margin-top: 7px;
   padding: 7px;
   background: #a01d2b;
@@ -2175,19 +2175,6 @@ h1,h2,h3,h4,h5,h6{
 #toc ol ol ol ol {list-style-type: lower-latin;}
 #toc ol ol ol ol ol {list-style-type: lower-greek;}
 
-form .fields.slug-field {
-    width:11%;
-    float:left;
-}
-
-form .fields.title-field {
-    width:89%;
-    float: left;
-}
-
-form .field-group.content-field {
-    clear: both;
-}
 
 code {
     font-size:14px; 
@@ -2217,6 +2204,38 @@ code {
     border-radius: 2px;
 }
 
+form .fields.slug-field {
+    width:11%;
+    float:left;
+    margin-right: .5%;
+}
+
+form .fields.lang-field {
+    width:11%;
+    float:left;
+    margin-right: .5%;
+}
+form .fields.lang-field .chzn-single {
+    height: 30px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+}
+
+form .fields.title-field {
+    width:77%;
+    float: left;
+}
+form .fields.title-field input {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+form .field-group.content-field {
+    clear: both;
+}
 
 /******************
  * LOGIN

@@ -39,14 +39,19 @@ class Article(models.Model):
         filtered = ArticleContent.objects.filter(article=self, lang=lang)
         return filtered.order_by('-updated')
 
-    def get_available_languages(self, current=None):
-        filtered = ArticleContent.objects.filter(article=self)
-        codes = filtered.exclude(
-            lang=current.lang
+    def get_available_language_codes(self):
+        codes = ArticleContent.objects.filter(
+            article=self
         ).distinct().values_list('lang', flat=True)
+        return list(codes)
+
+    def get_available_languages(self, current=None):
+        codes = self.get_available_language_codes()
+        if current.lang is not None:
+            codes.remove(current.lang)
         if codes:
-            return dict(zip(map(lambda key: LANGUAGE_NAMES[key], codes),
-                            map(self.get_url, codes)))
+            return zip(map(lambda key: LANGUAGE_NAMES[key], codes),
+                       map(self.get_newest_content, codes))
 
     def get_url(self, lang="en"):
         newest_content = self.get_newest_content(lang)
@@ -92,6 +97,9 @@ class ArticleContent(models.Model):
     def get_edit_url(self):
         return (self.get_url() + '/edit/').replace('//', '/')
 
+    def get_add_language_url(self):
+        return "/" + self.article.slug + "/add_language/"
+
     def get_history_url(self):
         return (self.get_url() + '/history/').replace('//', '/')
 
@@ -122,9 +130,7 @@ class ArticleContent(models.Model):
         }
         return article
 
-    def save(self, lang=None, change_updated_time=True):
-        if not self.pk and not lang:
-            self.lang = self.get_language()
+    def save(self, change_updated_time=True):
         if change_updated_time:
             self.updated = datetime.datetime.now()
         super(ArticleContent, self).save()

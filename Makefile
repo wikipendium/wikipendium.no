@@ -14,3 +14,5 @@ update:
 migrate:
 	python manage.py syncdb --migrate
 
+lint:
+	flake8 wikipendium/ --exclude=migrations,settings,diff.py

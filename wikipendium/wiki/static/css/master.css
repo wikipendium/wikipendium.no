@@ -2247,7 +2247,9 @@ form .field-group.content-field {
  * LOGIN
 ******************/
 
-.login-form, .register-form{
+.login-form,
+.register-form,
+.change-password-form {
     width:320px;
     margin:0 auto;
 }

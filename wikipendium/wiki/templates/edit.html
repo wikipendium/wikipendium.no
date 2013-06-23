@@ -3,7 +3,11 @@
 
 {% block title %}
     {% if form.instance.article.pk %}
-        Edit: {{ articleContent.article.slug }} –
+        {% if form.instance.pk %}
+            Edit: {{ articleContent.article.slug }} –
+        {% else %}
+            Add language: {{ articleContent.article.slug }} –
+        {% endif %}
     {% else %}
         Create article –
     {% endif %}

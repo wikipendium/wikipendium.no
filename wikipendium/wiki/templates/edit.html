@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 {% load extras %}
 
+{% block title %}
+    {% if form.instance.article.pk %}
+        {% if form.instance.pk %}
+            Edit: {{ articleContent.article.slug }} –
+        {% else %}
+            Add language: {{ articleContent.article.slug }} –
+        {% endif %}
+    {% else %}
+        Create article –
+    {% endif %}
+{% endblock %}
+
 {% block nav %}
 <a class=button href=/new/>Create article</a>
 {% if form.instance.article.pk %}

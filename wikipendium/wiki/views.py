@@ -170,7 +170,8 @@ def history(request, slug, lang="en"):
 
     return render(request, "history.html", {
         "articleContents": articleContents,
-        "back_url": originalArticle.get_url
+        "back_url": originalArticle.get_url,
+        "article": article
     })
 
 

@@ -38,7 +38,8 @@ urlpatterns = patterns(
         'wikipendium.wiki.views.edit'),
     url(r'^(?P<slug>' + slug_regex + ')[^/]*/(?P<lang>[a-z]+)/history/$',
         'wikipendium.wiki.views.history'),
-    url(r'^(?P<slug>' + slug_regex + ')[^/]*/(?P<lang>[a-z]+)/history/(?P<id>\d+)/$',
+    url(r'^(?P<slug>' + slug_regex +
+        ')[^/]*/(?P<lang>[a-z]+)/history/(?P<id>\d+)/$',
         'wikipendium.wiki.views.history_single'),
 
 )

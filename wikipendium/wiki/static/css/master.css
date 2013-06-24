@@ -2529,7 +2529,6 @@ input[readonly=True]{
 
 .tab-container .tab {
     display: none;
-    position: absolute;
 }
 .tab-container .tab.active {
     display: block;

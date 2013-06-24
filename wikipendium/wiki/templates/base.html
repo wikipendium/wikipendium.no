@@ -123,7 +123,7 @@
                     <nav class="float-right">
                     {% block nav %}
                     {% endblock %}
-                    {% if user.is_authenticated %}
+                    {% if request.user.is_authenticated %}
         
     <div class="has-dropdown button-dropdown">
         <a href=# class=button data-toggle=dropdown><i class="icon icon-prepend green-bg"></i>{{request.user.username}}<span class=caret></span></a>

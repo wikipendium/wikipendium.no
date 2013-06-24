@@ -10,9 +10,6 @@
     <title>{% block title %}{% endblock %} Wikipendium</title>
 
     <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js></script>
-    {% if mathjax %}
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    {% endif %}
     <link rel=stylesheet href={{STATIC_URL}}css/master.css />
     <link rel=stylesheet href={{STATIC_URL}}codemirror/codemirror.css />
     <link rel=stylesheet href={{STATIC_URL}}codemirror/wikipendium.css />
@@ -30,15 +27,17 @@
     <link rel="shortcut icon" href="{{STATIC_URL}}images/favicon.png" />
 
     {% if mathjax %}
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\\[','\\]']]
-  }
-});
-</script>
-{% endif %}
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']]
+      }
+    });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    {% endif %}
+
 </head>
 
 <body class="responsive {% block body_class %}{% endblock %}">
@@ -52,7 +51,7 @@ MathJax.Hub.Config({
                     <nav class="float-right">
                     {% block nav %}
                     {% endblock %}
-                    {% if user.is_authenticated %}
+                    {% if request.user.is_authenticated %}
         
     <div class="has-dropdown button-dropdown">
         <a href=# class=button data-toggle=dropdown><i class="icon icon-prepend green-bg"></i>{{request.user.username}}<span class=caret></span></a>

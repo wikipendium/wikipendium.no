@@ -71,11 +71,14 @@ def clone_prod_data():
         # Dump the database to a file...
         PROD.run('source venv/bin/activate && nice python manage.py dumpdata > ' + dump_file)
 
+        # clean password hashes
+        PROD.run('sed -i \'s/"password": "[^"]*"/"password": ""/\' ' + dump_file)
+
         # Then download that file
         get(PROD.dir + dump_file, dump_file)
 
         # Replace this db with the contents of the dump
-        local('python manage.py loaddata ' + dump_file)
+        local('python manage.py loaddata_ex ' + dump_file)
 
     # ... then cleanup the dump files
     PROD.run('rm ' + dump_file)

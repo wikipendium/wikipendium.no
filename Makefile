@@ -16,3 +16,6 @@ migrate:
 
 lint:
 	flake8 wikipendium/ --exclude=migrations,settings,diff.py
+
+test:
+	python manage.py test

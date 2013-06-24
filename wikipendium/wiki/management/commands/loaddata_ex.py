@@ -1,9 +1,9 @@
-from django.conf import settings
 from django.core.management.commands.loaddata import Command as loaddata
 from django.db import connection, transaction
 
+
 class Command(loaddata):
-    def handle (self, *args, **kwargs):
+    def handle(self, *args, **kwargs):
         cursor = connection.cursor()
         cursor.execute("DELETE FROM django_content_type;")
         cursor.execute("DELETE FROM auth_permission;")

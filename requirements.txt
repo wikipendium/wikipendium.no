@@ -6,3 +6,4 @@ fabric
 simplejson
 pytz
 markdown2Mathjax
+django-ignoretests

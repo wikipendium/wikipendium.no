@@ -2319,7 +2319,7 @@ form .field-group.content-field {
     margin: .5em 0;
 }
 .help-container ul {
-    padding-left: 1em;
+    padding-left: 10px;
 }
 
 
@@ -2541,4 +2541,5 @@ input[readonly=True]{
 
 #help-tabs-container {
     min-height: 300px;
+    padding: 5px 20px;
 }

@@ -18,13 +18,14 @@ class Article(models.Model):
 
     def save(self):
         self.slug = self.slug.upper()
+        self.clean()
         super(Article, self).save()
 
     def clean(self):
         if '/' in self.slug:
             raise ValidationError('Course code cannot contain slashes')
 
-    def get_contributors(self, lang):
+    def get_contributors(self, lang='en'):
         filtered = ArticleContent.objects.filter(article=self, lang=lang)
         return set([ac.edited_by for ac in filtered])
 
@@ -47,7 +48,7 @@ class Article(models.Model):
 
     def get_available_languages(self, current=None):
         codes = self.get_available_language_codes()
-        if current.lang is not None:
+        if current and current.lang is not None:
             codes.remove(current.lang)
         if codes:
             return zip(map(lambda key: LANGUAGE_NAMES[key], codes),

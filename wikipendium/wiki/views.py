@@ -52,7 +52,9 @@ def home(request):
                 "lang": ac.lang
             })
 
-    rand_articles = filter(lambda x:x,[a.get_newest_content() for a in Article.objects.all()])
+    rand_articles = filter(
+        lambda x: x,
+        [a.get_newest_content() for a in Article.objects.all()])
     random.shuffle(rand_articles)
 
     return render(request, 'index.html', {

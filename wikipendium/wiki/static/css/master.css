@@ -2318,11 +2318,11 @@ form .field-group.content-field {
  * POPULAR-ARTICLES
 ********************/
 
-.popular-articles{
+.random-articles{
     margin-top:100px;
 }
 
-.popular-articles ul li{
+.random-articles ul li{
     list-style-type:none; 
     display:inline-block;
     width:32%;

@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 import diff
 import urllib
 import hashlib
-from collections import Counter
+import random
 
 
 def all_articles(request):
@@ -36,21 +36,6 @@ def all_articles(request):
 
 
 def home(request):
-
-    articleContents = ArticleContent.objects.all().filter(
-        lang='en').order_by('-updated')
-
-    counter = Counter()
-    for ac in articleContents:
-        counter[ac.article] += 1
-
-    popularACs = []
-    try:
-        popularACs = [article.get_newest_content() for
-                      article, count in counter.most_common(6)]
-    except:
-        pass
-
     trie = []
     articleset = set([])
     for article in Article.objects.all():
@@ -67,9 +52,12 @@ def home(request):
                 "lang": ac.lang
             })
 
+    rand_articles = filter(lambda x:x,[a.get_newest_content() for a in Article.objects.all()])
+    random.shuffle(rand_articles)
+
     return render(request, 'index.html', {
         "trie": simplejson.dumps(trie),
-        'popularACs': popularACs
+        'random_articles': rand_articles[:6]
     })
 
 

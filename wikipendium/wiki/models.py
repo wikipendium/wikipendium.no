@@ -13,6 +13,25 @@ from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 class Article(models.Model):
     slug = models.SlugField(max_length=256, unique=True)
 
+    @staticmethod
+    def get_all_newest_contents():
+        articles = Article.objects.all()
+
+        all_newest_in_all_languages = [
+            [a.get_newest_content(lang)
+                for lang in a.get_available_language_codes()]
+            for a in articles]
+
+        all_newest_reduced_to_one_ac_per_article_regardless_of_language = map(
+            lambda x: sorted(x, key=lambda ac: ac.updated)[0],
+            filter(lambda x: x, all_newest_in_all_languages))
+
+        alphabetically_sorted = sorted(
+            all_newest_reduced_to_one_ac_per_article_regardless_of_language,
+            key=lambda ac: ac.article.slug)
+
+        return alphabetically_sorted
+
     def __unicode__(self):
         return self.slug
 

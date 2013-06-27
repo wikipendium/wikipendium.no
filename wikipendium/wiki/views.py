@@ -19,16 +19,16 @@ def all_articles(request):
 
 def home(request):
 
+    rand_articles = filter(
+        lambda x: x,
+        [a.get_newest_content() for a in Article.objects.all()])
+    random.shuffle(rand_articles)
+
     trie = [{
         "label": ac.get_full_title(),
         "url": ac.get_url(),
         "lang": ac.lang
     } for ac in Article.get_all_newest_contents()]
-
-    rand_articles = filter(
-        lambda x: x,
-        [a.get_newest_content() for a in Article.objects.all()])
-    random.shuffle(rand_articles)
 
     return render(request, 'index.html', {
         "trie": simplejson.dumps(trie),

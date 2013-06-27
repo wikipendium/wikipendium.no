@@ -12,7 +12,7 @@ update:
 	pip install -r requirements.txt
 
 migrate:
-	python manage.py syncdb --migrate
+	python manage.py syncdb --migrate --noinput
 
 lint:
 	flake8 wikipendium/ --exclude=migrations,settings,diff.py

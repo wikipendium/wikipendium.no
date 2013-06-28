@@ -2179,8 +2179,10 @@ h1,h2,h3,h4,h5,h6{
 code {
     background:#fafafa;
     border:1px solid #eaeaea;
+    display: inline;
+    padding: 5px;
 }
-code:not(.inline) {
+pre code {
     font-size:14px; 
     line-height: 18px;
     padding:10px;
@@ -2189,10 +2191,6 @@ code:not(.inline) {
     box-shadow: -1px -1px 0px rgba(0,0,0,0.2);
     margin-bottom:20px;
     overflow:auto;
-}
-code.inline {
-    display: inline;
-    padding: 5px;
 }
 
 

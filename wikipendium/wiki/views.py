@@ -12,50 +12,23 @@ import random
 
 
 def all_articles(request):
-
-    articles = Article.objects.all()
-
-    complete_list = []
-
-    for a in articles:
-        article = a.get_newest_content(lang='en')
-        if article:
-            complete_list.append(article)
-        else:
-            article = a.get_newest_content(lang='nb')
-            if article:
-                complete_list.append(article)
-
-    complete_list = sorted(
-        complete_list,
-        key=lambda ArticleContent: ArticleContent.article.slug)
-
     return render(request, 'all.html', {
-        'complete_list': complete_list
+        'complete_list': Article.get_all_newest_contents()
     })
 
 
 def home(request):
-    trie = []
-    articleset = set([])
-    for article in Article.objects.all():
-        ac = article.get_newest_content(lang='en')
-        if ac is None:
-            ac = article.get_newest_content(lang='nb')
-            if ac is None:
-                continue
-        if article.pk not in articleset:
-            articleset.add(article.pk)
-            trie.append({
-                "label": ac.get_full_title(),
-                "url": ac.get_url(),
-                "lang": ac.lang
-            })
 
     rand_articles = filter(
         lambda x: x,
         [a.get_newest_content() for a in Article.objects.all()])
     random.shuffle(rand_articles)
+
+    trie = [{
+        "label": ac.get_full_title(),
+        "url": ac.get_url(),
+        "lang": ac.lang
+    } for ac in Article.get_all_newest_contents()]
 
     return render(request, 'index.html', {
         "trie": simplejson.dumps(trie),

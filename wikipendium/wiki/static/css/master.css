@@ -781,7 +781,7 @@ hgroup {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  color: #222222;
+  color: #353535;
   font-weight: 600;
   line-height: 1;
   text-rendering: optimizelegibility;
@@ -791,20 +791,20 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 2em;
   letter-spacing: -1px;
 }
 
 h2 {
-  font-size: 22px;
+  font-size: 1.5555555556em;
 }
 
 h3 {
-  font-size: 16px;
+  font-size: 1.3333333333em;
 }
 
 h4, h5, h6 {
-  font-size: 14px;
+  font-size: 1em;
 }
 
 a {
@@ -2136,22 +2136,23 @@ body.frontpage:before {
 
 #article {
     width: auto;
-    max-width: 520px;
+    max-width: 640px;
     margin:0 auto;
     text-align:left;
-    font-size:16px;
-    line-height: 24px;
+    font-size:1.2857142857em;
+    line-height: 1.55em;
 }
 
-h1{margin:50px 0 20px;}
-h2{margin:30px 0 8px;}
-h3{margin:22px 0 8px;}
-h4{margin:22px 0 8px;}
-h5{margin:22px 0 8px;}
-h6{margin:22px 0 8px;}
+h1{margin:-30px 0 20px;}
+h2{margin:-48px 0 8px;}
+h3{margin:-48px 0 8px;}
+h4{margin:-48px 0 8px;}
+h5{margin:-48px 0 8px;}
+h6{margin:-48px 0 8px;}
 
 h1,h2,h3,h4,h5,h6{
     font-weight:bold;
+    padding-top: 70px;
 }
 
 #article .title{
@@ -2161,7 +2162,9 @@ h1,h2,h3,h4,h5,h6{
 
 #toc {
     padding: .5em;
-    margin: 40px 0 20px;
+    margin: 20px 0;
+    font-size: .9em;
+    line-height: 1.4;
 }
 #toc h3 {
     margin: .5em 0;
@@ -2496,6 +2499,7 @@ input[readonly=True]{
 
 #header h1 {
     margin: 0;
+    padding: 0;
 }
 
 /********************

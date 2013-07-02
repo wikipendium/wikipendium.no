@@ -7,3 +7,4 @@ simplejson
 pytz
 markdown2Mathjax
 django-ignoretests
+boto

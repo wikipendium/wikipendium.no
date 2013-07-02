@@ -2,11 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import datetime
-import urllib2
-import urllib
 from markdown2 import markdown
 from markdown2Mathjax import sanitizeInput, reconstructMath
-import simplejson as json
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 
 
@@ -105,7 +102,7 @@ class ArticleContent(models.Model):
         return set([ac.edited_by for ac in filtered]) | set([self.edited_by])
 
     def get_full_title(self):
-        return self.article.slug+': '+self.title
+        return self.article.slug + ': ' + self.title
 
     def get_url(self):
         lang = ""
@@ -126,26 +123,14 @@ class ArticleContent(models.Model):
     def get_history_single_url(self):
         return self.get_history_url() + str(self.pk)+'/'
 
-    def get_language(self):
-        data = {
-            'q': self.content.encode('utf-8'),
-            'key': '21f18e409617475159ef7d5a7084d40c'
-        }
-        language_json = urllib2.urlopen(
-            'http://ws.detectlanguage.com/0.2/detect',
-            urllib.urlencode(data))
-        language_info = json.loads(language_json.read())
-        language_code = language_info["data"]["detections"][0]["language"]
-        return language_code
-
     def get_html_content(self):
-        tmp = sanitizeInput(self.content)
+        sanitized_input, codeblocks = sanitizeInput(self.content)
         markdowned_text = markdown(
-            tmp[0],
+            sanitized_input,
             extras=["toc", "wiki-tables"],
             safe_mode=True)
         article = {
-            'html': reconstructMath(markdowned_text, tmp[1]),
+            'html': reconstructMath(markdowned_text, codeblocks),
             'toc': markdowned_text.toc_html
         }
         return article
@@ -156,4 +141,4 @@ class ArticleContent(models.Model):
         super(ArticleContent, self).save()
 
     def __unicode__(self):
-        return '['+str(self.pk)+'] '+self.title
+        return '[' + str(self.pk) + '] ' + self.title

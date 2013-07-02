@@ -1,0 +1,119 @@
+<ul class=tabs id=help-tabs>
+    <li class=active>
+        <a href=#general-tab>General</a>
+    </li>
+    <li>
+        <a href=#lists-tab>Lists</a>
+    <li>
+        <a href=#links-and-images-tab>Links & Images</a>
+    </li>
+    <li>
+        <a href=#code-tab>Code</a>
+    </li>
+    <li>
+        <a href=#math-tab>Math</a>
+    </li>
+    <li>
+        <a href=#tables-tab>Tables</a>
+    </li>
+</ul>
+<div class=tab-container id="help-tabs-container">
+    <div class="tab active" id="general-tab">
+        <p><em>Wikipendiums are written using markdown syntax.<br />
+            <a href=http://daringfireball.net/projects/markdown/basics target=_blank>The full specification</a> is available, if you're into that.<br />
+            This is the short version:</em>
+        </p>
+        
+        <h4>Heading</h4>
+        <p>Headings are defined by using <code>#</code>.
+        The largest heading is <code># Heading 1</code>,
+        then comes <code>## Heading 2</code> and so on.
+        </p>
+
+        <h4>Paragraphs</h4>
+        <p>Paragraphs are separated with a blank line.</p>
+        <pre><code>So this line, and the next line.
+Is actually the same paragraph.
+
+While this becomes a new one.</code></pre>
+
+        <h4>Bold</h4>
+        <p><strong>__These two underscores make the text bold.__</strong></p>
+
+        <h4>Italic</h4>
+        <p><em>_One underscore, and the text becomes italic._</em></p>
+
+        <h4>Blockquotes</h4>
+        <pre><code>> in front of the text gives a blockquote.
+
+> You can
+even split the text to separate lines
+and it will still be the same blockquote.</code></pre>
+
+    </div>
+
+    <div class="tab" id="lists-tab">
+        <h4>Unordered lists</h4>
+        <pre><code>* This
+* is
+* a
+* list
+    * And you can have sub-lists too
+    * by indenting them with a tab</code></pre>
+
+        <h4>Ordered lists</h4>
+        <pre><code>1. While this one...
+2. has numbers.
+1. And you don't have to know how to count.
+5. We will correct the numbers for you.
+    2. and we will
+    23. number the subsections
+    1. properly
+6. and continue with the right numbers here</code></pre>
+
+    </div>
+
+    <div class=tab id="links-and-images-tab">
+        <h4>Links</h4>
+        <pre><code>[This is a link](http://tothispage.com/)</code></pre>
+        <p>If you want to show the link URL, you can simply type:</p>
+        <pre><code>&lt;http://theurl.com/&gt;</code></pre>
+        <h4>Images</h4>
+        <pre><code>![Alt text](http://url.to/image.png)</code></pre>
+    </div>
+
+    <div class=tab id="tables-tab">
+        <p>This table markup should be quite self-explanatory.<br />
+        Unfortunately it's not well-suited for advanced table layouts, so try to keep it simple.</p>
+        <pre><code>|| <strong>__Heading 1__</strong> || <strong>__Heading 2__</strong> ||
+|| Row 1, Col 1  || Row 1, Col 2  ||
+|| Row 2, Col 1  || Row 2, Col 2  ||</code></pre>
+    </div>
+
+    <div class=tab id="math-tab">
+        <h4>Mathematical notation may be written as follows:</h4>
+        <p>Inline math uses single dollar signs, like this <code>$ y = x $</code>,  while blocks of math are indicated with double dollar signs:</p>
+        <pre><code>$$ y = 2*x $$</code></pre>
+
+        <h4>We support standard LaTeX syntax</h4>
+        <pre><code>$$ e^{ \pm i\theta } = \cos \theta \pm i\sin \theta $$</code></pre>
+        <p>This piece of code will show Euler's formula:</p>
+        <p>$$ e^{ \pm i\theta } = \cos \theta \pm i\sin \theta $$</p>
+        <p>With LaTeX you can type out formulas, matrices etc.
+            <a href="http://en.wikibooks.org/wiki/LaTeX/Mathematics" target=_blank>
+                See a full LaTeX/Math documentation here</a>.
+        </p>
+    </div>
+
+    <div class=tab id="code-tab">
+        <h4>Blocks of code</h4>
+        <pre><code>    Indent lines with four spaces (or a tab) to indicate code snippets.
+    They will render just like what you are reading now (meta!).</code></pre>
+        
+        <h4>Inline code</h4>
+        <p>Yes, you may have just short bits of code scattered around your text.
+        You get it by surround your code with a grave accent <em>(which is douche for backtick)</em>.
+        Here's an <code>`example`</code>.</p>
+    </div>
+
+</div>

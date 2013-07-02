@@ -776,7 +776,7 @@ dl,
 table,
 figure,
 hgroup {
-  margin: 0 0 14px;
+  margin: 8px 0 14px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -2180,13 +2180,17 @@ h1,h2,h3,h4,h5,h6{
 
 
 code {
+    background:#fafafa;
+    border:1px solid #eaeaea;
+    display: inline;
+    padding: 5px;
+}
+pre code {
     font-size:14px; 
     line-height: 18px;
-    background:#fafafa;
     padding:10px;
     display:block;
-    border-radius:10px;
-    border:1px solid #eaeaea;
+    border-radius:5px;
     box-shadow: -1px -1px 0px rgba(0,0,0,0.2);
     margin-bottom:20px;
     overflow:auto;
@@ -2256,7 +2260,7 @@ form .field-group.content-field {
  * SEARCHBOX
 ******************/
 
-.active{
+#suggestions .active{
     background:rgba(109,132,184,0.8);
     color:white;
 }
@@ -2313,7 +2317,7 @@ form .field-group.content-field {
     margin: .5em 0;
 }
 .help-container ul {
-    padding-left: 1em;
+    padding-left: 10px;
 }
 
 
@@ -2519,4 +2523,20 @@ input[readonly=True]{
 
 .tex2jax_ignore {
     font-family: "Consolas", "Courier", monospace;
+}
+
+/*******************
+ * TABS
+*******************/
+
+.tab-container .tab {
+    display: none;
+}
+.tab-container .tab.active {
+    display: block;
+}
+
+#help-tabs-container {
+    min-height: 300px;
+    padding: 5px 20px;
 }

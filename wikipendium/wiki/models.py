@@ -127,7 +127,13 @@ class ArticleContent(models.Model):
         sanitized_input, codeblocks = sanitizeInput(self.content)
         markdowned_text = markdown(
             sanitized_input,
-            extras=["toc", "wiki-tables"],
+            extras={
+                "toc": {},
+                "wiki-tables": {},
+                "html-classes": {
+                    'code': 'prettyprint'
+                }
+            },
             safe_mode=True)
         article = {
             'html': reconstructMath(markdowned_text, codeblocks),

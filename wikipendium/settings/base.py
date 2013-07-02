@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'registration',
+    'ignoretests',
     'south',
 
     'pytz',
@@ -164,4 +165,20 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
     'wikipendium.wiki.context_processors.google_analytics_processor',
+)
+
+
+TEST_RUNNER = "ignoretests.DjangoIgnoreTestSuiteRunner"
+IGNORE_TESTS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'registration',
+    'ignoretests',
+    'south',
+    'pytz',
 )

@@ -119,6 +119,7 @@ def edit(request, slug, lang='en'):
                             available_languages or [])
 
         return render(request, 'edit.html', {
+            "mathjax": True,
             "language_list": language_list,
             "articleContent": articleContent,
             "form": form

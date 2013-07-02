@@ -124,13 +124,13 @@ class ArticleContent(models.Model):
         return self.get_history_url() + str(self.pk)+'/'
 
     def get_html_content(self):
-        tmp = sanitizeInput(self.content)
+        sanitized_input, codeblocks = sanitizeInput(self.content)
         markdowned_text = markdown(
-            tmp[0],
+            sanitized_input,
             extras=["toc", "wiki-tables"],
             safe_mode=True)
         article = {
-            'html': reconstructMath(markdowned_text, tmp[1]),
+            'html': reconstructMath(markdowned_text, codeblocks),
             'toc': markdowned_text.toc_html
         }
         return article

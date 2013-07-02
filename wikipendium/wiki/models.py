@@ -102,7 +102,7 @@ class ArticleContent(models.Model):
         return set([ac.edited_by for ac in filtered]) | set([self.edited_by])
 
     def get_full_title(self):
-        return self.article.slug+': '+self.title
+        return self.article.slug + ': ' + self.title
 
     def get_url(self):
         lang = ""
@@ -141,4 +141,4 @@ class ArticleContent(models.Model):
         super(ArticleContent, self).save()
 
     def __unicode__(self):
-        return '['+str(self.pk)+'] '+self.title
+        return '[' + str(self.pk) + '] ' + self.title

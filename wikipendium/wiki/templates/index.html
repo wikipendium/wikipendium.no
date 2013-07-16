@@ -19,7 +19,7 @@
     <h2>Random compendiums</h2>
     <ul>
         {% for ac in random_articles %}
-            <li><a href={{ ac.get_url }}>{{ ac.get_full_title }}</a></li>
+            <li><a href={{ ac.get_absolute_url }}>{{ ac.get_full_title }}</a></li>
         {% endfor %}
     </ul>
 </div>

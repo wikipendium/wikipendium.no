@@ -64,5 +64,5 @@ class ArticleTest(TestCase):
         self.assertEquals(self.article.get_available_languages(),
                           [('English', self.ac2)])
 
-    def test_get_url(self):
-        self.assertEquals(self.article.get_url(), "/TDT4100_per")
+    def test_get_absolute_url(self):
+        self.assertEquals(self.article.get_absolute_url(), "/TDT4100_per")

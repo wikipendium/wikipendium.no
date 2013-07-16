@@ -21,8 +21,8 @@
 {% endblock %}
 
 {% block content %}
-{% if articleContent.get_url %}
-<a href={% if articleContent.pk %}{{ articleContent.get_url }}{%else%}/{%endif%} >« Back</a>
+{% if articleContent.get_absolute_url %}
+<a href={% if articleContent.pk %}{{ articleContent.get_absolute_url }}{%else%}/{%endif%} >« Back</a>
 {% endif %}
 
 <form method="post" action="">

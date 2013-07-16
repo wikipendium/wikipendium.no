@@ -2250,6 +2250,8 @@ form .field-group.content-field {
 
 .login-form,
 .register-form,
+.reset-password-form,
+.confirm-password-form,
 .change-password-form {
     width:320px;
     margin:0 auto;

@@ -15,7 +15,7 @@
     <ul class=article-all-list>
         {% for ac in complete_list %}
         <li class=clearfix>
-            <a href="{{ac.get_url}}">{{ ac.get_full_title }}</a>
+            <a href="{{ac.get_absolute_url}}">{{ ac.get_full_title }}</a>
             <p class=date>Last updated: {{ ac.updated }}</p>
         </li>
         {% endfor %}

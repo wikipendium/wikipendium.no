@@ -6,3 +6,4 @@ fabric
 pytz
 markdown2Mathjax
 django-ignoretests
+boto

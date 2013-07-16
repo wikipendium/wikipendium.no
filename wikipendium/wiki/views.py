@@ -26,7 +26,7 @@ def home(request):
 
     trie = [{
         "label": ac.get_full_title(),
-        "url": ac.get_url(),
+        "url": ac.get_absolute_url(),
         "lang": ac.lang
     } for ac in Article.get_all_newest_contents()]
 
@@ -44,14 +44,14 @@ def article(request, slug, lang="en"):
     except:
         return HttpResponseRedirect("/" + slug.upper() + "/" + lang + '/edit')
 
-    if request.path != article.get_url(lang):
-        return HttpResponseRedirect(article.get_url(lang))
+    if request.path != article.get_absolute_url(lang):
+        return HttpResponseRedirect(article.get_absolute_url(lang))
 
     contributors = articleContent.get_contributors()
 
     content = articleContent.get_html_content()
     available_languages = article.get_available_languages(articleContent)
-    language_list = map(lambda x: (x[0], x[1].get_url),
+    language_list = map(lambda x: (x[0], x[1].get_absolute_url),
                         available_languages or [])
 
     return render(request, 'article.html', {
@@ -111,7 +111,7 @@ def edit(request, slug, lang='en'):
             if articleContent.pk is not None:
                 articleContent.child = new_articleContent
                 articleContent.save(change_updated_time=False)
-            return HttpResponseRedirect(new_articleContent.get_url())
+            return HttpResponseRedirect(new_articleContent.get_absolute_url())
     else:
         form = ArticleForm(instance=articleContent)
         available_languages = article.get_available_languages(articleContent)
@@ -134,7 +134,7 @@ def history(request, slug, lang="en"):
 
     return render(request, "history.html", {
         "articleContents": articleContents,
-        "back_url": originalArticle.get_url,
+        "back_url": originalArticle.get_absolute_url,
         "article": article
     })
 
@@ -155,7 +155,7 @@ def history_single(request, slug, lang, id):
         'ac': ac,
         'next_ac': ac.child,
         'prev_ac': ac.parent,
-        'back_url': originalArticle.get_url
+        'back_url': originalArticle.get_absolute_url
     })
 
 

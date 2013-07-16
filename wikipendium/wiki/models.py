@@ -64,7 +64,7 @@ class Article(models.Model):
 
     def get_available_languages(self, current=None):
         codes = self.get_available_language_codes()
-        if current and current.lang is not None:
+        if current and current.lang is not None and current.lang in codes:
             codes.remove(current.lang)
         if codes:
             return zip(map(lambda key: LANGUAGE_NAMES[key], codes),

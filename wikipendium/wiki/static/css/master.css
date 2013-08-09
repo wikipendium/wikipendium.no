@@ -2211,7 +2211,7 @@ pre code {
     border-radius: 2px;
 }
 
-.CodeMirror pre {
+.CodeMirror-wrap.CodeMirror pre {
     white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;

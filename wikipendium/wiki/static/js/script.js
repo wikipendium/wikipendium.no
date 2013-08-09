@@ -26,11 +26,25 @@ $(function(){
         return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "markdown"), markdownMath);
     });
 
+    /* from https://github.com/marijnh/CodeMirror/issues/988#issuecomment-14921785 */
+    function betterTab(cm) {
+      if (cm.somethingSelected()) {
+        cm.indentSelection("add");
+      } else {
+        cm.replaceSelection(cm.getOption("indentWithTabs")? "\t":
+          Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+      }
+    }
+
     var textarea;
     if (textarea = document.getElementById("id_content")) {
         var codeMirror = CodeMirror.fromTextArea(textarea, {
             mode: "markdown-math",
             theme: "wikipendium",
+            indentUnit: 4,
+            extraKeys: {
+                Tab: betterTab
+            },
             lineWrapping: true
         }).on("change", function(){
             editor_has_been_updated = true;

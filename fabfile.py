@@ -51,7 +51,7 @@ DEV = Site(
 
 PROD = Site(
     dir='/home/prods/wikipendium.no/',
-    user_id='web'
+    user_id='www-data'
 )
 
 env.hosts = ['wikipendium.no']

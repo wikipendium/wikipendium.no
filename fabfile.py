@@ -101,7 +101,7 @@ def deploy():
             abort('Aborting production, at your request')
     """
 
-    # Pull on the production branch
+    PROD.backup()
     PROD.deploy()
 
     # Check if we want to tag the deployment

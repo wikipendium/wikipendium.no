@@ -22,3 +22,10 @@ GOOGLE_ANALYTICS_NAME = ''
 ACTIVATE_FAKEAUTH = "YES, I WANT TO ENABLE PASSWORDLESS LOGIN" \
                   + " FOR ALL USERS, INCLUDING SUPERUSERS"
 """
+
+# For the backup-to-s3 management command
+"""
+AWS_ID = ''
+AWS_KEY = ''
+AWS_BUCKET_NAME = ''
+"""

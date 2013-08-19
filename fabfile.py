@@ -12,6 +12,9 @@ class Site(object):
         with cd(self.dir):
             sudo(cmd, user=self.user_id)
 
+    def backup(self):
+        self.run('venv/bin/python manage.py backup-to-s3')
+
     def deploy(self):
         self.git_pull()
         self.update_packages()
@@ -98,7 +101,7 @@ def deploy():
             abort('Aborting production, at your request')
     """
 
-    # Pull on the production branch
+    PROD.backup()
     PROD.deploy()
 
     # Check if we want to tag the deployment
@@ -106,3 +109,11 @@ def deploy():
 
 def header(text):
     print ("#" * 45) + "\n# %s\n" % text + ("#" * 45)
+
+@task
+def backup():
+    """
+    Dump a full backup to S3.
+    """
+    env.user = prompt("Username on prod server:", default=getpass.getuser())
+    PROD.backup()

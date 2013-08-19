@@ -33,7 +33,7 @@ class Article(models.Model):
         return self.slug
 
     def save(self):
-        self.slug = self.slug.upper()
+        self.slug = self.slug.upper().strip()
         self.clean()
         super(Article, self).save()
 

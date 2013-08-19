@@ -44,6 +44,12 @@ class ArticleTest(TestCase):
         article.save()
         self.assertEqual(article.slug, "LOWERCASE")
 
+    def test_slug_should_strip_whitespace_when_saved(self):
+        article = Article()
+        article.slug = "   PADDED\v\t \n"
+        article.save()
+        self.assertEqual(article.slug, "PADDED")
+
     def test_slug_cannot_contain_slashes(self):
         article = Article()
         article.slug = "TDT/4100"

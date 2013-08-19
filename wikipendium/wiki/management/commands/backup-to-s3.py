@@ -9,6 +9,7 @@ import boto.s3
 from boto.s3.key import Key
 import socket
 import boto
+from wikipendium import settings
 
 
 class Command(BaseCommand):
@@ -16,10 +17,6 @@ class Command(BaseCommand):
         """
         Dumps the database to a json file, zips it and sends it to s3.
         """
-
-        if len(args) != 3:
-            print "Usage: backup-to-s3 <id> <key> <bucket name>"
-            return
 
         filename = str(time.mktime(datetime.datetime.now().timetuple())) \
             + "-" + socket.gethostname() + "-wikipendium-backup.json"
@@ -33,9 +30,13 @@ class Command(BaseCommand):
         with zipfile.ZipFile(filename_zip, 'w', zipfile.ZIP_DEFLATED) as z:
                 z.write(filename)
 
-        aws_id = args[0]
-        aws_key = args[1]
-        aws_bucket_name = args[2]
+        try:
+            aws_id = settings.AWS_ID
+            aws_key = settings.AWS_KEY
+            aws_bucket_name = settings.AWS_BUCKET_NAME
+        except:
+            print "Please configure AWS credentials in settings/local.py!"
+            return
 
         conn = boto.connect_s3(aws_id, aws_key)
         buckets = conn.get_all_buckets()

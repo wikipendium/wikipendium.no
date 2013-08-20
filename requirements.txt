@@ -1,9 +1,9 @@
 django==1.4
-django-registration
-south
-markdown2
-fabric
-pytz
-markdown2Mathjax
-django-ignoretests
-boto
+django-registration==1.0
+south==0.8.1
+markdown2==2.1.0
+fabric==1.7.0
+pytz==2013b
+markdown2Mathjax==0.3.8
+django-ignoretests==0.3.2
+boto==2.9.9

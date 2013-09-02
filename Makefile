@@ -19,3 +19,8 @@ lint:
 
 test:
 	python manage.py test
+
+setup: update migrate
+	virtualenv venv
+	source venv/bin/activate
+	cp wikipendium/settings/local.py.example wikipendium/settings/local.py

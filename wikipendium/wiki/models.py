@@ -134,7 +134,7 @@ class ArticleContent(models.Model):
                     'code': 'prettyprint'
                 }
             },
-            safe_mode=True)
+            safe_mode='escape')
         article = {
             'html': reconstructMath(markdowned_text, codeblocks),
             'toc': markdowned_text.toc_html

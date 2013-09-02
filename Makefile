@@ -20,7 +20,9 @@ lint:
 test:
 	python manage.py test
 
-setup: update migrate
+setup:
 	virtualenv venv
 	source venv/bin/activate
 	cp wikipendium/settings/local.py.example wikipendium/settings/local.py
+	make update
+	make migrate

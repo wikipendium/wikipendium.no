@@ -116,6 +116,7 @@ INSTALLED_APPS = (
     'registration',
     'ignoretests',
     'south',
+    'compressor',
 
     'pytz',
 )
@@ -180,5 +181,21 @@ IGNORE_TESTS = (
     'registration',
     'ignoretests',
     'south',
+    'compressor',
     'pytz',
 )
+
+
+# compressor
+
+STATICFILES_FINDERS += (
+    'compressor.finders.CompressorFinder',
+)
+COMPRESS_OUTPUT_DIR = 'cache'
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]

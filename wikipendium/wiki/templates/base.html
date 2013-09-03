@@ -11,8 +11,6 @@
 
     <title>{% block title %}{% endblock %} Wikipendium</title>
 
-    <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js></script>
-
     {% compress css %}
     <link rel=stylesheet href={{STATIC_URL}}css/master.css />
     <link rel=stylesheet href={{STATIC_URL}}codemirror/codemirror.css />
@@ -20,6 +18,9 @@
     <link href="{{STATIC_URL}}google-code-prettify/prettify.css" rel="stylesheet" />
     <link rel=stylesheet href={{STATIC_URL}}chosen/chosen.min.css />
     {% endcompress %}
+
+    <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js></script>
+
     {% compress js %}
     <script src={{STATIC_URL}}js/bootstrap.min.js></script>
     <script src={{STATIC_URL}}codemirror/codemirror.min.js></script>

@@ -26,6 +26,8 @@ Then simply:
 git clone git@github.com:stianjensen/wikipendium.no.git
 cd wikipendium.no
 make setup
+source venv/bin/activate
+make
 ```
 
 When you've pulled updates, you can run `make` to udpate dependencies and migrate the database.

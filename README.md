@@ -25,11 +25,10 @@ Then simply:
 ```
 git clone git@github.com:stianjensen/wikipendium.no.git
 cd wikipendium.no
-virtualenv venv
-source venv/bin/virtualenv
-cp wikipendium/settings/local.py.example wikipendium/settings/local.py
-make
+make setup
 ```
+
+When you've pulled updates, you can run `make` to udpate dependencies and migrate the database.
 
 ## Coding style
 

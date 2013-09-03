@@ -1,3 +1,5 @@
+{% load compress %}
+
 <!DOCTYPE html>
 <html>
 
@@ -10,16 +12,21 @@
     <title>{% block title %}{% endblock %} Wikipendium</title>
 
     <script src=//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js></script>
+
+    {% compress css %}
     <link rel=stylesheet href={{STATIC_URL}}css/master.css />
     <link rel=stylesheet href={{STATIC_URL}}codemirror/codemirror.css />
     <link rel=stylesheet href={{STATIC_URL}}codemirror/wikipendium.css />
+    <link href="{{STATIC_URL}}google-code-prettify/prettify.css" rel="stylesheet" />
+    <link rel=stylesheet href={{STATIC_URL}}chosen/chosen.min.css />
+    {% endcompress %}
+    {% compress js %}
     <script src={{STATIC_URL}}js/bootstrap.min.js></script>
     <script src={{STATIC_URL}}codemirror/codemirror.min.js></script>
-    <link href="{{STATIC_URL}}google-code-prettify/prettify.css" rel="stylesheet" />
     <script src="{{STATIC_URL}}google-code-prettify/prettify.js"></script>
-    <link rel=stylesheet href={{STATIC_URL}}chosen/chosen.min.css />
     <script src="{{STATIC_URL}}chosen/chosen.jquery.min.js"></script>
     <script src={{STATIC_URL}}js/script.js></script>
+    {% endcompress %}
 
     <link rel="apple-touch-icon" href="{{STATIC_URL}}apple-touch/icon-57x57.png" />
     <link rel="apple-touch-icon" href="{{STATIC_URL}}apple-touch/icon-72x72.png" sizes="72x72" />

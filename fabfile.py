@@ -2,6 +2,7 @@ import time
 import getpass
 from fabric.api import *
 from fabric.contrib.console import confirm
+import subprocess
 
 class Site(object):
 
@@ -91,15 +92,20 @@ def clone_prod_data():
 def deploy():
     """
     """
+    # mac-only command, just for fun
+    try:
+        subprocess.call(['say', '"Ship! Ship! Ship!"'])
+    except:
+        pass
+    print "ship! ship! ship!"
+
     env.user = prompt("Username on prod server:", default=getpass.getuser())
 
     # Check if we first want to test on dev
-    """
     if confirm("Test on DEV first?"):
         DEV.deploy()
         if not confirm("Deploy to staging done. Continue with deploy to production?"):
             abort('Aborting production, at your request')
-    """
 
     PROD.backup()
     PROD.deploy()

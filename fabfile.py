@@ -46,13 +46,6 @@ class Site(object):
         header("Running: Restart server script: uwsgi")
         run("sudo service uwsgi restart")
 
-"""
-DEV = Site(
-    dir='',
-    user_id=''
-)
-"""
-
 PROD = Site(
     dir='/home/prods/wikipendium.no/',
     user_id='www-data'
@@ -100,12 +93,6 @@ def deploy():
     print "ship! ship! ship!"
 
     env.user = prompt("Username on prod server:", default=getpass.getuser())
-
-    # Check if we first want to test on dev
-    if confirm("Test on DEV first?"):
-        DEV.deploy()
-        if not confirm("Deploy to staging done. Continue with deploy to production?"):
-            abort('Aborting production, at your request')
 
     PROD.backup()
     PROD.deploy()

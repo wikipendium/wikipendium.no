@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load extras %}
+
+{% block title %}This article is not available in this language -{% endblock %}
+
+{% block body_class %}article{% endblock %}
+
+{% block content %}
+<div id=article class=serif>
+    <div class=no-article>
+        {% if language_does_not_exist %}
+            <h1>This language does not exist.</h1>
+        {% else %}
+            <h1>This article is not available in {{ language_name }}.</h1>
+            <h2><a href="{{ create_url }}">Create it?</a></h2>
+        {% endif %}
+    </div>
+
+    <h2>Or read it in:</h2>
+    <ul class=no-list>
+    {% for language_name, url in available_languages %}
+        <li>
+            <a href="{{ url }}">{{ language_name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

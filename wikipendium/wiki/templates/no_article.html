@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load extras %}
+
+{% block title %}This article does not exist -{% endblock %}
+
+{% block body_class %}article{% endblock %}
+
+{% block content %}
+<div id=article class=serif>
+    <div class=no-article>
+        <h1>An article with the slug {{ slug }} does not exist.</h1>
+        <h2><a href="{{ create_url }}">Create it?</a></h2>
+    </div>
+</div>
+
+{% endblock %}

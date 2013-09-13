@@ -4,6 +4,7 @@ from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import ArticleForm
+from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from django.contrib.auth.models import User
 import diff
 import urllib
@@ -40,9 +41,12 @@ def article(request, slug, lang="en"):
 
     try:
         article = Article.objects.get(slug=slug.upper())
-        articleContent = article.get_newest_content(lang)
     except:
-        return HttpResponseRedirect("/" + slug.upper() + "/" + lang + '/edit')
+        return no_article(request, slug.upper(), lang)
+
+    articleContent = article.get_newest_content(lang)
+    if articleContent is None:
+        return missing_language(request, article, lang)
 
     if request.path != article.get_absolute_url(lang):
         return HttpResponseRedirect(article.get_absolute_url(lang))
@@ -64,6 +68,36 @@ def article(request, slug, lang="en"):
         'contributors': contributors,
         "share_url": "http://" + request.META['HTTP_HOST'] +
         request.get_full_path(),
+    })
+
+
+def no_article(request, slug, lang="en"):
+    create_url = "/" + slug + "/" + lang + "/edit/"
+    return render(request, 'no_article.html', {
+        "slug": slug,
+        "create_url": create_url,
+    })
+
+
+def missing_language(request, article, lang="en"):
+    language_name = ""
+    language_does_not_exist = False
+    create_url = "/" + article.get_slug() + "/" + lang + "/edit/"
+
+    if lang in LANGUAGE_NAMES:
+        language_name = LANGUAGE_NAMES[lang].lower()
+    else:
+        language_does_not_exist = True
+
+    available_languages = article.get_available_languages()
+    language_list = map(lambda x: (x[0], x[1].get_absolute_url),
+                        available_languages or [])
+
+    return render(request, 'missing_language.html', {
+        "create_url": create_url,
+        "language_name": language_name,
+        "available_languages": language_list,
+        "language_does_not_exist": language_does_not_exist,
     })
 
 

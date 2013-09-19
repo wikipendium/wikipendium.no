@@ -72,7 +72,7 @@ def article(request, slug, lang="en"):
 
 
 def no_article(request, slug, lang="en"):
-    create_url = "/" + slug + "/" + lang + "/edit/"
+    create_url = "/" + slug + "/add_language/"
     return render(request, 'no_article.html', {
         "slug": slug,
         "create_url": create_url,

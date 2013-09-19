@@ -76,6 +76,9 @@ class Article(models.Model):
             return newest_content.get_absolute_url()
         return "/" + self.slug + "/" + lang + "/edit/"
 
+    def get_slug(self):
+        return self.slug.upper()
+
 
 class ArticleContent(models.Model):
     article = models.ForeignKey('Article')

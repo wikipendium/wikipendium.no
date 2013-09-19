@@ -2196,6 +2196,22 @@ pre code {
     overflow:auto;
 }
 
+/******************
+ * NO ARTICLE
+******************/
+
+#article .no-article {
+    text-align: center;
+    font-style: italic;
+}
+.no-article h2 a {
+    color: #069;
+}
+ul.no-list {
+    list-style-type: none;
+    padding: 0;
+}
+
 
 /******************
  * CODEMIRROR

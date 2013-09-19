@@ -2,7 +2,7 @@
 
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from django.views.generic.simple import redirect_to
+from django.views.generic import RedirectView
 
 admin.autodiscover()
 
@@ -16,7 +16,9 @@ urlpatterns = patterns(
     url(r'^new/$', 'wikipendium.wiki.views.new', name='newarticle'),
     url(r'^all/$', 'wikipendium.wiki.views.all_articles', name='allarticles'),
 
-    url(r'^(?P<x>' + slug_regex + '[^/]*)/$', redirect_to, {'url': '/%(x)s'}),
+    url(r'^(?P<x>' + slug_regex + '[^/]*)/$',
+        RedirectView.as_view(url='/%(x)s')),
+
     url(r'^(?P<slug>' + slug_regex + ')[^/]*$',
         'wikipendium.wiki.views.article'),
     url(r'^(?P<slug>' + slug_regex + ')[^/]*/edit/$',

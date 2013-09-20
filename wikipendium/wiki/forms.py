@@ -22,6 +22,10 @@ class ArticleForm(ModelForm):
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
         self.fields['pk'].widget.attrs['value'] = 0
+        self.fields['lang'].widget.attrs = {
+            'class': "select_chosen",
+            'data-placeholder': "Language"
+        }
 
         try:
             if self.instance.article:
@@ -42,11 +46,6 @@ class ArticleForm(ModelForm):
                     self.fields['lang'].widget = forms.TextInput(attrs={
                         'readonly': True
                     })
-                else:
-                    self.fields['lang'].widget.attrs = {
-                        'class': "select_chosen",
-                        'data-placeholder': "Language"
-                    }
         except:
             pass
 
@@ -55,7 +54,8 @@ class ArticleForm(ModelForm):
 
     def clean(self):
         super(ArticleForm, self)
-        self.merge_contents_if_needed()
+        if 'slug' in self.cleaned_data and 'lang' in self.cleaned_data:
+            self.merge_contents_if_needed()
         return self.cleaned_data
 
     def merge_contents_if_needed(self):

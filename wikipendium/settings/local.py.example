@@ -29,3 +29,9 @@ AWS_ID = ''
 AWS_KEY = ''
 AWS_BUCKET_NAME = ''
 """
+
+# For newrelic integration
+"""
+import newrelic.agent
+newrelic.agent.initialize('/home/prods/wikipendium.no/wikipendium/settings/newrelic.ini')
+"""

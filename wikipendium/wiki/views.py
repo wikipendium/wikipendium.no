@@ -148,16 +148,17 @@ def edit(request, slug, lang='en'):
             return HttpResponseRedirect(new_articleContent.get_absolute_url())
     else:
         form = ArticleForm(instance=articleContent)
-        available_languages = article.get_available_languages(articleContent)
-        language_list = map(lambda x: (x[0], x[1].get_edit_url),
-                            available_languages or [])
 
-        return render(request, 'edit.html', {
-            "mathjax": True,
-            "language_list": language_list,
-            "articleContent": articleContent,
-            "form": form
-        })
+    available_languages = article.get_available_languages(articleContent)
+    language_list = map(lambda x: (x[0], x[1].get_edit_url),
+                        available_languages or [])
+
+    return render(request, 'edit.html', {
+        "mathjax": True,
+        "language_list": language_list,
+        "articleContent": articleContent,
+        "form": form
+    })
 
 
 def history(request, slug, lang="en"):

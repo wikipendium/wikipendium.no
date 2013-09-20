@@ -128,6 +128,8 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
+EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+DEFAULT_FROM_EMAIL = 'post@wikipendium.no'
 
 
 # A sample logging configuration. The only tangible logging

@@ -7,4 +7,4 @@ pytz==2013d
 markdown2Mathjax==0.3.8
 django-ignoretests==0.3.2
 boto==2.9.9
-django-mailgun=0.2.2
+django-mailgun==0.2.2

@@ -2261,6 +2261,9 @@ form .fields.title-field input {
     font-size: 1.4em;
     font-weight: bold;
 }
+form .fields.error {
+    margin-bottom: 25px;
+}
 
 form .field-group.content-field {
     clear: both;

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import Article, ArticleContent
@@ -194,7 +194,11 @@ def history_single(request, slug, lang, id):
 
 
 def user(request, username):
-    user = User.objects.get(username=username)
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        raise Http404
+
     contributions = ArticleContent.objects.filter(
         edited_by=user).order_by('-updated')
 

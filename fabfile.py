@@ -41,10 +41,7 @@ class Site(object):
     def restart(self):
         #header("Running: Restart server script: %s" % self.gunicorn)
         #run("sudo /etc/init.d/%s restart" % self.gunicorn)
-        header("Running: Restart server script: nginx")
-        run("sudo service nginx restart")
-        header("Running: Restart server script: uwsgi")
-        run("sudo service uwsgi restart")
+        run("touch wikipendium_uswgi.ini")
 
 PROD = Site(
     dir='/home/prods/wikipendium.no/',

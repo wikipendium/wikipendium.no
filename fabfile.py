@@ -104,6 +104,10 @@ def header(text):
     print ("#" * 45) + "\n# %s\n" % text + ("#" * 45)
 
 @task
+def restart():
+    PROD.restart()
+
+@task
 def backup():
     """
     Dump a full backup to S3.

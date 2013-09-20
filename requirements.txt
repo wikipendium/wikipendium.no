@@ -8,3 +8,4 @@ markdown2Mathjax==0.3.8
 django-ignoretests==0.3.2
 boto==2.9.9
 newrelic==2.0.0.1
+django-mailgun==0.2.2

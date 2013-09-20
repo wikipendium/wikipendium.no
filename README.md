@@ -34,6 +34,16 @@ When you've pulled updates, you can run `make` to udpate dependencies and migrat
 
 If you want newrelic reporting in prod, `cp wikipendium/settings/newrelic.ini.example wikipendium/settings/newrelic.ini`, and put the proper newrelic licence key in the .ini file.
 
+#### E-mail sending
+
+Some parts of wikipendium (such as password recovery) relies on e-mail sending.
+For this to work, mailgun needs to be set up on the prod server.
+
+```
+MAILGUN_ACCESS_KEY = 'ACCESS-KEY'
+MAILGUN_SERVER_NAME = 'SERVER-NAME'
+```
+
 ## Coding style
 
 Wikipendium uses Flake8.

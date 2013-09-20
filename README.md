@@ -32,6 +32,8 @@ make
 
 When you've pulled updates, you can run `make` to udpate dependencies and migrate the database.
 
+If you want newrelic reporting in prod, `cp wikipendium/settings/newrelic.ini.example wikipendium/settings/newrelic.ini`, and put the proper newrelic licence key in the .ini file.
+
 ## Coding style
 
 Wikipendium uses Flake8.

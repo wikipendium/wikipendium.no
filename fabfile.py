@@ -29,11 +29,11 @@ class Site(object):
         self.run("git fetch origin && git reset --hard origin/master")
 
     def git_tag(self):
-        if confirm("Give new tag for this deployment?"):
-            self.run("git tag |tail -n 5")
-            tag = prompt('Give new tag for this deployment: ')
-            self.run("git tag %s" % tag)
-            self.run("git push --tags && git push")
+        if not confirm("Give new tag for this deployment?"):
+            if confirm("Are you sure?", default=False):
+                return
+        self.run("git tag | sort -g | tail -n 1 | sed s/$/+1/ | bc | xargs git tag")
+        self.run("git push --tags && git push")
 
     def update_packages(self):
         self.run("./venv/bin/pip install -r requirements.txt")

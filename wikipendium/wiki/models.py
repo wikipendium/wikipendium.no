@@ -138,9 +138,14 @@ class ArticleContent(models.Model):
                 }
             },
             safe_mode='escape')
+        if markdowned_text.toc_html is not None:
+            toc = reconstructMath(markdowned_text.toc_html, codeblocks)
+        else:
+            toc = ""
+
         article = {
             'html': reconstructMath(markdowned_text, codeblocks),
-            'toc': markdowned_text.toc_html
+            'toc': toc,
         }
         return article
 

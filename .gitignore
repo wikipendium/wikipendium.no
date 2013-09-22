@@ -11,4 +11,4 @@ wikipendium/settings/local.py
 .gitignore
 .*.sw*
 venv/*
-static/cache/*
+static/*

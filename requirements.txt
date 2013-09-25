@@ -1,7 +1,7 @@
 django==1.5.4
 django-registration==1.0
 south==0.8.2
--e git://github.com/sigvef/Python-Markdown.git#egg=markdown
+git+git://github.com/sigvef/Python-Markdown.git#egg=markdown
 fabric==1.7.0
 pytz==2013d
 django-ignoretests==0.3.2

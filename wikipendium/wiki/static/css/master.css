@@ -2195,6 +2195,14 @@ pre code {
     overflow:auto;
 }
 
+.edit-section-button {
+    position:absolute;
+    font-family: sans-serif;
+    margin-left: -60px;
+    margin-right: 0;
+    opacity: 0;
+}
+
 /******************
  * NO ARTICLE
 ******************/

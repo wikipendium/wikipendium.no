@@ -2,9 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import datetime
-from markdown2 import markdown
-from markdown2Mathjax import sanitizeInput, reconstructMath
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
+from markdown import Markdown
 
 
 class Article(models.Model):
@@ -127,20 +126,17 @@ class ArticleContent(models.Model):
         return self.get_history_url() + str(self.pk)+'/'
 
     def get_html_content(self):
-        sanitized_input, codeblocks = sanitizeInput(self.content)
-        markdowned_text = markdown(
-            sanitized_input,
-            extras={
-                "toc": {},
-                "wiki-tables": {},
-                "html-classes": {
-                    'code': 'prettyprint'
-                }
-            },
-            safe_mode='escape')
+        md = Markdown(extensions=[
+            'toc',
+            'tables',
+            ],
+            output_format='html5',
+            safe_mode='replace'
+        )
+        markdowned_text = md.convert(self.content)
         article = {
-            'html': reconstructMath(markdowned_text, codeblocks),
-            'toc': markdowned_text.toc_html
+            'html': markdowned_text,
+            'toc': md.toc,
         }
         return article
 

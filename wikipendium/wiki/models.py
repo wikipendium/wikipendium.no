@@ -131,7 +131,7 @@ class ArticleContent(models.Model):
             'tables',
             ],
             output_format='html5',
-            safe_mode='replace'
+            safe_mode='escape'
         )
         markdowned_text = md.convert(self.content)
         article = {

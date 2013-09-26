@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 import datetime
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from markdown import Markdown
+from markdown_wikitables import WikiTableExtension
 
 
 class Article(models.Model):
@@ -126,9 +127,10 @@ class ArticleContent(models.Model):
         return self.get_history_url() + str(self.pk)+'/'
 
     def get_html_content(self):
+        wikitables = WikiTableExtension()
         md = Markdown(extensions=[
             'toc',
-            'tables',
+            wikitables,
             ],
             output_format='html5',
             safe_mode='escape'

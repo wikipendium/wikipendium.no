@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """
 Wikitables extension for Python-Markdown
 ========================================

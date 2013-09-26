@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 import datetime
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from markdown import Markdown
-from markdown_wikitables import WikiTableExtension
+from .markdown_extra.markdown_wikitables import WikiTableExtension
 
 
 class Article(models.Model):

@@ -130,6 +130,7 @@ class ArticleContent(models.Model):
         wikitables = WikiTableExtension()
         md = Markdown(extensions=[
             'toc',
+            'outline',
             wikitables,
             ],
             output_format='html5',

@@ -107,7 +107,7 @@ $(function(){
         var semaphor = 0;
         function show(){ semaphor++, a.css('opacity', 1); }
         function hide(){ setTimeout(function(){--semaphor || a.css('opacity', 0);}, 300); }
-        $(a, el).hover(show, hide);
+        $(a).hover(show, hide);
         $(el).hover(show, hide);
     });
 });

@@ -8,9 +8,6 @@ Wikitables extension for Python-Markdown
 || Row 2, col 1 || Row 2, col 2 ||
 
 Based on wiki_tables extra in python-markdown2
-
-Ninjadev - Stian Jensen
-
 """
 
 

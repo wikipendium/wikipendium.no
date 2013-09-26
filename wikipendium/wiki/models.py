@@ -128,10 +128,11 @@ class ArticleContent(models.Model):
 
     def get_html_content(self):
         wikitables = WikiTableExtension()
-        md = Markdown(extensions=[
-            'toc',
-            'outline',
-            wikitables,
+        md = Markdown(
+            extensions=[
+                'toc',
+                'outline',
+                wikitables,
             ],
             output_format='html5',
             safe_mode='escape'

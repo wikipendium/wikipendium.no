@@ -2,6 +2,7 @@ $(function(){
 
     var editor_has_been_updated = false;
 
+    $('code').addClass('prettyprint');
     prettyPrint();
 
     CodeMirror.defineMode("markdown-math", function(config, parserConfig) {
@@ -46,9 +47,20 @@ $(function(){
                 Tab: betterTab
             },
             lineWrapping: true
-        }).on("change", function(){
+        })
+
+        codeMirror.on("change", function(){
             editor_has_been_updated = true;
         });
+
+        !function(){
+            var line_number = window.location.hash && +window.location.hash.substring(1);
+            if(line_number){
+                /* scroll to bottom first, so that the line we want will appear in the top of the window */
+                codeMirror.doc.setCursor(1e1000);
+                codeMirror.doc.setCursor(line_number - 1);
+            }
+        }();
 
         $('form').submit(function(){
             // Allow form to submit without being bugged about unsaved changes
@@ -86,6 +98,18 @@ $(function(){
         $('.tab-container .tab').removeClass('active');
         var tabId = $(this).attr('href');
         $(tabId).addClass('active');
+    });
+
+    $('[data-source-line-number]').each(function(i, el){
+        var a = $('<a class="edit-section-button button">Edit</a>');
+        a.attr('href',window.location.pathname + '/edit#' + $(el).attr('data-source-line-number'));
+        $(el).prepend(a);
+
+        var semaphor = 0;
+        function show(){ semaphor++, a.css('opacity', 1); }
+        function hide(){ setTimeout(function(){--semaphor || a.css('opacity', 0);}, 300); }
+        $(a).hover(show, hide);
+        $(el).hover(show, hide);
     });
 });
 

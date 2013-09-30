@@ -2143,40 +2143,40 @@ body.frontpage:before {
     line-height: 1.55em;
 }
 
-h1{margin:-30px 0 20px;}
-h2{margin:-48px 0 8px;}
-h3{margin:-48px 0 8px;}
-h4{margin:-48px 0 8px;}
-h5{margin:-48px 0 8px;}
-h6{margin:-48px 0 8px;}
+#article section {
+    padding-top: 70px;
+    margin-top: -50px;
+}
 
 h1,h2,h3,h4,h5,h6{
     font-weight:bold;
-    padding-top: 70px;
+    margin: 0 0 8px;
 }
+h1{margin-bottom: 20px;}
+
 
 #article .title{
-    margin-bottom:20px;
+    margin: 30px 0 20px;
     text-align: left;
 }
 
-#toc {
+.toc {
     padding: .5em;
     margin: 20px 0;
     font-size: .9em;
     line-height: 1.4;
 }
-#toc h3 {
+.toc h3 {
     margin: .5em 0;
 }
-#toc > ol {
+.toc > ol {
     list-style-type: decimal;
     margin-left: 1.5em;
 }
-#toc ol ol {list-style-type: upper-roman;}
-#toc ol ol ol {list-style-type: lower-roman;}
-#toc ol ol ol ol {list-style-type: lower-latin;}
-#toc ol ol ol ol ol {list-style-type: lower-greek;}
+.toc ol ol {list-style-type: upper-roman;}
+.toc ol ol ol {list-style-type: lower-roman;}
+.toc ol ol ol ol {list-style-type: lower-latin;}
+.toc ol ol ol ol ol {list-style-type: lower-greek;}
 
 
 code {
@@ -2194,6 +2194,15 @@ pre code {
     box-shadow: -1px -1px 0px rgba(0,0,0,0.2);
     margin-bottom:20px;
     overflow:auto;
+}
+
+.edit-section-button {
+    position:absolute;
+    font-family: sans-serif;
+    margin-left: -60px;
+    margin-right: 0;
+    opacity: 0;
+    letter-spacing: 0;
 }
 
 /******************

@@ -61,8 +61,7 @@ def article(request, slug, lang="en"):
     return render(request, 'article.html', {
         "mathjax": True,
         "content": content['html'],
-        "toc": (content['toc'] or "").replace(
-            '<ul>', '<ol>').replace('</ul>', '</ol>'),
+        "toc": content['toc'],
         "articleContent": articleContent,
         "language_list": language_list,
         'contributors': contributors,

@@ -41,7 +41,7 @@ class Site(object):
     def restart(self):
         #header("Running: Restart server script: %s" % self.gunicorn)
         #run("sudo /etc/init.d/%s restart" % self.gunicorn)
-        run("touch wikipendium_uswgi.ini")
+        self.run("touch wikipendium_uswgi.ini")
 
 PROD = Site(
     dir='/home/prods/wikipendium.no/',

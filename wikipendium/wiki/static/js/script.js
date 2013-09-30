@@ -2,6 +2,7 @@ $(function(){
 
     var editor_has_been_updated = false;
 
+    $('code').addClass('prettyprint');
     prettyPrint();
 
     CodeMirror.defineMode("markdown-math", function(config, parserConfig) {

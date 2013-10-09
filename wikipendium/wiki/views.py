@@ -173,7 +173,7 @@ def history(request, slug, lang="en"):
     })
 
 
-def history_single(request, slug, lang, id):
+def history_single(request, slug, lang="en", id=None):
     article = Article.objects.get(slug=slug)
 
     ac = ArticleContent.objects.get(id=id)

@@ -24,7 +24,7 @@ GOOGLE_ANALYTICS_NAME = ''
 """
 AWS_ID = ''
 AWS_KEY = ''
-AWS_BUCKET_NAME = ''
+AWS_BACKUP_BUCKET_NAME = ''
 """
 
 # For newrelic integration

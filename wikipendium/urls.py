@@ -16,10 +16,10 @@ article_patterns = patterns(
     url(r'^history/(?P<id>\d+)/$', 'history_single'),
 )
 
-
 urlpatterns = patterns(
     'wikipendium.wiki.views',
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^upload/', include('wikipendium.upload.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^$', 'home', name='home'),
     url(r'^new/$', 'new', name='newarticle'),

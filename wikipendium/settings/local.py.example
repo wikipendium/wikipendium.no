@@ -29,7 +29,7 @@ ACTIVATE_FAKEAUTH = "YES, I WANT TO ENABLE PASSWORDLESS LOGIN" \
 """
 AWS_ID = ''
 AWS_KEY = ''
-AWS_BUCKET_NAME = ''
+AWS_BACKUP_BUCKET_NAME = ''
 """
 
 # For newrelic integration

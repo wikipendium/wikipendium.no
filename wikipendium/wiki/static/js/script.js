@@ -53,6 +53,20 @@ $(function(){
             editor_has_been_updated = true;
         });
 
+        inlineAttach.attachToCodeMirror(codeMirror, {
+            uploadUrl: '/upload/',
+            uploadFieldName: 'image',
+            downloadFieldName: 'image',
+            allowedTypes: [
+                'image/jpeg',
+                'image/png',
+                'image/jpg',
+                'image/gif'
+            ],
+            progressText: '![Uploading file...]()',
+            urlText: "![image]({filename})",
+        });
+
         !function(){
             var line_number = window.location.hash && +window.location.hash.substring(1);
             if(line_number){

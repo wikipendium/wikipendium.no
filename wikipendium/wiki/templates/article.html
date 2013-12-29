@@ -10,13 +10,6 @@
 {% language_chooser language_list articleContent %}
 <div class=button-group style=inline-block>
     <a class="button edit-link" href={{ articleContent.get_edit_url }}>Edit</a>
-    <div class="has-dropdown button-dropdown">
-        <a class="button share-link" href=# data-toggle=dropdown>Share<span class=caret></span></a>
-        <ul class="dropdown">
-            <li><a href="http://www.facebook.com/sharer.php?u={{ share_url }}&t={{ articleContent.get_full_title }}" target=_blank>Facebook</a></li>
-            <li><a href="http://www.twitter.com/share?url={{ share_url }}" target=_blank>Twitter</a></li>
-        </ul>
-    </div>
     <a class="button history-link" href={{ articleContent.get_history_url }}>History</a>
 </div>
 {% endblock %}

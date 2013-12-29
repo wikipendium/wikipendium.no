@@ -21,7 +21,7 @@ urlpatterns = patterns(
     'wikipendium.wiki.views',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^$', 'home', name='home'),
+    url(r'^$', include('wikipendium.allsearch.urls')),
     url(r'^new/$', 'new', name='newarticle'),
     url(r'^all/$', 'all_articles', name='allarticles'),
 

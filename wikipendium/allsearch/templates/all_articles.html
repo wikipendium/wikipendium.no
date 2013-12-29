@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block body_class %}{% endblock %}
+
+{% block nav %}
+<a class=button href=/new/>Create article</a>
+{% endblock %}
+
+{% block content %}
+
+<script src={{ STATIC_URL }}js/allsearchfilter.js></script>
+
+<input id=searchbox type=text placeholder="find a compendium...">
+
+<div class=all-articles>
+    <h1>All compendiums</h1>
+    <ul id=all-list><ul>
+</div>
+
+<script>
+    var trie = {{ trie|safe }};
+    $('#searchbox').allsearchfilter(trie);
+</script>
+{% endblock %}

@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
-from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import ArticleForm
@@ -9,32 +8,6 @@ from django.contrib.auth.models import User
 import diff
 import urllib
 import hashlib
-import random
-
-
-def all_articles(request):
-    return render(request, 'all.html', {
-        'complete_list': Article.get_all_newest_contents()
-    })
-
-
-def home(request):
-
-    rand_articles = filter(
-        lambda x: x,
-        [a.get_newest_content() for a in Article.objects.all()])
-    random.shuffle(rand_articles)
-
-    trie = [{
-        "label": ac.get_full_title(),
-        "url": ac.get_absolute_url(),
-        "lang": ac.lang
-    } for ac in Article.get_all_newest_contents()]
-
-    return render(request, 'index.html', {
-        "trie": simplejson.dumps(trie),
-        'random_articles': rand_articles[:6]
-    })
 
 
 def article(request, slug, lang="en"):

@@ -1,0 +1,23 @@
+.all-articles {
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+}
+
+.all-articles li {
+    padding: 2em;
+    border: 1px solid #ccc;
+    margin-bottom: .7em;
+    margin-right: 1%;
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+    background: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.title {
+    margin-top: 100px;
+}

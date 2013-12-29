@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
-{% block body_class %}{% endblock %}
+{% block body_class %}frontpage{% endblock %}
+{% block logo %}{% endblock %}
+
+{% block css %}
+<link rel=stylesheet href={{ STATIC_URL }}css/allsearch.css>
+{% endblock %}
 
 {% block nav %}
 <a class=button href=/new/>Create article</a>
@@ -13,7 +18,7 @@
 <input id=searchbox type=text placeholder="find a compendium...">
 
 <div class=all-articles>
-    <h1>All compendiums</h1>
+    <h1 class=title>All compendiums</h1>
     <ul id=all-list><ul>
 </div>
 

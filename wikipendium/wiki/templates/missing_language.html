@@ -9,9 +9,9 @@
 <div id=article class=serif>
     <div class=no-article>
         {% if language_does_not_exist %}
-            <h1>This language does not exist.</h1>
+            <h1 class=title>This language does not exist.</h1>
         {% else %}
-            <h1>This article is not available in {{ language_name }}.</h1>
+            <h1 class=title>This article is not available in {{ language_name }}.</h1>
             <h2><a href="{{ create_url }}">Create it?</a></h2>
         {% endif %}
     </div>

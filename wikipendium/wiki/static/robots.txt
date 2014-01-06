@@ -1,2 +1,5 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /*/history/
+Disallow: /*/edit/
+Disallow: /*/add_language/

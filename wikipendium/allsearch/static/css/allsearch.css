@@ -1,0 +1,29 @@
+.all-articles {
+    margin-top: 100px;
+}
+
+#all-list {
+    list-style-type: none;
+    margin:0;
+    padding: 0;
+}
+
+#all-list li {
+    padding: 2em;
+    border: 1px solid #ccc;
+    margin-bottom: .7em;
+    margin-right: 1%;
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+    background: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 320px) {
+    #all-list li {
+        width: 100%;
+    }
+}

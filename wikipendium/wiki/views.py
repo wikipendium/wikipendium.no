@@ -174,7 +174,10 @@ def history(request, slug, lang="en"):
 
 
 def history_single(request, slug, lang="en", id=None):
-    article = Article.objects.get(slug=slug)
+    try:
+        article = Article.objects.get(slug=slug)
+    except:
+        return no_article(request, slug.upper(), lang)
 
     ac = ArticleContent.objects.get(id=id)
 

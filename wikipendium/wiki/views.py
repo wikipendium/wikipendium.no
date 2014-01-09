@@ -9,7 +9,6 @@ from django.contrib.auth.models import User
 import diff
 import urllib
 import hashlib
-import random
 
 
 def all_articles(request):
@@ -20,20 +19,20 @@ def all_articles(request):
 
 def home(request):
 
-    rand_articles = filter(
-        lambda x: x,
-        [a.get_newest_content() for a in Article.objects.all()])
-    random.shuffle(rand_articles)
+    all_newest_contents = Article.get_all_newest_contents()
+
+    recent_articles = list(reversed(sorted(all_newest_contents,
+                                           key=lambda ac: ac.updated)))[:6]
 
     trie = [{
         "label": ac.get_full_title(),
         "url": ac.get_absolute_url(),
         "lang": ac.lang
-    } for ac in Article.get_all_newest_contents()]
+    } for ac in all_newest_contents]
 
     return render(request, 'index.html', {
         "trie": simplejson.dumps(trie),
-        'random_articles': rand_articles[:6]
+        'recent_articles': recent_articles
     })
 
 

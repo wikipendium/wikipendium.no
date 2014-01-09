@@ -161,7 +161,11 @@ def edit(request, slug, lang='en'):
 
 
 def history(request, slug, lang="en"):
-    article = Article.objects.get(slug=slug)
+    try:
+        article = Article.objects.get(slug=slug)
+    except:
+        return no_article(request, slug.upper(), lang)
+
     articleContents = article.get_sorted_contents(lang=lang)
 
     originalArticle = article.get_newest_content(lang=lang)

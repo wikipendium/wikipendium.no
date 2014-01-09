@@ -2358,14 +2358,14 @@ form .field-group.content-field {
 
 
 /********************
- * POPULAR-ARTICLES
+ * RECENTLY-UPDATED-ARTICLES
 ********************/
 
-.random-articles{
+.recently-updated-articles{
     margin-top:100px;
 }
 
-.random-articles ul li{
+.recently-updated-articles ul li{
     list-style-type:none; 
     display:inline-block;
     width:32%;

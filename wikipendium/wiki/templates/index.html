@@ -15,10 +15,10 @@
 
 <input id=searchbox type=text placeholder="find a compendium..." />
 
-<div class="random-articles serif">
-    <h2>Random compendiums</h2>
+<div class="recently-updated-articles serif">
+    <h2>Recently updated compendiums</h2>
     <ul>
-        {% for ac in random_articles %}
+        {% for ac in recent_articles %}
             <li><a href={{ ac.get_absolute_url }}>{{ ac.get_full_title }}</a></li>
         {% endfor %}
     </ul>

@@ -35,5 +35,5 @@ AWS_BUCKET_NAME = ''
 # For newrelic integration
 """
 import newrelic.agent
-newrelic.agent.initialize('/home/prods/wikipendium.no/wikipendium/settings/newrelic.ini')
+newrelic.agent.initialize('/home/wikipendium-web/wikipendium.no/wikipendium/settings/newrelic.ini')
 """

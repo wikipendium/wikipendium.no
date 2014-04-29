@@ -1,4 +1,4 @@
-django==1.5.5
+django==1.6.4
 django-registration==1.0
 south==0.8.2
 git+git://github.com/sigvef/Python-Markdown.git#egg=markdown
@@ -6,7 +6,7 @@ git+git://github.com/sigvef/python-markdown-mathjax.git#egg=mdx_mathjax
 git+git://github.com/stianjensen/mdx_outline.git
 fabric==1.8.0
 pytz==2013d
-django-ignoretests==0.3.2
+git+git://github.com/stianjensen/django-ignoretests.git
 boto==2.9.9
 newrelic==2.4.0.4
 django-mailgun==0.2.2

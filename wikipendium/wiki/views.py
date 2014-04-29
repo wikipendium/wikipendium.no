@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, Http404
-from django.utils import simplejson
 from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import ArticleForm
@@ -9,6 +8,7 @@ from django.contrib.auth.models import User
 import diff
 import urllib
 import hashlib
+import json
 
 
 def all_articles(request):
@@ -31,7 +31,7 @@ def home(request):
     } for ac in all_newest_contents]
 
     return render(request, 'index.html', {
-        "trie": simplejson.dumps(trie),
+        "trie": json.dumps(trie),
         'recent_articles': recent_articles
     })
 

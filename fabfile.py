@@ -41,11 +41,11 @@ class Site(object):
     def restart(self):
         #header("Running: Restart server script: %s" % self.gunicorn)
         #run("sudo /etc/init.d/%s restart" % self.gunicorn)
-        self.run("touch wikipendium_uwsgi.ini")
+        self.run("touch reload") 
 
 PROD = Site(
-    dir='/home/prods/wikipendium.no/',
-    user_id='www-data'
+    dir='/home/wikipendium-web/wikipendium.no/',
+    user_id='wikipendium-web'
 )
 
 env.hosts = ['wikipendium.no']

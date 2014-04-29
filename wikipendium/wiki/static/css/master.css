@@ -45,6 +45,10 @@ caption, th, td {
 
 q, blockquote {
   quotes: none;
+  font-style: italic;
+  margin-left: -20px;
+  padding-left: 16px;
+  border-left: 4px solid #0088cc;
 }
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";

@@ -102,7 +102,7 @@ $(function(){
 
     $('[data-source-line-number]').each(function(i, el){
         var a = $('<a class="edit-section-button button">Edit</a>');
-        a.attr('href',window.location.pathname + '/edit#' + $(el).attr('data-source-line-number'));
+        a.attr('href',window.location.pathname + '/edit/#' + $(el).attr('data-source-line-number'));
         $(el).prepend(a);
 
         var semaphor = 0;

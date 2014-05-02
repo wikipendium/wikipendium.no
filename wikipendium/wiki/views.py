@@ -104,7 +104,7 @@ def new(request):
     slug = ''
     if request.POST:
         slug = request.POST.get('slug')
-    return edit(request, slug.upper(), None)
+    return edit(request, slug.upper(), lang=None, new_article=True)
 
 
 @login_required
@@ -113,7 +113,7 @@ def add_language(request, slug):
 
 
 @login_required
-def edit(request, slug, lang='en'):
+def edit(request, slug, lang='en', new_article=False):
     article = None
     articleContent = None
     try:
@@ -126,7 +126,7 @@ def edit(request, slug, lang='en'):
         articleContent = ArticleContent(article=article, lang=lang)
 
     if request.method == 'POST':
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, new_article=new_article)
         if form.is_valid():
             if not article.pk:
                 article.save()

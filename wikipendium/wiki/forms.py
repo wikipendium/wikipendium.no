@@ -1,5 +1,6 @@
 from django.forms import ModelForm, ValidationError
 import django.forms as forms
+from django.core.exceptions import ObjectDoesNotExist
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.merge3 import MergeError, merge
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
@@ -19,6 +20,9 @@ class ArticleForm(ModelForm):
         fields = ('lang', 'title', 'content')
 
     def __init__(self, *args, **kwargs):
+        if 'new_article' in kwargs:
+            self.new_article = kwargs.pop('new_article')
+
         super(ArticleForm, self).__init__(*args, **kwargs)
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
         self.fields['pk'].widget.attrs['value'] = 0
@@ -57,6 +61,15 @@ class ArticleForm(ModelForm):
         if 'slug' in self.cleaned_data and 'lang' in self.cleaned_data:
             self.merge_contents_if_needed()
         return self.cleaned_data
+
+    def clean_slug(self):
+        if self.new_article:
+            try:
+                Article.objects.get(slug=self.cleaned_data['slug'].upper())
+                raise ValidationError("This course code is already in use")
+            except ObjectDoesNotExist:
+                pass
+        return self.cleaned_data['slug']
 
     def merge_contents_if_needed(self):
         parentId = self.cleaned_data['pk']

@@ -19,10 +19,10 @@ class Command(BaseCommand):
         """
 
         filename = str(time.mktime(datetime.datetime.now().timetuple())) \
-            + "-" + socket.gethostname() + "-wikipendium-backup.json"
+            + "-" + socket.gethostname() + "-wikipendium-backup.dump"
         filename_zip = filename + '.zip'
         content = StringIO()
-        call_command("dumpdata", stdout=content)
+        call_command("dumpdb", stdout=content)
 
         with open(filename, 'w') as f:
             f.write(content.getvalue())

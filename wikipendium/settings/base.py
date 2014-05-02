@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'compressor',
 
     'pytz',
+    'django_dumpdb',
 )
 
 # compressor

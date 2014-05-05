@@ -70,7 +70,7 @@ class ArticleForm(ModelForm):
         if self.new_article:
             try:
                 Article.objects.get(slug=self.cleaned_data['slug'].upper())
-                raise ValidationError("This course code is already in use")
+                raise ValidationError("This course code is already in use.")
             except ObjectDoesNotExist:
                 pass
         return self.cleaned_data['slug']

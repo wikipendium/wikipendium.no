@@ -107,6 +107,11 @@
 
   ga('create', '{{GOOGLE_ANALYTICS_KEY}}', '{{GOOGLE_ANALYTICS_NAME}}');
   ga('send', 'pageview');
+
+  var fiveMinInMs = 5 * 60 * 1000;
+  setInterval(function() {
+    ga('send', 'event', 'still-on-page');
+  }, fiveMinInMs);
 </script>
 {% endif %}
 

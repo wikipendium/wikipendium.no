@@ -23,7 +23,6 @@ urlpatterns = patterns(
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^$', 'home', name='home'),
     url(r'^new/$', 'new', name='newarticle'),
-    url(r'^all/$', 'all_articles', name='allarticles'),
 
     url(r'^users/(?P<username>' + slug_regex + ')/$',
         'user', name='user'),

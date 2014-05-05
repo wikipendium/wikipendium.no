@@ -5,34 +5,26 @@ from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import ArticleForm
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from django.contrib.auth.models import User
+from django.template.defaultfilters import date
 import diff
 import urllib
 import hashlib
 import json
 
 
-def all_articles(request):
-    return render(request, 'all.html', {
-        'complete_list': Article.get_all_newest_contents()
-    })
-
-
 def home(request):
 
-    all_newest_contents = Article.get_all_newest_contents()
-
-    recent_articles = list(reversed(sorted(all_newest_contents,
-                                           key=lambda ac: ac.updated)))[:6]
+    all_newest_contents = Article.get_all_newest_contents_all_languages()
 
     trie = [{
         "label": ac.get_full_title(),
         "url": ac.get_absolute_url(),
-        "lang": ac.lang
+        "lang": ac.lang,
+        "updated": date(ac.updated, "d N Y, G:i"),
     } for ac in all_newest_contents]
 
     return render(request, 'index.html', {
         "trie": json.dumps(trie),
-        'recent_articles': recent_articles
     })
 
 

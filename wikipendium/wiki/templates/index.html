@@ -6,21 +6,16 @@
 
 {% block nav %}
 <a class=button href=/new/>Create article</a>
-<a class=button href=/all/>All compendiums</a>
 {% endblock %}
 
 {% block content %}
 
 <script src={{STATIC_URL}}js/autocompletrie.js></script>
 
-<input id=searchbox type=text placeholder="find a compendium..." />
+<input id=searchbox type=text placeholder="find a compendium..." autocomplete=off />
 
-<div class="recently-updated-articles serif">
-    <h2>Recently updated compendiums</h2>
-    <ul>
-        {% for ac in recent_articles %}
-            <li><a href={{ ac.get_absolute_url }}>{{ ac.get_full_title }}</a></li>
-        {% endfor %}
+<div class="serif all-articles-wrapper">
+    <ul class=article-all-list id=suggestions>
     </ul>
 </div>
 <script>

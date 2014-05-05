@@ -11,13 +11,19 @@ class Article(models.Model):
     slug = models.SlugField(max_length=256, unique=True)
 
     @staticmethod
-    def get_all_newest_contents():
+    def get_all_article_content():
         articles = Article.objects.all()
 
         all_newest_in_all_languages = [
             [a.get_newest_content(lang)
                 for lang in a.get_available_language_codes()]
             for a in articles]
+
+        return all_newest_in_all_languages
+
+    @staticmethod
+    def get_all_newest_contents():
+        all_newest_in_all_languages = Article.get_all_article_content()
 
         all_newest_reduced_to_one_ac_per_article_regardless_of_language = map(
             lambda x: sorted(x, key=lambda ac: ac.updated)[0],
@@ -26,6 +32,17 @@ class Article(models.Model):
         alphabetically_sorted = sorted(
             all_newest_reduced_to_one_ac_per_article_regardless_of_language,
             key=lambda ac: ac.article.slug)
+        return alphabetically_sorted
+
+    @staticmethod
+    def get_all_newest_contents_all_languages():
+        all_newest_in_all_languages = Article.get_all_article_content()
+
+        flattened_list = [article
+                          for sublist in all_newest_in_all_languages
+                          for article in sublist]
+        alphabetically_sorted = sorted(flattened_list,
+                                       key=lambda ac: ac.article.slug)
 
         return alphabetically_sorted
 

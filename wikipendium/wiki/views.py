@@ -6,6 +6,7 @@ from wikipendium.wiki.forms import ArticleForm
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from django.contrib.auth.models import User
 from django.template.defaultfilters import date
+from collections import defaultdict
 import diff
 import urllib
 import hashlib
@@ -199,8 +200,13 @@ def user(request, username):
     except User.DoesNotExist:
         raise Http404
 
-    contributions = ArticleContent.objects.filter(
+    contribution_article_contents = ArticleContent.objects.filter(
         edited_by=user).order_by('-updated')
+
+    contributions = defaultdict(list)
+    for article_content in contribution_article_contents:
+        contributions[(article_content.article,
+                       article_content.lang)].append(article_content)
 
     email = user.email
     default = "mm"
@@ -212,6 +218,9 @@ def user(request, username):
     gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
     return render(request, "user.html", {
         "user": user,
-        "contributions": contributions,
+        "contributions": sorted(contributions.items(),
+                                key=lambda item:
+                                item[1][0].get_last_descendant()
+                                .get_full_title()),
         "gravatar": gravatar_url
     })

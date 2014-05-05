@@ -15,16 +15,34 @@
             <img src="{{ gravatar }}" width=150 height=150 />
         </div>
         {% endif %}
-        <h1 class=title>{{ user }}</h1>
+        <h2 class=title>{{ user }}</h2>
    </div>
-   <h3>Contributions:</h3>
+   <h3 class=contributions-title>Contributions:</h3>
     <ul class=article-history-list>
-        {% for ac in contributions %}
-        <li class="clearfix">
-            <a href="{{ac.get_history_single_url}}">{{ ac.get_full_title }}</a>
-            <span class="date">{{ ac.updated }}</span>
-        </li>
+        {% for _, acs in contributions %}
+            <li class="clearfix click-to-expand">
+            <span class=dropdown-marker>▼</span>
+            <a href={{ acs.0.get_last_descendant.get_absolute_url }}>
+            {{ acs.0.get_last_descendant.get_full_title }}</a>
+            </li>
+
+            <ul class="article-history-list hide">
+            {% for ac in acs %}
+            <li class="clearfix">
+            <a href="{{ ac.get_history_single_url }}">Changeset #{{ ac.pk }}</a>
+                <span class="date">{{ ac.updated }}</span>
+            </li>
+            {% endfor %}
+            </ul>
         {% endfor %}
     </ul>
 </div>
+<script>
+    $(function(){
+        $('.click-to-expand').click(function(){
+            console.log($(this).next());
+            $(this).next().toggle();
+        });
+    });
+</script>
 {% endblock %}

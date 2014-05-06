@@ -1,15 +1,14 @@
 from django.core.management.base import BaseCommand
-from django.core.management import call_command
 import datetime
 import time
 import zipfile
 from subprocess import call
-from StringIO import StringIO
 import boto.s3
 from boto.s3.key import Key
 import socket
 import boto
 from wikipendium import settings
+from django_dumpdb.dumprestore import dump
 
 
 class Command(BaseCommand):
@@ -21,11 +20,9 @@ class Command(BaseCommand):
         filename = str(time.mktime(datetime.datetime.now().timetuple())) \
             + "-" + socket.gethostname() + "-wikipendium-backup.dump"
         filename_zip = filename + '.zip'
-        content = StringIO()
-        call_command("dumpdb", stdout=content)
 
         with open(filename, 'w') as f:
-            f.write(content.getvalue())
+            dump(file=f)
 
         with zipfile.ZipFile(filename_zip, 'w', zipfile.ZIP_DEFLATED) as z:
                 z.write(filename)

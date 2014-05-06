@@ -45,6 +45,9 @@ def article(request, slug, lang="en"):
 
     articleContent = article.get_newest_content(lang)
     if articleContent is None:
+        language_codes = article.get_available_language_codes()
+        if len(language_codes) == 1:
+            return HttpResponseRedirect(article.get_absolute_url(language_codes[0]))
         return missing_language(request, article, lang)
 
     if request.path != article.get_absolute_url(lang):

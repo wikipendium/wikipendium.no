@@ -41,7 +41,7 @@ def article(request, slug, lang="en"):
     try:
         article = Article.objects.get(slug=slug.upper())
     except:
-        return no_article(request, slug.upper(), lang)
+        return no_article(request, slug.upper())
 
     articleContent = article.get_newest_content(lang)
     if articleContent is None:
@@ -67,12 +67,10 @@ def article(request, slug, lang="en"):
         "articleContent": articleContent,
         "language_list": language_list,
         'contributors': contributors,
-        "share_url": "http://" + request.META['HTTP_HOST'] +
-        request.get_full_path(),
     })
 
 
-def no_article(request, slug, lang="en"):
+def no_article(request, slug):
     create_url = "/" + slug + "/add_language/"
     return render(request, 'no_article.html', {
         "slug": slug,

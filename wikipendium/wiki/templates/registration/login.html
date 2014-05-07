@@ -8,7 +8,12 @@
     <h1>Log in</h1>
 </div>
 
-<form class=login-form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
+<form class="login-form {% if form.errors %}form-error{% endif %}" method="post" action="?next={{ next|default:"/" }}">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div class=error-banner>{{ form.non_field_errors|join:", " }}</div>
+    {% endif %}
 
     <div class="field-group {%if form.username.errors %}error{% endif %}">
         <label class=field-label>Username:</label>

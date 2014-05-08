@@ -25,19 +25,8 @@
                     index = $(this).attr('data-idx') | 0;
                     ul.children().removeClass('active');
                     $(ul.children()[index]).addClass("active");
-                }).on('touchstart',function(e){
-                    index = $(this).attr('data-idx') | 0;
-                    ul.children().removeClass('active');
-                    $(ul.children()[index]).addClass("active");
-                }).on('touchmove',function(e){
-                    index = $(this).attr('data-idx') | 0;
-                    ul.children().removeClass('active');
-                    $(ul.children()[index]).addClass("active");
-                }).on('click touchend',function(e){
+                }).on('click',function(e){
                     e.preventDefault();
-                    index = $(this).attr('data-idx') | 0;
-                    ul.children().removeClass('active');
-                    $(ul.children()[index]).addClass("active");
                     var url = $(ul.children()[index]).attr('data-url') || sb.val();
                     window.location = url;
                     return false;

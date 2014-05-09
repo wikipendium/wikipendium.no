@@ -17,6 +17,21 @@
                         ret.push(trie[i]);
                     }
                 }
+
+                function heuristic(element){
+                    return element.label.toLowerCase().split(' ').map(
+                        function(substring){
+                            return substring.indexOf(word);
+                        }
+                    ).reduce(function(a, b){
+                        return a + b;
+                    }, 0) + element.label.toLowerCase().indexOf(word);
+                }
+
+                ret.sort(function(a, b){
+                    return heuristic(a) - heuristic(b);
+                });
+
                 return ret;
             }
 

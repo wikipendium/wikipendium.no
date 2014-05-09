@@ -111,10 +111,22 @@
   ga('create', '{{GOOGLE_ANALYTICS_KEY}}', '{{GOOGLE_ANALYTICS_NAME}}');
   ga('send', 'pageview');
 
-  var fiveMinInMs = 5 * 60 * 1000;
-  setInterval(function() {
-    ga('send', 'event', 'still-on-page');
-  }, fiveMinInMs);
+  ~function() {
+    var lastTimeScrolled = Date.now();
+
+    window.addEventListener('scroll', function() {
+      lastTimeScrolled = Date.now();
+    });
+
+    var fiveMinInMs = 5 * 60 * 1000;
+    var thirtyMinutesInMs = 30 * 60 * 1000;
+    setInterval(function() {
+      ga('send', 'event', (lastTimeScrolled - Date.now() < thirtyMinutesInMs)
+                                                         ? 'active-on-page'
+                                                         : 'inactive-on-page');
+
+    }, fiveMinInMs);
+  }();
 </script>
 {% endif %}
 

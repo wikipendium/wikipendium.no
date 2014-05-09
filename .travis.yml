@@ -8,3 +8,5 @@ before_script:
   - make lint
 script:
   - make test
+notifications:
+  email: false

@@ -121,7 +121,7 @@
     var fiveMinInMs = 5 * 60 * 1000;
     var thirtyMinutesInMs = 30 * 60 * 1000;
     setInterval(function() {
-      ga('send', 'event', (lastTimeScrolled - Date.now() < thirtyMinutesInMs)
+      ga('send', 'event', (Date.now() - lastTimeScrolled < thirtyMinutesInMs)
                                                          ? 'active-on-page'
                                                          : 'inactive-on-page');
 

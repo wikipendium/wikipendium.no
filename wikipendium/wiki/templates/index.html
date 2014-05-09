@@ -10,7 +10,7 @@
 
 {% block content %}
 
-<script src={{STATIC_URL}}js/autocompletrie.js></script>
+<script src={{STATIC_URL}}js/autocomplete.js></script>
 
 <input id=searchbox type=text placeholder="find a compendium..." autocomplete=off />
 
@@ -21,7 +21,7 @@
 <script>
     (function(){
         var trie = {{ trie|safe }};
-        $('#searchbox').autocompletrie(trie);
+        $('#searchbox').autocomplete(trie);
     })();
 </script>
 

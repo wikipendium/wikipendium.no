@@ -2353,24 +2353,30 @@ form .field-group.content-field {
 }
 
 .article-all-list li {
-    padding: .9em;
     border: 1px solid #ccc;
     margin-bottom: .7em;
     width: 100%;
     color: #069;
     background-color: rgba(255,255,255,0.8);
-    cursor: pointer;
-}
-
-.article-all-list .compendium-title {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
 }
 
+.article-all-list li a {
+    padding: .9em;
+    display: block;
+    text-decoration: none;
+}
+
+.article-all-list li.active a {
+    color: white;
+}
+
 .article-all-list .no-found {
     color: #444;
+    padding: .9em;
 }
 
 .article-all-list .date {

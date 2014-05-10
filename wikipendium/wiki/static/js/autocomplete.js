@@ -51,12 +51,16 @@
         for (var i=0;i<articles.length;i++) {
           var li = document.createElement("li");
           li.setAttribute('data-idx', i);
+
           var a = document.createElement("a");
           a.setAttribute('href', articles[i].url);
           a.textContent = articles[i].label;
+
           var date = document.createElement("p");
-          date.textContent = "Last updated: " + articles[i].updated;
+          date.textContent = "Last updated: " +
+              moment(articles[i].updated).fromNow() + ".";
           date.setAttribute('class', 'date');
+
           a.appendChild(date);
           li.appendChild(a);
           ul.append(li); 

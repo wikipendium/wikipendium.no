@@ -7,12 +7,14 @@ from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from django.contrib.auth.models import User
 from django.template.defaultfilters import date
 from collections import defaultdict
+from wikipendium.cache.decorators import cache_page_per_user
 import diff
 import urllib
 import hashlib
 import json
 
 
+@cache_page_per_user
 def home(request):
 
     all_newest_contents = Article.get_all_newest_contents_all_languages()
@@ -37,31 +39,36 @@ def article(request, slug, lang="en"):
         return no_article(request, slug.upper())
 
     articleContent = article.get_newest_content(lang)
-    if articleContent is None:
-        language_codes = article.get_available_language_codes()
-        if len(language_codes) == 1:
-            new_lang = language_codes[0]
-            return HttpResponseRedirect(article.get_absolute_url(new_lang))
-        return missing_language(request, article, lang)
 
-    if request.path != article.get_absolute_url(lang):
-        return HttpResponseRedirect(article.get_absolute_url(lang))
+    @cache_page_per_user
+    def cachable_article(request, articleContent, lang=lang):
+        if articleContent is None:
+            language_codes = article.get_available_language_codes()
+            if len(language_codes) == 1:
+                new_lang = language_codes[0]
+                return HttpResponseRedirect(article.get_absolute_url(new_lang))
+            return missing_language(request, article, lang)
 
-    contributors = articleContent.get_contributors()
+        if request.path != article.get_absolute_url(lang):
+            return HttpResponseRedirect(article.get_absolute_url(lang))
 
-    content = articleContent.get_html_content()
-    available_languages = article.get_available_languages(articleContent)
-    language_list = map(lambda x: (x[0], x[1].get_absolute_url),
-                        available_languages or [])
+        contributors = articleContent.get_contributors()
 
-    return render(request, 'article.html', {
-        "mathjax": True,
-        "content": content['html'],
-        "toc": content['toc'],
-        "articleContent": articleContent,
-        "language_list": language_list,
-        'contributors': contributors,
-    })
+        content = articleContent.get_html_content()
+        available_languages = article.get_available_languages(articleContent)
+        language_list = map(lambda x: (x[0], x[1].get_absolute_url),
+                            available_languages or [])
+
+        return render(request, 'article.html', {
+            "mathjax": True,
+            "content": content['html'],
+            "toc": content['toc'],
+            "articleContent": articleContent,
+            "language_list": language_list,
+            'contributors': contributors,
+        })
+
+    return cachable_article(request, articleContent, lang=lang)
 
 
 def no_article(request, slug):
@@ -179,19 +186,26 @@ def history_single(request, slug, lang="en", id=None):
 
     ac = ArticleContent.objects.get(id=id)
 
-    ac.diff = diff.textDiff(
-        ac.parent.content if ac.parent else '',
-        ac.content
-    )
+    @cache_page_per_user
+    def cachable_history_single(request, ac, has_parent,
+                                has_child, lang="en", id=None):
 
-    originalArticle = article.get_newest_content(lang=lang)
+        ac.diff = diff.textDiff(
+            ac.parent.content if ac.parent else '',
+            ac.content
+        )
 
-    return render(request, 'history_single.html', {
-        'ac': ac,
-        'next_ac': ac.child,
-        'prev_ac': ac.parent,
-        'back_url': originalArticle.get_absolute_url
-    })
+        originalArticle = article.get_newest_content(lang=lang)
+
+        return render(request, 'history_single.html', {
+            'ac': ac,
+            'next_ac': ac.child,
+            'prev_ac': ac.parent,
+            'back_url': originalArticle.get_absolute_url
+        })
+
+    return cachable_history_single(request, ac, bool(ac.parent),
+                                   bool(ac.child), lang=lang, id=id)
 
 
 def user(request, username):

@@ -4,7 +4,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.merge3 import MergeError, merge
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
-from wikipendium.urls import slug_regex
 from re import match
 
 
@@ -65,7 +64,8 @@ class ArticleForm(ModelForm):
         return self.cleaned_data
 
     def clean_slug(self):
-        if not match('^' + slug_regex + '$', self.cleaned_data['slug']):
+        if not match('^[' + Article.slug_regex + ']+$',
+                     self.cleaned_data['slug']):
             raise ValidationError('Course codes must be alphanumeric.')
         if self.new_article:
             try:

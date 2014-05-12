@@ -2398,7 +2398,7 @@ ins{
 .article-history-list {
     list-style-type: none;
     margin: 0;
-    margin-top:50px;
+    margin-bottom: 50px;
 }
 .article-history-list li {
     padding: .5em;
@@ -2415,6 +2415,17 @@ ins{
 .article-history-list a {
     padding-left: .5em;
     float: left;
+}
+
+.article-history-list .click-to-expand {
+    cursor: pointer;
+}
+.article-history-list .dropdown-marker {
+    float: right;
+}
+
+.contributions-title {
+    margin: 50px 0 25px;
 }
 
 .info{

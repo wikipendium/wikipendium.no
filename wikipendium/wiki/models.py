@@ -124,6 +124,9 @@ class ArticleContent(models.Model):
     def get_full_title(self):
         return self.article.slug + ': ' + self.title
 
+    def get_last_descendant(self):
+        return self.article.get_newest_content(lang=self.lang)
+
     def get_absolute_url(self):
         lang = ""
         if self.lang != "en":

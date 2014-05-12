@@ -29,6 +29,8 @@ urlpatterns = patterns(
     'wikipendium.wiki.views',
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^stats/', include('wikipendium.stats.urls')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^$', 'home', name='home'),
     url(r'^new/(?P<slug>[' + Article.slug_regex + ']+)?$',
         'new', name='newarticle'),

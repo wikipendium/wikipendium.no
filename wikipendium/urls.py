@@ -32,7 +32,7 @@ urlpatterns = patterns(
     url(r'^$', 'home', name='home'),
     url(r'^new/$', 'new', name='newarticle'),
 
-    url(r'^users/(?P<username>' + slug_regex + ')/$',
+    url(r'^users/(?P<username>[\w|\W]+)/$',
         'user', name='user'),
 
     url(r'^' + article_regex + '/$',

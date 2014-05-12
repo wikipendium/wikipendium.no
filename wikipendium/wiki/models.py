@@ -42,10 +42,11 @@ class Article(models.Model):
         flattened_list = [article
                           for sublist in all_newest_in_all_languages
                           for article in sublist]
-        alphabetically_sorted = sorted(flattened_list,
-                                       key=lambda ac: ac.article.slug)
+        sorted_by_last_updated = sorted(flattened_list,
+                                        key=lambda ac: ac.updated,
+                                        reverse=True)
 
-        return alphabetically_sorted
+        return sorted_by_last_updated
 
     def __unicode__(self):
         return self.slug

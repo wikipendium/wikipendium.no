@@ -2152,6 +2152,11 @@ body.frontpage:before {
     margin-top: -50px;
 }
 
+#article .footnote-ref {
+    vertical-align: super;
+    font-size: small;
+}
+
 h1,h2,h3,h4,h5,h6{
     font-weight:bold;
     margin: 0 0 8px;

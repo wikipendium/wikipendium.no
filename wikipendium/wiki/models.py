@@ -157,6 +157,7 @@ class ArticleContent(models.Model):
                 'outline',
                 'mathjax',
                 wikitables,
+                'footnotes',
             ],
             output_format='html5',
             safe_mode='escape'

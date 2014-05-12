@@ -199,3 +199,10 @@ IGNORE_TESTS = (
     'south',
     'pytz',
 )
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+}

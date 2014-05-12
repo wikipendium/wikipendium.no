@@ -5,6 +5,7 @@ import datetime
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from markdown import Markdown
 from .markdown_extra.markdown_wikitables import WikiTableExtension
+from wikipendium.cache.decorators import cache_model_method
 
 
 class Article(models.Model):
@@ -146,6 +147,7 @@ class ArticleContent(models.Model):
     def get_history_single_url(self):
         return self.get_history_url() + str(self.pk)+'/'
 
+    @cache_model_method
     def get_html_content(self):
         wikitables = WikiTableExtension()
 

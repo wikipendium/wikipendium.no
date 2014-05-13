@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import ArticleContent
+from wikipendium.user.forms import UserChangeForm
 from django.contrib.auth.models import User
 import hashlib
 import urllib
@@ -32,4 +34,24 @@ def profile(request, username):
                                 item[1][0].get_last_descendant()
                                 .get_full_title()),
         "gravatar": gravatar_url
+    })
+
+
+@login_required
+def change_username(request):
+    user_change_form = UserChangeForm()
+
+    if request.method == 'POST':
+        user_change_form = UserChangeForm(request.POST)
+        if user_change_form.is_valid():
+            new_username = user_change_form.cleaned_data['username']
+            request.user.username = new_username
+            request.user.save()
+
+            return render(request, 'user/change_username_complete.html', {
+                "username": new_username,
+            })
+
+    return render(request, 'user/change_username.html', {
+        'form': user_change_form,
     })

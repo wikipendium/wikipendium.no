@@ -9,4 +9,5 @@ urlpatterns = patterns(
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^users/(?P<username>[\w|\W]+)/$',
         'profile', name='user'),
+    url(r'^accounts/username/change/$', 'change_username'),
 )

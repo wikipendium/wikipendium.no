@@ -63,7 +63,9 @@ def clone_prod_data():
     with settings(warn_only=True):
 
         # Dump the database to a file...
-        PROD.run('source venv/bin/activate && nice python manage.py dumpdata > ' + dump_file)
+        PROD.run('source venv/bin/activate ' +
+                 '&& nice python manage.py dumpdb > ' +
+                 dump_file)
 
         # clean password hashes
         PROD.run('sed -i \'s/"password": "[^"]*"/"password": ""/\' ' + dump_file)

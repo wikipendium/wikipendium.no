@@ -2,32 +2,29 @@
 {% load extras %}
 
 {% block title %}
-    {% if form.instance.article.pk %}
-        {% if form.instance.pk %}
-            Edit: {{ articleContent.article.slug }} –
-        {% else %}
-            Add language: {{ articleContent.article.slug }} –
-        {% endif %}
-    {% else %}
-        Create article –
-    {% endif %}
+  {{ title }} –
 {% endblock %}
 
 {% block nav %}
 <a class=button href=/new/>Create article</a>
-{% if form.instance.article.pk %}
+{% if language_list %}
     {% language_chooser language_list articleContent %}
 {% endif %}
 {% endblock %}
 
 {% block content %}
-{% if articleContent.get_absolute_url %}
-<a href={% if articleContent.pk %}{{ articleContent.get_absolute_url }}{%else%}/{%endif%} >« Back</a>
+{% if articleContent %}
+    <a href={{ articleContent.get_absolute_url }}>« Back</a>
 {% endif %}
 
 <form method="post" action="">
-    {{ form.pk }}
+    {% if form.parent_id %}
+    {{ form.parent_id }}
+    {% endif %}
     {% csrf_token %}
+    {% if form.non_field_errors %}
+        <div class=error-banner>{{form.non_field_errors|join:", "}}</div>
+    {% endif %}
     <div class="field-group clearfix">
         <div class="fields slug-field {%if form.slug.errors %}error{% endif %}">
             {{ form.slug }}

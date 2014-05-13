@@ -1194,6 +1194,13 @@ input::-moz-focus-inner {
   border: solid 6px;
   border-color: transparent transparent #a01d2b transparent;
 }
+.error-banner {
+  border-radius: 2px;
+  background: #a01d2b;
+  margin: 10px 0;
+  padding: 5px;
+  color: #fff;
+}
 
 .button {
   zoom: 1;

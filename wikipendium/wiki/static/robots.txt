@@ -3,3 +3,5 @@ Disallow: /admin/
 Disallow: /*/history/
 Disallow: /*/edit/
 Disallow: /*/add_language/
+
+Sitemap: https://www.wikipendium.no/sitemap.xml

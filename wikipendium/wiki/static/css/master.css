@@ -2135,7 +2135,7 @@ body.frontpage:before {
 ******************/
 
 #content {
-    padding-top: 20px;
+    padding-top: 50px;
 }
 
 #article {
@@ -2160,7 +2160,7 @@ h1{margin-bottom: 20px;}
 
 
 #article .title{
-    margin: 30px 0 20px;
+    margin: 0 0 20px;
     text-align: left;
 }
 
@@ -2434,7 +2434,6 @@ ins{
     padding: 20px;
     border-radius:10px;
     margin: 0 0 30px 0;
-    margin-top:50px;
 }
 
 .article-source{

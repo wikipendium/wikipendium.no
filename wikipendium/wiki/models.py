@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -6,10 +8,12 @@ from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from markdown import Markdown
 from .markdown_extra.markdown_wikitables import WikiTableExtension
 from wikipendium.cache.decorators import cache_model_method
+from re import sub
 
 
 class Article(models.Model):
     slug = models.SlugField(max_length=256, unique=True)
+    slug_regex = ur'A-Za-z0-9æøåÆØÅ'
 
     @staticmethod
     def get_all_article_content():
@@ -133,8 +137,12 @@ class ArticleContent(models.Model):
         lang = ""
         if self.lang != "en":
             lang = '/' + self.lang + '/'
-        return '/' + self.article.slug + "_" + \
-               self.title.replace(' ', '_') + lang
+        return ('/' +
+                self.article.slug + "_" +
+                sub('[^'+Article.slug_regex+'_-]', '',
+                    self.title.replace(' ', '_')) +
+                lang
+                )
 
     def get_edit_url(self):
         return (self.get_absolute_url() + '/edit/').replace('//', '/')

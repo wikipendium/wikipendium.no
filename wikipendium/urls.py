@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from wikipendium.sitemap import ArticleSitemap
+from wikipendium.wiki.models import Article
 
 
 sitemaps = {
@@ -13,8 +14,7 @@ sitemaps = {
 
 admin.autodiscover()
 
-slug_regex = ur'[A-Za-z0-9æøåÆØÅ]+'
-article_regex = ur'(?P<slug>' + slug_regex + ')[^/]*'
+article_regex = ur'(?P<slug>[' + Article.slug_regex + ']+)[^/]*'
 
 article_patterns = patterns(
     'wikipendium.wiki.views',
@@ -32,7 +32,7 @@ urlpatterns = patterns(
     url(r'^$', 'home', name='home'),
     url(r'^new/$', 'new', name='newarticle'),
 
-    url(r'^users/(?P<username>' + slug_regex + ')/$',
+    url(r'^users/(?P<username>[\w|\W]+)/$',
         'user', name='user'),
 
     url(r'^' + article_regex + '/$',

@@ -31,7 +31,7 @@ class Article(models.Model):
         all_newest_in_all_languages = Article.get_all_article_content()
 
         all_newest_reduced_to_one_ac_per_article_regardless_of_language = map(
-            lambda x: sorted(x, key=lambda ac: ac.updated)[0],
+            lambda x: sorted(x, key=lambda ac: ac.updated)[-1],
             filter(lambda x: x, all_newest_in_all_languages))
 
         alphabetically_sorted = sorted(
@@ -53,7 +53,7 @@ class Article(models.Model):
         return sorted_by_last_updated
 
     def __unicode__(self):
-        return self.slug
+        return self.slug.decode('utf8')
 
     def save(self):
         self.slug = self.slug.upper().strip()
@@ -180,6 +180,7 @@ class ArticleContent(models.Model):
     def save(self, change_updated_time=True):
         if change_updated_time:
             self.updated = datetime.datetime.now()
+        self.clean()
         super(ArticleContent, self).save()
 
     def __unicode__(self):

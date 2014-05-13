@@ -3,6 +3,13 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.views.generic import RedirectView
+from django.contrib.sitemaps.views import sitemap
+from wikipendium.sitemap import ArticleSitemap
+
+
+sitemaps = {
+    'articles': ArticleSitemap,
+}
 
 admin.autodiscover()
 
@@ -19,6 +26,7 @@ article_patterns = patterns(
 
 urlpatterns = patterns(
     'wikipendium.wiki.views',
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^$', 'home', name='home'),

@@ -208,3 +208,5 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     },
 }
+
+SESSION_COOKIE_SECURE = True

@@ -28,12 +28,10 @@ urlpatterns = patterns(
     'wikipendium.wiki.views',
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^$', 'home', name='home'),
     url(r'^new/$', 'new', name='newarticle'),
 
-    url(r'^users/(?P<username>[\w|\W]+)/$',
-        'user', name='user'),
+    url(r'^', include('wikipendium.user.urls')),
 
     url(r'^' + article_regex + '/$',
         RedirectView.as_view(url='/%(slug)s')),

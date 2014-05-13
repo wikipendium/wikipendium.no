@@ -74,7 +74,7 @@ def clone_prod_data():
         get(PROD.dir + dump_file, dump_file)
 
         # Replace this db with the contents of the dump
-        local('python manage.py loaddata_ex ' + dump_file)
+        local('python manage.py restoredb < ' + dump_file)
 
     # ... then cleanup the dump files
     PROD.run('rm ' + dump_file)

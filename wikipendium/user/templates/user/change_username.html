@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load extras %}
+
+{% block title %}
+Change username -
+{% endblock %}
+
+{% block content %}
+    <h1>Change your username</h1>
+
+    <form method=POST class="change-password-form {% if form.errors %}form-error{% endif %}">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class=error-message>
+                {{form.non_field_errors|join:", "}}
+            </div>
+        {% endif %}
+        <div class="field-group clearfix">
+            <label class=field-label for=id_username>New username:</label>
+            <div class="fields {%if form.username.errors %}error{% endif %}">
+                {{ form.username }}
+            </div>
+        </div>
+        <input type=submit class="button" value=Change! />
+    </form>
+{% endblock %}

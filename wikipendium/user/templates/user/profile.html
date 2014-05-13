@@ -16,6 +16,9 @@
         </div>
         {% endif %}
         <h2 class=title>{{ user }}</h2>
+        {% if user == request.user %}
+            <a href=/accounts/username/change>Change your username</a>
+        {% endif %}
    </div>
    <h3 class=contributions-title>Contributions:</h3>
     <ul class=article-history-list>

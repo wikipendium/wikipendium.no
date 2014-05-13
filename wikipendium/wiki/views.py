@@ -1,18 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import (
     NewArticleForm, AddLanguageArticleForm, EditArticleForm
     )
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
-from django.contrib.auth.models import User
 from django.template.defaultfilters import date
-from collections import defaultdict
 from wikipendium.cache.decorators import cache_page_per_user
 import diff
-import urllib
-import hashlib
 import json
 
 
@@ -233,35 +229,3 @@ def history_single(request, slug, lang="en", id=None):
 
     return cachable_history_single(request, ac, bool(ac.parent),
                                    bool(ac.child), lang=lang, id=id)
-
-
-def user(request, username):
-    try:
-        user = User.objects.get(username=username)
-    except User.DoesNotExist:
-        raise Http404
-
-    contribution_article_contents = ArticleContent.objects.filter(
-        edited_by=user).order_by('-updated')
-
-    contributions = defaultdict(list)
-    for article_content in contribution_article_contents:
-        contributions[(article_content.article,
-                       article_content.lang)].append(article_content)
-
-    email = user.email
-    default = "mm"
-    size = 150
-
-    # construct the url
-    gravatar_url = "http://www.gravatar.com/avatar/" + \
-        hashlib.md5(email.lower()).hexdigest() + "?"
-    gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
-    return render(request, "user.html", {
-        "user": user,
-        "contributions": sorted(contributions.items(),
-                                key=lambda item:
-                                item[1][0].get_last_descendant()
-                                .get_full_title()),
-        "gravatar": gravatar_url
-    })

@@ -2127,8 +2127,42 @@ body.article .header-wrapper {
  * FOOTER
 ******************/
 
-footer {
-    text-align:right;
+#page-footer .bottom-menu {
+    list-style-type: none;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    justify-content: center;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+#page-footer .bottom-menu li {
+    margin-left: .8em;
+    padding-left: .8em;
+    border-left: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+#page-footer .bottom-menu li:first-child {
+    border-left: none;
+}
+
+@media screen and (max-width: 500px) {
+    #page-footer .bottom-menu li:last-child {
+        width: 100%;
+        text-align: center;
+        border-left: none;
+        margin-left: 0;
+        padding-left: 0;
+        margin-bottom: 20px;
+    }
 }
 
 

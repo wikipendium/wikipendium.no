@@ -38,18 +38,18 @@ def article(request, slug, lang="en"):
 
     articleContent = article.get_newest_content(lang)
 
+    if articleContent is None:
+        language_codes = article.get_available_language_codes()
+        if len(language_codes) == 1:
+            new_lang = language_codes[0]
+            return HttpResponseRedirect(article.get_absolute_url(new_lang))
+        return missing_language(request, article, lang)
+
+    if request.path != article.get_absolute_url(lang):
+        return HttpResponseRedirect(article.get_absolute_url(lang))
+
     @cache_page_per_user
     def cachable_article(request, articleContent, lang=lang):
-        if articleContent is None:
-            language_codes = article.get_available_language_codes()
-            if len(language_codes) == 1:
-                new_lang = language_codes[0]
-                return HttpResponseRedirect(article.get_absolute_url(new_lang))
-            return missing_language(request, article, lang)
-
-        if request.path != article.get_absolute_url(lang):
-            return HttpResponseRedirect(article.get_absolute_url(lang))
-
         contributors = articleContent.get_contributors()
 
         content = articleContent.get_html_content()

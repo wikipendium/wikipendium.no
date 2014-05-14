@@ -69,7 +69,7 @@ def article(request, slug, lang="en"):
 
 
 def no_article(request, slug):
-    create_url = "/" + slug + "/add_language/"
+    create_url = "/new/" + slug
     return render(request, 'no_article.html', {
         "slug": slug,
         "create_url": create_url,
@@ -79,7 +79,7 @@ def no_article(request, slug):
 def missing_language(request, article, lang="en"):
     language_name = ""
     language_does_not_exist = False
-    create_url = "/" + article.get_slug() + "/" + lang + "/edit/"
+    create_url = "/" + article.get_slug() + "/add_language/" + lang + "/"
 
     if lang in LANGUAGE_NAMES:
         language_name = LANGUAGE_NAMES[lang].lower()
@@ -99,7 +99,7 @@ def missing_language(request, article, lang="en"):
 
 
 @login_required
-def new(request):
+def new(request, slug=None):
     if request.POST:
         form = NewArticleForm(request.POST)
         if form.is_valid():
@@ -113,7 +113,12 @@ def new(request):
             articleContent.save()
             return HttpResponseRedirect(articleContent.get_absolute_url())
     else:
-        form = NewArticleForm()
+        articleContent = None
+        if slug:
+            slug = slug.upper()
+            articleContent = ArticleContent(article=Article(slug=slug),
+                                            lang=None)
+        form = NewArticleForm(instance=articleContent)
 
     return render(request, 'edit.html', {
         "mathjax": True,
@@ -123,7 +128,7 @@ def new(request):
 
 
 @login_required
-def add_language(request, slug):
+def add_language(request, slug, lang=None):
     article = get_object_or_404(Article, slug=slug)
 
     if request.method == 'POST':
@@ -135,7 +140,7 @@ def add_language(request, slug):
             articleContent.save()
             return HttpResponseRedirect(articleContent.get_absolute_url())
     else:
-        form = AddLanguageArticleForm(article=article)
+        form = AddLanguageArticleForm(article=article, lang=lang)
 
     available_languages = article.get_available_languages()
     language_list = map(lambda x: (x[0], x[1].get_edit_url),

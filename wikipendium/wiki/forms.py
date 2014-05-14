@@ -22,6 +22,10 @@ class ArticleForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ArticleForm, self).__init__(*args, **kwargs)
 
+        if hasattr(self.instance, 'article'):
+            slug = self.instance.article.slug
+            self.fields['slug'].widget.attrs['value'] = slug
+
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
         self.fields['lang'].widget.attrs = {
             'class': "select_chosen",
@@ -58,6 +62,8 @@ class NewArticleForm(ArticleForm):
 
 class AddLanguageArticleForm(ArticleForm):
     def __init__(self, article, *args, **kwargs):
+        lang = kwargs.pop('lang') if 'lang' in kwargs else None
+
         super(AddLanguageArticleForm, self).__init__(*args, **kwargs)
 
         self.fields['slug'].widget.attrs['value'] = article.slug
@@ -69,6 +75,8 @@ class AddLanguageArticleForm(ArticleForm):
         filtered_choices = [x for x in self.fields['lang'].choices
                             if x[0] not in existing_langs]
         self.fields['lang'].choices = filtered_choices
+        if lang:
+            self.fields['lang'].initial = lang
 
 
 class EditArticleForm(ArticleForm):
@@ -80,8 +88,6 @@ class EditArticleForm(ArticleForm):
         if self.instance.pk:
             self.fields['parent_id'].widget.attrs['value'] = self.instance.pk
 
-        slug = self.instance.article.slug
-        self.fields['slug'].widget.attrs['value'] = slug
         self.fields['slug'].widget.attrs['readonly'] = True
 
         self.fields['lang'].widget = forms.TextInput(attrs={

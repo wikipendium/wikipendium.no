@@ -18,6 +18,24 @@
         }
       });
 
+      function heuristic(element, word) {
+        var words = element.label.toLowerCase().split(' ');
+        return words.map(
+            function (substring, index) {
+              var pos = substring.indexOf(word);
+              if (pos == -1) {
+                return 0;
+              } else if (pos == 0) {
+                return 1e10-1e7*(index+1);
+              } else {
+                return 1000 - 100*pos*(index+1);
+              }
+            }
+            ).reduce(function(a, b) {
+          return a + b;
+        }, 0);
+      }
+
       function search(articles, word){
         if (word.length == 0) return [];
 
@@ -29,18 +47,8 @@
           }
         }
 
-        function heuristic(element) {
-          return element.label.toLowerCase().split(' ').map(
-              function (substring) {
-                return substring.indexOf(word);
-              }
-              ).reduce(function(a, b) {
-            return a + b;
-          }, 0) + element.label.toLowerCase().indexOf(word);
-        }
-
         ret.sort(function(a, b) {
-          return heuristic(a) - heuristic(b);
+          return heuristic(b, word) - heuristic(a, word);
         });
 
         return ret;

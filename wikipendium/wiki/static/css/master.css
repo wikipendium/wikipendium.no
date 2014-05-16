@@ -2079,16 +2079,29 @@ button.close {
 body{
 }
 
-body.frontpage:before {
-    content: "W";
-    position: absolute;
-    font-size: 500px;
-    top: 0;
-    left: 30%;
-    margin-left: -250px;
-    z-index: -1;
-    color: rgba(0,0,0,.1);
-    line-height: 90%;
+@media all and (max-width: 650px) {
+    .header-logo-link .ikipendium {
+        display: none;
+    }
+}
+
+@media all and (min-width: 600px) {
+    body.frontpage .header-logo-link {
+        display: none;
+    }
+
+    body.frontpage:before {
+        content: "W";
+        position: absolute;
+        z-index: -1;
+        line-height: 90%;
+        overflow: hidden;
+        font-size: 500px;
+        top: 0;
+        left: 30%;
+        margin-left: -250px;
+        color: rgba(0,0,0,.1);
+    }
 }
 
 /******************
@@ -2141,9 +2154,16 @@ body.frontpage:before {
  * ARTICLE
 ******************/
 
-#content {
+body.article #content {
     padding-top: 50px;
 }
+
+@media all and (max-width: 650px) {
+    body.article #content {
+        padding-top: 75px;
+    }
+}
+
 
 #article {
     width: auto;
@@ -2182,7 +2202,7 @@ h1{margin-bottom: 20px;}
 }
 .toc > ol {
     list-style-type: decimal;
-    margin-left: 1.5em;
+    margin: 0;
 }
 .toc ol ol {list-style-type: upper-roman;}
 .toc ol ol ol {list-style-type: lower-roman;}
@@ -2375,6 +2395,8 @@ form .field-group.content-field {
     padding: .9em;
     display: block;
     text-decoration: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .article-all-list li.active a {
@@ -2390,6 +2412,20 @@ form .field-group.content-field {
     clear:both;
     margin:0;
     color: #444;
+}
+
+@media all and (max-width: 600px) {
+    .all-articles-wrapper {
+        margin-top: 20px;
+    }
+
+    .article-all-list .date {
+        display: none;
+    }
+
+    .article-all-list li a {
+        padding: .4em;
+    }
 }
 
 .article-all-list .active .date {

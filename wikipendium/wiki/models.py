@@ -53,7 +53,7 @@ class Article(models.Model):
         return sorted_by_last_updated
 
     def __unicode__(self):
-        return self.slug.decode('utf8')
+        return self.slug
 
     def save(self):
         self.slug = self.slug.upper().strip()

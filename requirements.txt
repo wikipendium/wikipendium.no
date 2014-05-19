@@ -2,7 +2,7 @@ django==1.6.4
 git+git://github.com/macropin/django-registration.git@e3ec641fc0#egg=django-registration-fix
 south==0.8.2
 git+git://github.com/sigvef/Python-Markdown.git#egg=markdown
-git+git://github.com/sigvef/python-markdown-mathjax.git#egg=mdx_mathjax
+git+git://github.com/wikipendium/python-markdown-mathjax.git#egg=markdown_mathjax
 git+git://github.com/stianjensen/mdx_outline.git
 fabric==1.8.0
 pytz==2013d

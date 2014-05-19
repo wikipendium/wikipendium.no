@@ -166,6 +166,7 @@ class ArticleContent(models.Model):
                 'outline',
                 'mathjax',
                 wikitables,
+                'def_list',
             ],
             output_format='html5',
             safe_mode='escape'

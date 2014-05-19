@@ -37,3 +37,12 @@ AWS_BUCKET_NAME = ''
 import newrelic.agent
 newrelic.agent.initialize('/home/wikipendium-web/wikipendium.no/wikipendium/settings/newrelic.ini')
 """
+
+# Disable cache in development
+"""
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    },
+}
+"""

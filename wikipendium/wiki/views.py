@@ -6,7 +6,6 @@ from wikipendium.wiki.forms import (
     NewArticleForm, AddLanguageArticleForm, EditArticleForm
     )
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
-from django.template.defaultfilters import date
 from wikipendium.cache.decorators import cache_page_per_user
 import diff
 import json
@@ -21,7 +20,7 @@ def home(request):
         "label": ac.get_full_title(),
         "url": ac.get_absolute_url(),
         "lang": ac.lang,
-        "updated": date(ac.updated, "d N Y, G:i"),
+        "updated": str(ac.updated),
     } for ac in all_newest_contents]
 
     return render(request, 'index.html', {

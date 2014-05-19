@@ -33,4 +33,8 @@
         </div>
     {% endfor %}
 </div>
+
+<div class=last-updated>
+    {{ articleContent.updated|date:"r" }}
+</div>
 {% endblock %}

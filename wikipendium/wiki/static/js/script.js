@@ -112,6 +112,10 @@ $(function(){
         $(a).hover(show, hide);
         $(el).hover(show, hide);
     });
+
+    (function() {
+        this.html("<em>Last updated:</em> " + moment(this.text()).fromNow() + ".")
+    }).apply($('.last-updated'));
 });
 
 // Stay in web-app on iOS

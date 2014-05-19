@@ -21,9 +21,9 @@ class ArticleTest(TestCase):
         self.u2 = User(username='u2')
         self.u1.save()
         self.u2.save()
-        self.article1 = Article(slug="TDT4100")
+        self.article1 = Article(slug=u'TDT4100')
         self.article1.save()
-        self.article2 = Article(slug="TIØ4258")
+        self.article2 = Article(slug=u'TIØ4258')
         self.article2.save()
         self.ac1 = ArticleContent(article=self.article1,
                                   updated=datetime.datetime(2012, 1, 1))
@@ -46,19 +46,19 @@ class ArticleTest(TestCase):
 
     def test_slug_should_uppercase_when_saved(self):
         article = Article()
-        article.slug = "lowercase"
+        article.slug = u'lowercase'
         article.save()
-        self.assertEqual(article.slug, "LOWERCASE")
+        self.assertEqual(article.slug, u'LOWERCASE')
 
     def test_slug_should_strip_whitespace_when_saved(self):
         article = Article()
-        article.slug = "   PADDED\v\t \n"
+        article.slug = u'   PADDED\v\t \n'
         article.save()
-        self.assertEqual(article.slug, "PADDED")
+        self.assertEqual(article.slug, u'PADDED')
 
     def test_slug_cannot_contain_slashes(self):
         article = Article()
-        article.slug = "TDT/4100"
+        article.slug = u'TDT/4100'
         try:
             article.save()
             self.assertEqual(1, 2)  # this should not be reached
@@ -121,13 +121,13 @@ class ArticleTest(TestCase):
         self.assertEquals(expected_result, result)
 
     def test_get_slug(self):
-        self.assertEquals('TIØ4258', self.article2.get_slug())
+        self.assertEquals(u'TIØ4258', self.article2.get_slug())
 
 
 class ArticleContentTest(TestCase):
 
     def setUp(self):
-        self.article1 = Article(slug="TDT4100")
+        self.article1 = Article(slug=u'TDT4100')
         self.article1.save()
         self.ac1 = ArticleContent(article=self.article1,
                                   updated=datetime.datetime(2012, 1, 1),
@@ -180,5 +180,5 @@ class ArticleContentTest(TestCase):
         self.assertTrue('<h1>' in self.ac1.get_html_content()['html'])
 
     def test___unicode__(self):
-        self.assertEquals('[1] Cooking and baking',
+        self.assertEquals(u'[1] Cooking and baking',
                           unicode(self.ac1))

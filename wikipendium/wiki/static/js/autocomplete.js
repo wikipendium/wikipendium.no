@@ -54,7 +54,7 @@
         return ret;
       }
 
-      function render(articles) {
+      function render(articles, highlight) {
         ul.empty();
         for (var i=0;i<articles.length;i++) {
           var li = document.createElement("li");
@@ -62,7 +62,8 @@
 
           var a = document.createElement("a");
           a.setAttribute('href', articles[i].url);
-          a.textContent = articles[i].label;
+          a.innerHTML = articles[i].label.replace(
+              new RegExp(highlight, 'gi'), '<span class=highlight>$&</span>');
 
           var date = document.createElement("p");
           date.textContent = "Last updated: " +
@@ -117,7 +118,7 @@
         var words = search(articles, oldword);
         if (sb.val()) {
           ullength = words.length;
-          render(words);
+          render(words, sb.val());
         } else {
           ullength = articles.length;
           render(articles);

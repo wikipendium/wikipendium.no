@@ -1074,18 +1074,10 @@ input.char10 {
 
 ::-webkit-input-placeholder {
   color: #999999;
-  -webkit-transition: 0.2s all;
-  -moz-transition: 0.2s all;
-  -o-transition: 0.2s all;
-  transition: 0.2s all;
 }
 
 :-moz-placeholder {
   color: #999999;
-  -webkit-transition: 0.2s all;
-  -moz-transition: 0.2s all;
-  -o-transition: 0.2s all;
-  transition: 0.2s all;
 }
 
 ::-webkit-input-placeholder:focus {

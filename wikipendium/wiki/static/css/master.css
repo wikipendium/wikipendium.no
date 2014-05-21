@@ -2427,6 +2427,14 @@ form .field-group.content-field {
     color: white;
 }
 
+.article-all-list .highlight {
+    background: rgba(109, 132, 184, 0.2);
+}
+
+.article-all-list .active .highlight {
+    background: #069;
+}
+
 /********************
  * HISTORY
 ********************/

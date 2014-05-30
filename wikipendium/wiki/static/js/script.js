@@ -85,13 +85,13 @@ $(function(){
         }
     });
 
-    window.addEventListener('beforeunload', function(){
+    window.onbeforeunload = function(e) {
         if (editor_has_been_updated) {
             return "You have unsaved changes!";
         }
-    });
+    };
 
-    
+
     $('#help-tabs a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');

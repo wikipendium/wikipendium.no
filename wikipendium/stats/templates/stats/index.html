@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<h1>Articles</h1>
 Number of articles edited today: {{ number_of_acs_updated_in_the_last_24_hours }}
 
+<h1>Users</h1>
+<p>Most contributions last 24 hours: {{ users.most_contrib_24_hours.user }}
+with {{ users.most_contrib_24_hours.contributions }} contributions!</p>
+<p>Most contributions last week: {{ users.most_contrib_week.user }}
+with {{ users.most_contrib_week.contributions }} contributions!</p>
+<p>Most contributions last month: {{ users.most_contrib_month.user }}
+with {{ users.most_contrib_month.contributions }} contributions!</p>
 {% endblock %}

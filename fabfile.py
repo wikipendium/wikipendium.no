@@ -29,9 +29,6 @@ class Site(object):
         self.run("git fetch origin && git reset --hard origin/master")
 
     def git_tag(self):
-        if not confirm("Give new tag for this deployment?"):
-            if confirm("Are you sure?", default=False):
-                return
         self.run("git tag | sort -g | tail -n 1 | sed s/$/+1/ | bc | xargs git tag")
         self.run("git push --tags && git push")
 
@@ -93,11 +90,13 @@ def deploy():
 
     env.user = prompt("Username on prod server:", default=getpass.getuser())
 
+    should_tag = tag()
+
     PROD.backup()
     PROD.deploy()
 
-    # Check if we want to tag the deployment
-    PROD.git_tag()
+    if should_tag:
+        PROD.git_tag()
 
 def header(text):
     print ("#" * 45) + "\n# %s\n" % text + ("#" * 45)
@@ -113,3 +112,12 @@ def backup():
     """
     env.user = prompt("Username on prod server:", default=getpass.getuser())
     PROD.backup()
+
+def tag():
+    if not confirm("Give new tag for this deployment?"):
+        if confirm("Are you sure?", default=False):
+            return False
+        else:
+            tag()
+    else:
+        return True

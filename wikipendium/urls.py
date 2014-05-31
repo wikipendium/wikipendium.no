@@ -29,7 +29,8 @@ urlpatterns = patterns(
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'home', name='home'),
-    url(r'^new/$', 'new', name='newarticle'),
+    url(r'^new/(?P<slug>[' + Article.slug_regex + ']+)?$',
+        'new', name='newarticle'),
 
     url(r'^', include('wikipendium.user.urls')),
 
@@ -39,7 +40,7 @@ urlpatterns = patterns(
     url(r'^' + article_regex + '$', 'article'),
     url(r'^' + article_regex + '/',
         include(article_patterns)),
-    url(r'^' + article_regex + '/add_language/$',
+    url(r'^' + article_regex + '/add_language/((?P<lang>[a-z]+)/)?$',
         'add_language'),
 
     url(r'^' + article_regex + '/(?P<lang>[a-z]+)/$',

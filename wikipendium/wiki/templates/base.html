@@ -48,6 +48,9 @@
       tex2jax: {
         inlineMath: [['$','$'], ['\\(','\\)']],
         displayMath: [['$$','$$'], ['\\[','\\]']]
+      },
+      "HTML-CSS": {
+        linebreaks: {automatic: true, width: "container"}
       }
     });
     </script>
@@ -61,9 +64,9 @@
             <div class=container>
                 <header id="header" class=row>
                     <h1 class="float-left serif"><a class=header-logo-link href=/>
-                        {% block logo %}Wikipendium{% endblock %}
+                        W<span class=ikipendium>ikipendium</span>
                     </a></h1>
-                    <nav class="float-right">
+                    <nav>
                     {% block nav %}
                     {% endblock %}
                     {% if request.user.is_authenticated %}
@@ -77,7 +80,7 @@
         </ul>
     </div>
                     {% else %}
-                    <a class=button href="/accounts/login/?next={{request.path}}"><i class="icon icon-prepend"></i>Not logged in</a>
+                    <a class=button href="/accounts/login/?next={{request.path}}">Log in</a>
                     {% endif %}
                     </nav>
                 </header>

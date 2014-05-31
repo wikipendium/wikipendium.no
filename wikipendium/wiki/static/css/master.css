@@ -851,14 +851,26 @@ ol {
 
 dl {
   margin: 0 0 14px;
+  overflow: hidden;
 }
 
 dt {
   font-weight: bold;
+  clear: left;
+  float: left;
+  width: 30%;
+  margin: 0;
+  padding: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.13);
 }
 
 dd {
   margin: 0 0 14px;
+  float: left;
+  width: 70%;
+  margin: 0;
+  padding: 5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.13);
 }
 
 table {

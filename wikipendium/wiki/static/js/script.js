@@ -5,26 +5,33 @@ $(function(){
     $('code').addClass('prettyprint');
     prettyPrint();
 
-    CodeMirror.defineMode("markdown-math", function(config, parserConfig) {
-        var markdownMath = {
-            token: function(stream, state) {
-                var ch;
-                if (stream.match("$$")) {
-                    while ((ch = stream.next()) != null)
-                    if (ch == "$" && stream.next() == "$") break;
-                    stream.eat("$");
-                    return "mathjax-block";
-                }
-                if (stream.match("$")) {
-                    while ((ch = stream.next()) != null)
-                    if (ch == "$" && stream.current().substr(-2) != "\\$") break;
-                    return "mathjax-inline";
-                }
-                while (stream.next() != null && !stream.match("$", false)) {}
-                return null;
-            }
+    CodeMirror.defineMode("markdown-math", function() {
+        var markdown_mode = CodeMirror.getMode({}, "markdown");
+        var latex_mode = CodeMirror.getMode({}, "mathjax");
+
+        var block_latex = {
+          open: "$$",
+          close: "$$",
+          mode: latex_mode,
+          delimStyle: "mathjax-delimit",
+          innerStyle: "mathjax-block",
+          escapeDelimiters: true
         };
-        return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "markdown"), markdownMath);
+
+        var inner_latex = {
+          open: "$",
+          close: "$",
+          mode: latex_mode,
+          delimStyle: "mathjax-delimit",
+          innerStyle: "mathjax-inline",
+          escapeDelimiters: true
+        };
+
+        return CodeMirror.multiplexingMode(
+          markdown_mode,
+          block_latex,
+          inner_latex
+          );
     });
 
     /* from https://github.com/marijnh/CodeMirror/issues/988#issuecomment-14921785 */
@@ -40,7 +47,7 @@ $(function(){
     var textarea;
     if (textarea = document.getElementById("id_content")) {
         var codeMirror = CodeMirror.fromTextArea(textarea, {
-            mode: "markdown-math",
+            mode: CodeMirror.getMode({}, "markdown-math"),
             theme: "wikipendium",
             indentUnit: 4,
             extraKeys: {

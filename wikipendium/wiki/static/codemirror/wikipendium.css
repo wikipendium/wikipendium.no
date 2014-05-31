@@ -17,9 +17,15 @@
 .cm-s-wikipendium span.cm-tag {color: #3F7F7F;}
 .cm-s-wikipendium span.cm-attribute {color: #7F007F;}
 .cm-s-wikipendium span.cm-link {color: #069;}
+.cm-s-wikipendium span.cm-quote {font-style: italic;}
 
-.cm-mathjax-inline,
-.cm-mathjax-block {
+.cm-mathjax-delimit {
+    color: #4CA828;
+    font-weight: bold;
+}
+
+.cm-s-wikipendium span.cm-mathjax-inline.cm-variable-2,
+.cm-s-wikipendium span.cm-mathjax-block.cm-variable-2 {
     color: #4CA828;
 }
 

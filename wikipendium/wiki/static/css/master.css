@@ -852,6 +852,7 @@ ol {
 dl {
   margin: 0 0 14px;
   overflow: hidden;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
 }
 
 dt {
@@ -871,6 +872,17 @@ dd {
   margin: 0;
   padding: 5px;
   border-top: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+@media all and (max-width: 500px) {
+    dt, dd {
+        float: none;
+        width: auto;
+        padding: 5px 0;
+    }
+    dd {
+        border-top: none;
+    }
 }
 
 table {

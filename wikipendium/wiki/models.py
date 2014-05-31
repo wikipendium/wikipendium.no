@@ -16,6 +16,15 @@ class Article(models.Model):
     slug_regex = ur'A-Za-z0-9æøåÆØÅ'
 
     @staticmethod
+    def get_all_contents(time_from, time_to):
+        ac = ArticleContent.objects.all()
+
+        acs_updated = filter(
+            lambda ac: ac.updated > time_to - time_from, ac)
+
+        return acs_updated
+
+    @staticmethod
     def get_all_article_content():
         articles = Article.objects.all()
 

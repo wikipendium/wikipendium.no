@@ -114,29 +114,54 @@
             <div class=donation-appeal>
               Wikipendium is ad-free and costs nothing to use.
               Please help keep Wikipendium alive by donating today!
+
               <form
                 action=https://www.paypal.com/cgi-bin/webscr
                 method=post
                 target=_top
                 >
-                <input
-                  type=hidden
-                  name=cmd
-                  value=_s-xclick
-                  />
-                <input
-                  type=hidden
-                  name=encrypted
-                  value="{{ PAYPAL_DONATION_PKCS7 }}"
-                  />
-                <input
-                  type=image
-                  src=https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
-                  border=0
-                  name=submit
-                  alt="PayPal - The safer, easier way to pay online!"
-                  />
+                <label>
+                  <input
+                    type=radio
+                    name=amount
+                    value="20.00"
+                    />
+                    20 kr
+                </label>
+
+                <label>
+                  <input
+                    type=radio
+                    name=amount
+                    value="50.00"
+                    checked
+                    />
+                    <strong>50 kr</strong>
+                </label>
+
+                <label>
+                  <input
+                    type=radio
+                    name=amount
+                    value="100.00"
+                    />
+                    100 kr
+                </label>
+
+                <input type=hidden name=cmd value=_donations>
+                <input type=hidden name=business value=donate@wikipendium.no>
+                <input type=hidden name=item_name value="Wikipendium donation">
+                <input type=hidden name=currency_code value=NOK>
+                <div>
+                  <input type=image
+                    src=https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
+                    border=0
+                    name=submit
+                    alt="PayPal - The safer, easier way to pay online!"
+                    />
+                </div>
               </form>
+
             </div>
         </div>
     </footer>

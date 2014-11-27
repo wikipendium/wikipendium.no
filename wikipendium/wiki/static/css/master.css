@@ -2180,6 +2180,15 @@ body.article .header-wrapper {
     padding: 20px 0 0;
 }
 
+#page-footer .donation-appeal label {
+    margin: 20px;
+}
+
+#page-footer .donation-appeal input[type=image] {
+    margin: 20px;
+}
+
+
 @media screen and (max-width: 500px) {
     #page-footer .bottom-menu li:last-child {
         width: 100%;

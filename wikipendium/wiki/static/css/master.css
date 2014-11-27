@@ -2171,6 +2171,15 @@ body.article .header-wrapper {
     border-left: none;
 }
 
+#page-footer .donation-appeal {
+    text-align: center;
+    margin: 20px;
+}
+
+#page-footer .donation-appeal form {
+    padding: 20px 0 0;
+}
+
 @media screen and (max-width: 500px) {
     #page-footer .bottom-menu li:last-child {
         width: 100%;

@@ -185,6 +185,7 @@ from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
     'wikipendium.wiki.context_processors.google_analytics_processor',
+    'wikipendium.wiki.context_processors.paypal_processor',
 )
 
 

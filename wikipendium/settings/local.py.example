@@ -46,3 +46,6 @@ CACHES = {
     },
 }
 """
+
+# Paypal donations
+PAYPAL_DONATION_PKCS7 = ''

@@ -2686,3 +2686,27 @@ input[readonly=True]{
     min-height: 300px;
     padding: 5px 20px;
 }
+
+/*******************
+ * PRINTING
+*******************/
+@media print {
+    body.article .header-wrapper {
+        position: relative;
+        -webkit-box-shadow: none;
+           -moz-box-shadow: none;
+                box-shadow: none;
+    }
+    .header-logo-link .ikipendium {
+        display: inline;
+    }
+    body.article .header-wrapper nav {
+        display: none;
+    }
+    body.article #content {
+        padding-top: 0;
+    }
+    #page-footer .bottom-menu, .donation-appeal {
+        display: none;
+    }
+}

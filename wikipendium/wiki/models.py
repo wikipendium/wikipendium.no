@@ -13,7 +13,7 @@ from re import sub
 
 class Article(models.Model):
     slug = models.SlugField(max_length=256, unique=True)
-    slug_regex = ur'(A-Za-z0-9æøåÆØÅ)-'
+    slug_regex = ur'A-Za-z0-9æøåÆØÅ'
 
     @staticmethod
     def get_all_article_content():
@@ -139,7 +139,7 @@ class ArticleContent(models.Model):
             lang = '/' + self.lang + '/'
         return ('/' +
                 self.article.slug + "_" +
-                sub('[^'+Article.slug_regex+'_]', '',
+                sub('[^'+Article.slug_regex+'_-]', '',
                     self.title.replace(' ', '_')) +
                 lang
                 )

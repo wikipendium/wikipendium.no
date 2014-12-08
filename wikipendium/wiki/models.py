@@ -7,6 +7,7 @@ import datetime
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from markdown import Markdown
 from .markdown_extra.markdown_wikitables import WikiTableExtension
+from .markdown_extra.nofollow import NofollowExtension
 from wikipendium.cache.decorators import cache_model_method
 from re import sub
 
@@ -159,6 +160,7 @@ class ArticleContent(models.Model):
     @cache_model_method
     def get_html_content(self):
         wikitables = WikiTableExtension()
+        nofollow = NofollowExtension()
 
         md = Markdown(
             extensions=[
@@ -166,6 +168,7 @@ class ArticleContent(models.Model):
                 'outline',
                 'mathjax',
                 wikitables,
+                nofollow,
                 'def_list',
             ],
             output_format='html5',

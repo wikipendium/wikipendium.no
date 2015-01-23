@@ -117,8 +117,6 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
 
     'registration',
-    'ignoretests',
-    'south',
     'compressor',
 
     'pytz',
@@ -187,22 +185,7 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'wikipendium.wiki.context_processors.google_analytics_processor',
 )
 
-
-TEST_RUNNER = "ignoretests.DjangoIgnoreTestSuiteRunner"
-IGNORE_TESTS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'registration',
-    'ignoretests',
-    'south',
-    'pytz',
-)
-
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 CACHES = {
     'default': {

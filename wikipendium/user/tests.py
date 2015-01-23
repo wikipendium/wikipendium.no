@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from wikipendium.user.forms import UserChangeForm
-from django.forms import ValidationError
 
 
 class UserTest(TestCase):
@@ -13,8 +12,5 @@ class UserTest(TestCase):
         self.u2.save()
 
     def test_change_username(self):
-        change_user_form = UserChangeForm(instance=self.u1)
-        change_user_form.username = 'christoffer'
-        self.assertRaises(ValidationError,
-                          UserChangeForm,
-                          change_user_form.save())
+        change_user_form = UserChangeForm({'username': 'christoffer'})
+        self.assertFalse(change_user_form.is_valid())

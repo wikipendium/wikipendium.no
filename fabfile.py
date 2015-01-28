@@ -19,7 +19,7 @@ class Site(object):
     def deploy(self):
         self.git_pull()
         self.update_packages()
-        self.run('venv/bin/python manage.py syncdb --migrate')
+        self.run('venv/bin/python manage.py migrate')
         self.run('venv/bin/python manage.py collectstatic --noinput')
         self.restart()
 

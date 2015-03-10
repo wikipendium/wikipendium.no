@@ -10,4 +10,4 @@ newrelic==2.4.0.4
 django-mailgun==0.2.2
 django-compressor==1.4
 git+git://github.com/stianjensen/django-dumpdb.git
-flake8==2.0
+flake8==2.3.0

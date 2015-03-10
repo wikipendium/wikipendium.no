@@ -12,3 +12,4 @@ wikipendium/settings/local.py
 .*.sw*
 venv/*
 static/*
+*.iml

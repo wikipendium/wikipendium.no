@@ -2448,6 +2448,30 @@ pre code {
     letter-spacing: 0;
 }
 
+.tags {
+    font-size: 10px;
+    overflow: hidden;
+}
+
+.tags form {
+    display: none;
+}
+
+.tags-label {
+    float: left;
+    padding-right: 10px;
+}
+
+.tags ul {
+    padding: 0;
+}
+
+.tags li {
+    float: left;
+    list-style-type: none;
+    padding: 0 10px 0 0;
+}
+
 /******************
  * NO ARTICLE
 ******************/

@@ -1,6 +1,11 @@
 from django.shortcuts import render, get_object_or_404
+from django.utils.text import slugify
+from django.http import HttpResponse
+from django.http import HttpResponseBadRequest
 from django.http import HttpResponseRedirect
+from django.http import Http404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from wikipendium.wiki.models import Article, ArticleContent
 from wikipendium.wiki.forms import (
     NewArticleForm, AddLanguageArticleForm, EditArticleForm
@@ -66,6 +71,44 @@ def article(request, slug, lang="en"):
         })
 
     return cachable_article(request, articleContent, lang=lang)
+
+
+@cache_page_per_user
+def tag(request, tag):
+
+    articles_with_tag = Article.objects.filter(tags__name__in=[tag])
+    all_newest_contents = Article.get_all_newest_contents_all_languages()
+    filtered_contents = filter(lambda ac: ac.article in articles_with_tag,
+                               all_newest_contents)
+    if len(filtered_contents) == 0:
+        raise Http404
+    compendiums = [{
+        "label": ac.get_full_title(),
+        "url": ac.get_absolute_url(),
+        "lang": ac.lang,
+        "updated": str(ac.updated),
+    } for ac in filtered_contents]
+
+    return render(request, 'index.html', {
+        "compendiums": json.dumps(compendiums),
+        "tag": tag,
+    })
+
+
+@csrf_exempt
+def add_tag_to_article(request, slug):
+
+    if not request.POST:
+        return HttpResponseBadRequest()
+
+    article = get_object_or_404(Article, slug=slug)
+
+    if 'tag' not in request.POST:
+        return HttpResponseBadRequest()
+
+    tag = slugify(request.POST['tag'])
+    article.tags.add(tag)
+    return HttpResponse(tag)
 
 
 def no_article(request, slug):

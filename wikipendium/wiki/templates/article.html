@@ -45,6 +45,20 @@
 <a href="javascript:;" id="toggle-toc">‹</a>
 <div id=article class=serif>
     <h1 class=title>{{ articleContent.get_full_title }}</h1>
+
+    <div class=tags>
+        <div class=tags-label>
+            Tags:
+        </div>
+        <ul>
+            {% for tag in articleContent.article.tags.all %}
+                <li><a href="/tag/{{ tag }}">{{ tag }}</a></li>
+            {% endfor %}
+        </ul>
+        <form><input /></form>
+        <a href class=tag-adder data-article-slug={{ articleContent.article.slug }}>+</a>
+    </div>
+
 {% autoescape off %}
     {{ content }}
 {% endautoescape %}

@@ -9,5 +9,6 @@ boto==2.9.9
 newrelic==2.4.0.4
 django-mailgun==0.2.2
 django-compressor==1.4
+django-taggit==0.14.0
 git+git://github.com/stianjensen/django-dumpdb.git
 flake8==2.3.0

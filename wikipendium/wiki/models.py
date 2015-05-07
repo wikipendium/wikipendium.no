@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 import datetime
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from markdown import Markdown
+from markdown.extensions.toc import TocExtension
 from .markdown_extra.markdown_wikitables import WikiTableExtension
 from .markdown_extra.nofollow import NofollowExtension
 from wikipendium.cache.decorators import cache_model_method
@@ -161,10 +162,11 @@ class ArticleContent(models.Model):
     def get_html_content(self):
         wikitables = WikiTableExtension()
         nofollow = NofollowExtension()
+        toc = TocExtension([('title', 'Table of Contents')])
 
         md = Markdown(
             extensions=[
-                'toc',
+                toc,
                 'outline',
                 'mathjax',
                 wikitables,

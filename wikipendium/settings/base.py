@@ -191,6 +191,4 @@ CACHES = {
     },
 }
 
-SESSION_COOKIE_SECURE = True
-
 ABSOLUTE_URL_OVERRIDES = {'auth.user': lambda o: "/users/%s/" % o.username}

@@ -42,6 +42,10 @@
 </div>
 <script>
     $(function(){
+        $('.click-to-expand a').click(function(e){
+            e.stopPropagation();
+        });
+
         $('.click-to-expand').click(function(){
             console.log($(this).next());
             $(this).next().toggle();

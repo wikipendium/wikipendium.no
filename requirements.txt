@@ -1,6 +1,6 @@
 django==1.7.3
 django-registration-redux==1.1
-git+git://github.com/sigvef/Python-Markdown.git#egg=markdown
+git+git://github.com/wikipendium/Python-Markdown.git@5e9e809#egg=markdown
 git+git://github.com/wikipendium/python-markdown-mathjax.git#egg=markdown_mathjax
 git+git://github.com/stianjensen/mdx_outline.git
 fabric==1.8.0

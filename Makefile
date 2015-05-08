@@ -33,3 +33,7 @@ test:
 setup:
 	virtualenv venv
 	cp wikipendium/settings/local.py.example wikipendium/settings/local.py
+
+.PHONY: shell
+shell:
+	python manage.py shell

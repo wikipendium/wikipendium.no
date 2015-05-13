@@ -2112,7 +2112,7 @@ body{
  * HEADER
 ******************/
 
-body.article .header-wrapper {
+body.fixed-header .header-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -2123,6 +2123,10 @@ body.article .header-wrapper {
        -moz-box-shadow: 0 0 5px rgba(0,0,0,.5);
             box-shadow: 0 0 5px rgba(0,0,0,.5);
     z-index:9000;
+}
+
+body.article .header-wrapper .container {
+    max-width: none;
 }
 
 #header {
@@ -2210,12 +2214,12 @@ body.frontpage:before {
  * ARTICLE
 ******************/
 
-body.article #content {
+body.fixed-header #content {
     padding-top: 50px;
 }
 
 @media all and (max-width: 650px) {
-    body.article #content {
+    body.fixed-header #content {
         padding-top: 75px;
     }
 }
@@ -2235,6 +2239,10 @@ body.article #content {
     margin-top: -50px;
 }
 
+body.article .contributors {
+    margin-top: 20px;
+}
+
 body.article .contributors,
 body.article .last-updated {
     margin-bottom: 10px;
@@ -2250,17 +2258,164 @@ h1{margin-bottom: 20px;}
 #article .title{
     margin: 0 0 20px;
     text-align: left;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 2.2em;
 }
 
 .toc {
-    padding: .5em;
-    margin: 20px 0;
+    position: fixed;
+    left: 0;
+    top: 50px;
+    bottom: 0;
+    width: 270px;
+    padding: 2em 10px;
     font-size: .9em;
     line-height: 1.4;
+    background: #fbfcff;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: auto;
+
+    word-wrap: break-word;
+
+    border-right: 1px solid #ddd;
+
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    transition: .3s;
 }
+
+body.toc-hidden .toc {
+    -webkit-transform: translateX(-270px);
+    transform: translateX(-270px);
+}
+
+#toggle-toc {
+    position: fixed;
+    top: 65px;
+    left: 252px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    text-decoration: none;
+    text-align: center;
+    font-family: arial, sans-serif;
+    line-height: 30px;
+    font-size: 28px;
+    z-index: 9000;
+
+    color: white;
+
+    padding-right: 1px;
+    background: #60AECA;
+    border: 1px solid #67A1B5;
+
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    transition: transform .3s;
+}
+
+body.toc-hidden #toggle-toc {
+    -webkit-transform: translateX(-230px) rotate(-180deg);
+    -moz-transform: translateX(-230px) rotate(-180deg);
+    transform: translateX(-230px) rotate(-180deg);
+}
+
+.toctitle {
+    font-weight: bold;
+    font-variant: small-caps;
+    padding: 30px;
+}
+
+
+@media screen and (min-width: 768px) {
+    body.article .header-wrapper .container {
+        padding-left: 50px;
+    }
+
+    body.article:not(.toc-hidden) #content,
+    body.article:not(.toc-hidden) #page-footer {
+        padding-left: 315px;
+    }
+}
+
+@media screen and (min-width: 1330px) {
+    body.article:not(.toc-hidden) #content,
+    body.article:not(.toc-hidden) #page-footer {
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .toc,
+    #toggle-toc {
+        display: none;
+    }
+
+    #article {
+        font-size: 1.1em;
+    }
+
+    .section1 h1 {
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+        position: relative;
+        padding-left: 35px;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+    .section1 h1::before {
+        position: absolute;
+        left: 0px;
+        top: 10px;
+        font-size: 0.7em;
+        content: "﹀";
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .section1:not(.open) :not(h1) {
+        display: none;
+    }
+    .section1.open h1::before {
+        content: "︿";
+        top: -3px;
+    }
+
+    #article section.section2 {
+        padding-top: 55px;
+    }
+
+    h1 {
+        font-size: 1.7em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+    h3 {
+        font-size: 1.2em;
+    }
+}
+
+
+.toc > ol > li {
+    margin-top: 10px;
+}
+.toc > ol > li > ol {
+    padding-left: 0;
+}
+.toc > ol > li > a {
+    font-size: 1.15em;
+}
+
 .toc h3 {
     margin: .5em 0;
 }
+
+.toc li ol {
+    padding-left: 10px;
+}
+
 .toc > ol {
     list-style-type: decimal;
     margin: 0;
@@ -2557,6 +2712,8 @@ ins{
 .article-source{
     font-family: monospace;
     white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .diff.equal{
@@ -2691,7 +2848,7 @@ input[readonly=True]{
  * PRINTING
 *******************/
 @media print {
-    body.article .header-wrapper {
+    body.fixed-header .header-wrapper {
         position: relative;
         -webkit-box-shadow: none;
            -moz-box-shadow: none;
@@ -2700,13 +2857,13 @@ input[readonly=True]{
     .header-logo-link .ikipendium {
         display: inline;
     }
-    body.article .header-wrapper nav {
+    body.fixed-header .header-wrapper nav {
         display: none;
     }
-    body.article #content {
+    body.fixed-header #content {
         padding-top: 0;
     }
-    #page-footer .bottom-menu, .donation-appeal {
+    #page-footer .bottom-menu, .donation-appeal, .toc, #toggle-toc {
         display: none;
     }
 }

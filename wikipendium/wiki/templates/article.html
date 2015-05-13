@@ -3,7 +3,7 @@
 
 {% block title %}{{ articleContent.get_full_title }} -{% endblock %}
 
-{% block body_class %}article{% endblock %}
+{% block body_class %}article fixed-header{% endblock %}
 
 {% block nav %}
 <a class=button href=/new/>Create article</a>
@@ -15,10 +15,13 @@
 {% endblock %}
 
 {% block content %}
+{% autoescape off %}
+    {{ toc }}
+{% endautoescape %}
+<a href="javascript:;" id="toggle-toc">‹</a>
 <div id=article class=serif>
     <h1 class=title>{{ articleContent.get_full_title }}</h1>
 {% autoescape off %}
-    {{ toc }}
     {{ content }}
 {% endautoescape %}
 </div>

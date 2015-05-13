@@ -6,11 +6,35 @@
 {% block body_class %}article fixed-header{% endblock %}
 
 {% block nav %}
-<a class=button href=/new/>Create article</a>
-{% language_chooser language_list articleContent %}
-<div class=button-group style=inline-block>
-    <a class="button edit-link" href={{ articleContent.get_edit_url }}>Edit</a>
-    <a class="button history-link" href={{ articleContent.get_history_url }}>History</a>
+<div class=article-nav>
+    <div class=hide-on-mobile>
+        <a class=button href=/new/>Create article</a>
+        {% language_chooser language_list articleContent %}
+        <div class=button-group style=inline-block>
+            <a class="button hidden-sm edit-link" href={{ articleContent.get_edit_url }}>Edit</a>
+            <a class="button history-link" href={{ articleContent.get_history_url }}>History</a>
+        </div>
+    </div>
+
+    <div class=show-on-mobile>
+        <div class="has-dropdown button-dropdown">
+            <a href=# class=button data-toggle=dropdown>
+                Tools
+                <span class=caret></span>
+            </a>
+            <ul class="dropdown right">
+                <li><a class=edit-link href={{ articleContent.get_edit_url }}>Edit</a></li>
+                <li><a class=history-link href={{ articleContent.get_history_url }}>History</a></li>
+                <hr>
+                {% for language, language_article_content_url in language_list %}
+                    <li><a href={{ language_article_content_url }}>Read in {{ language }}</a></li>
+                {% endfor %}
+                <li><a href={{ articleContent.get_add_language_url }}>Add language</a></li>
+                <hr>
+                <li><a href=/new/>Create new article</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
 {% endblock %}
 

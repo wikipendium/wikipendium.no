@@ -107,6 +107,11 @@ $(function(){
         $(tabId).addClass('active');
     });
 
+    $(window).on('hashchange', function(e) {
+        // Impressively, this ensures scrolling doesn't break (as much) in Safari
+        $('.toc').toggleClass('safari-reload-scroll-hack');
+    });
+
     $('.section1 h1').click(function(e) {
         $(this).parent('.section1').toggleClass('open');
     });

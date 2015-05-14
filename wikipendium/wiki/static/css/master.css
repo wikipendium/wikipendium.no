@@ -2672,6 +2672,7 @@ ins{
     list-style-type: none;
     margin: 0;
     margin-bottom: 50px;
+    padding: 0;
 }
 .article-history-list li {
     padding: .5em;

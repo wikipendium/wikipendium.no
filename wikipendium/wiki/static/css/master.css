@@ -2274,7 +2274,7 @@ h1{margin-bottom: 20px;}
     line-height: 1.4;
     background: #fbfcff;
     overflow-y: auto;
-    -webkit-overflow-scrolling: auto;
+    -webkit-overflow-scrolling: touch;
 
     word-wrap: break-word;
 

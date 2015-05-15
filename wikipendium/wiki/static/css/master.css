@@ -2218,6 +2218,10 @@ body.fixed-header #content {
     padding-top: 50px;
 }
 
+.article-nav {
+    display: inline-block;
+}
+
 @media all and (max-width: 650px) {
     body.fixed-header #content {
         padding-top: 75px;

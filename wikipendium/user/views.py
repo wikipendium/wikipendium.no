@@ -22,7 +22,7 @@ def profile(request, username):
 
     email = user.email
     default = "mm"
-    size = 150
+    size = 300
 
     # construct the url
     gravatar_url = "http://www.gravatar.com/avatar/" + \

@@ -2409,7 +2409,7 @@ body.toc-hidden #toggle-toc {
     padding-left: 0;
 }
 .toc > ol > li > a {
-    font-size: 1.15em;
+    font-weight: bold;
 }
 
 .toc h3 {

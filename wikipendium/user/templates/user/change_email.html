@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load extras %}
+
+{% block title %}
+Change email -
+{% endblock %}
+
+{% block content %}
+    <h1>Change your email</h1>
+
+    <p>Your current email is {{ email }}.</p>
+
+    <form method=POST class="change-password-form {% if form.errors %}form-error{% endif %}">
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+            <div class=error-message>
+                {{form.non_field_errors|join:", "}}
+            </div>
+        {% endif %}
+        <div class="field-group clearfix">
+            <label class=field-label for=id_email>New email:</label>
+            <div class="fields {%if form.email.errors %}error{% endif %}">
+                {{ form.email }}
+            </div>
+        </div>
+        <input type=submit class="button" value=Change! />
+    </form>
+{% endblock %}

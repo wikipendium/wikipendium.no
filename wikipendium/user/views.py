@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from wikipendium.wiki.models import ArticleContent
-from wikipendium.user.forms import UserChangeForm
+from wikipendium.user.forms import UserChangeForm, EmailChangeForm
 from django.contrib.auth.models import User
 import hashlib
 import urllib
@@ -55,6 +55,27 @@ def change_username(request):
 
     return render(request, 'user/change_username.html', {
         'form': user_change_form,
+    })
+
+
+@login_required
+def change_email(request):
+    email_change_form = EmailChangeForm()
+
+    if request.method == 'POST':
+        email_change_form = EmailChangeForm(request.POST)
+        if email_change_form.is_valid():
+            new_email = email_change_form.cleaned_data['email']
+            request.user.email = new_email
+            request.user.save()
+
+            return render(request, 'user/change_email_complete.html', {
+                'email': new_email,
+            })
+
+    return render(request, 'user/change_email.html', {
+        'form': email_change_form,
+        'email': request.user.email,
     })
 
 

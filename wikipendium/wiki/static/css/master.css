@@ -2853,6 +2853,10 @@ input[readonly=True]{
  * PRINTING
 *******************/
 @media print {
+    body {
+      font-size: 10px;
+    }
+
     body.fixed-header .header-wrapper {
         position: relative;
         -webkit-box-shadow: none;

@@ -46,3 +46,6 @@ CACHES = {
     },
 }
 """
+
+# Disable secure cookies in development environments
+SESSION_COOKIE_SECURE = False

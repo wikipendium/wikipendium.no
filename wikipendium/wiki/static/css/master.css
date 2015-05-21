@@ -820,10 +820,6 @@ a:hover {
   text-decoration: underline;
 }
 
-p a {
-  text-decoration: underline;
-}
-
 ul, ol {
   padding-left: 30px;
   margin: 0;

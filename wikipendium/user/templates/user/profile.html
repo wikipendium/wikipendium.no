@@ -18,6 +18,11 @@
         <h2 class=title>{{ user }}</h2>
         {% if user == request.user %}
             <a href=/accounts/username/change>Change your username</a>
+
+            <p>
+              <strong>Email:</strong>
+              {{ user.email }} <a href=/accounts/email/change>Change</a>
+            </p>
         {% endif %}
    </div>
    <h3 class=contributions-title>Contributions:</h3>

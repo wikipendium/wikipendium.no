@@ -14,4 +14,5 @@ urlpatterns = patterns(
     url(r'^users/(?P<username>[\w|\W]+)/$',
         'profile', name='user'),
     url(r'^accounts/username/change/$', 'change_username'),
+    url(r'^accounts/email/change/$', 'change_email'),
 )

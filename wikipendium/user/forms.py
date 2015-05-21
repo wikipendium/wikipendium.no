@@ -12,3 +12,7 @@ class UserChangeForm(Form):
             raise ValidationError('Username already taken!')
 
         return cleaned_data
+
+
+class EmailChangeForm(Form):
+    email = CharField(max_length=75, label='New email')

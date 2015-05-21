@@ -1346,36 +1346,8 @@ input::-moz-focus-inner {
   padding-left: 1.5em;
   padding-right: 1.5em;
 }
-.button.button-facebook {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1px, #4264aa), color-stop(1px, #4c70ba), color-stop(2px, #4c70ba), color-stop(2px, #4264aa), color-stop(100%, #344e86));
-  background-image: -webkit-linear-gradient(top, #4264aa 1px, #4c70ba 1px, #4c70ba 2px, #4264aa 2px, #344e86 100%);
-  background-image: -moz-linear-gradient(top, #4264aa 1px, #4c70ba 1px, #4c70ba 2px, #4264aa 2px, #344e86 100%);
-  background-image: -o-linear-gradient(top, #4264aa 1px, #4c70ba 1px, #4c70ba 2px, #4264aa 2px, #344e86 100%);
-  background-image: linear-gradient(top, #4264aa 1px, #4c70ba 1px, #4c70ba 2px, #4264aa 2px, #344e86 100%);
-  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
-  color: white;
-}
-.button.button-facebook:hover {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1px, #4c70ba), color-stop(1px, #5f7ec1), color-stop(2px, #5f7ec1), color-stop(2px, #5f7ec1), color-stop(100%, #3b5998));
-  background-image: -webkit-linear-gradient(top, #4c70ba 1px, #5f7ec1 1px, #5f7ec1 2px, #5f7ec1 2px, #3b5998 100%);
-  background-image: -moz-linear-gradient(top, #4c70ba 1px, #5f7ec1 1px, #5f7ec1 2px, #5f7ec1 2px, #3b5998 100%);
-  background-image: -o-linear-gradient(top, #4c70ba 1px, #5f7ec1 1px, #5f7ec1 2px, #5f7ec1 2px, #3b5998 100%);
-  background-image: linear-gradient(top, #4c70ba 1px, #5f7ec1 1px, #5f7ec1 2px, #5f7ec1 2px, #3b5998 100%);
-}
-.button.button-facebook:active, .button.button-facebook.active {
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #344e86), color-stop(100%, #3b5998));
-  background-image: -webkit-linear-gradient(top, #344e86 0%, #3b5998 100%);
-  background-image: -moz-linear-gradient(top, #344e86 0%, #3b5998 100%);
-  background-image: -o-linear-gradient(top, #344e86 0%, #3b5998 100%);
-  background-image: linear-gradient(top, #344e86 0%, #3b5998 100%);
-  -webkit-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
-  box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
-}
-.button.button-twitter {
+
+.button.button-primary {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1px, #00aced), color-stop(1px, #07bbff), color-stop(2px, #07bbff), color-stop(2px, #00aced), color-stop(100%, #0087ba));
   background-image: -webkit-linear-gradient(top, #00aced 1px, #07bbff 1px, #07bbff 2px, #00aced 2px, #0087ba 100%);
   background-image: -moz-linear-gradient(top, #00aced 1px, #07bbff 1px, #07bbff 2px, #00aced 2px, #0087ba 100%);
@@ -1387,14 +1359,14 @@ input::-moz-focus-inner {
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
   color: white;
 }
-.button.button-twitter:hover {
+.button.button-primary:hover {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1px, #07bbff), color-stop(1px, #21c2ff), color-stop(2px, #21c2ff), color-stop(2px, #21c2ff), color-stop(100%, #0099d3));
   background-image: -webkit-linear-gradient(top, #07bbff 1px, #21c2ff 1px, #21c2ff 2px, #21c2ff 2px, #0099d3 100%);
   background-image: -moz-linear-gradient(top, #07bbff 1px, #21c2ff 1px, #21c2ff 2px, #21c2ff 2px, #0099d3 100%);
   background-image: -o-linear-gradient(top, #07bbff 1px, #21c2ff 1px, #21c2ff 2px, #21c2ff 2px, #0099d3 100%);
   background-image: linear-gradient(top, #07bbff 1px, #21c2ff 1px, #21c2ff 2px, #21c2ff 2px, #0099d3 100%);
 }
-.button.button-twitter:active, .button.button-twitter.active {
+.button.button-primary:active, .button.button-primary.active {
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0087ba), color-stop(100%, #0099d3));
   background-image: -webkit-linear-gradient(top, #0087ba 0%, #0099d3 100%);
   background-image: -moz-linear-gradient(top, #0087ba 0%, #0099d3 100%);
@@ -1404,6 +1376,7 @@ input::-moz-focus-inner {
   -moz-box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
   box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.15);
 }
+
 .button.button-disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -1837,7 +1810,7 @@ input::-moz-focus-inner {
 }
 .tabs > li.active > a {
   background: none;
-  border-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.2) #fafafa rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.2) #ffffff rgba(0, 0, 0, 0.2);
   color: #999999;
 }
 .tabs > li.active > a:hover {
@@ -2133,7 +2106,7 @@ body.fixed-header .header-wrapper {
     z-index:9000;
 }
 
-body.article .header-wrapper .container {
+body.fixed-header .header-wrapper .container {
     max-width: none;
 }
 
@@ -2341,7 +2314,7 @@ body.toc-hidden #toggle-toc {
 
 
 @media screen and (min-width: 768px) {
-    body.article .header-wrapper .container {
+    body.fixed-header .header-wrapper .container {
         padding-left: 50px;
     }
 
@@ -2485,14 +2458,20 @@ ul.no-list {
  * CODEMIRROR
 ******************/
 
-.CodeMirror {
+body.editor .CodeMirror {
     border:1px solid #ccc;
-    min-height: 400px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
     -o-border-radius: 2px;
     border-radius: 2px;
+
+    position: absolute;
+    top: 65px;
+    bottom: 75px;
+    left: 20px;
+    right: 20px;
+    height: auto;
 }
 
 .CodeMirror-wrap.CodeMirror pre {
@@ -2577,20 +2556,6 @@ form .field-group.content-field {
 
 .green-bg{
     background: rgba(0, 204, 255, 0.5);
-}
-
-/********************
- * HELP-CONTAINER
-********************/
-
-.help-container {
-    margin: 1em 0;
-}
-.help-container h3 {
-    margin: .5em 0;
-}
-.help-container ul {
-    padding-left: 10px;
 }
 
 /********************
@@ -2842,8 +2807,22 @@ input[readonly=True]{
 }
 
 /*******************
- * TABS
+ * EDITOR
 *******************/
+
+body.editor #content {
+    position: absolute;
+    top: 50px;
+    left: 270px;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+}
+
+
+/********************
+ * HELP-CONTAINER
+********************/
 
 .tab-container .tab {
     display: none;
@@ -2852,9 +2831,121 @@ input[readonly=True]{
     display: block;
 }
 
+
+#help-container {
+    display: none;
+    position: fixed;
+    top: 15%;
+    bottom: 7%;
+    left: 5%;
+    right: 5%;
+    border: 1px solid #ddd;
+    background: white;
+
+    z-index: 8000;
+
+    border-radius: 5px;
+}
+
+#help-container h3 {
+    margin: .5em 0;
+}
+
+#help-container h2 {
+    float: left;
+    font-weight: normal;
+    line-height: 50px;
+    padding: 0 10px;
+    margin: 0;
+}
+
+#help-tabs {
+    height: 50px;
+    padding-top: 10px;
+    padding-left: 0;
+}
+
 #help-tabs-container {
-    min-height: 300px;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#help-tabs-container .tab {
+    height: 100%;
+}
+
+#tab-close-button {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    z-index: 8100;
+
+    color: white;
+    background: #ccc;
+    border-radius: 50%;
+}
+#tab-close-button:hover {
+    text-decoration: none;
+    background: #ddd;
+}
+
+
+#help-tabs-container .tab {
+    overflow-y: auto;
     padding: 5px 20px;
+}
+
+#overlay {
+    display: none;
+
+    position: fixed;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 7000;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.bottom-bar {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 70px;
+    line-height: 40px;
+    padding: 15px 20px;
+}
+
+@media screen and (max-width: 767px) {
+    body.editor #content {
+        left: 0;
+    }
+    body.editor .toc {
+        display: none;
+    }
+
+    body.editor #help-tabs {
+        display: none;
+    }
+
+    body.editor #help-tabs-container {
+        top: 0;
+        overflow-y: auto;
+    }
+    body.editor #help-tabs-container .tab {
+        display: block;
+        overflow-y: visible;
+        padding-right: 40px;
+        height: auto;
+    }
 }
 
 /*******************

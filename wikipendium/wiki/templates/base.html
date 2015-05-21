@@ -38,6 +38,7 @@
 
     <script src="{{STATIC_URL}}google-code-prettify/prettify.js"></script>
     <script src="{{STATIC_URL}}chosen/chosen.jquery.min.js"></script>
+    <script src="{{STATIC_URL}}js/jquery.ba-throttle-debounce.min.js"></script>
     <script src={{STATIC_URL}}js/script.js></script>
     {% block js %}
     {% endblock %}
@@ -107,6 +108,7 @@
         </div>
         <div id="push"></div>
     </div>
+    {% block footer %}
     <footer id="page-footer">
         <div class="container">
             <ul class=bottom-menu style=font-variant:small-caps>
@@ -173,6 +175,7 @@
             </div>
         </div>
     </footer>
+    {% endblock %}
 
 
 

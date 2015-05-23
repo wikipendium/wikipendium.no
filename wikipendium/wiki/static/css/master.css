@@ -2304,8 +2304,8 @@ body.toc-hidden .toc {
 
 #toggle-toc {
     position: fixed;
-    top: 65px;
-    left: 252px;
+    top: 70px;
+    left: 290px;
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -2328,9 +2328,9 @@ body.toc-hidden .toc {
 }
 
 body.toc-hidden #toggle-toc {
-    -webkit-transform: translateX(-230px) rotate(-180deg);
-    -moz-transform: translateX(-230px) rotate(-180deg);
-    transform: translateX(-230px) rotate(-180deg);
+    -webkit-transform: translateX(-270px) rotate(-180deg);
+    -moz-transform: translateX(-270px) rotate(-180deg);
+    transform: translateX(-270px) rotate(-180deg);
 }
 
 .toctitle {

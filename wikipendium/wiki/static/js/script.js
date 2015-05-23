@@ -58,16 +58,79 @@ $(function(){
 
         codeMirror.on("change", function(){
             editor_has_been_updated = true;
+
+            $.throttle(100, parseHeadlines)();
         });
 
-        !function(){
+        function parseHeadlines() {
+            var headlines = [];
+            var regex = RegExp("^#+");
+            codeMirror.eachLine(function(lineHandle) {
+                if (lineHandle.text.substr(0, 1) == "#") {
+                    var headerIndent = regex.exec(lineHandle.text);
+                    var text = lineHandle.text.replace(regex, '').trim();
+                    headlines.push({
+                        text: text,
+                        lineNumber: codeMirror.getLineNumber(lineHandle),
+                        level: headerIndent[0].length,
+                        children: []
+                    });
+                    headlines[headlines.length-1].children.text = text;
+                }
+            });
+
+            var toc = [];
+            var currentLevel = 0;
+            var currentStack = [toc];
+            for (var i=0; i < headlines.length; i++) {
+                var headline = headlines[i];
+                var currentParent;
+                while (headline.level <= currentLevel) {
+                    currentParent = currentStack.pop();
+                    currentLevel = currentStack.length - 1;
+                }
+                currentParent = currentStack[currentStack.length - 1];
+
+                currentParent.push(headline);
+                currentLevel = headline.level;
+                currentStack.push(headline.children);
+            }
+
+            var tocContainer = document.querySelector('.toc > ol');
+            tocContainer.innerHTML = '';
+            createTocList(toc, tocContainer);
+        }
+
+        function createTocList(tree, parentNode) {
+            for (var i=0; i < tree.length; i++) {
+                var node = tree[i];
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.setAttribute('href', '#' + node.lineNumber);
+                a.innerText = node.text;
+                li.appendChild(a);
+
+                if (node.children.length > 0) {
+                    var ol = document.createElement('ol');
+                    createTocList(node.children, ol);
+                    li.appendChild(ol);
+                }
+                parentNode.appendChild(li);
+            }
+        }
+
+        function goToLine() {
             var line_number = window.location.hash && +window.location.hash.substring(1);
-            if(line_number){
+            if (line_number !== "") {
                 /* scroll to bottom first, so that the line we want will appear in the top of the window */
                 codeMirror.doc.setCursor(1e1000);
                 codeMirror.doc.setCursor(line_number - 1);
             }
-        }();
+        }
+
+        goToLine();
+        parseHeadlines();
+        $(window).on('hashchange', goToLine);
 
         $('form').submit(function(){
             // Allow form to submit without being bugged about unsaved changes
@@ -105,6 +168,15 @@ $(function(){
         $('.tab-container .tab').removeClass('active');
         var tabId = $(this).attr('href');
         $(tabId).addClass('active');
+    });
+
+    $('#tab-close-button, #overlay').click(function(e) {
+        $('#help-container').hide();
+        $('#overlay').hide();
+    });
+    $('#display-help-button').click(function(e) {
+        $('#help-container').show();
+        $('#overlay').show();
     });
 
     $(window).on('hashchange', function(e) {

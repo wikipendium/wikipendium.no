@@ -5,19 +5,52 @@
   {{ title }} –
 {% endblock %}
 
+{% block body_class %}editor fixed-header{% endblock %}
+
 {% block nav %}
-<a class=button href=/new/>Create article</a>
-{% if language_list %}
-    {% language_chooser language_list articleContent %}
-{% endif %}
+<div class=article-nav>
+    <div class=hide-on-mobile>
+        <a class=button href=/new/>Create article</a>
+        {% language_chooser language_list articleContent %}
+
+        {% if articleContent %}
+            <div class=button-group style=inline-block>
+                <a class=button href={{ articleContent.get_absolute_url }}>Article</a>
+                <a class="button history-link" href={{ articleContent.get_history_url }}>History</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class=show-on-mobile>
+        <div class="has-dropdown button-dropdown">
+            <a href=# class=button data-toggle=dropdown>
+                Tools
+                <span class=caret></span>
+            </a>
+            <ul class="dropdown right">
+                <li><a class=edit-link href={{ articleContent.get_absolute_url }}>Article</a></li>
+                <li><a class=history-link href={{ articleContent.get_history_url }}>History</a></li>
+                <hr>
+                {% for language, language_article_content_url in language_list %}
+                    <li><a href={{ language_article_content_url }}>Edit in {{ language }}</a></li>
+                {% endfor %}
+                <li><a href={{ articleContent.get_add_language_url }}>Add language</a></li>
+                <hr>
+                <li><a href=/new/>Create new article</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
-{% if articleContent %}
-    <a href={{ articleContent.get_absolute_url }}>« Back</a>
-{% endif %}
 
-<form method="post" action="">
+<div class=toc>
+  <span class=toctitle>Table of Contents</span>
+  <ol></ol>
+</div>
+
+<form method="post" action="" class="article-editor">
     {% if form.parent_id %}
     {{ form.parent_id }}
     {% endif %}
@@ -61,10 +94,19 @@
             {% endif %}
         </div>
     </div>
-    <input type=submit class="button button-large float-right" value=Save! />
+
+    <div class="bottom-bar">
+        <a href="javascript:;" id="display-help-button">Help</a>
+        <input type=submit class="button button-large button-primary float-right" value=Save! />
+    </div>
 </form>
-<div class="help-container">
-    <h2>How do I do this?</h2>
+
+<div id="help-container">
+    <a id="tab-close-button" href="javascript:;">x</a>
     {% include "writing_guide.html" %}
+
 </div>
+<div id=overlay></div>
 {% endblock %}
+
+{% block footer %}{% endblock %}

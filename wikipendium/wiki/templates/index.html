@@ -14,7 +14,20 @@
 
 <script src={{STATIC_URL}}js/autocomplete.js></script>
 
-<input id=searchbox type=text placeholder="find a compendium..." autocomplete=off />
+{% if tag %}
+    <p>
+        Showing compendiums with tag: <em>{{ tag }}</em>.
+        <a href=/>Show all compendiums</a>.
+    </p>
+{% endif %}
+
+<input
+    id=searchbox
+    {% if tag %} style=display:none {% endif %}
+    type=text
+    placeholder="find a compendium..."
+    autocomplete=off
+    />
 
 <div class="serif all-articles-wrapper">
     <ul class=article-all-list id=suggestions>

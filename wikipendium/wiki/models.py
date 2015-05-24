@@ -11,9 +11,11 @@ from .markdown_extra.markdown_wikitables import WikiTableExtension
 from .markdown_extra.nofollow import NofollowExtension
 from wikipendium.cache.decorators import cache_model_method
 from re import sub
+from taggit.managers import TaggableManager
 
 
 class Article(models.Model):
+    tags = TaggableManager()
     slug = models.SlugField(max_length=256, unique=True)
     slug_regex = ur'A-Za-z0-9æøåÆØÅ\-'
 

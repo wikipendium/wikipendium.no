@@ -18,6 +18,7 @@ article_regex = ur'(?P<slug>[' + Article.slug_regex + ']+)[^/]*'
 
 article_patterns = patterns(
     'wikipendium.wiki.views',
+    url(r'^add_tag/$', 'add_tag_to_article'),
     url(r'^edit/$', 'edit'),
     url(r'^history/$', 'history'),
     url(r'^history/(?P<id>\d+)/$', 'history_single'),
@@ -33,6 +34,8 @@ urlpatterns = patterns(
         'new', name='newarticle'),
 
     url(r'^', include('wikipendium.user.urls')),
+
+    url(r'^tag/(?P<tag>[a-zA-Z0-9_-]+)/$', 'tag'),
 
     url(r'^' + article_regex + '/$',
         RedirectView.as_view(url='/%(slug)s')),

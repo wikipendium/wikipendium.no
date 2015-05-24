@@ -116,6 +116,7 @@ INSTALLED_APPS = (
 
     'registration',
     'compressor',
+    'taggit',
 
     'pytz',
     'django_dumpdb',

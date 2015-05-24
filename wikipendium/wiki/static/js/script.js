@@ -209,7 +209,6 @@ $(function(){
         this.html("<em>Last updated:</em> " + moment(this.text()).fromNow() + ".")
     }).apply($('.last-updated'));
 
-
     function scrollContainerToShowDomElement(container, element) {
       var containerHeight = $(container).outerHeight();
       var containerScrollTop = $(container).scrollTop();
@@ -262,6 +261,36 @@ $(function(){
         e.preventDefault();
       }
     });
+
+    (function() {
+        var tagUl = this.find('ul');
+        var tagAdder = this.find('.tag-adder');
+        var articleSlug = tagAdder.data('article-slug');
+        var tagForm = this.find('form');
+        var tagInput = this.find('input');
+        tagInput.blur(function(e) {
+          if(!tagInput.val()) {
+            tagForm.hide();
+            tagAdder.show();
+          }
+        });
+        tagAdder.click(function(e) {
+          e.preventDefault();
+          tagAdder.hide();
+          tagForm.show();
+          tagInput.focus();
+        });
+        tagForm.submit(function(e) {
+          e.preventDefault();
+          var tag = tagInput.val();
+          $.post('/' + articleSlug + '/add_tag/', {tag: tag}, function(tag) {
+            tagAdder.show();
+            tagForm.hide();
+            tagInput.val('');
+            tagUl.append($('<li><a href="/tag/' + tag + '">' + tag + '</a></li>'));
+          });
+        });
+    }).apply($('.tags'));
 });
 
 // Stay in web-app on iOS

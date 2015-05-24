@@ -16,7 +16,7 @@ def home(request):
 
     all_newest_contents = Article.get_all_newest_contents_all_languages()
 
-    trie = [{
+    compendiums = [{
         "label": ac.get_full_title(),
         "url": ac.get_absolute_url(),
         "lang": ac.lang,
@@ -24,7 +24,7 @@ def home(request):
     } for ac in all_newest_contents]
 
     return render(request, 'index.html', {
-        "trie": json.dumps(trie),
+        "compendiums": json.dumps(compendiums),
     })
 
 

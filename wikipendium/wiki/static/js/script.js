@@ -208,6 +208,60 @@ $(function(){
     (function() {
         this.html("<em>Last updated:</em> " + moment(this.text()).fromNow() + ".")
     }).apply($('.last-updated'));
+
+
+    function scrollContainerToShowDomElement(container, element) {
+      var containerHeight = $(container).outerHeight();
+      var containerScrollTop = $(container).scrollTop();
+      var elementOffset = $(element).position().top;
+      var elementHeight = $(element).outerHeight();
+      var padding = 10;
+
+      if(elementOffset - padding < 0) {
+        $(container).scrollTop(containerScrollTop + elementOffset - padding);
+      } else if(elementOffset  + elementHeight + padding > containerHeight) {
+        $(container).scrollTop(containerScrollTop + elementOffset - containerHeight + elementHeight + padding);
+      }
+    }
+
+    var scrollDirty = false;
+    var sections = $('#article section');
+    function highlightScrollPositionInTOC() {
+      scrollDirty = false;
+      var scrollTop = $(window).scrollTop();
+      var bestOffset = -1e99;
+      var currentSection = sections.eq(0);
+      for(var i = 0; i < sections.length; i++) {
+        var section = sections.eq(i);
+        var offset = $(section).offset().top - scrollTop;
+        if(offset <= 0 && offset > bestOffset) {
+          bestOffset = offset;
+          currentSection = section;
+        }
+      }
+
+      var elementToHilight = $('.toc a[href=#' + currentSection.attr('id') + ']');
+      $('.toc a').removeClass('hilight');
+      elementToHilight.addClass('hilight');
+      scrollContainerToShowDomElement($('.toc'), elementToHilight);
+    }
+
+    $(window).scroll(function() {
+      if(!scrollDirty) {
+        scrollDirty = true;
+        requestAnimationFrame(highlightScrollPositionInTOC);
+      }
+    });
+
+    $('.toc').on('mousewheel', function(e, d) {
+      var toc = $(this);
+      if (d > 0 && toc.scrollTop() == 0) {
+        e.preventDefault();
+      }
+      else if (d < 0 && (Math.ceil(toc.scrollTop()) == toc[0].scrollHeight - toc.innerHeight())) {
+        e.preventDefault();
+      }
+    });
 });
 
 // Stay in web-app on iOS

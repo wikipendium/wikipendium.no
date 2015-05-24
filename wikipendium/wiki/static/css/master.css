@@ -2270,6 +2270,17 @@ h1{margin-bottom: 20px;}
     transition: .3s;
 }
 
+.toc a {
+    padding: 1px 4px;
+    display: block;
+}
+
+.toc a.hilight {
+    background: #60AECA;
+    color: white;
+    border-radius: 4px;
+}
+
 body.toc-hidden .toc {
     -webkit-transform: translateX(-270px);
     transform: translateX(-270px);

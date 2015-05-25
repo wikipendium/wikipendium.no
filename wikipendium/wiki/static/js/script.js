@@ -227,7 +227,9 @@ $(function(){
       var currentSection = sections.eq(0);
       for(var i = 0; i < sections.length; i++) {
         var section = sections.eq(i);
-        var offset = $(section).offset().top - scrollTop;
+        // Using floor to avoid half pixel problems
+        // scrollTop() returns an integer while offset().top can return a decimal
+        var offset = Math.floor($(section).offset().top - scrollTop);
         if(offset <= 0 && offset > bestOffset) {
           bestOffset = offset;
           currentSection = section;

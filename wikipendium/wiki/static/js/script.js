@@ -107,7 +107,7 @@ $(function(){
                 var li = document.createElement('li');
                 var a = document.createElement('a');
                 a.setAttribute('href', '#' + node.lineNumber);
-                a.innerText = node.text;
+                a.textContent = node.text;
                 li.appendChild(a);
 
                 if (node.children.length > 0) {

@@ -3,6 +3,21 @@
 
 {% block title %}{{ articleContent.get_full_title }} -{% endblock %}
 
+{% block meta %}
+<meta property=og:title content="{{ articleContent.get_full_title }}" />
+<meta property=og:type content=article />
+<meta property=og:image content=https://www.wikipendium.no/static/apple-touch/icon-114x114.png />
+<meta property=og:url content="https://www.wikipendium.no{{ articleContent.get_absolute_url }}" />
+<meta property=og:description content="Wikipendium for {{ articleContent.get_full_title }}." />
+{% for tag in articleContent.article.tags.all %}
+    <meta property=og:article:tag content="{{ tag }}" />
+{% endfor %}
+{% for user in contributors %}
+    <meta property=og:article:author content="{{ user.get_full_name|default:user.username }}" />
+{% endfor %}
+{% endblock %}
+
+
 {% block body_class %}article fixed-header{% endblock %}
 
 {% block nav %}

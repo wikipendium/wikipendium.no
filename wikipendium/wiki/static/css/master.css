@@ -2329,15 +2329,13 @@ body.toc-hidden #toggle-toc {
         padding-left: 50px;
     }
 
-    body.article:not(.toc-hidden) #content,
-    body.article:not(.toc-hidden) #page-footer {
+    body.article:not(.toc-hidden) {
         padding-left: 315px;
     }
 }
 
 @media screen and (min-width: 1330px) {
-    body.article:not(.toc-hidden) #content,
-    body.article:not(.toc-hidden) #page-footer {
+    body.article:not(.toc-hidden) {
         padding-left: 0;
     }
 }

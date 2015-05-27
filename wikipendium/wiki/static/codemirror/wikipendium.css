@@ -1,10 +1,10 @@
-.cm-s-wikipendium span.cm-keyword {color: black;}
+.cm-s-wikipendium span.cm-keyword {}
 .cm-s-wikipendium span.cm-atom {color: #6C8CD5;}
 .cm-s-wikipendium span.cm-number {color: #164;}
 .cm-s-wikipendium span.cm-def {text-decoration:underline;}
-.cm-s-wikipendium span.cm-variable {color: black; }
-.cm-s-wikipendium span.cm-variable-2 {color:black;}
-.cm-s-wikipendium span.cm-variable-3 {color: black; }
+.cm-s-wikipendium span.cm-variable {}
+.cm-s-wikipendium span.cm-variable-2 {}
+.cm-s-wikipendium span.cm-variable-3 {}
 .cm-s-wikipendium span.cm-property {}
 .cm-s-wikipendium span.cm-operator {}
 .cm-s-wikipendium span.cm-comment {color: #0080FF; font-style: italic;}

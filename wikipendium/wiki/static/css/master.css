@@ -2224,13 +2224,11 @@ body.fixed-header #content {
     margin-top: -50px;
 }
 
-body.article .contributors {
-    margin-top: 20px;
-}
-
 body.article .contributors,
 body.article .last-updated {
-    margin-bottom: 10px;
+    position: relative;
+    max-width: 640px;
+    margin: 20px auto 10px;
 }
 
 h1,h2,h3,h4,h5,h6{

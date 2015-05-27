@@ -82,11 +82,7 @@
 <div class=contributors>
     <h2>Written by</h2>
     {% for user in contributors %}
-        <div>
-            <a href=/users/{{user.username}}>
-                {{ user.get_full_name|default:user.username }}
-            </a>
-        </div>
+        <a href=/users/{{user.username}}>{{ user.get_full_name|default:user.username }}</a>
     {% endfor %}
 </div>
 

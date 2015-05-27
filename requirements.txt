@@ -1,5 +1,5 @@
 django==1.8.2
-django-registration-redux==1.1
+django-registration-redux==1.2
 git+git://github.com/wikipendium/Python-Markdown.git@5e9e809#egg=markdown
 git+git://github.com/wikipendium/python-markdown-mathjax.git#egg=markdown_mathjax
 git+git://github.com/stianjensen/mdx_outline.git

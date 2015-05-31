@@ -15,4 +15,4 @@ class UserChangeForm(Form):
 
 
 class EmailChangeForm(Form):
-    email = EmailField(max_length=75, label='New email')
+    email = EmailField(max_length=254, label='New email')

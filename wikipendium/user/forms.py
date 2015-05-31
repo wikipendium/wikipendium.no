@@ -1,4 +1,4 @@
-from django.forms import Form, CharField, ValidationError
+from django.forms import Form, CharField, EmailField, ValidationError
 from django.contrib.auth.models import User
 
 
@@ -15,4 +15,4 @@ class UserChangeForm(Form):
 
 
 class EmailChangeForm(Form):
-    email = CharField(max_length=75, label='New email')
+    email = EmailField(max_length=75, label='New email')

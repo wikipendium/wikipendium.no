@@ -7,6 +7,7 @@ wikipendium/bin/
 wikipendium/lib/
 wikipendium/include/
 wikipendium/settings/local.py
+wikipendium/settings/whoosh_index/
 *.db
 .gitignore
 .*.sw*

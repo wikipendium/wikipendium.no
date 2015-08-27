@@ -31,6 +31,7 @@ urlpatterns = patterns(
     url(r'^stats/', include('wikipendium.stats.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^upload/', include('wikipendium.upload.urls')),
+    url(r'^search/', include('haystack.urls')),
     url(r'^$', 'home', name='home'),
     url(r'^new/(?P<slug>[' + Article.slug_regex + ']+)?$',
         'new', name='newarticle'),

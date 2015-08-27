@@ -1,0 +1,34 @@
+.search-form {
+  margin-top: 30px;
+}
+
+.highlighted {
+  background: rgba(109, 132, 184, 0.2);
+}
+
+.search-result {
+  margin: 30px 0;
+}
+
+.search-result-title a {
+  color: #006699;
+  text-decoration: none;
+
+  &:hover {
+    color: #0088cc;
+  }
+}
+
+.search-result-url {
+  font-family: monospace;
+  color: green;
+  margin-bottom: 3px;
+}
+
+.search-result-updated-time {
+  font-style: italic;
+
+  a {
+    color: #999999;
+  }
+}

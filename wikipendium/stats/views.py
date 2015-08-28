@@ -26,8 +26,8 @@ def index(request):
 
 
 @cache
-def _generate_user_statistics_for_one_day(**kwargs):
-    now = datetime(kwargs['year'], kwargs['month'], kwargs['day'])
+def _generate_user_statistics_for_one_day(year=None, month=None, day=None):
+    now = datetime(year, month, day)
     now = now.replace(tzinfo=utc)
     users_24_hours = map(
         lambda a: a.edited_by,

@@ -91,6 +91,9 @@
 </div>
 
 <div class=last-updated>
-    {{ articleContent.updated|date:"r" }}
+    <em>Last updated:</em>
+    <time datetime="{{ articleContent.updated|date:"c" }}">
+        {{ articleContent.updated|date:"r" }}
+    </time>.
 </div>
 {% endblock %}

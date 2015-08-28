@@ -189,8 +189,8 @@ $(function(){
     });
 
     (function() {
-        this.html("<em>Last updated:</em> " + moment(this.text()).fromNow() + ".")
-    }).apply($('.last-updated'));
+        this.html(moment(this.attr('datetime')).fromNow())
+    }).apply($('time'));
 
     function scrollContainerToShowDomElement(container, element) {
       var containerHeight = $(container).outerHeight();

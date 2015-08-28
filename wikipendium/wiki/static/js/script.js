@@ -143,18 +143,6 @@ $(function(){
         no_results_text: "Language already in use, or doesn't exist."
     });
 
-    function create_article() {
-        var redirect_url = $('#create-article-slug').val() + "/edit/";
-        window.location.href = redirect_url;
-        return false;
-    }
-    $('#create-button').click( create_article );
-    $('#create-article-slug').on('keypress', function(e) {
-        if(e.keyCode==13){
-            create_article();
-        }
-    });
-
     window.onbeforeunload = function(e) {
         if (editor_has_been_updated) {
             return "You have unsaved changes!";

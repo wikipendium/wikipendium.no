@@ -21,23 +21,7 @@ def index(request):
     return render(request, 'stats/index.html', {
         'number_of_acs_updated_in_the_last_24_hours':
             len(acs_updated_in_the_last_24_hours),
-        'users': {
-                'most_contrib_24_hours':
-                    {
-                        'user': user_stats[0][0],
-                        'contributions': user_stats[0][1],
-                    },
-                'most_contrib_week':
-                    {
-                        'user': user_stats[1][0],
-                        'contributions': user_stats[1][1],
-                    },
-                'most_contrib_month':
-                    {
-                        'user': user_stats[2][0],
-                        'contributions': user_stats[2][1],
-                    },
-            },
+        'users': user_stats
     })
 
 
@@ -62,6 +46,17 @@ def _generate_user_statistics_for_one_day(**kwargs):
     user_most_contributions_week = Counter(users_week).most_common(1)
     user_most_contributions_month = Counter(users_month).most_common(1)
 
-    return [user_most_contributions_24_hours[0],
-            user_most_contributions_week[0],
-            user_most_contributions_month[0]]
+    return {
+        'most_contrib_24_hours': {
+            'user': user_most_contributions_24_hours[0],
+            'contributions': user_most_contributions_24_hours[1],
+        },
+        'most_contrib_week': {
+            'user': user_most_contributions_week[0],
+            'contributions': user_most_contributions_week[1],
+        },
+        'most_contrib_month': {
+            'user': user_most_contributions_month[0],
+            'contributions': user_most_contributions_month[1],
+        }
+    }

@@ -42,9 +42,12 @@ def _generate_user_statistics_for_one_day(**kwargs):
         Article.get_all_contents(timezone.timedelta(weeks=4), now)
         )
 
-    user_most_contributions_24_hours = Counter(users_24_hours).most_common(1)
-    user_most_contributions_week = Counter(users_week).most_common(1)
-    user_most_contributions_month = Counter(users_month).most_common(1)
+    user_most_contributions_24_hours = next(
+        iter(Counter(users_24_hours).most_common(1)), [None, 0])
+    user_most_contributions_week = next(
+        iter(Counter(users_week).most_common(1)), [None, 0])
+    user_most_contributions_month = next(
+        iter(Counter(users_month).most_common(1)), [None, 0])
 
     return {
         'most_contrib_24_hours': {

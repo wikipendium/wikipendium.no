@@ -2680,6 +2680,45 @@ ins{
     display: inline-block;
     text-decoration: none;
 }
+.equal {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.equal-abridged-content {
+  display: none;
+}
+
+.equal-abridged-placeholder {
+  text-align: center;
+  cursor: pointer;
+  margin: 15px;
+  color: #999;
+}
+
+.equal-abridged-placeholder .icon-wrapper {
+  height: 31px;
+  background: linear-gradient(to right, white, #999, white);
+  border: 15px solid white;
+  border-left: 100px solid white;
+  border-right: 100px solid white;
+}
+
+.equal-abridged-placeholder .octicon {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+  top: -14px;
+  padding: 5px;
+  background: white;
+}
+
+.equal-abridged-placeholder:hover {
+  color: #222;
+}
+
 .article-history-list {
     list-style-type: none;
     margin: 0;
@@ -2727,26 +2766,6 @@ ins{
     white-space: pre-wrap;
     word-wrap: break-word;
     word-break: break-all;
-}
-
-.diff.equal{
-    cursor:pointer;
-}
-
-.diff.equal:hover{
-    opacity: 1 !important;
-}
-
-.diff.equal.hidden{
-    height: 1.3em;
-    overflow:hidden;
-    text-overflow: ellipsis;
-    display:inline-block;
-    opacity: 0.5;
-}
-
-.diff.equal.hidden:before{
-    content: "... ";
 }
 
 /********************

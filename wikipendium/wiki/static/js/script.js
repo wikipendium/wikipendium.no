@@ -276,6 +276,15 @@ $(function(){
           });
         });
     }).apply($('.tags'));
+
+
+    /* history view */
+    $('.equal-abridged').each(function(i, el) {
+      $(el).find('.equal-abridged-placeholder').click(function() {
+        $(this).hide();
+        $(el).find('.equal-abridged-content').show();
+      });
+    });
 });
 
 // Stay in web-app on iOS

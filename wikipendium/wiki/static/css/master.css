@@ -2173,15 +2173,20 @@ body.fixed-header .header-wrapper .container {
     margin: 20px;
 }
 
+#page-footer .bottom-menu .break {
+  display: none;
+  width: 100%;
+  height: 0;
+  margin: 0;
+}
 
-@media screen and (max-width: 500px) {
-    #page-footer .bottom-menu li:last-child {
-        width: 100%;
-        text-align: center;
+@media screen and (max-width: 545px) {
+    #page-footer .bottom-menu li.break + li {
         border-left: none;
-        margin-left: 0;
-        padding-left: 0;
-        margin-bottom: 20px;
+    }
+
+    #page-footer .bottom-menu .break {
+      display: block;
     }
 }
 

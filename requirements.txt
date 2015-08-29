@@ -8,7 +8,7 @@ pytz==2015.4
 boto==2.38.0
 newrelic==2.54.0.41
 django-mailgun==0.2.2
-django-compressor==1.4
+django-compressor==1.5
 django-taggit==0.14.0
 git+git://github.com/stianjensen/django-dumpdb.git
 flake8==2.3.0

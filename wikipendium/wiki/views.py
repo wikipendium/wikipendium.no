@@ -260,7 +260,7 @@ def history_single(request, slug, lang="en", id=None):
     def cachable_history_single(request, ac, has_parent,
                                 has_child, lang="en", id=None):
 
-        ac.diff = diff.textDiff(
+        ac.diff = diff.render_diff_as_html(
             ac.parent.content if ac.parent else '',
             ac.content
         )

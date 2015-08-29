@@ -1,69 +1,108 @@
-"""HTML Diff: http://www.aaronsw.com/2002/diff
-Rough code, badly documented. Send me comments and patches."""
-
-"""Modified to parse markdown and ignore HTML"""
-
-__author__ = 'Aaron Swartz <me@aaronsw.com>'
-__copyright__ = '(C) 2003 Aaron Swartz. GNU GPL 2 or 3.'
-__version__ = '0.22'
-
-import difflib
-import string
+from difflib import SequenceMatcher
+from collections import defaultdict
 
 
-def textDiff(a, b):
-    """Takes in strings a and b and returns a human-readable HTML diff."""
+def render_diff_as_html(a, b):
+    '''
+    Renders the character-by-character diff between
+    two strings a and b as HTML.
 
-    out = []
-    a, b = html2list(a), html2list(b)
-    s = difflib.SequenceMatcher(None, a, b)
-    for e in s.get_opcodes():
-        if e[0] == "replace":
-            # @@ need to do something more complicated here
-            # call textDiff but not for html, but for some html... ugh
-            # gonna cop-out for now
-            out.append(
-                '<del class="diff modified">' +
-                ''.join(a[e[1]:e[2]]) +
-                '</del><ins class="diff modified">' +
-                ''.join(b[e[3]:e[4]]) +
-                "</ins> "
-                )
-        elif e[0] == "delete":
-            out.append('<del class="diff">' + ''.join(a[e[1]:e[2]]) + "</del>")
-        elif e[0] == "insert":
-            out.append('<ins class="diff">' + ''.join(b[e[3]:e[4]]) + "</ins>")
-        elif e[0] == "equal":
-            out.append(
-                '<span class="diff equal hidden">' +
-                ''.join(b[e[3]:e[4]]) +
-                '</span>'
-                )
-        else:
-            raise "Um, something's broken. I didn't expect a '" + \
-                repr(e[0]) + "'."
-    return ''.join(out)
+    Edit operations to get from a to b are rendered
+    as combinations of inserts, deletions and equals,
+    the latter of which is a noop. Equals-operations
+    that span multiple newlines may be rendered as
+    partially hidden.
+    '''
 
+    # Init a difflib sequence matcher, which is the
+    # main engine behind the diff calculation.
+    sequence_matcher = SequenceMatcher(a=a, b=b)
 
-def html2list(x, b=0):
-    cur = ''
-    out = []
-    for c in x:
-        if c in string.whitespace:
-            out.append(cur+c)
-            cur = ''
-        else:
-            cur += c
-    out.append(cur)
-    return filter(lambda x: x is not '', out)
+    # A dict of html-rendered operations needed
+    # to transform string a to string b.
+    operations = defaultdict(list)
 
+    def insert(a_from, a_to, b_from, b_to):
+        '''Renders an insert operation as HTML.'''
+        operations[a_from].append('<ins>%s</ins>' % b[b_from:b_to])
 
-if __name__ == '__main__':
-    import sys
-    try:
-        a, b = sys.argv[1:3]
-    except ValueError:
-        print "htmldiff: highlight the differences between two html files"
-        print "usage: " + sys.argv[0] + " a b"
-        sys.exit(1)
-    print textDiff(open(a).read(), open(b).read())
+    def delete(a_from, a_to, b_from, b_to):
+        '''Renders a delete operation as HTML.'''
+        operations[a_from].append('<del>%s</del>' % a[a_from:a_to])
+
+    def equal(a_from, a_to, b_from, b_to,
+              start_visible_lines=1, end_visible_lines=1):
+        '''
+        Renders an equal operation as HTML.
+        start_visible_lines defines the number of lines
+        in the start of the text that should not be hidden,
+        and end_visible_lines defined the number of lines
+        in the end of the text that should not be hidden.
+        '''
+
+        # The equal operation needs to know line boundaries
+        # in the text for abbreviation purposes, so we work
+        # with a list of text lines rather than just a single
+        # large text string.
+        text_lines = a[a_from:a_to].splitlines()
+
+        # Normalise start_visible lines, end_visible_lines for
+        # cases where no lines should be truncated/hidden.
+        lines_should_be_truncated = (
+            start_visible_lines + end_visible_lines < len(text_lines))
+        if not lines_should_be_truncated:
+            start_visible_lines = len(text_lines)
+            end_visible_lines = 0
+
+        # Render the start visible lines as HTML.
+        operations[a_from].append('\n'.join(text_lines[:start_visible_lines]))
+
+        # Render the hidden truncated lines as HTML, if any.
+        if lines_should_be_truncated:
+            operations[a_from].append(
+                '<div class=equal-abridged>'
+                '<div class=equal-abridged-content>%s</div>'
+                '<div class=equal-abridged-placeholder>'
+                '<div class=icon-wrapper>'
+                '<span class="octicon octicon-unfold"></span>'
+                '</div></div></div>' %
+                '\n'.join(text_lines[
+                    start_visible_lines:
+                    len(text_lines)-end_visible_lines]))
+
+        # Render the end visible lines as HTML.
+        operations[a_from].append(
+            '\n'.join(text_lines[len(text_lines) - end_visible_lines:]))
+
+    # Get the operations needed to transform string a to string b.
+    opcodes = sequence_matcher.get_opcodes()
+
+    # Iterate through the opcodes and render them to HTML.
+    for opcode in opcodes:
+        tag, positions = opcode[0], opcode[1:]
+        if tag == 'insert':
+            insert(*positions)
+        elif tag == 'delete':
+            delete(*positions)
+        elif tag == 'replace':
+            # Replace is really just a delete and
+            # an insert, so we render it as such.
+            delete(*positions)
+            insert(*positions)
+        elif tag == 'equal':
+            # Normally we want to show one line of visible
+            # noop-transformed text at the beginning and the
+            # end of the text, and fold away the rest. However,
+            # In the case that the noop-transformed text is the
+            # very first or the very last piece of text in the
+            # rendered diff view, We only want to render visible
+            # lines on one side of the fold.
+            start_visible_lines = 0 if opcode == opcodes[0] else 1
+            end_visible_lines = 0 if opcode == opcodes[-1] else 1
+            equal(*positions,
+                  start_visible_lines=start_visible_lines,
+                  end_visible_lines=end_visible_lines)
+
+    # Finally, the rendered operations are ordered and concatenated,
+    # producing the final rendered HTML string.
+    return ''.join([''.join(value) for _, value in sorted(operations.items())])

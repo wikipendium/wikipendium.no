@@ -11,4 +11,4 @@ django-mailgun==0.2.2
 django-compressor==1.5
 django-taggit==0.17.0
 git+git://github.com/stianjensen/django-dumpdb.git
-flake8==2.3.0
+flake8==2.4.1

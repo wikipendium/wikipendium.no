@@ -3,7 +3,7 @@ django-registration-redux==1.2
 git+git://github.com/wikipendium/Python-Markdown.git@5e9e809#egg=markdown
 git+git://github.com/wikipendium/python-markdown-mathjax.git#egg=markdown_mathjax
 git+git://github.com/stianjensen/mdx_outline.git
-fabric==1.8.0
+fabric==1.10.2
 pytz==2013d
 boto==2.9.9
 newrelic==2.4.0.4

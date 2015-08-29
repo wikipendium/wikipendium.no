@@ -24,6 +24,8 @@ def index(request):
         year=now.year, month=now.month, day=now.day
     )
 
+    article_length_stats = _generate_article_length_statistics()
+
     return render(request, 'stats/index.html', {
         'number_of_acs_updated_in_the_last_24_hours':
             len(acs_updated_in_the_last_24_hours),
@@ -31,8 +33,20 @@ def index(request):
             len(acs_updated_in_the_last_week),
         'number_of_acs_updated_in_the_last_month':
             len(acs_updated_in_the_last_month),
-        'users': user_stats
+        'users': user_stats,
+        'compendium_length_stats': article_length_stats,
     })
+
+
+def _generate_article_length_statistics():
+    acs = Article.get_all_newest_contents_all_languages()
+
+    return {
+        'longest_compendiums': sorted([{
+            'length': len(ac.content.split()),
+            'compendium': ac
+        } for ac in acs], key=lambda d: -d['length'])[:10],
+    }
 
 
 @cache

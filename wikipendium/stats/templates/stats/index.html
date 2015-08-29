@@ -88,6 +88,25 @@
     </div>
   </div>
 
+  <div class=row>
+    <div class=span12>
+      <h2>Top 10 longest compendiums</h2>
+      <ol>
+      {% for item in compendium_length_stats.longest_compendiums %}
+        <li>
+          <div class=word-count>
+            {{ item.length }} word{{ item|pluralize }}
+          </div>
+          <a href="{{ item.compendium.get_absolute_url }}">
+            {{ item.compendium.get_full_title }}
+          </a>
+          ({{ item.compendium.lang }})
+        </li>
+      {% endfor %}
+      </ol>
+    </div>
+  </div>
+
 </div>
 
 

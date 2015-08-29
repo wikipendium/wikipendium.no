@@ -2472,6 +2472,35 @@ pre code {
     padding: 0 10px 0 0;
 }
 
+#article .margin-note {
+  position: relative;
+  float: right;
+  border-left: 3px solid #089;
+  background: #fafafa;
+  width: 350px;
+  margin-right: -365px;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 10px;
+}
+
+@media all and (max-width: 1399px) {
+  #article .margin-note {
+    width: 250px;
+    margin-right: -265px;
+  }
+}
+
+@media all and (max-width: 1329px) {
+  #article .margin-note {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+}
+
+
+
 /******************
  * NO ARTICLE
 ******************/

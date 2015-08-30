@@ -14,6 +14,12 @@ def index(request):
     acs_updated_in_the_last_24_hours = filter(
         lambda ac: ac.updated > now - timezone.timedelta(hours=24), acs)
 
+    acs_updated_in_the_last_week = filter(
+        lambda ac: ac.updated > now - timezone.timedelta(days=7), acs)
+
+    acs_updated_in_the_last_month = filter(
+        lambda ac: ac.updated > now - timezone.timedelta(days=30), acs)
+
     user_stats = _generate_user_statistics_for_one_day(
         year=now.year, month=now.month, day=now.day
     )
@@ -21,6 +27,10 @@ def index(request):
     return render(request, 'stats/index.html', {
         'number_of_acs_updated_in_the_last_24_hours':
             len(acs_updated_in_the_last_24_hours),
+        'number_of_acs_updated_in_the_last_week':
+            len(acs_updated_in_the_last_week),
+        'number_of_acs_updated_in_the_last_month':
+            len(acs_updated_in_the_last_month),
         'users': user_stats
     })
 

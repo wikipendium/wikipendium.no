@@ -200,3 +200,7 @@ CACHES = {
 SESSION_COOKIE_SECURE = True
 
 ABSOLUTE_URL_OVERRIDES = {'auth.user': lambda o: "/users/%s/" % o.username}
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'python wikipendium/utils/scss-cli.py {infile}'),
+)

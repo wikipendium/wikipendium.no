@@ -9,6 +9,7 @@ from markdown import Markdown
 from markdown.extensions.toc import TocExtension
 from .markdown_extra.markdown_wikitables import WikiTableExtension
 from .markdown_extra.nofollow import NofollowExtension
+from .markdown_extra.marginnotes import MarginNotesExtension
 from wikipendium.cache.decorators import cache_model_method
 from re import sub
 from taggit.managers import TaggableManager
@@ -164,6 +165,7 @@ class ArticleContent(models.Model):
     def get_html_content(self):
         wikitables = WikiTableExtension()
         nofollow = NofollowExtension()
+        margin_notes = MarginNotesExtension()
         toc = TocExtension([('title', 'Table of Contents')])
 
         md = Markdown(
@@ -174,6 +176,7 @@ class ArticleContent(models.Model):
                 wikitables,
                 nofollow,
                 'def_list',
+                margin_notes,
             ],
             output_format='html5',
             safe_mode='escape'

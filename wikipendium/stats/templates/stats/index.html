@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class=statistics>
+
+  <div class=row>
+    <div class=span12>
+      <div class=statistics-box>
+        <div class=statistic>
+          Statistics
+          <small>Updated once per day.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=row>
+    <div class=span4>
+      <div class=statistics-box>
+        <h2>Compendiums edited last 24 hours</h2>
+        <div class=statistic>
+          {{ number_of_acs_updated_in_the_last_24_hours }}
+        </div>
+      </div>
+    </div>
+    <div class=span4>
+      <div class=statistics-box>
+        <h2>Compendiums edited last week</h2>
+        <div class=statistic>
+          {{ number_of_acs_updated_in_the_last_week }}
+        </div>
+      </div>
+    </div>
+    <div class=span4>
+      <div class=statistics-box>
+        <h2>Compendiums edited last month</h2>
+        <div class=statistic>
+          {{ number_of_acs_updated_in_the_last_month }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class=row>
+    <div class=span4>
+      <div class=statistics-box>
+        <h2>Most contributions last 24 hours</h2>
+        <div class=statistic>
+          <a href="/users/{{ users.most_contrib_24_hours.user }}/">
+            {{ users.most_contrib_24_hours.user }}
+          </a>
+          <small>
+            {{ users.most_contrib_24_hours.contributions }}
+            contribution{{ users.most_contrib_24_hours.contributions|pluralize }}
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class=span4>
+      <div class=statistics-box>
+        <h2>Most contributions last week</h2>
+        <div class=statistic>
+          <a href="/users/{{ users.most_contrib_week.user }}/">
+            {{ users.most_contrib_week.user }}
+          </a>
+          <small>
+            {{ users.most_contrib_week.contributions }}
+            contribution{{ users.most_contrib_week.contributions|pluralize }}
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class=span4>
+      <div class=statistics-box>
+        <h2>Most contributions last month</h2>
+        <div class=statistic>
+          <a href="/users/{{ users.most_contrib_month.user }}/">
+            {{ users.most_contrib_month.user }}
+          </a>
+          <small>
+            {{ users.most_contrib_month.contributions }}
+            contribution{{ users.most_contrib_month.contributions|pluralize }}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock %}

@@ -1,4 +1,5 @@
 # Django settings for wikipendium project.
+import os
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -56,6 +57,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(os.path.dirname(os.path.realpath(__file__)), '../static/'),
 )
 
 # List of finder classes that know how to find static files in

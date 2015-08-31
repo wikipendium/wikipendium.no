@@ -6,6 +6,7 @@ from django.views.generic import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from wikipendium.sitemap import ArticleSitemap
 from wikipendium.wiki.models import Article
+from wikipendium.cache.decorators import cache
 from haystack.views import SearchView
 
 sitemaps = {
@@ -32,8 +33,11 @@ urlpatterns = patterns(
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^upload/', include('wikipendium.upload.urls')),
     url(r'^search/partial/',
-        SearchView(template='search/results.partial.html')),
-    url(r'^search/', SearchView(template='search/search.html')),
+        cache(SearchView(template='search/results.partial.html'),
+              key=lambda request:
+              'wikipendium.wiki.partial_search_view(q=%s)' %
+              request.META['QUERY_STRING'])),
+    url(r'^search/$', 'home'),
     url(r'^$', 'home', name='home'),
     url(r'^new/(?P<slug>[' + Article.slug_regex + ']+)?$',
         'new', name='newarticle'),

@@ -37,3 +37,9 @@ setup:
 .PHONY: shell
 shell:
 	python manage.py shell
+
+.PHONY: clean
+clean:
+	find . -name '*.pyc' -delete
+	find . -name '__pycache__' -delete
+	find . -type d -empty -delete

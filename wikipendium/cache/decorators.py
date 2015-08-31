@@ -1,4 +1,4 @@
-from django.core.cache import get_cache
+from django.core.cache import caches
 
 
 def _make_cache_key_from_function(fn, *args, **kwargs):
@@ -29,7 +29,7 @@ def cache_model_method(fn):
 
 
 def cache(fn, key=None):
-    cache = get_cache('default')
+    cache = caches['default']
 
     def inner(*args, **kwargs):
         if key is None:

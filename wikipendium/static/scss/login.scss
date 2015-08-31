@@ -1,0 +1,22 @@
+.login-form, .register-form, .reset-password-form, .confirm-password-form, .change-password-form {
+  width: 320px;
+  margin: 0 auto;
+}
+
+.login-header {
+  h1, a {
+    display: inline-block;
+  }
+  h1 {
+    vertical-align: middle;
+  }
+  a {
+    vertical-align: text-top;
+    margin: 0 3em;
+  }
+}
+
+.tex2jax_ignore {
+  font-family: "Consolas", "Courier", monospace;
+}
+

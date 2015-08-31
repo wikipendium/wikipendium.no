@@ -1,0 +1,26 @@
+@media print {
+  body {
+    font-size: 10px;
+    &.fixed-header .header-wrapper {
+      position: relative;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+  .header-logo-link .ikipendium {
+    display: inline;
+  }
+  body.fixed-header {
+    .header-wrapper nav {
+      display: none;
+    }
+    #content {
+      padding-top: 0;
+    }
+  }
+  #page-footer .bottom-menu, .donation-appeal, .toc, #toggle-toc {
+    display: none;
+  }
+}
+

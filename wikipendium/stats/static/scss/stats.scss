@@ -1,0 +1,34 @@
+.statistics .row {
+  margin-top: 30px;
+}
+
+.statistics-box {
+  border-radius: 3px;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  h2 {
+    margin: 0 auto;
+    display: inline-block;
+    padding: 15px 0;
+    font-size: 14px;
+    font-weight: normal;
+    border-bottom: 1px solid #999;
+  }
+}
+
+.statistic {
+  font-size: 40px;
+  margin: 30px auto;
+  text-align: center;
+  small {
+    margin: 30px;
+    display: block;
+    font-size: 14px;
+    color: #999;
+  }
+}
+
+.word-count {
+    float: right;
+}

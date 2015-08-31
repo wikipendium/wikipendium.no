@@ -1,0 +1,24 @@
+#suggestions .active {
+  background: rgba(109, 132, 184, 0.8);
+  color: white;
+}
+
+#searchbox {
+  width: 100%;
+  border: 0;
+  outline: none;
+  margin: 30px auto 0;
+  display: block;
+  padding: 4px 5px 4px 5px;
+  border: 1px solid #BDC7D8;
+  font-family: Georgia, serif;
+  font-size: 30px;
+  height: 60px;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+
+.green-bg {
+  background: rgba(0, 204, 255, 0.5);
+}
+

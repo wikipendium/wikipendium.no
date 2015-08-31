@@ -1,0 +1,182 @@
+body.editor .CodeMirror {
+  border: 1px solid #ccc;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  position: absolute;
+  top: 65px;
+  bottom: 75px;
+  left: 20px;
+  right: 20px;
+  height: auto;
+}
+
+.CodeMirror-wrap.CodeMirror pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+form {
+  .fields {
+    &.slug-field {
+      width: 11%;
+      float: left;
+      margin-right: .5%;
+    }
+    &.lang-field {
+      width: 11%;
+      float: left;
+      margin-right: .5%;
+      .chzn-single {
+        height: 30px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        -o-border-radius: 2px;
+        border-radius: 2px;
+      }
+    }
+    &.title-field {
+      width: 77%;
+      float: left;
+      input {
+        font-size: 1.4em;
+        font-weight: bold;
+      }
+    }
+    &.error {
+      margin-bottom: 25px;
+    }
+  }
+  .field-group.content-field {
+    clear: both;
+  }
+}
+
+body.editor #content {
+  position: absolute;
+  top: 50px;
+  left: 270px;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+}
+
+/********************
+ * HELP-CONTAINER
+********************/
+
+.tab-container .tab {
+  display: none;
+  &.active {
+    display: block;
+  }
+}
+
+#help-container {
+  display: none;
+  position: fixed;
+  top: 15%;
+  bottom: 7%;
+  left: 5%;
+  right: 5%;
+  border: 1px solid #ddd;
+  background: white;
+  z-index: 8000;
+  border-radius: 5px;
+  h3 {
+    margin: .5em 0;
+  }
+  h2 {
+    float: left;
+    font-weight: normal;
+    line-height: 50px;
+    padding: 0 10px;
+    margin: 0;
+  }
+}
+
+#help-tabs {
+  height: 50px;
+  padding-top: 10px;
+  padding-left: 0;
+}
+
+#help-tabs-container {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  .tab {
+    height: 100%;
+  }
+}
+
+#tab-close-button {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  z-index: 8100;
+  color: white;
+  background: #ccc;
+  border-radius: 50%;
+  &:hover {
+    text-decoration: none;
+    background: #ddd;
+  }
+}
+
+#help-tabs-container .tab {
+  overflow-y: auto;
+  padding: 5px 20px;
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 7000;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 70px;
+  line-height: 40px;
+  padding: 15px 20px;
+}
+
+@media screen and (max-width: 767px) {
+  body.editor {
+    #content {
+      left: 0;
+    }
+    .toc, #help-tabs {
+      display: none;
+    }
+    #help-tabs-container {
+      top: 0;
+      overflow-y: auto;
+      .tab {
+        display: block;
+        overflow-y: visible;
+        padding-right: 40px;
+        height: auto;
+      }
+    }
+  }
+}

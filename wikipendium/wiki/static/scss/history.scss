@@ -1,0 +1,97 @@
+/********************
+ * HISTORY
+********************/
+
+del {
+  background: pink;
+  display: inline-block;
+}
+
+ins {
+  background: lightgreen;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.equal {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.equal-abridged-content {
+  display: none;
+}
+
+.equal-abridged-placeholder {
+  text-align: center;
+  cursor: pointer;
+  margin: 15px;
+  color: #999;
+  .icon-wrapper {
+    height: 31px;
+    background: linear-gradient(to right, white, #999, white);
+    border: 15px solid white;
+    border-left: 100px solid white;
+    border-right: 100px solid white;
+  }
+  .octicon {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto;
+    top: -14px;
+    padding: 5px;
+    background: white;
+  }
+  &:hover {
+    color: #222;
+  }
+}
+
+.article-history-list {
+  list-style-type: none;
+  margin: 0;
+  margin-bottom: 50px;
+  padding: 0;
+  li {
+    padding: .5em;
+    border: 1px solid #ccc;
+    margin-bottom: .5em;
+  }
+  .date, .user {
+    border-left: 1px solid #ccc;
+    padding-left: .5em;
+    margin-left: .5em;
+    float: left;
+  }
+  a {
+    padding-left: .5em;
+    float: left;
+  }
+  .click-to-expand {
+    cursor: pointer;
+  }
+  .dropdown-marker {
+    float: right;
+  }
+}
+
+.contributions-title {
+  margin: 50px 0 25px;
+}
+
+.info {
+  background: rgba(255, 165, 0, 0.5);
+  border: 1px solid rgb(255, 165, 0);
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 0 30px 0;
+}
+
+.article-source {
+  font-family: monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+

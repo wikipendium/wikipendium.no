@@ -1,0 +1,67 @@
+/********************
+ * ALL ARTICLES
+********************/
+
+.all-articles-wrapper {
+  margin-top: 40px;
+}
+
+.article-all-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  li {
+    border: 1px solid #ccc;
+    margin-bottom: .7em;
+    width: 100%;
+    color: #069;
+    background-color: rgba(255, 255, 255, 0.8);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    a {
+      padding: .9em;
+      display: block;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    &.active a {
+      color: white;
+    }
+  }
+  .no-found {
+    color: #444;
+    padding: .9em;
+  }
+  .date {
+    clear: both;
+    margin: 0;
+    color: #444;
+  }
+  .active .date {
+    color: white;
+  }
+  .highlight {
+    background: rgba(109, 132, 184, 0.2);
+  }
+  .active .highlight {
+    background: #069;
+  }
+}
+
+@media all and (max-width: 600px) {
+  .all-articles-wrapper {
+    margin-top: 20px;
+  }
+  .article-all-list {
+    .date {
+      display: none;
+    }
+    li a {
+      padding: .4em;
+    }
+  }
+}

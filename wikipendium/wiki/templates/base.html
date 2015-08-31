@@ -13,10 +13,10 @@
     <title>{% block title %}{% endblock %} Wikipendium</title>
 
     {% load compress %}
-
     {% compress css %}
     <link rel=stylesheet href={{STATIC_URL}}css/helium.css>
-    <link rel=stylesheet href={{STATIC_URL}}scss/master.scss type=text/x-scss />
+    {% load all_scss_files %}
+    {% all_scss_files %}
     <link rel=stylesheet href={{STATIC_URL}}octicons/octicons.css />
     <link rel=stylesheet href={{STATIC_URL}}codemirror/codemirror.css />
     <link rel=stylesheet href={{STATIC_URL}}codemirror/dialog.css />

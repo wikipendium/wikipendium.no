@@ -13,5 +13,3 @@ wikipendium/settings/local.py
 venv/*
 static/*
 *.iml
-
-tmp/

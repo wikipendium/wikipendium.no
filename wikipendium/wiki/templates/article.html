@@ -23,7 +23,7 @@
 {% block nav %}
 <div class=article-nav>
     <div class=hide-on-mobile>
-        <a class=button href=/new/>Create article</a>
+        <a class=button href=/new/>Create compendium</a>
         {% language_chooser language_list articleContent %}
         <div class=button-group style=inline-block>
             <a class="button hidden-sm edit-link" href={{ articleContent.get_edit_url }}>Edit</a>
@@ -46,7 +46,7 @@
                 {% endfor %}
                 <li><a href={{ articleContent.get_add_language_url }}>Add language</a></li>
                 <hr>
-                <li><a href=/new/>Create new article</a></li>
+                <li><a href=/new/>Create new compendium</a></li>
             </ul>
         </div>
     </div>

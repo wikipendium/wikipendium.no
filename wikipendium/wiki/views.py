@@ -166,7 +166,7 @@ def new(request, slug=None):
     return render(request, 'edit.html', {
         "mathjax": True,
         "form": form,
-        "title": "Create article",
+        "title": "Create compendium",
     })
 
 

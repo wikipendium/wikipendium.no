@@ -10,13 +10,13 @@
 {% block nav %}
 <div class=article-nav>
     <div class=hide-on-mobile>
-        <a class=button href=/new/>Create article</a>
+        <a class=button href=/new/>Create compendium</a>
 
         {% if articleContent %}
             {% language_chooser language_list articleContent %}
 
             <div class=button-group style=inline-block>
-                <a class=button href={{ articleContent.get_absolute_url }}>Article</a>
+                <a class=button href={{ articleContent.get_absolute_url }}>Compendium</a>
                 <a class="button history-link" href={{ articleContent.get_history_url }}>History</a>
             </div>
         {% endif %}
@@ -30,7 +30,7 @@
                     <span class=caret></span>
                 </a>
                 <ul class="dropdown right">
-                    <li><a class=edit-link href={{ articleContent.get_absolute_url }}>Article</a></li>
+                    <li><a class=edit-link href={{ articleContent.get_absolute_url }}>Compendium</a></li>
                     <li><a class=history-link href={{ articleContent.get_history_url }}>History</a></li>
                     <hr>
                     {% for language, language_article_content_url in language_list %}
@@ -38,11 +38,11 @@
                     {% endfor %}
                     <li><a href={{ articleContent.get_add_language_url }}>Add language</a></li>
                     <hr>
-                    <li><a href=/new/>Create new article</a></li>
+                    <li><a href=/new/>Create new compendium</a></li>
                 </ul>
             </div>
         {% else %}
-            <a class=button href=/new/>Create article</a>
+            <a class=button href=/new/>Create compendium</a>
         {% endif %}
     </div>
 </div>

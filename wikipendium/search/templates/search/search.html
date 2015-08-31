@@ -1,83 +1,23 @@
 {% extends 'base.html' %}
 
-{% load highlight %}
-
 {% block content %}
 
 <form class=search-form method=get action=.>
-  <div class="field-group">
-    <div class="fields">
-      <input
-         class=searchbox
-         name=q
-         value="{{ query }}"
-         placeholder="Search..."
-         />
-    </div>
+<div class="field-group">
+  <div class="fields">
+    <input
+       id=searchbox
+       class=searchbox
+       name=q
+       value="{{ query }}"
+       placeholder="Search..."
+       />
   </div>
+</div>
 </form>
 
-{% if query %}
-
-  {% for result in page.object_list %}
-  <div class=search-result>
-    <h3 class=search-result-title>
-      <a href="{{ result.object.get_absolute_url }}">
-        {{ result.object.get_full_title }}
-      </a>
-    </h3>
-    <div class=search-result-url>
-        https://wikipendium.no{{ result.object.get_absolute_url }}
-    </div>
-    {% highlight result.object.get_html_content.html with query %}
-
-    {% with tags=result.object.article.tags.all %}
-      {% if tags %}
-        <div class=tags>
-          <ul>
-            <li>Tags:</li>
-            {% for tag in tags %}
-              <li><a href="/tag/{{ tag }}">{{ tag }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-    {% endwith %}
-
-    <div class="muted search-result-updated-time">
-      <a href="{{ result.object.get_history_url }}">
-        Last updated on {{ result.object.updated }}
-      </a>
-      by
-      <a href="{{ result.object.edited_by.get_absolute_url }}">
-        {{ result.object.edited_by }}</a>.
-    </div>
-  </div>
-
-  {% empty %}
-      <p>No results found.</p>
-  {% endfor %}
-
-  {% if page.has_previous or page.has_next %}
-    <div>
-      {% if page.has_previous %}
-        <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">
-      {% endif %}
-      &laquo; Previous
-      {% if page.has_previous %}
-        </a>
-      {% endif %}
-      |
-      {% if page.has_next %}
-        <a href="?q={{ query }}&amp;page={{ page.next_page_number }}">
-      {% endif %}
-        Next &raquo;
-      {% if page.has_next %}
-        </a>
-      {% endif %}
-    </div>
-  {% endif %}
-
-{% endif %}
+<div class=search-results>
+{% include 'search/results.partial.html' %}
+</div>
 
 {% endblock %}

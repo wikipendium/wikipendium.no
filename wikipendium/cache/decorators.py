@@ -13,7 +13,7 @@ def _make_cache_key_from_function(fn, *args, **kwargs):
 def cache_page_per_user(fn, *args, **kwargs):
     def key(request, *args, **kwargs):
         return (_make_cache_key_from_function(fn, *args, **kwargs) +
-                'user(pk=%s, username=%s)' % (
+                'user(pk=%s,username=%s)' % (
                     request.user.pk
                     if request.user.is_authenticated()
                     else 'None', request.user.username))

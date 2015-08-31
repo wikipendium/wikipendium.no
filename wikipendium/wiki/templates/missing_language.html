@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load extras %}
 
-{% block title %}This article is not available in this language -{% endblock %}
+{% block title %}This compendium is not available in this language -{% endblock %}
 
 {% block body_class %}toc-hidden article fixed-header{% endblock %}
 
@@ -11,7 +11,7 @@
         {% if language_does_not_exist %}
             <h1 class=title>This language does not exist.</h1>
         {% else %}
-            <h1 class=title>This article is not available in {{ language_name }}.</h1>
+            <h1 class=title>This compendium is not available in {{ language_name }}.</h1>
             <h2><a href="{{ create_url }}">Create it?</a></h2>
         {% endif %}
     </div>

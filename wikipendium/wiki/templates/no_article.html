@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% load extras %}
 
-{% block title %}This article does not exist -{% endblock %}
+{% block title %}This compendium does not exist -{% endblock %}
 
 {% block body_class %}toc-hidden article fixed-header{% endblock %}
 
 {% block content %}
 <div id=article class=serif>
     <div class=no-article>
-        <h1 class=title>An article with the course code {{ slug }} does not exist.</h1>
+        <h1 class=title>A compendium with the course code {{ slug }} does not exist.</h1>
         <h2><a href="{{ create_url }}">Create it?</a></h2>
     </div>
 </div>

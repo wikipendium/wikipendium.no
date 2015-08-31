@@ -12,3 +12,4 @@ django-compressor==1.5
 django-taggit==0.17.0
 git+git://github.com/stianjensen/django-dumpdb.git
 flake8==2.4.1
+libsass==0.8.3

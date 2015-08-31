@@ -22,12 +22,7 @@ class Article(models.Model):
 
     @staticmethod
     def get_all_contents(time_from, time_to):
-        ac = ArticleContent.objects.all()
-
-        acs_updated = filter(
-            lambda ac: ac.updated > time_to - time_from, ac)
-
-        return acs_updated
+        return ArticleContent.objects.filter(updated__gte=time_to - time_from)
 
     @staticmethod
     def get_all_article_content():

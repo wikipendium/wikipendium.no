@@ -299,6 +299,38 @@ $(function(){
         $(el).find('.equal-abridged-content').show();
       });
     });
+
+    /* search */
+    var searchbox = $('#searchbox');
+    var searchResults = $('.search-results');
+    var oldSearchboxValue = '';
+    var newSearchboxValue = searchbox.val();
+    var oldAjaxRequest = undefined;
+    function searchAjaxLoop() {
+      setTimeout(searchAjaxLoop, 300);
+      newSearchboxValue = searchbox.val();
+      if(oldSearchboxValue == newSearchboxValue) {
+        return;
+      }
+      oldSearchboxValue = newSearchboxValue;
+      if(oldAjaxRequest) {
+        oldAjaxRequest.abort();
+        oldAjaxRequest = undefined;
+      }
+      searchResults.html('').addClass('loading');
+      if(newSearchboxValue) {
+        history.replaceState({}, undefined, '/search/?q=' + newSearchboxValue);
+      } else {
+        history.replaceState({}, undefined, '/');
+      }
+      oldAjaxRequest = $.get('/search/partial/?q=' + encodeURI(newSearchboxValue), function(data) {
+        searchResults.removeClass('loading').html(data);
+        oldAjaxRequest = undefined;
+      });
+    }
+    if(searchbox.length > 0) {
+      searchAjaxLoop();
+    }
 });
 
 // Stay in web-app on iOS

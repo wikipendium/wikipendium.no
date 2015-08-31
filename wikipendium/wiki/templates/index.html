@@ -27,12 +27,19 @@
     type=text
     placeholder="find a compendium..."
     autocomplete=off
+    value="{{ request.GET.q }}"
     />
 
 <div class="serif all-articles-wrapper">
     <ul class=article-all-list id=suggestions>
     </ul>
 </div>
+
+<h2 style=margin-top:30px>Full search results</h2>
+
+<div class=search-results>
+</div>
+
 <script>
     (function(){
         var compendiums = {{ compendiums|safe }};

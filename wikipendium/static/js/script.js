@@ -119,6 +119,20 @@ $(function(){
             }
         }
 
+        inlineAttachment.editors.codemirror4.attach(codeMirror, {
+            uploadUrl: '/upload/',
+            uploadFieldName: 'image',
+            jsonFieldName: 'image',
+            allowedTypes: [
+                'image/jpeg',
+                'image/png',
+                'image/jpg',
+                'image/gif'
+            ],
+            progressText: '![Uploading file...]()',
+            urlText: "![]({filename})",
+        });
+
         function goToLine() {
             var line_number = window.location.hash && +window.location.hash.substring(1);
             if (line_number !== "") {

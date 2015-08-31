@@ -30,7 +30,7 @@ class Command(BaseCommand):
         try:
             aws_id = settings.AWS_ID
             aws_key = settings.AWS_KEY
-            aws_bucket_name = settings.AWS_BUCKET_NAME
+            aws_bucket_name = settings.AWS_BACKUP_BUCKET_NAME
         except:
             print "Please configure AWS credentials in settings/local.py!"
             return

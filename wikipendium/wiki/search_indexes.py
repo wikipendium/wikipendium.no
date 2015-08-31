@@ -3,7 +3,7 @@ from wikipendium.wiki.models import Article, ArticleContent
 
 
 class ArticleContentIndex(indexes.SearchIndex, indexes.Indexable):
-    text = indexes.CharField(document=True, model_attr='content')
+    text = indexes.CharField(document=True, use_template=True)
     title = indexes.CharField(model_attr='title')
 
     def get_model(self):

@@ -1,0 +1,7 @@
+{% autoescape off %}
+    {{ object.get_full_title }}
+    {% for tag in object.article.tags.all %}
+        {{ tag }}
+    {% endfor %}
+    {{ object.content }}
+{% endautoescape %}

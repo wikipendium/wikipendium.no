@@ -46,9 +46,13 @@
       <div class=statistics-box>
         <h2>Most contributions last 24 hours</h2>
         <div class=statistic>
-          <a href="/users/{{ users.most_contrib_24_hours.user }}/">
-            {{ users.most_contrib_24_hours.user }}
-          </a>
+          {% if users.most_contrib_24_hours.user %}
+            <a href="/users/{{ users.most_contrib_24_hours.user }}/">
+              {{ users.most_contrib_24_hours.user }}
+            </a>
+          {% else %}
+            Nobody
+          {% endif %}
           <small>
             {{ users.most_contrib_24_hours.contributions }}
             contribution{{ users.most_contrib_24_hours.contributions|pluralize }}
@@ -61,9 +65,13 @@
       <div class=statistics-box>
         <h2>Most contributions last week</h2>
         <div class=statistic>
-          <a href="/users/{{ users.most_contrib_week.user }}/">
-            {{ users.most_contrib_week.user }}
-          </a>
+          {% if users.most_contrib_week.user %}
+            <a href="/users/{{ users.most_contrib_week.user }}/">
+              {{ users.most_contrib_week.user }}
+            </a>
+          {% else %}
+            Nobody
+          {% endif %}
           <small>
             {{ users.most_contrib_week.contributions }}
             contribution{{ users.most_contrib_week.contributions|pluralize }}
@@ -76,15 +84,38 @@
       <div class=statistics-box>
         <h2>Most contributions last month</h2>
         <div class=statistic>
-          <a href="/users/{{ users.most_contrib_month.user }}/">
-            {{ users.most_contrib_month.user }}
-          </a>
+          {% if users.most_contrib_month.user %}
+            <a href="/users/{{ users.most_contrib_month.user }}/">
+              {{ users.most_contrib_month.user }}
+            </a>
+          {% else %}
+            Nobody
+          {% endif %}
           <small>
             {{ users.most_contrib_month.contributions }}
             contribution{{ users.most_contrib_month.contributions|pluralize }}
           </small>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class=row>
+    <div class=span12>
+      <h2>Top 10 longest compendiums</h2>
+      <ol>
+      {% for item in compendium_length_stats.longest_compendiums %}
+        <li>
+          <div class=word-count>
+            {{ item.length }} word{{ item|pluralize }}
+          </div>
+          <a href="{{ item.compendium.get_absolute_url }}">
+            {{ item.compendium.get_full_title }}
+          </a>
+          ({{ item.compendium.lang }})
+        </li>
+      {% endfor %}
+      </ol>
     </div>
   </div>
 

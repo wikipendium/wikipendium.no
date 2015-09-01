@@ -32,6 +32,9 @@ class Site(object):
         self.run("git tag | sort -g | tail -n 1 | sed s/$/+1/ | bc | xargs git tag")
         self.run("git push --tags && git push")
 
+    def rebuild_index(self):
+        self.run("venv/bin/python manage.py rebuild_index")
+
     def update_packages(self):
         self.run("./venv/bin/pip install -r requirements.txt")
 
@@ -104,6 +107,10 @@ def header(text):
 @task
 def restart():
     PROD.restart()
+
+@task
+def rebuild_index():
+    PROD.rebuild_index()
 
 @task
 def backup():

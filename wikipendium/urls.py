@@ -40,7 +40,7 @@ urlpatterns = patterns(
     url(r'^tag/(?P<tag>[a-zA-Z0-9_-]+)/$', 'tag'),
 
     url(r'^' + article_regex + '/$',
-        RedirectView.as_view(url='/%(slug)s')),
+        RedirectView.as_view(url='/%(slug)s', permanent=True)),
 
     url(r'^' + article_regex + '$', 'article'),
     url(r'^' + article_regex + '/',

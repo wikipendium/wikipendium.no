@@ -9,6 +9,7 @@ class TaskExecution(models.Model):
 
     class Meta:
         unique_together = ('key', 'execution_number')
+        app_label = 'jitishcron'
 
     def __unicode__(self):
         return '%s:%s' % (self.key, self.time)

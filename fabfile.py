@@ -32,6 +32,9 @@ class Site(object):
         self.run("git tag | sort -g | tail -n 1 | sed s/$/+1/ | bc | xargs git tag")
         self.run("git push --tags && git push")
 
+    def rebuild_index(self):
+        self.run("venv/bin/python manage.py rebuild_index")
+
     def update_packages(self):
         self.run("./venv/bin/pip install -r requirements.txt")
 
@@ -91,9 +94,13 @@ def deploy():
     env.user = prompt("Username on prod server:", default=getpass.getuser())
 
     should_tag = tag()
+    should_rebuild_index = rebuild_index()
 
     PROD.backup()
     PROD.deploy()
+
+    if should_rebuild_index:
+        PROD.rebuild_index()
 
     if should_tag:
         PROD.git_tag()
@@ -119,5 +126,14 @@ def tag():
             return False
         else:
             tag()
+    else:
+        return True
+
+def should_rebuild_index():
+    if not confirm("Do you want to rebuild the search index?"):
+        if confirm("Are you sure?", default=False):
+            return False
+        else:
+            should_rebuild_index()
     else:
         return True

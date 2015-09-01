@@ -81,10 +81,6 @@
 
         if (ul.children().length == 0) {
           ullength = 0;
-          var li = document.createElement("li");
-          li.textContent = "Sorry no compendiums were found";
-          li.setAttribute('class', 'no-found');
-          ul.append(li);
         }
       }
 

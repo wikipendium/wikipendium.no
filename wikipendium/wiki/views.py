@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils.text import slugify
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseRedirect
 from django.http import Http404
@@ -229,6 +230,20 @@ def edit(request, slug, lang='en'):
         'form': form,
         'title': 'Edit: ' + article.slug,
     })
+
+
+@csrf_exempt
+def preview(request, slug, lang='en'):
+    article = get_object_or_404(Article, slug=slug)
+
+    if request.method == 'POST':
+        content = request.POST.get('content', '')
+        articleContent = ArticleContent(
+            article=article, lang=lang, content=content
+        )
+        html = articleContent.get_html_content()
+        return JsonResponse(html)
+    return JsonResponse({'error': 'Method not allowed'})
 
 
 def history(request, slug, lang='en'):

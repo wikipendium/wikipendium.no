@@ -12,6 +12,7 @@ django-compressor==1.5
 django-taggit==0.17.0
 git+git://github.com/stianjensen/django-dumpdb.git
 flake8==2.4.1
+flake8-quotes==0.0.1
 libsass==0.8.3
 django-haystack==2.4.0
 Whoosh==2.7.0

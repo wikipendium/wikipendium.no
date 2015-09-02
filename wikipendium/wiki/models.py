@@ -107,11 +107,11 @@ class Article(models.Model):
             return zip(map(lambda key: LANGUAGE_NAMES[key], codes),
                        map(self.get_newest_content, codes))
 
-    def get_absolute_url(self, lang="en"):
+    def get_absolute_url(self, lang='en'):
         newest_content = self.get_newest_content(lang)
         if newest_content is not None:
             return newest_content.get_absolute_url()
-        return "/" + self.slug + "/" + lang + "/edit/"
+        return '/' + self.slug + '/' + lang + '/edit/'
 
     def get_slug(self):
         return self.slug.upper()
@@ -148,11 +148,11 @@ class ArticleContent(models.Model):
         return self.article.get_newest_content(lang=self.lang)
 
     def get_absolute_url(self):
-        lang = ""
-        if self.lang != "en":
+        lang = ''
+        if self.lang != 'en':
             lang = '/' + self.lang + '/'
         return ('/' +
-                self.article.slug + "_" +
+                self.article.slug + '_' +
                 sub('[^'+Article.slug_regex+'_]', '',
                     self.title.replace(' ', '_')) +
                 lang
@@ -162,7 +162,7 @@ class ArticleContent(models.Model):
         return (self.get_absolute_url() + '/edit/').replace('//', '/')
 
     def get_add_language_url(self):
-        return "/" + self.article.slug + "/add_language/"
+        return '/' + self.article.slug + '/add_language/'
 
     def get_history_url(self):
         return (self.get_absolute_url() + '/history/').replace('//', '/')

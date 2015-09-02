@@ -3,7 +3,7 @@ from wikipendium.wiki.models import Article
 
 
 class ArticleSitemap(Sitemap):
-    changefreq = "daily"
+    changefreq = 'daily'
 
     def items(self):
         return Article.get_all_newest_contents_all_languages()

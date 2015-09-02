@@ -22,18 +22,18 @@ def home(request):
     all_newest_contents = Article.get_all_newest_contents_all_languages()
 
     compendiums = [{
-        "label": ac.get_full_title(),
-        "url": ac.get_absolute_url(),
-        "lang": ac.lang,
-        "updated": str(ac.updated),
+        'label': ac.get_full_title(),
+        'url': ac.get_absolute_url(),
+        'lang': ac.lang,
+        'updated': str(ac.updated),
     } for ac in all_newest_contents]
 
     return render(request, 'index.html', {
-        "compendiums": json.dumps(compendiums),
+        'compendiums': json.dumps(compendiums),
     })
 
 
-def article(request, slug, lang="en"):
+def article(request, slug, lang='en'):
 
     try:
         article = Article.objects.get(slug=slug.upper())
@@ -62,11 +62,11 @@ def article(request, slug, lang="en"):
                             available_languages or [])
 
         return render(request, 'article.html', {
-            "mathjax": True,
-            "content": content['html'],
-            "toc": content['toc'],
-            "articleContent": articleContent,
-            "language_list": language_list,
+            'mathjax': True,
+            'content': content['html'],
+            'toc': content['toc'],
+            'articleContent': articleContent,
+            'language_list': language_list,
             'contributors': contributors,
         })
 
@@ -83,15 +83,15 @@ def tag(request, tag):
     if len(filtered_contents) == 0:
         raise Http404
     compendiums = [{
-        "label": ac.get_full_title(),
-        "url": ac.get_absolute_url(),
-        "lang": ac.lang,
-        "updated": str(ac.updated),
+        'label': ac.get_full_title(),
+        'url': ac.get_absolute_url(),
+        'lang': ac.lang,
+        'updated': str(ac.updated),
     } for ac in filtered_contents]
 
     return render(request, 'index.html', {
-        "compendiums": json.dumps(compendiums),
-        "tag": tag,
+        'compendiums': json.dumps(compendiums),
+        'tag': tag,
     })
 
 
@@ -112,17 +112,17 @@ def add_tag_to_article(request, slug):
 
 
 def no_article(request, slug):
-    create_url = "/new/" + slug
+    create_url = '/new/' + slug
     return render(request, 'no_article.html', {
-        "slug": slug,
-        "create_url": create_url,
+        'slug': slug,
+        'create_url': create_url,
     })
 
 
-def missing_language(request, article, lang="en"):
-    language_name = ""
+def missing_language(request, article, lang='en'):
+    language_name = ''
     language_does_not_exist = False
-    create_url = "/" + article.get_slug() + "/add_language/" + lang + "/"
+    create_url = '/' + article.get_slug() + '/add_language/' + lang + '/'
 
     if lang in LANGUAGE_NAMES:
         language_name = LANGUAGE_NAMES[lang].lower()
@@ -134,10 +134,10 @@ def missing_language(request, article, lang="en"):
                         available_languages or [])
 
     return render(request, 'missing_language.html', {
-        "create_url": create_url,
-        "language_name": language_name,
-        "available_languages": language_list,
-        "language_does_not_exist": language_does_not_exist,
+        'create_url': create_url,
+        'language_name': language_name,
+        'available_languages': language_list,
+        'language_does_not_exist': language_does_not_exist,
     })
 
 
@@ -164,9 +164,9 @@ def new(request, slug=None):
         form = NewArticleForm(instance=articleContent)
 
     return render(request, 'edit.html', {
-        "mathjax": True,
-        "form": form,
-        "title": "Create compendium",
+        'mathjax': True,
+        'form': form,
+        'title': 'Create compendium',
     })
 
 
@@ -190,10 +190,10 @@ def add_language(request, slug, lang=None):
                         available_languages or [])
 
     return render(request, 'edit.html', {
-        "mathjax": True,
-        "language_list": language_list,
-        "form": form,
-        "title": "Add language: " + article.slug,
+        'mathjax': True,
+        'language_list': language_list,
+        'form': form,
+        'title': 'Add language: ' + article.slug,
     })
 
 
@@ -223,15 +223,15 @@ def edit(request, slug, lang='en'):
                         available_languages or [])
 
     return render(request, 'edit.html', {
-        "mathjax": True,
-        "language_list": language_list,
-        "articleContent": articleContent,
-        "form": form,
-        "title": "Edit: " + article.slug,
+        'mathjax': True,
+        'language_list': language_list,
+        'articleContent': articleContent,
+        'form': form,
+        'title': 'Edit: ' + article.slug,
     })
 
 
-def history(request, slug, lang="en"):
+def history(request, slug, lang='en'):
     try:
         article = Article.objects.get(slug=slug)
     except:
@@ -241,14 +241,14 @@ def history(request, slug, lang="en"):
 
     originalArticle = article.get_newest_content(lang=lang)
 
-    return render(request, "history.html", {
-        "articleContents": articleContents,
-        "back_url": originalArticle.get_absolute_url,
-        "article": article
+    return render(request, 'history.html', {
+        'articleContents': articleContents,
+        'back_url': originalArticle.get_absolute_url,
+        'article': article
     })
 
 
-def history_single(request, slug, lang="en", id=None):
+def history_single(request, slug, lang='en', id=None):
     try:
         article = Article.objects.get(slug=slug)
     except:
@@ -258,7 +258,7 @@ def history_single(request, slug, lang="en", id=None):
 
     @cache_page_per_user
     def cachable_history_single(request, ac, has_parent,
-                                has_child, lang="en", id=None):
+                                has_child, lang='en', id=None):
 
         ac.diff = diff.render_diff_as_html(
             ac.parent.content if ac.parent else '',

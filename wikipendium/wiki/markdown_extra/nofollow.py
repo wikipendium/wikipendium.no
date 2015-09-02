@@ -17,8 +17,8 @@ class NofollowProcessor(Treeprocessor):
 
     def set_nofollow(self, element):
         for child in element:
-            if child.tag == "a":
-                child.set("rel", "nofollow")
+            if child.tag == 'a':
+                child.set('rel', 'nofollow')
             self.set_nofollow(child)  # run recursively on children
 
 

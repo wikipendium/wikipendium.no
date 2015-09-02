@@ -160,6 +160,46 @@ body.editor #content {
   padding: 15px 20px;
 }
 
+#preview-container {
+  position: absolute;
+  top: 65px;
+  bottom: 75px;
+  left: 20px;
+  right: 20px;
+  background: white;
+  z-index: 100;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+
+  #preview-header {
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
+    padding: 0 5px;
+    border-bottom: 1px solid #ccc;
+    background: #fbfcff;
+
+    h3 {
+      margin: 0;
+      line-height: 50px;
+    }
+  }
+
+  #preview-content-container {
+    height: calc(100% - 50px);
+    overflow-y: auto;
+    padding: 10px 5px;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+#preview-button {
+  padding-right: 10px;
+}
+
 @media screen and (max-width: 767px) {
   body.editor {
     #content {

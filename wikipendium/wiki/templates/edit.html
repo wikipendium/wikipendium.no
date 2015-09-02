@@ -103,8 +103,23 @@
     <div class="bottom-bar">
         <a href="javascript:;" id="display-help-button">Help</a>
         <input type=submit class="button button-large button-primary float-right" value=Save! />
+        <a href="javascript:;" id="preview-button" class="open-preview-button float-right">
+            Preview
+        </a>
     </div>
 </form>
+
+<div id="preview-container" class="hidden">
+    <div id="preview-header">
+        <h3 class="float-left">Preview:</h3>
+        <a href="javascript:;" class="cancel-preview-button float-right">
+            Cancel
+        </a>
+    </div>
+    <div id="preview-content-container" class="serif">
+      <div class="article-wrapper"></div>
+    </div>
+</div>
 
 <div id="help-container">
     <a id="tab-close-button" href="javascript:;">x</a>

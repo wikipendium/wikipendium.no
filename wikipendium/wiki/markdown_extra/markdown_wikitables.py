@@ -24,7 +24,7 @@ class WikiTableProcessor(BlockProcessor):
     def test(self, parent, block):
         """ Test if block is wikitable markup """
 
-        if "||" not in block:
+        if '||' not in block:
             return False
 
         wiki_table_re = re.compile(r'''

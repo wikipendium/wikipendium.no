@@ -18,7 +18,7 @@ class Command(BaseCommand):
         """
 
         filename = str(time.mktime(datetime.datetime.now().timetuple())) \
-            + "-" + socket.gethostname() + "-wikipendium-backup.dump"
+            + '-' + socket.gethostname() + '-wikipendium-backup.dump'
         filename_zip = filename + '.zip'
 
         with open(filename, 'w') as f:
@@ -32,7 +32,7 @@ class Command(BaseCommand):
             aws_key = settings.AWS_KEY
             aws_bucket_name = settings.AWS_BACKUP_BUCKET_NAME
         except:
-            print "Please configure AWS credentials in settings/local.py!"
+            print 'Please configure AWS credentials in settings/local.py!'
             return
 
         conn = boto.connect_s3(aws_id, aws_key)

@@ -28,8 +28,8 @@ class ArticleForm(ModelForm):
 
         self.fields['slug'].widget.attrs['placeholder'] = 'Course code'
         self.fields['lang'].widget.attrs = {
-            'class': "select_chosen",
-            'data-placeholder': "Language"
+            'class': 'select_chosen',
+            'data-placeholder': 'Language'
         }
 
         self.fields['title'].widget.attrs['placeholder'] = 'Course title'
@@ -54,7 +54,7 @@ class NewArticleForm(ArticleForm):
             raise ValidationError('Course codes must be alphanumeric.')
         try:
             Article.objects.get(slug=self.cleaned_data['slug'].upper())
-            raise ValidationError("This course code is already in use.")
+            raise ValidationError('This course code is already in use.')
         except ObjectDoesNotExist:
             pass
         return self.cleaned_data['slug']
@@ -141,7 +141,7 @@ class EditArticleForm(ArticleForm):
                                commonAncestor.content, articleContent.content)
                 self.cleaned_data['content'] = merged
             except MergeError as e:
-                raise ValidationError("Merge conflict.",
+                raise ValidationError('Merge conflict.',
                                       params={'diff': e.diff})
 
         return True

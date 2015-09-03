@@ -81,7 +81,7 @@ class ArticleTest(TestCase):
         self.assertEquals(expected_result, result)
 
     def test_get_absolute_url(self):
-        self.assertEquals(self.article1.get_absolute_url(), "/TDT4100_per")
+        self.assertEquals(self.article1.get_absolute_url(), '/TDT4100_per')
 
     def test_get_all_article_content(self):
         result = Article.get_all_article_content()

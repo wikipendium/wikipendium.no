@@ -21,20 +21,20 @@ def profile(request, username):
                        article_content.lang)].append(article_content)
 
     email = user.email
-    default = "mm"
+    default = 'mm'
     size = 300
 
     # construct the url
-    gravatar_url = "http://www.gravatar.com/avatar/" + \
-        hashlib.md5(email.lower()).hexdigest() + "?"
+    gravatar_url = 'http://www.gravatar.com/avatar/' + \
+        hashlib.md5(email.lower()).hexdigest() + '?'
     gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
     return render(request, 'user/profile.html', {
-        "user": user,
-        "contributions": sorted(contributions.items(),
+        'user': user,
+        'contributions': sorted(contributions.items(),
                                 key=lambda item:
                                 item[1][0].get_last_descendant()
                                 .get_full_title()),
-        "gravatar": gravatar_url
+        'gravatar': gravatar_url
     })
 
 
@@ -50,7 +50,7 @@ def change_username(request):
             request.user.save()
 
             return render(request, 'user/change_username_complete.html', {
-                "username": new_username,
+                'username': new_username,
             })
 
     return render(request, 'user/change_username.html', {

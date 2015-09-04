@@ -24,6 +24,8 @@ def cache_page_per_user(fn, *args, **kwargs):
 
 def cache_model_method(fn):
     def key(self, *args, **kwargs):
+        if self.pk is None:
+            return None
         return (_make_cache_key_from_function(fn, *args, **kwargs) +
                 '%s(pk=%s)' % (type(self).__name__, self.pk))
     return cache(fn, key)
@@ -39,6 +41,8 @@ def cache(fn, key=None):
             cache_key = key(*args, **kwargs)
         else:
             cache_key = str(key)
+        if cache_key is None:
+            return fn(*args, **kwargs)
         cached = cache.get(cache_key)
         if cached:
             return cached

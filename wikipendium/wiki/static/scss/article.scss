@@ -2,12 +2,6 @@
   display: inline-block;
 }
 
-@media all and (max-width: 650px) {
-  body.fixed-header #content {
-    padding-top: 75px;
-  }
-}
-
 #article {
   width: auto;
   max-width: 640px;

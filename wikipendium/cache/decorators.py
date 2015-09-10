@@ -44,7 +44,7 @@ def cache(fn, key=None):
         if cache_key is None:
             return fn(*args, **kwargs)
         cached = cache.get(cache_key)
-        if cached:
+        if cached is not None:
             return cached
         result = fn(*args, **kwargs)
         cache.set(cache_key, result)

@@ -2,12 +2,6 @@
   display: inline-block;
 }
 
-@media all and (max-width: 650px) {
-  body.fixed-header #content {
-    padding-top: 75px;
-  }
-}
-
 #article {
   width: auto;
   max-width: 640px;
@@ -117,7 +111,7 @@ body.toc-hidden #toggle-toc {
   padding: 34px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 601px) {
   body {
     &.fixed-header .header-wrapper .container {
       padding-left: 50px;
@@ -128,13 +122,27 @@ body.toc-hidden #toggle-toc {
   }
 }
 
+@media screen and (min-width: 601px) and (max-width: 768px) {
+  body.toc-hidden {
+    #article {
+      padding-top: 60px;
+
+      .title {
+        position: absolute;
+        left: 57px;
+        margin-top: -60px;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 1330px) {
   body.article:not(.toc-hidden) {
     padding-left: 0;
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 600px) {
   .toc, #toggle-toc {
     display: none;
   }

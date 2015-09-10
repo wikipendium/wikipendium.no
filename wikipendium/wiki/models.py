@@ -135,6 +135,8 @@ class ArticleContent(models.Model):
         if '/' in self.title:
             raise ValidationError('Title cannot contain slashes')
 
+        self.content.replace('\r\n', '\n').replace('\r', '\n')
+
     def get_contributors(self):
         filtered = ArticleContent.objects.filter(article=self.article,
                                                  lang=self.lang,

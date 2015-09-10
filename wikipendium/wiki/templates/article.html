@@ -74,9 +74,11 @@
         <a href class=tag-adder data-article-slug={{ articleContent.article.slug }}>+</a>
     </div>
 
-{% autoescape off %}
-    {{ content }}
-{% endautoescape %}
+    <div class="article-wrapper">
+    {% autoescape off %}
+        {{ content }}
+    {% endautoescape %}
+    </div>
 </div>
 
 <div class=contributors>

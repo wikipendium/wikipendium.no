@@ -21,6 +21,7 @@ article_patterns = patterns(
     'wikipendium.wiki.views',
     url(r'^add_tag/$', 'add_tag_to_article'),
     url(r'^edit/$', 'edit'),
+    url(r'^preview/$', 'preview'),
     url(r'^history/$', 'history'),
     url(r'^history/(?P<id>\d+)/$', 'history_single'),
 )

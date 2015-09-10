@@ -7,12 +7,20 @@
   max-width: 640px;
   margin: 0 auto;
   text-align: left;
-  font-size: 1.2857142857em;
-  line-height: 1.55em;
+
   section {
     padding-top: 70px;
     margin-top: -50px;
   }
+}
+
+.article-wrapper {
+  width: auto;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 1.2857142857em;
+  line-height: 1.55em;
 }
 
 body.article {
@@ -41,7 +49,7 @@ h1 {
   text-align: left;
   font-style: italic;
   font-weight: normal;
-  font-size: 2.2em;
+  font-size: 2.8em;
 }
 
 .toc {
@@ -276,7 +284,7 @@ pre code {
   }
 }
 
-#article {
+.article-wrapper {
   .margin-note {
     position: relative;
     float: right;
@@ -295,14 +303,14 @@ pre code {
 }
 
 @media all and (max-width: 1399px) {
-  #article .margin-note {
+  .article-wrapper .margin-note {
     width: 250px;
     margin-right: -265px;
   }
 }
 
 @media all and (max-width: 1329px) {
-  #article .margin-note {
+  .article-wrapper .margin-note {
     width: 100%;
     margin-right: 0;
     margin-bottom: 15px;

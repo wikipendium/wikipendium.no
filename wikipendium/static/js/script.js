@@ -62,6 +62,31 @@ $(function(){
             $.throttle(100, parseHeadlines)();
         });
 
+        $('#content').on('click', '.open-preview-button', function() {
+            var path = window.location.pathname.replace('edit', 'preview');
+            $.post(path, {content: codeMirror.getValue()}, function(data) {
+                $('#preview-button')
+                    .removeClass('open-preview-button')
+                    .addClass('cancel-preview-button')
+                    .text('Cancel preview');
+                $('#preview-container').removeClass('hidden');
+                $('#preview-content-container .article-wrapper').html(data.html);
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'preview-content-container']);
+
+                $('.toc').remove();
+                $('#content').append(data.toc);
+            });
+        });
+        $('#content').on('click', '.cancel-preview-button', function() {
+            $('#preview-button')
+                .removeClass('cancel-preview-button')
+                .addClass('open-preview-button')
+                .text('Preview');
+            $('#preview-container').addClass('hidden');
+            parseHeadlines();
+        });
+
+
         function parseHeadlines() {
             var headlines = [];
             var regex = RegExp("^#+");

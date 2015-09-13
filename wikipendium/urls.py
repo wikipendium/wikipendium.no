@@ -22,7 +22,6 @@ article_patterns = patterns(
     'wikipendium.wiki.views',
     url(r'^add_tag/$', 'add_tag_to_article'),
     url(r'^edit/$', 'edit'),
-    url(r'^preview/$', 'preview'),
     url(r'^history/$', 'history'),
     url(r'^history/(?P<id>\d+)/$', 'history_single'),
     url(r'^rss/$', ArticleLatestChangesRSSFeed()),
@@ -44,6 +43,7 @@ urlpatterns = patterns(
     url(r'^$', 'home', name='home'),
     url(r'^new/(?P<slug>[' + Article.slug_regex + ']+)?$',
         'new', name='newarticle'),
+    url(r'^preview/$', 'preview'),
 
     url(r'^', include('wikipendium.user.urls')),
 

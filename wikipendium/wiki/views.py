@@ -36,6 +36,26 @@ def home(request):
     })
 
 
+@cache_page_per_user
+def _cachable_article(request, articleContent, lang='en'):
+    contributors = articleContent.get_contributors()
+
+    content = articleContent.get_html_content()
+    available_languages = articleContent.article.get_available_languages(
+        articleContent)
+    language_list = map(lambda x: (x[0], x[1].get_absolute_url),
+                        available_languages or [])
+
+    return render(request, 'article.html', {
+        'mathjax': True,
+        'content': content['html'],
+        'toc': content['toc'],
+        'articleContent': articleContent,
+        'language_list': language_list,
+        'contributors': contributors,
+    })
+
+
 def article(request, slug, lang='en'):
 
     try:
@@ -54,26 +74,7 @@ def article(request, slug, lang='en'):
 
     if request.path != article.get_absolute_url(lang):
         return HttpResponseRedirect(article.get_absolute_url(lang))
-
-    @cache_page_per_user
-    def cachable_article(request, articleContent, lang=lang):
-        contributors = articleContent.get_contributors()
-
-        content = articleContent.get_html_content()
-        available_languages = article.get_available_languages(articleContent)
-        language_list = map(lambda x: (x[0], x[1].get_absolute_url),
-                            available_languages or [])
-
-        return render(request, 'article.html', {
-            'mathjax': True,
-            'content': content['html'],
-            'toc': content['toc'],
-            'articleContent': articleContent,
-            'language_list': language_list,
-            'contributors': contributors,
-        })
-
-    return cachable_article(request, articleContent, lang=lang)
+    return _cachable_article(request, articleContent, lang=lang)
 
 
 @cache_page_per_user

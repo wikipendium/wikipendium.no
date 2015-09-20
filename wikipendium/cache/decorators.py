@@ -31,8 +31,11 @@ def cache_model_method(fn):
     return cache(fn, key)
 
 
-def cache(fn, key=None):
-    cache = caches['default']
+def cache(fn=None, key=None):
+    django_cache = caches['default']
+
+    if fn is None:
+        return lambda fn: cache(fn=fn, key=key)
 
     def inner(*args, **kwargs):
         if key is None:
@@ -43,10 +46,10 @@ def cache(fn, key=None):
             cache_key = str(key)
         if cache_key is None:
             return fn(*args, **kwargs)
-        cached = cache.get(cache_key)
+        cached = django_cache.get(cache_key)
         if cached is not None:
             return cached
         result = fn(*args, **kwargs)
-        cache.set(cache_key, result)
+        django_cache.set(cache_key, result)
         return result
     return inner

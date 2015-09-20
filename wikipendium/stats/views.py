@@ -5,6 +5,7 @@ from collections import Counter
 from django.utils.timezone import utc
 from datetime import datetime
 from wikipendium.cache.decorators import cache
+import time
 
 
 def index(request):
@@ -24,7 +25,7 @@ def index(request):
         year=now.year, month=now.month, day=now.day
     )
 
-    article_length_stats = _generate_article_length_statistics()
+    article_length_stats = _generate_article_length_statistics(acs)
 
     return render(request, 'stats/index.html', {
         'number_of_acs_updated_in_the_last_24_hours':
@@ -38,9 +39,14 @@ def index(request):
     })
 
 
-def _generate_article_length_statistics():
-    acs = Article.get_all_newest_contents_all_languages()
+one_hour_in_seconds = 60 * 60
 
+
+@cache(key=lambda *args, **kwargs:
+       'wikipendium.wiki.stats.views.'
+       '_generate_article_length_statistics(t=%s)' %
+       (int(time.time()) / one_hour_in_seconds))
+def _generate_article_length_statistics(acs):
     return {
         'longest_compendiums': sorted([{
             'length': len(ac.content.split()),

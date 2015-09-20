@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.views.generic import RedirectView
 from django.contrib.sitemaps.views import sitemap
 from wikipendium.sitemap import ArticleSitemap
+from wikipendium.wiki.feeds import ArticleLatestChangesRSSFeed
 from wikipendium.wiki.models import Article
 from wikipendium.cache.decorators import cache
 from haystack.views import SearchView
@@ -24,6 +25,7 @@ article_patterns = patterns(
     url(r'^preview/$', 'preview'),
     url(r'^history/$', 'history'),
     url(r'^history/(?P<id>\d+)/$', 'history_single'),
+    url(r'^rss/$', ArticleLatestChangesRSSFeed()),
 )
 
 urlpatterns = patterns(

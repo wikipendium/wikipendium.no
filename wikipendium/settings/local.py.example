@@ -54,3 +54,6 @@ HAYSTACK_CONNECTIONS = {
         'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
     },
 }
+
+# Base URL
+BASE_URL = 'http://localhost:8000'

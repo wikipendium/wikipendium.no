@@ -25,6 +25,7 @@ article_patterns = patterns(
     url(r'^history/$', 'history'),
     url(r'^history/(?P<id>\d+)/$', 'history_single'),
     url(r'^rss/$', ArticleLatestChangesRSSFeed()),
+    url(r'^history/(?P<id>\d+)/rendered/$', 'history_single_rendered'),
 )
 
 urlpatterns = patterns(

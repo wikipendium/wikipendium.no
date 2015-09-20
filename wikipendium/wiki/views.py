@@ -301,3 +301,14 @@ def history_single(request, slug, lang='en', id=None):
 
     return cachable_history_single(request, ac, bool(ac.parent),
                                    bool(ac.child), lang=lang, id=id)
+
+
+def history_single_rendered(request, slug, lang='en', id=None):
+    try:
+        Article.objects.get(slug=slug)
+    except:
+        return no_article(request, slug.upper(), lang)
+
+    ac = ArticleContent.objects.get(id=id)
+
+    return _cachable_article(request, ac, lang=lang)

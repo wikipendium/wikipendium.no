@@ -37,7 +37,7 @@ def home(request):
 
 
 @cache_page_per_user
-def _cachable_article(request, article_content, lang='en'):
+def _cacheable_article(request, article_content, lang='en'):
     contributors = article_content.get_contributors()
 
     content = article_content.get_html_content()
@@ -74,7 +74,7 @@ def article(request, slug, lang='en'):
 
     if request.path != article.get_absolute_url(lang):
         return HttpResponseRedirect(article.get_absolute_url(lang))
-    return _cachable_article(request, article_content, lang=lang)
+    return _cacheable_article(request, article_content, lang=lang)
 
 
 @cache_page_per_user
@@ -282,8 +282,8 @@ def history_single(request, slug, lang='en', id=None):
     ac = ArticleContent.objects.get(id=id)
 
     @cache_page_per_user
-    def cachable_history_single(request, ac, has_parent,
-                                has_child, lang='en', id=None):
+    def cacheable_history_single(request, ac, has_parent,
+                                 has_child, lang='en', id=None):
 
         ac.diff = diff.render_diff_as_html(
             ac.parent.content if ac.parent else '',
@@ -299,8 +299,8 @@ def history_single(request, slug, lang='en', id=None):
             'back_url': originalArticle.get_absolute_url
         })
 
-    return cachable_history_single(request, ac, bool(ac.parent),
-                                   bool(ac.child), lang=lang, id=id)
+    return cacheable_history_single(request, ac, bool(ac.parent),
+                                    bool(ac.child), lang=lang, id=id)
 
 
 def history_single_rendered(request, slug, lang='en', id=None):
@@ -311,4 +311,4 @@ def history_single_rendered(request, slug, lang='en', id=None):
 
     ac = ArticleContent.objects.get(id=id)
 
-    return _cachable_article(request, ac, lang=lang)
+    return _cacheable_article(request, ac, lang=lang)

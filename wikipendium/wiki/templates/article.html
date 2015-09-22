@@ -15,6 +15,12 @@
 {% for user in contributors %}
     <meta property=og:article:author content="{{ user.get_full_name|default:user.username }}" />
 {% endfor %}
+<link
+    rel=alternate
+    type=application/rss+xml
+    title="Recent changes for {{ articleContent.article.slug }}."
+    href=rss/
+    />
 {% endblock %}
 
 

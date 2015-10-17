@@ -3,6 +3,7 @@ wikipendium.no
 
 kompendie-wiki
 
+![](http://i.imgur.com/Fc1mtDN.png)
 
 ## Getting started
 

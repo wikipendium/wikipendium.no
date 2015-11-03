@@ -233,14 +233,10 @@ def edit(request, slug, lang='en'):
 
 
 @csrf_exempt
-def preview(request, slug, lang='en'):
-    article = get_object_or_404(Article, slug=slug)
-
+def preview(request):
     if request.method == 'POST':
         content = request.POST.get('content', '')
-        articleContent = ArticleContent(
-            article=article, lang=lang, content=content
-        )
+        articleContent = ArticleContent(content=content)
         html = articleContent.get_html_content()
         return JsonResponse(html)
     return JsonResponse({'error': 'Method not allowed'})

@@ -63,8 +63,7 @@ $(function(){
         });
 
         $('#content').on('click', '.open-preview-button', function() {
-            var path = window.location.pathname.replace('edit', 'preview');
-            $.post(path, {content: codeMirror.getValue()}, function(data) {
+            $.post('/preview/', {content: codeMirror.getValue()}, function(data) {
                 $('#preview-button')
                     .removeClass('open-preview-button')
                     .addClass('cancel-preview-button')

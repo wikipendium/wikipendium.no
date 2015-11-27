@@ -47,7 +47,7 @@ urlpatterns = patterns(
 
     url(r'^', include('wikipendium.user.urls')),
 
-    url(r'^tag/(?P<tag>[a-zA-Z0-9_-]+)/$', 'tag'),
+    url(r'^tag/(?P<tag_slug>[a-zA-Z0-9_-]+)/$', 'tag'),
 
     url(r'^' + article_regex + '/$',
         RedirectView.as_view(url='/%(slug)s', permanent=True)),

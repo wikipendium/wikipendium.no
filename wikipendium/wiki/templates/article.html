@@ -73,7 +73,7 @@
         </div>
         <ul>
             {% for tag in articleContent.article.tags.all %}
-                <li><a href="/tag/{{ tag }}">{{ tag }}</a></li>
+                <li><a href="/tag/{{ tag.slug }}">{{ tag }}</a></li>
             {% endfor %}
         </ul>
         <form><input /></form>

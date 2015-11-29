@@ -54,6 +54,9 @@
     <link rel="apple-touch-icon" href="{{STATIC_URL}}apple-touch/icon-114x114.png" sizes="114x114" />
     <link rel="shortcut icon" href="{{STATIC_URL}}images/favicon.png" />
 
+    {% load opensearch_tags %}
+    {% opensearch_meta %}
+
     {% if mathjax %}
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({

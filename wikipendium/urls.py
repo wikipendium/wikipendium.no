@@ -39,7 +39,8 @@ urlpatterns = patterns(
               key=lambda request:
               'wikipendium.wiki.partial_search_view(q=%s)' %
               request.META['QUERY_STRING'])),
-    url(r'^search/$', 'home'),
+    url(r'^search/$', 'home', name='search'),
+    url(r'^opensearch/', include('opensearch.urls')),
     url(r'^$', 'home', name='home'),
     url(r'^new/(?P<slug>[' + Article.slug_regex + ']+)?$',
         'new', name='newarticle'),

@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'registration',
     'compressor',
     'taggit',
+    'opensearch',
 
     'pytz',
     'django_dumpdb',
@@ -210,3 +211,10 @@ COMPRESS_PRECOMPILERS = (
 
 # Base URL
 BASE_URL = 'https://www.wikipendium.no'
+
+
+OPENSEARCH_CONTACT_EMAIL = 'contact@wikipendium.no'
+OPENSEARCH_SHORT_NAME = OPENSEARCH_DESCRIPTION = 'wikipendium.no'
+OPENSEARCH_FAVICON_WIDTH = OPENSEARCH_FAVICON_HEIGHT = 16
+OPENSEARCH_FAVICON_TYPE = 'image/png'
+OPENSEARCH_FAVICON_FILE = 'images/favicon.png'

@@ -182,3 +182,12 @@ class ArticleContentTest(TestCase):
     def test___unicode__(self):
         self.assertEquals(u'[1] Cooking and baking',
                           unicode(self.ac1))
+
+    def test_line_endings(self):
+        ac = ArticleContent.objects.create(
+            article=self.article1,
+            content=u'Test\r\nnext line.'
+        )
+        saved_ac = ArticleContent.objects.get(pk=ac.pk)
+        self.assertEquals(u'Test\nnext line.',
+                          saved_ac.content)

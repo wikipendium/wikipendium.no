@@ -64,10 +64,10 @@ class Article(models.Model):
     def __unicode__(self):
         return self.slug
 
-    def save(self):
+    def save(self, *args, **kwargs):
         self.slug = self.slug.upper().strip()
         self.clean()
-        super(Article, self).save()
+        super(Article, self).save(*args, **kwargs)
 
     def clean(self):
         if '/' in self.slug:
@@ -129,7 +129,7 @@ class ArticleContent(models.Model):
         if '/' in self.title:
             raise ValidationError('Title cannot contain slashes')
 
-        self.content.replace('\r\n', '\n').replace('\r', '\n')
+        self.content = self.content.replace('\r\n', '\n').replace('\r', '\n')
 
     def get_contributors(self):
         filtered = ArticleContent.objects.filter(
@@ -195,11 +195,11 @@ class ArticleContent(models.Model):
         }
         return article
 
-    def save(self, change_updated_time=True):
+    def save(self, change_updated_time=True, *args, **kwargs):
         if change_updated_time:
             self.updated = datetime.datetime.now()
         self.clean()
-        super(ArticleContent, self).save()
+        super(ArticleContent, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return '[' + str(self.pk) + '] ' + self.title

@@ -13,8 +13,10 @@ from wikipendium.wiki.forms import (
     )
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from wikipendium.cache.decorators import cache_page_per_user
+from taggit.models import Tag
 import diff
 import json
+import itertools
 
 
 @cache_page_per_user
@@ -75,9 +77,9 @@ def article(request, slug, lang='en'):
 
 
 @cache_page_per_user
-def tag(request, tag):
-
-    articles_with_tag = Article.objects.filter(tags__name__in=[tag])
+def tag(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    articles_with_tag = Article.objects.filter(tags=tag)
     all_newest_contents = Article.get_all_newest_contents_all_languages()
     filtered_contents = filter(lambda ac: ac.article in articles_with_tag,
                                all_newest_contents)
@@ -107,9 +109,20 @@ def add_tag_to_article(request, slug):
     if 'tag' not in request.POST:
         return HttpResponseBadRequest()
 
-    tag = slugify(request.POST['tag'])
+    slug = original_slug = slugify(request.POST['tag'])
+    for i in itertools.count(1):
+        try:
+            tag, _ = Tag.objects.get_or_create(
+                name=request.POST['tag'],
+                slug=slug)
+            break
+        except:
+            slug = '%s-%d' % (original_slug, i)
     article.tags.add(tag)
-    return HttpResponse(tag)
+    return HttpResponse(json.dumps({
+        'name': tag.name,
+        'slug': tag.slug
+    }))
 
 
 def no_article(request, slug):

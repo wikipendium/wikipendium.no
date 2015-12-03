@@ -310,8 +310,8 @@ $(function(){
             tagAdder.show();
             tagForm.hide();
             tagInput.val('');
-            tagUl.append($('<li><a href="/tag/' + tag + '">' + tag + '</a></li>'));
-          });
+            tagUl.append($('<li><a href="/tag/' + tag.slug + '">' + tag.name + '</a></li>'));
+          }, 'json');
         });
     }).apply($('.tags'));
 

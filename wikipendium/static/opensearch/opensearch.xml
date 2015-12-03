@@ -1,0 +1,7 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+    <ShortName>wikipendium.no</ShortName>
+    <Description>wikipendium.no</Description>
+    <InputEncoding>UTF-8</InputEncoding>
+    <Image width="16" height="16" type="image/png">https://www.wikipendium.no/static/images/favicon.png</Image>
+    <Url type="text/html" template="https://www.wikipendium.no/search/?q={searchTerms}"/>
+</OpenSearchDescription>

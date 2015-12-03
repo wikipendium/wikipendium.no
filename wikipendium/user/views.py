@@ -12,8 +12,11 @@ from registration.backends.simple.views import RegistrationView
 def profile(request, username):
     user = get_object_or_404(User, username=username)
 
-    contribution_article_contents = ArticleContent.objects.filter(
-        edited_by=user).order_by('-updated')
+    contribution_article_contents = (
+        ArticleContent.objects.filter(edited_by=user)
+                              .order_by('-updated')
+                              .select_related('article', 'edited_by')
+    )
 
     contributions = defaultdict(list)
     for article_content in contribution_article_contents:

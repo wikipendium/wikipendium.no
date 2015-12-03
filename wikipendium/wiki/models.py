@@ -78,15 +78,14 @@ class Article(models.Model):
         return set([ac.edited_by for ac in filtered])
 
     def get_newest_content(self, lang='en'):
-        try:
-            filtered = ArticleContent.objects.filter(article=self, lang=lang)
-            return filtered.order_by('-updated')[:1].get()
-        except:
-            return None
+        return ArticleContent.objects.filter(
+            article=self, lang=lang
+        ).order_by('-updated').select_related('article', 'edited_by').first()
 
     def get_sorted_contents(self, lang='en'):
-        filtered = ArticleContent.objects.filter(article=self, lang=lang)
-        return filtered.order_by('-updated')
+        return ArticleContent.objects.filter(
+            article=self, lang=lang
+        ).order_by('-updated').select_related('article', 'edited_by')
 
     def get_available_language_codes(self):
         codes = ArticleContent.objects.filter(
@@ -133,10 +132,12 @@ class ArticleContent(models.Model):
         self.content.replace('\r\n', '\n').replace('\r', '\n')
 
     def get_contributors(self):
-        filtered = ArticleContent.objects.filter(article=self.article,
-                                                 lang=self.lang,
-                                                 updated__lt=self.updated)
-        return set([ac.edited_by for ac in filtered]) | set([self.edited_by])
+        filtered = ArticleContent.objects.filter(
+            article=self.article,
+            lang=self.lang,
+            updated__lte=self.updated
+        ).select_related('edited_by')
+        return set([ac.edited_by for ac in filtered])
 
     def get_full_title(self):
         return self.article.slug + ': ' + self.title

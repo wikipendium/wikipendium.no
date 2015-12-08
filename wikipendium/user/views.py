@@ -28,7 +28,7 @@ def profile(request, username):
     size = 300
 
     # construct the url
-    gravatar_url = 'http://www.gravatar.com/avatar/' + \
+    gravatar_url = 'https://www.gravatar.com/avatar/' + \
         hashlib.md5(email.lower()).hexdigest() + '?'
     gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
     return render(request, 'user/profile.html', {

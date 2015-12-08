@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 import hashlib
 import urllib
 from collections import defaultdict
-from registration.backends.simple.views import RegistrationView
 
 
 def profile(request, username):
@@ -80,8 +79,3 @@ def change_email(request):
         'form': email_change_form,
         'email': request.user.email,
     })
-
-
-class WikipendiumRegistrationView(RegistrationView):
-    def get_success_url(self, request=None, user=None):
-        return '/'

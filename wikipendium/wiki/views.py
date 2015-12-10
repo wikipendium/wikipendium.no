@@ -37,7 +37,7 @@ def home(request):
 
 
 @cache_page_per_user
-def _cacheable_article(request, article_content, lang='en'):
+def _cacheable_article(request, article_content, lang='en', old=False):
     contributors = article_content.get_contributors()
 
     content = article_content.get_html_content()
@@ -53,6 +53,7 @@ def _cacheable_article(request, article_content, lang='en'):
         'articleContent': article_content,
         'language_list': language_list,
         'contributors': contributors,
+        'old_version': old,
     })
 
 
@@ -311,4 +312,4 @@ def history_single_rendered(request, slug, lang='en', id=None):
 
     ac = ArticleContent.objects.get(id=id)
 
-    return _cacheable_article(request, ac, lang=lang)
+    return _cacheable_article(request, ac, lang=lang, old=True)

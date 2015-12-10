@@ -32,7 +32,11 @@
         <a class=button href=/new/>Create compendium</a>
         {% language_chooser language_list articleContent %}
         <div class=button-group style=inline-block>
-            <a class="button hidden-sm edit-link" href={{ articleContent.get_edit_url }}>Edit</a>
+            {% if old_version %}
+                <a class="button hidden-sm compendium-link" href={{ articleContent.get_last_descendant.get_absolute_url }}>Compendium</a>
+            {% else %}
+                <a class="button hidden-sm edit-link" href={{ articleContent.get_edit_url }}>Edit</a>
+            {% endif %}
             <a class="button history-link" href={{ articleContent.get_history_url }}>History</a>
         </div>
     </div>
@@ -64,7 +68,22 @@
     {{ toc }}
 {% endautoescape %}
 <a href="javascript:;" id="toggle-toc">‹</a>
-<div id=article class=serif>
+
+{% if old_version %}
+    <div class="info old-version">
+        This is an old version of the compendium, written {{articleContent.updated}}
+        Changes made in this revision were made by
+        <a href="{{ articleContent.edited_by.get_absolute_url }}">
+            {{ articleContent.edited_by }}<!--
+        --></a>.
+        <a href="{{ articleContent.get_history_single_url }}">
+            View changes<!--
+        --></a>.
+    </div>
+{% endif %}
+
+<div id=article class=serif data-editable={{ old_version|yesno:'false,true' }}>
+
     <h1 class=title>{{ articleContent.get_full_title }}</h1>
 
     <div class=tags>

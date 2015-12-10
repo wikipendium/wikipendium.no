@@ -213,18 +213,20 @@ $(function(){
         $('body').toggleClass('toc-hidden');
     });
 
-    $('[data-source-line-number]').each(function(i, el){
-        var a = $('<a class="edit-section-button button">Edit</a>');
-        var url = (window.location.pathname + '/edit/#').replace('//', '/');
-        a.attr('href', url + $(el).attr('data-source-line-number'));
-        $(el).prepend(a);
+    if($('#article').data('editable')) {
+      $('[data-source-line-number]').each(function(i, el){
+          var a = $('<a class="edit-section-button button">Edit</a>');
+          var url = (window.location.pathname + '/edit/#').replace('//', '/');
+          a.attr('href', url + $(el).attr('data-source-line-number'));
+          $(el).prepend(a);
 
-        var semaphor = 0;
-        function show(){ semaphor++, a.css('opacity', 1); }
-        function hide(){ setTimeout(function(){--semaphor || a.css('opacity', 0);}, 300); }
-        $(a).hover(show, hide);
-        $(el).hover(show, hide);
-    });
+          var semaphor = 0;
+          function show(){ semaphor++, a.css('opacity', 1); }
+          function hide(){ setTimeout(function(){--semaphor || a.css('opacity', 0);}, 300); }
+          $(a).hover(show, hide);
+          $(el).hover(show, hide);
+      });
+    }
 
     (function() {
         this.html(moment(this.attr('datetime')).fromNow())

@@ -2,6 +2,12 @@
   display: inline-block;
 }
 
+.info.old-version {
+  @media (min-width: 1330px) {
+    margin-left: 150px;
+  }
+}
+
 #article {
   width: auto;
   max-width: 640px;

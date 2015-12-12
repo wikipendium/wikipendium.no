@@ -36,6 +36,27 @@ def home(request):
     })
 
 
+@cache_page_per_user
+def _cacheable_article(request, article_content, lang='en', old=False):
+    contributors = article_content.get_contributors()
+
+    content = article_content.get_html_content()
+    available_languages = article_content.article.get_available_languages(
+        article_content)
+    language_list = map(lambda x: (x[0], x[1].get_absolute_url),
+                        available_languages or [])
+
+    return render(request, 'article.html', {
+        'mathjax': True,
+        'content': content['html'],
+        'toc': content['toc'],
+        'articleContent': article_content,
+        'language_list': language_list,
+        'contributors': contributors,
+        'old_version': old,
+    })
+
+
 def article(request, slug, lang='en'):
 
     try:
@@ -43,9 +64,9 @@ def article(request, slug, lang='en'):
     except:
         return no_article(request, slug.upper())
 
-    articleContent = article.get_newest_content(lang)
+    article_content = article.get_newest_content(lang)
 
-    if articleContent is None:
+    if article_content is None:
         language_codes = article.get_available_language_codes()
         if len(language_codes) == 1:
             new_lang = language_codes[0]
@@ -54,26 +75,7 @@ def article(request, slug, lang='en'):
 
     if request.path != article.get_absolute_url(lang):
         return HttpResponseRedirect(article.get_absolute_url(lang))
-
-    @cache_page_per_user
-    def cachable_article(request, articleContent, lang=lang):
-        contributors = articleContent.get_contributors()
-
-        content = articleContent.get_html_content()
-        available_languages = article.get_available_languages(articleContent)
-        language_list = map(lambda x: (x[0], x[1].get_absolute_url),
-                            available_languages or [])
-
-        return render(request, 'article.html', {
-            'mathjax': True,
-            'content': content['html'],
-            'toc': content['toc'],
-            'articleContent': articleContent,
-            'language_list': language_list,
-            'contributors': contributors,
-        })
-
-    return cachable_article(request, articleContent, lang=lang)
+    return _cacheable_article(request, article_content, lang=lang)
 
 
 @cache_page_per_user
@@ -164,18 +166,18 @@ def new(request, slug=None):
             article = Article(slug=slug)
             article.save()
 
-            articleContent = form.save(commit=False)
-            articleContent.article = article
-            articleContent.edited_by = request.user
-            articleContent.save()
-            return HttpResponseRedirect(articleContent.get_absolute_url())
+            article_content = form.save(commit=False)
+            article_content.article = article
+            article_content.edited_by = request.user
+            article_content.save()
+            return HttpResponseRedirect(article_content.get_absolute_url())
     else:
-        articleContent = None
+        article_content = None
         if slug:
             slug = slug.upper()
-            articleContent = ArticleContent(article=Article(slug=slug),
-                                            lang=None)
-        form = NewArticleForm(instance=articleContent)
+            article_content = ArticleContent(article=Article(slug=slug),
+                                             lang=None)
+        form = NewArticleForm(instance=article_content)
 
     return render(request, 'edit.html', {
         'mathjax': True,
@@ -191,11 +193,11 @@ def add_language(request, slug, lang=None):
     if request.method == 'POST':
         form = AddLanguageArticleForm(article, request.POST)
         if form.is_valid():
-            articleContent = form.save(commit=False)
-            articleContent.article = article
-            articleContent.edited_by = request.user
-            articleContent.save()
-            return HttpResponseRedirect(articleContent.get_absolute_url())
+            article_content = form.save(commit=False)
+            article_content.article = article
+            article_content.edited_by = request.user
+            article_content.save()
+            return HttpResponseRedirect(article_content.get_absolute_url())
     else:
         form = AddLanguageArticleForm(article=article, lang=lang)
 
@@ -214,32 +216,32 @@ def add_language(request, slug, lang=None):
 @login_required
 def edit(request, slug, lang='en'):
     article = get_object_or_404(Article, slug=slug)
-    articleContent = article.get_newest_content(lang)
+    article_content = article.get_newest_content(lang)
 
     if request.method == 'POST':
-        new_articleContent = ArticleContent(article=article, lang=lang)
-        form = EditArticleForm(request.POST, instance=new_articleContent)
+        new_article_content = ArticleContent(article=article, lang=lang)
+        form = EditArticleForm(request.POST, instance=new_article_content)
         if form.is_valid():
-            new_articleContent.article = article
-            new_articleContent.edited_by = request.user
-            new_articleContent.parent = articleContent
-            new_articleContent.save()
+            new_article_content.article = article
+            new_article_content.edited_by = request.user
+            new_article_content.parent = article_content
+            new_article_content.save()
 
-            articleContent.child = new_articleContent
-            articleContent.save(change_updated_time=False)
+            article_content.child = new_article_content
+            article_content.save(change_updated_time=False)
 
-            return HttpResponseRedirect(new_articleContent.get_absolute_url())
+            return HttpResponseRedirect(new_article_content.get_absolute_url())
     else:
-        form = EditArticleForm(instance=articleContent)
+        form = EditArticleForm(instance=article_content)
 
-    available_languages = article.get_available_languages(articleContent)
+    available_languages = article.get_available_languages(article_content)
     language_list = map(lambda x: (x[0], x[1].get_edit_url),
                         available_languages or [])
 
     return render(request, 'edit.html', {
         'mathjax': True,
         'language_list': language_list,
-        'articleContent': articleContent,
+        'articleContent': article_content,
         'form': form,
         'title': 'Edit: ' + article.slug,
     })
@@ -249,8 +251,8 @@ def edit(request, slug, lang='en'):
 def preview(request):
     if request.method == 'POST':
         content = request.POST.get('content', '')
-        articleContent = ArticleContent(content=content)
-        html = articleContent.get_html_content()
+        article_content = ArticleContent(content=content)
+        html = article_content.get_html_content()
         return JsonResponse(html)
     return JsonResponse({'error': 'Method not allowed'})
 
@@ -261,12 +263,12 @@ def history(request, slug, lang='en'):
     except:
         return no_article(request, slug.upper(), lang)
 
-    articleContents = article.get_sorted_contents(lang=lang)
+    article_contents = article.get_sorted_contents(lang=lang)
 
     originalArticle = article.get_newest_content(lang=lang)
 
     return render(request, 'history.html', {
-        'articleContents': articleContents,
+        'articleContents': article_contents,
         'back_url': originalArticle.get_absolute_url,
         'article': article
     })
@@ -281,8 +283,8 @@ def history_single(request, slug, lang='en', id=None):
     ac = ArticleContent.objects.get(id=id)
 
     @cache_page_per_user
-    def cachable_history_single(request, ac, has_parent,
-                                has_child, lang='en', id=None):
+    def cacheable_history_single(request, ac, has_parent,
+                                 has_child, lang='en', id=None):
 
         ac.diff = diff.render_diff_as_html(
             ac.parent.content if ac.parent else '',
@@ -298,5 +300,16 @@ def history_single(request, slug, lang='en', id=None):
             'back_url': originalArticle.get_absolute_url
         })
 
-    return cachable_history_single(request, ac, bool(ac.parent),
-                                   bool(ac.child), lang=lang, id=id)
+    return cacheable_history_single(request, ac, bool(ac.parent),
+                                    bool(ac.child), lang=lang, id=id)
+
+
+def history_single_rendered(request, slug, lang='en', id=None):
+    try:
+        Article.objects.get(slug=slug)
+    except:
+        return no_article(request, slug.upper(), lang)
+
+    ac = ArticleContent.objects.get(id=id)
+
+    return _cacheable_article(request, ac, lang=lang, old=True)

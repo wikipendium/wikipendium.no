@@ -203,9 +203,9 @@ SESSION_COOKIE_SECURE = True
 
 ABSOLUTE_URL_OVERRIDES = {'auth.user': lambda o: "/users/%s/" % o.username}
 
-COMPRESS_PRECOMPILERS = (
+COMPRESS_PRECOMPILERS = [
     ('text/x-scss', 'venv/bin/python wikipendium/utils/scss-cli.py {infile}'),
-)
+]
 
 # Base URL
 BASE_URL = 'https://www.wikipendium.no'

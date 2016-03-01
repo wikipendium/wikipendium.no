@@ -106,7 +106,7 @@ def add_tag_to_article(request, slug):
     if not request.POST:
         return HttpResponseBadRequest()
 
-    article = get_object_or_404(Article, slug=slug)
+    article = get_object_or_404(Article, slug=slug.upper())
 
     if 'tag' not in request.POST:
         return HttpResponseBadRequest()
@@ -163,7 +163,7 @@ def new(request, slug=None):
         form = NewArticleForm(request.POST)
         if form.is_valid():
             slug = request.POST.get('slug')
-            article = Article(slug=slug)
+            article = Article(slug=slug.upper())
             article.save()
 
             article_content = form.save(commit=False)
@@ -174,9 +174,8 @@ def new(request, slug=None):
     else:
         article_content = None
         if slug:
-            slug = slug.upper()
-            article_content = ArticleContent(article=Article(slug=slug),
-                                             lang=None)
+            article_content = ArticleContent(
+                article=Article(slug=slug.upper()), lang=None)
         form = NewArticleForm(instance=article_content)
 
     return render(request, 'edit.html', {
@@ -188,7 +187,7 @@ def new(request, slug=None):
 
 @login_required
 def add_language(request, slug, lang=None):
-    article = get_object_or_404(Article, slug=slug)
+    article = get_object_or_404(Article, slug=slug.upper())
 
     if request.method == 'POST':
         form = AddLanguageArticleForm(article, request.POST)
@@ -215,7 +214,7 @@ def add_language(request, slug, lang=None):
 
 @login_required
 def edit(request, slug, lang='en'):
-    article = get_object_or_404(Article, slug=slug)
+    article = get_object_or_404(Article, slug=slug.upper())
     article_content = article.get_newest_content(lang)
 
     if request.method == 'POST':
@@ -259,7 +258,7 @@ def preview(request):
 
 def history(request, slug, lang='en'):
     try:
-        article = Article.objects.get(slug=slug)
+        article = Article.objects.get(slug=slug.upper())
     except:
         return no_article(request, slug.upper())
 
@@ -276,7 +275,7 @@ def history(request, slug, lang='en'):
 
 def history_single(request, slug, lang='en', id=None):
     try:
-        article = Article.objects.get(slug=slug)
+        article = Article.objects.get(slug=slug.upper())
     except:
         return no_article(request, slug.upper())
 
@@ -306,7 +305,7 @@ def history_single(request, slug, lang='en', id=None):
 
 def history_single_rendered(request, slug, lang='en', id=None):
     try:
-        Article.objects.get(slug=slug)
+        Article.objects.get(slug=slug.upper())
     except:
         return no_article(request, slug.upper())
 

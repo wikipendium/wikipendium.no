@@ -261,7 +261,7 @@ def history(request, slug, lang='en'):
     try:
         article = Article.objects.get(slug=slug)
     except:
-        return no_article(request, slug.upper(), lang)
+        return no_article(request, slug.upper())
 
     article_contents = article.get_sorted_contents(lang=lang)
 
@@ -278,7 +278,7 @@ def history_single(request, slug, lang='en', id=None):
     try:
         article = Article.objects.get(slug=slug)
     except:
-        return no_article(request, slug.upper(), lang)
+        return no_article(request, slug.upper())
 
     ac = ArticleContent.objects.get(id=id)
 
@@ -308,7 +308,7 @@ def history_single_rendered(request, slug, lang='en', id=None):
     try:
         Article.objects.get(slug=slug)
     except:
-        return no_article(request, slug.upper(), lang)
+        return no_article(request, slug.upper())
 
     ac = ArticleContent.objects.get(id=id)
 

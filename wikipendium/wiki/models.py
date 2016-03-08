@@ -191,7 +191,7 @@ class ArticleContent(models.Model):
         markdowned_text = md.convert(self.content)
         article = {
             'html': markdowned_text,
-            'toc': md.toc,
+            'toc': getattr(md, 'toc', None),
         }
         return article
 

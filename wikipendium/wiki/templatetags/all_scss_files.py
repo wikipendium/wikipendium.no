@@ -8,7 +8,7 @@ import re
 register = template.Library()
 
 
-@register.simple_tag
+@register.inclusion_tag('scss_files.html')
 def all_scss_files():
     '''
     Finds all .scss files that are in a scss folder in all staticfiles search
@@ -31,7 +31,7 @@ def all_scss_files():
         for finder in all_finders])
 
     # Finally, we wrap in HTML <link> tags and return
-    return '\n'.join(
-        ['<link rel=stylesheet href=%s%s type=text/x-scss />' %
-         (settings.STATIC_URL, filename)
-         for filename in all_found_scss_files])
+    return {
+        'all_found_scss_files': all_found_scss_files,
+        'STATIC_URL': settings.STATIC_URL,
+    }

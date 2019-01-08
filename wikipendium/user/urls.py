@@ -1,18 +1,20 @@
 # -*- coding: utf8 -*-
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from registration.backends.simple.views import RegistrationView
+import registration.auth_urls
+import wikipendium.user.views
 
 
-urlpatterns = patterns(
-    'wikipendium.user.views',
-
+urlpatterns = [
     url(r'^accounts/register/$',
         RegistrationView.as_view(success_url='/'),
         name='registration_register'),
-    url(r'^accounts/', include('registration.auth_urls')),
+    url(r'^accounts/', include(registration.auth_urls)),
     url(r'^users/(?P<username>[\w|\W]+)/$',
-        'profile', name='user'),
-    url(r'^accounts/username/change/$', 'change_username'),
-    url(r'^accounts/email/change/$', 'change_email'),
-)
+        wikipendium.user.views.profile, name='user'),
+    url(r'^accounts/username/change/$',
+        wikipendium.user.views.change_username),
+    url(r'^accounts/email/change/$',
+        wikipendium.user.views.change_email),
+]

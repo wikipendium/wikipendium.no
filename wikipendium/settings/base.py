@@ -69,12 +69,30 @@ STATICFILES_FINDERS = (
 )
 
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    # 'django.template.loaders.eggs.Loader',
-)
+# Templates
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': (),
+    'OPTIONS': {
+        'debug': False,
+        'loaders': (
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+        ),
+        'context_processors': [
+            'django.contrib.auth.context_processors.auth',
+            'django.template.context_processors.debug',
+            'django.template.context_processors.i18n',
+            'django.template.context_processors.media',
+            'django.template.context_processors.static',
+            'django.template.context_processors.tz',
+            'django.contrib.messages.context_processors.messages',
+            'django.template.context_processors.request',
+            'wikipendium.wiki.context_processors.google_analytics_processor',
+        ],
+    }
+}]
+
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -91,13 +109,6 @@ ROOT_URLCONF = 'wikipendium.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'wikipendium.wsgi.application'
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or
-    # "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
 
 
 INSTALLED_APPS = (
@@ -185,13 +196,6 @@ LOGGING = {
 }
 
 
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
-
-TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-    'django.core.context_processors.request',
-    'wikipendium.wiki.context_processors.google_analytics_processor',
-)
-
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 CACHES = {
@@ -204,9 +208,9 @@ SESSION_COOKIE_SECURE = True
 
 ABSOLUTE_URL_OVERRIDES = {'auth.user': lambda o: "/users/%s/" % o.username}
 
-COMPRESS_PRECOMPILERS = (
+COMPRESS_PRECOMPILERS = [
     ('text/x-scss', 'venv/bin/python wikipendium/utils/scss-cli.py {infile}'),
-)
+]
 
 # Base URL
 BASE_URL = 'https://www.wikipendium.no'

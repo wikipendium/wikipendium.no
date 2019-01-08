@@ -1,6 +1,6 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+import wikipendium.stats.views
 
-urlpatterns = patterns(
-    'wikipendium.stats.views',
-    url(r'^$', 'index'),
-)
+urlpatterns = [
+    url(r'^$', wikipendium.stats.views.index),
+]

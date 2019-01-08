@@ -1,0 +1,3 @@
+{% for filename in all_found_scss_files %}
+    <link rel=stylesheet href={{ STATIC_URL }}{{ filename }} type=text/x-scss />
+{% endfor %}

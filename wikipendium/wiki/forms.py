@@ -13,7 +13,8 @@ class ArticleForm(ModelForm):
     choices = [('', '')] + language_list
     lang = forms.ChoiceField(label='', choices=choices)
     title = forms.CharField(label='')
-    content = forms.CharField(label='', widget=forms.Textarea())
+    content = forms.CharField(
+        label='', widget=forms.Textarea(), required=False)
 
     class Meta:
         model = ArticleContent

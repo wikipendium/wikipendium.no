@@ -13,10 +13,12 @@ from wikipendium.wiki.forms import (
     )
 from wikipendium.wiki.langcodes import LANGUAGE_NAMES
 from wikipendium.cache.decorators import cache_page_per_user
+from wikipendium import settings
 from taggit.models import Tag
 import diff
 import json
 import itertools
+import urllib
 
 
 @cache_page_per_user
@@ -46,6 +48,17 @@ def _cacheable_article(request, article_content, lang='en', old=False):
     language_list = map(lambda x: (x[0], x[1].get_absolute_url),
                         available_languages or [])
 
+    twitter_share_text = article_content.get_full_title()
+    twitter_share_url = '%s%s' % (
+        settings.BASE_URL, article_content.get_absolute_url())
+    twitter_share_hashtags = 'wikipendium,ntnu'
+    twitter_share_intent_href = ('https://twitter.com/intent/tweet?%s' %
+                                 urllib.urlencode({
+                                     'text': twitter_share_text,
+                                     'url': twitter_share_url,
+                                     'hashtags': twitter_share_hashtags,
+                                 }))
+
     return render(request, 'article.html', {
         'mathjax': True,
         'content': content['html'],
@@ -53,6 +66,7 @@ def _cacheable_article(request, article_content, lang='en', old=False):
         'articleContent': article_content,
         'language_list': language_list,
         'contributors': contributors,
+        'twitter_share_intent_href': twitter_share_intent_href,
         'old_version': old,
     })
 

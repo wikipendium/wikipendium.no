@@ -27,7 +27,7 @@ lint:
 
 .PHONY: test
 test:
-	python manage.py test
+	DJANGO_SETTINGS_MODULE=wikipendium.settings.test python manage.py test
 
 .PHONY: setup
 setup:

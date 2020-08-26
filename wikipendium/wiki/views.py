@@ -52,12 +52,13 @@ def _cacheable_article(request, article_content, lang='en', old=False):
     twitter_share_url = '%s%s' % (
         settings.BASE_URL, article_content.get_absolute_url())
     twitter_share_hashtags = 'wikipendium,ntnu'
-    twitter_share_intent_href = ('https://twitter.com/intent/tweet?%s' %
-                                 urllib.urlencode({
-                                     'text': twitter_share_text,
-                                     'url': twitter_share_url,
-                                     'hashtags': twitter_share_hashtags,
-                                 }))
+    twitter_share_intent_href = (
+        'https://twitter.com/intent/tweet?%s' % urllib.urlencode({
+            'text': twitter_share_text.encode('utf-8'),
+            'url': twitter_share_url.encode('utf-8'),
+            'hashtags': twitter_share_hashtags,
+        })
+    )
 
     return render(request, 'article.html', {
         'mathjax': True,

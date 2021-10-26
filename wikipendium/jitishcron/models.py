@@ -11,5 +11,5 @@ class TaskExecution(models.Model):
         unique_together = ('key', 'execution_number')
         app_label = 'jitishcron'
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s:%s' % (self.key, self.time)

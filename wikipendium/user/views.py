@@ -28,8 +28,8 @@ def profile(request, username):
 
     # construct the url
     gravatar_url = 'https://www.gravatar.com/avatar/' + \
-        hashlib.md5(email.lower()).hexdigest() + '?'
-    gravatar_url += urllib.urlencode({'d': default, 's': str(size)})
+        hashlib.md5(email.lower().encode()).hexdigest() + '?'
+    gravatar_url += urllib.parse.urlencode({'d': default, 's': str(size)})
     return render(request, 'user/profile.html', {
         'user': user,
         'contributions': sorted(contributions.items(),

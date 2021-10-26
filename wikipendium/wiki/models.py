@@ -18,7 +18,7 @@ from taggit.managers import TaggableManager
 class Article(models.Model):
     tags = TaggableManager()
     slug = models.SlugField(max_length=256, unique=True)
-    slug_regex = ur'A-Za-z0-9æøåÆØÅ\-'
+    slug_regex = r'A-Za-z0-9æøåÆØÅ\-'
 
     @staticmethod
     def get_all_contents(time_from, time_to):
@@ -61,7 +61,7 @@ class Article(models.Model):
 
         return sorted_by_last_updated
 
-    def __unicode__(self):
+    def __str__(self):
         return self.slug
 
     def save(self, *args, **kwargs):
@@ -98,8 +98,8 @@ class Article(models.Model):
         if current and current.lang is not None and current.lang in codes:
             codes.remove(current.lang)
         if codes:
-            return zip(map(lambda key: LANGUAGE_NAMES[key], codes),
-                       map(self.get_newest_content, codes))
+            return list(zip(map(lambda key: LANGUAGE_NAMES[key], codes),
+                            map(self.get_newest_content, codes)))
 
     def get_absolute_url(self, lang='en'):
         newest_content = self.get_newest_content(lang)
@@ -171,13 +171,13 @@ class ArticleContent(models.Model):
         wikitables = WikiTableExtension()
         nofollow = NofollowExtension()
         margin_notes = MarginNotesExtension()
-        toc = TocExtension([('title', 'Table of Contents')])
+        toc = TocExtension(title='Table of Contents')
 
         md = Markdown(
             extensions=[
                 toc,
-                'outline',
-                'mathjax',
+                'mdx_outline',
+                'mdx_mathjax',
                 wikitables,
                 nofollow,
                 'def_list',
@@ -199,5 +199,5 @@ class ArticleContent(models.Model):
         self.clean()
         super(ArticleContent, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return '[' + str(self.pk) + '] ' + self.title

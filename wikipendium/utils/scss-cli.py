@@ -13,11 +13,11 @@ import sys
 
 def main():
     if len(sys.argv) != 2:
-        print 'Usage: python sass-cli.py filename.sass'
+        print('Usage: python sass-cli.py filename.sass')
         sys.exit(1)
     filename = sys.argv[1]
     with codecs.open(filename, encoding='utf-8', mode='r') as f:
-        print sass.compile(string=f.read())
+        print(sass.compile(string=f.read()))
 
 
 if __name__ == '__main__':

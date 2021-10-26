@@ -34,7 +34,7 @@ article_patterns = [
 
 urlpatterns = [
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^stats/', include(wikipendium.stats.urls)),
     url(r'^upload/', include(wikipendium.upload.urls)),
     url(r'^search/partial/',

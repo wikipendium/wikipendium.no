@@ -3,11 +3,11 @@ all: update migrate
 
 .PHONY: run
 run:
-	python manage.py runserver
+	python -Wd manage.py runserver
 
 .PHONY: serve
 serve:
-	python manage.py runserver 0.0.0.0:8000
+	python -Wd manage.py runserver 0.0.0.0:8000
 
 .PHONY: update
 update:
@@ -15,11 +15,11 @@ update:
 
 .PHONY: migrate
 migrate:
-	python manage.py migrate
+	python -Wd manage.py migrate
 
 .PHONY: migrations
 migrations:
-	python manage.py makemigrations
+	python -Wd manage.py makemigrations
 
 .PHONY: lint
 lint:
@@ -27,7 +27,7 @@ lint:
 
 .PHONY: test
 test:
-	DJANGO_SETTINGS_MODULE=wikipendium.settings.test python manage.py test
+	DJANGO_SETTINGS_MODULE=wikipendium.settings.test python -Wd manage.py test
 
 .PHONY: setup
 setup:
@@ -37,7 +37,7 @@ setup:
 
 .PHONY: shell
 shell:
-	python manage.py shell
+	python -Wd manage.py shell
 
 .PHONY: clean
 clean:

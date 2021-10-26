@@ -112,7 +112,7 @@ class Article(models.Model):
 
 
 class ArticleContent(models.Model):
-    article = models.ForeignKey('Article')
+    article = models.ForeignKey('Article', on_delete=models.PROTECT)
     content = models.TextField()
     title = models.CharField(max_length=1024)
     lang = models.CharField(max_length=2, default='en')

@@ -98,9 +98,8 @@ class ArticleTest(TestCase):
         expected_result = [self.ac4, self.ac3, self.ac2]
         self.assertEquals(expected_result, result)
 
-    def test___unicode__(self):
-        self.assertEquals(u'TIØ4258', unicode(self.article2))
-        self.assertEquals(unicode, type(unicode(self.article2)))
+    def test___str__(self):
+        self.assertEquals('TIØ4258', str(self.article2))
 
     def test_get_sorted_contents(self):
         result = list(self.article1.get_sorted_contents())
@@ -179,9 +178,8 @@ class ArticleContentTest(TestCase):
     def test_get_html_content(self):
         self.assertTrue('<h1>' in self.ac1.get_html_content()['html'])
 
-    def test___unicode__(self):
-        self.assertEquals(u'[1] Cooking and baking',
-                          unicode(self.ac1))
+    def test___str__(self):
+        self.assertEquals('[1] Cooking and baking', str(self.ac1))
 
     def test_line_endings(self):
         ac = ArticleContent.objects.create(

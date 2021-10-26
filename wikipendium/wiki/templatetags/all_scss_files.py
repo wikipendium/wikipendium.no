@@ -1,3 +1,4 @@
+from functools import reduce
 from django import template
 from django.contrib.staticfiles import finders
 from wikipendium import settings
@@ -26,8 +27,8 @@ def all_scss_files():
     # the static files available, and filter out all files
     # that are not .scss files.
     all_found_scss_files = reduce(operator.add, [
-        filter(lambda filename: re.match('scss/[^/]*.scss$', filename),
-               [filename for filename, _ in finder.list('')])
+        list(filter(lambda filename: re.match('scss/[^/]*.scss$', filename),
+               [filename for filename, _ in finder.list('')]))
         for finder in all_finders])
 
     # Finally, we wrap in HTML <link> tags and return

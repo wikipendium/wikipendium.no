@@ -20,7 +20,7 @@ sitemaps = {
 
 admin.autodiscover()
 
-article_regex = ur'(?P<slug>[' + Article.slug_regex + ']+)[^/]*'
+article_regex = r'(?P<slug>[' + Article.slug_regex + ']+)[^/]*'
 
 article_patterns = [
     url(r'^add_tag/$', wikipendium.wiki.views.add_tag_to_article),

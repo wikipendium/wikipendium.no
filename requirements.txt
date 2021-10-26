@@ -1,9 +1,9 @@
 django==1.11.29
 django-registration-redux==1.3
-git+git://github.com/wikipendium/Python-Markdown.git@5e9e809#egg=markdown
-git+git://github.com/wikipendium/python-markdown-mathjax.git#egg=markdown_mathjax
-git+git://github.com/wikipendium/mdx_outline.git
-fabric==1.10.2
+git+git://github.com/wikipendium/Python-Markdown.git@458e25eb9cbb9d3294224e653e24e666a9eaedb5#egg=markdown
+git+git://github.com/wikipendium/python-markdown-mathjax.git@acb854dfe55c80ab5c355642481e6f0d6a988f83#egg=mdx_mathjax
+git+git://github.com/wikipendium/mdx_outline.git@904a41f4216146153a195fd0edbb543cd910cf16#egg=mdx_outline
+fabric==2.6.0
 pytz==2015.4
 boto==2.38.0
 newrelic==2.54.0.41

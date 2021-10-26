@@ -7,8 +7,8 @@ class MergeError(Exception):
     def __init__(self, diff):
         self.diff = diff
 
-    def __unicode__(self):
-        return unicode(self.diff)
+    def __str__(self):
+        return str(self.diff)
 
 
 def merge(a, ancestor, b):

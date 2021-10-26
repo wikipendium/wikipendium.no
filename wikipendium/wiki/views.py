@@ -302,8 +302,9 @@ def history_single(request, slug, lang='en', id=None):
                                  has_child, lang='en', id=None):
 
         ac.diff = diff.render_diff_as_html(
-            ac.parent.content if ac.parent else '',
-            ac.content
+            (ac.parent.content if ac.parent else '').replace(
+                '<', '&lt;').replace('>', '&gt;'),
+            ac.content.replace('<', '&lt;').replace('>', '&gt;')
         )
 
         originalArticle = article.get_newest_content(lang=lang)

@@ -22,3 +22,18 @@
   background: rgba(0, 204, 255, 0.5);
 }
 
+@media (prefers-color-scheme: dark) {
+  .green-bg {
+    background: rgba(0, 64, 105, 0.5);
+  }
+  #searchbox {
+    background: rgba(30, 30, 35, 0.5);
+  }
+  #suggestions .active {
+    color: #004478;
+    border: 1px solid #BDC7D8;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #a4a4a4;
+  }
+}

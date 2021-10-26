@@ -220,3 +220,29 @@ body.editor #content {
     }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  body.editor .CodeMirror {
+    border: 1px solid #111;
+  }
+  #help-container {
+    border: 1px solid #111;
+    background: #1a1a1a;
+  }
+  #tab-close-button {
+    color: #a4a4a4;
+    background: #121212;
+    &:hover {
+      background: #111;
+    }
+  }
+  #preview-container {
+    background: #111;
+    border: 1px solid #121212;
+
+    #preview-header {
+      border-bottom: 1px solid #111;
+      background: #1a1a1a;
+    }
+  }
+}

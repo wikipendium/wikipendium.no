@@ -11,7 +11,7 @@ git+git://github.com/BradWhittington/django-mailgun/@d5f66d050c596fa95f474a0ed0e
 django-mailgun
 django-compressor==2.1
 django-taggit==0.22.2
-git+git://github.com/wikipendium/django-dumpdb.git@16ad009#egg=django-dumpdb
+git+git://github.com/wikipendium/django-dumpdb.git@3cea152934c4beda9e4b5e623c442e87bf51d143#egg=django-dumpdb
 flake8==2.4.1
 flake8-quotes==0.0.1
 libsass==0.8.3

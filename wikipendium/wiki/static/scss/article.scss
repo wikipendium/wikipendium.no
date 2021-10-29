@@ -338,3 +338,41 @@ ul.no-list {
   list-style-type: none;
   padding: 0;
 }
+
+@media (prefers-color-scheme: dark) {
+  .toc {
+    background: #1a1a1a;
+    border-right: 1px solid #111;
+    a {
+      &.hilight {
+        color: #a4a4a4;
+        background: #294854;
+        border-radius: 4px;
+      }
+    }
+  }
+  .article-wrapper {
+    .margin-note {
+      position: relative;
+      float: right;
+      border-left: 3px solid #023;
+      background: #1a1a1a;
+    }
+  }
+  #toggle-toc {
+    color: #a4a4a4;
+    background: #294854;
+    border: 1px solid #0a1d24,
+  }
+  code {
+    background: #1a1a1a;
+    border: 1px solid #111111;
+    display: inline;
+    padding: 5px;
+  }
+  body {
+    &.fixed-header .header-wrapper {
+      background: rgba(12, 12, 12, 0.5);
+    }
+  }
+}

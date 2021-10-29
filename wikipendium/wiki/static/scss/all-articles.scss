@@ -65,3 +65,31 @@
     }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+    .article-all-list {
+      li {
+        border: 1px solid #ccc;
+        color: #069;
+        background-color: rgba(0, 0, 0, 0.2);
+        &.active a {
+          color: #069;
+        }
+      }
+      .no-found {
+        color: #a4a4a4;
+      }
+      .date {
+        color: #a4a4a4;
+      }
+      .active .date {
+        color: #a4a4a4;
+      }
+      .highlight {
+        background: rgba(0, 58, 104, 0.2);
+      }
+      .active .highlight {
+        background: #014;
+      }
+    }
+}
